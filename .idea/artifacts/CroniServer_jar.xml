@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CroniServer:jar">
+    <output-path>$USER_HOME$/Desktop/Servertest/plugins</output-path>
+    <root id="archive" name="CroniServer.jar">
+      <element id="module-output" name="CroniServer" />
+    </root>
+  </artifact>
+</component>

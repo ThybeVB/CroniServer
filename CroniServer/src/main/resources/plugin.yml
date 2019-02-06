@@ -1,0 +1,33 @@
+name: CroniServer
+version: ${project.version}
+main: com.monstahhh.croniserver.plugin.croniserver.CroniServer
+authors: [monstahhhy]
+
+commands:
+  distance:
+    description: Shows you the distance to a certain point
+    usage: /distance x y z
+
+  pdistance:
+    description: Shows you the distance to a certain player
+    usage: /pdistance player
+
+  attack:
+    description: f
+    usage: /attack
+
+  lol:
+    description: xd
+    usage: /lol
+
+  monstahwheat:
+    description: x
+    usage: /monstahwheat
+
+  guakawheat:
+    description: d
+    usage: /guakawheat
+
+  setwheat:
+    descripton: Sets the Wheat value of yourself
+    usage: /set 0
