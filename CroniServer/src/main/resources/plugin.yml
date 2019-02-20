@@ -31,3 +31,7 @@ commands:
   setwheat:
     descripton: Sets the Wheat value of yourself
     usage: /set 0
+
+  hub:
+    description: Takes you to the hub
+    usage: /hub

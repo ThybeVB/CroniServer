@@ -29,7 +29,7 @@ public class PlayerListener implements Listener {
         if (block.getData() == 7) {
             if (event.getPlayer().getDisplayName().equalsIgnoreCase("Guaka25")) {
                 guakaWheat++;
-            } else {
+            } else if (event.getPlayer().getDisplayName().equalsIgnoreCase("monstahhhy")) {
                 monstahWheat++;
             }
         }
