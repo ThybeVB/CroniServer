@@ -11,7 +11,9 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+
         WheatCommand b = new WheatCommand();
         this.getCommand("hub").setExecutor(new HubCommand());
         this.getCommand("distance").setExecutor(new DistanceCommand());

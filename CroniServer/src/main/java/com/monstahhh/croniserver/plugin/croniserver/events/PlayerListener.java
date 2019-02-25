@@ -1,11 +1,11 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
@@ -33,5 +33,17 @@ public class PlayerListener implements Listener {
                 monstahWheat++;
             }
         }
+    }
+
+    @EventHandler
+    public void onWorldChange(PlayerChangedWorldEvent event){
+        if (event.getPlayer().getWorld().getName() == "uhc") {
+            event.getPlayer().getServer().broadcastMessage(event.getPlayer().getWorld().getName());
+            boolean dead = FindPlayerUHCState(event.getPlayer().getName());
+        }
+    }
+
+    boolean FindPlayerUHCState (String username) {
+        return false;
     }
 }
