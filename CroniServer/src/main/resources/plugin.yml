@@ -20,18 +20,6 @@ commands:
     description: xd
     usage: /lol
 
-  monstahwheat:
-    description: x
-    usage: /monstahwheat
-
-  guakawheat:
-    description: d
-    usage: /guakawheat
-
-  setwheat:
-    descripton: Sets the Wheat value of yourself
-    usage: /set 0
-
   hub:
     description: Takes you to the hub
     usage: /hub
