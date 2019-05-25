@@ -24,7 +24,7 @@ public final class CroniServer extends JavaPlugin {
         this.getCommand("distance").setExecutor(new DistanceCommand());
         this.getCommand("pdistance").setExecutor((new DistanceCommand()));
         this.getCommand("lol").setExecutor(new DistanceCommand());
-        logger.log(new LogRecord(Level.INFO, "Loaded TPS Recorder"));
+
         logger.log(new LogRecord(Level.INFO, "Loaded CroniServer Build 25/05/19"));
 
     }
