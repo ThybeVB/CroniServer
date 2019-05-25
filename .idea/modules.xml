@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CroniServer/CroniServer.iml" filepath="$PROJECT_DIR$/CroniServer/CroniServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CroniServer.iml" filepath="$PROJECT_DIR$/.idea/CroniServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CroniServer/croniserver.iml" filepath="$PROJECT_DIR$/CroniServer/croniserver.iml" />
     </modules>
   </component>
 </project>

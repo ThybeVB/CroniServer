@@ -77,14 +77,19 @@ public class DistanceCommand implements CommandExecutor {
                 }
             }
 
-        Player executor = (Player)sender;
-        if (command.getName().equalsIgnoreCase("lol")) {
-            if (executor.hasPermission("croniserver.command.lol")) {
-                Bukkit.broadcastMessage(ChatColor.BLUE + "guaka have big gay jaja xd");
-            } else {
-                executor.sendMessage(ChatColor.DARK_RED + "Sorry, but it seems like you don't have the sheer power to say guaka has big gay.");
+        if (sender instanceof Player) {
+            Player executor = (Player)sender;
+            if (command.getName().equalsIgnoreCase("lol")) {
+                if (executor.hasPermission("croniserver.command.lol")) {
+                    Bukkit.broadcastMessage(ChatColor.BLUE + "guaka have big gay jaja xd");
+                } else {
+                    executor.sendMessage(ChatColor.DARK_RED + "Sorry, but it seems like you don't have the sheer power to say guaka has big gay.");
+                }
             }
+        } else {
+            Bukkit.broadcastMessage(ChatColor.BLUE + "guaka have big gay jaja xd");
         }
+
 
             return true;
     }

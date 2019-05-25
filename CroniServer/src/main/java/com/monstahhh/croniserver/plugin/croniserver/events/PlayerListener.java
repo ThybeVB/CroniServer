@@ -1,14 +1,28 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
+import fr.xephi.authme.api.v3.AuthMeApi;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
 
+    AuthMeApi authApi = AuthMeApi.getInstance();
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
+
+        Player p = event.getPlayer();
+        if (p.getLocation().getBlock().getType() == Material.NETHER_PORTAL) {
+            authApi.forceLogin(p);
+        }
+
+        p.getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
     }
+
+
 }
