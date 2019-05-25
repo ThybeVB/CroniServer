@@ -1,6 +1,5 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
-import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import fr.xephi.authme.api.v3.AuthMeApi;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,6 +17,7 @@ public class PlayerListener implements Listener {
 
         Player p = event.getPlayer();
         if (p.getLocation().getBlock().getType() == Material.NETHER_PORTAL) {
+            p.sendMessage(ChatColor.GREEN + "Noticed you are in a portal, force logging in...");
             authApi.forceLogin(p);
         }
 
