@@ -17,7 +17,7 @@ public class HubCommand implements CommandExecutor {
 
         if (command.getName().equalsIgnoreCase("spawn")) {
             Player player = (Player)sender;
-            player.teleport(new Location(Bukkit.getWorld("world"), 3, 69, -2));
+            player.teleport(new Location(player.getWorld(), 3, 69, -2));
         }
 
         return true;
