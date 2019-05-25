@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.croniserver;
 
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
-import com.monstahhh.croniserver.plugin.croniserver.commands.HubCommand;
+import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,8 +19,8 @@ public final class CroniServer extends JavaPlugin {
         PluginLogger logger = new PluginLogger(this);
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 
-        this.getCommand("hub").setExecutor(new HubCommand());
-        this.getCommand("spawn").setExecutor(new HubCommand());
+        this.getCommand("hub").setExecutor(new WarpCommands());
+        this.getCommand("spawn").setExecutor(new WarpCommands());
         this.getCommand("distance").setExecutor(new DistanceCommand());
         this.getCommand("pdistance").setExecutor((new DistanceCommand()));
         this.getCommand("lol").setExecutor(new DistanceCommand());
