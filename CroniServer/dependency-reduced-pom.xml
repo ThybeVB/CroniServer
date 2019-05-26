@@ -4,7 +4,7 @@
   <groupId>com.monstahhh.croniserver.plugin</groupId>
   <artifactId>croniserver</artifactId>
   <name>CroniServer</name>
-  <version>1.4.5</version>
+  <version>1.4.8</version>
   <description>A plugin for the Cronibet Survival Server</description>
   <url>https://github.com/MonstahGames/</url>
   <build>
@@ -90,6 +90,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <spigot.version>1.14.1-R0.1-SNAPSHOT</spigot.version>
     <authme.version>5.6.0-SNAPSHOT</authme.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

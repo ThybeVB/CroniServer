@@ -14,7 +14,6 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-
         Player p = event.getPlayer();
         if (p.getLocation().getBlock().getType() == Material.NETHER_PORTAL) {
             p.sendMessage(ChatColor.GREEN + "Noticed you are in a portal, force logging in...");

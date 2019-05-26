@@ -25,3 +25,7 @@ commands:
   spawn:
     description: Takes you to spawn
     usage: /spawn
+
+  info:
+    description: Info about CroniServer
+    usage: /info
