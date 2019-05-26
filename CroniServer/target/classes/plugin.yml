@@ -26,6 +26,6 @@ commands:
     description: Takes you to spawn
     usage: /spawn
 
-  info:
+  crinfo:
     description: Info about CroniServer
     usage: /info

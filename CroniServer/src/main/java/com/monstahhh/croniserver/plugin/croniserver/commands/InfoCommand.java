@@ -10,7 +10,7 @@ import org.bukkit.command.ConsoleCommandSender;
 public class InfoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("info")) {
+        if (command.getName().equalsIgnoreCase("crinfo")) {
             if (sender.hasPermission("croniserver.command.info") || sender instanceof ConsoleCommandSender) {
                 sender.sendMessage(ChatColor.DARK_PURPLE + "====== CroniServer Info ======");
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Plugin Version: v" + CroniServer.version);

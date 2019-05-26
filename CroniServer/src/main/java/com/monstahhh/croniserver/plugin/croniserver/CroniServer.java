@@ -34,7 +34,7 @@ public final class CroniServer extends JavaPlugin {
         this.getCommand("distance").setExecutor(new DistanceCommand());
         this.getCommand("pdistance").setExecutor((new DistanceCommand()));
         this.getCommand("lol").setExecutor(new DistanceCommand());
-        this.getCommand("info").setExecutor(new InfoCommand());
+        this.getCommand("crinfo").setExecutor(new InfoCommand());
 
         logger.log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
     }
