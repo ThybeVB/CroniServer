@@ -1,5 +1,5 @@
 name: CroniServer
-version: 1.4.8
+version: 1.4.9-SHAPSHOT
 api-version: 1.14
 main: com.monstahhh.croniserver.plugin.croniserver.CroniServer
 authors: [monstahhhy]
@@ -28,4 +28,4 @@ commands:
 
   crinfo:
     description: Info about CroniServer
-    usage: /info
+    usage: /crinfo

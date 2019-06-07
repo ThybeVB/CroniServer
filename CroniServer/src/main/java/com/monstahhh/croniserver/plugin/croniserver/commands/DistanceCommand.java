@@ -52,7 +52,7 @@ public class DistanceCommand implements CommandExecutor {
                             return true;
                         }
 
-                        if (((Player) sender).getWorld().getEnvironment() == player1.getWorld().getEnvironment()) {
+                        if (((Player) sender).getWorld().getEnvironment() == player1.getWorld().getEnvironment() && ((Player) sender).getWorld() == player1.getWorld()) {
 
                             double originX = ((Player) sender).getLocation().getX();
                             double originY = ((Player) sender).getLocation().getY();

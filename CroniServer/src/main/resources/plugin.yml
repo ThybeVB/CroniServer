@@ -28,4 +28,4 @@ commands:
 
   crinfo:
     description: Info about CroniServer
-    usage: /info
+    usage: /crinfo
