@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
+import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
@@ -18,10 +19,13 @@ public final class CroniServer extends JavaPlugin {
     public static int onlinePlayers = 0;
     public static int maxPlayers = 0;
 
+    private DamageAPI damageAPI;
+
     @Override
     public void onEnable() {
 
         PluginLogger logger = new PluginLogger(this);
+        damageAPI = new DamageAPI(this, logger);
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
@@ -41,6 +45,9 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onDisable () {
+
+        damageAPI.disable();
+
         onlinePlayers = 0;
         maxPlayers = 0;
         version = null;
