@@ -25,7 +25,9 @@ public final class CroniServer extends JavaPlugin {
     public void onEnable() {
 
         PluginLogger logger = new PluginLogger(this);
+
         damageAPI = new DamageAPI(this, logger);
+        damageAPI.enable();
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
@@ -47,12 +49,6 @@ public final class CroniServer extends JavaPlugin {
     public void onDisable () {
 
         damageAPI.disable();
-
-        onlinePlayers = 0;
-        maxPlayers = 0;
-        version = null;
-        author = null;
-        logger = null;
 
         logger.log(new LogRecord(Level.INFO, "Disabled CroniServer"));
     }
