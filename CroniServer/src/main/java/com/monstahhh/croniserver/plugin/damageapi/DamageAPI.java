@@ -4,6 +4,8 @@ import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDamageEvent;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 import java.util.logging.Level;
 
 public class DamageAPI {
@@ -51,6 +53,10 @@ public class DamageAPI {
     }
 
     public void disable () {
+        File file = new File("plugins/DamageAPI/player_data.yml");
+        pluginLogger.log(Level.INFO, "Deleting Damage Data...");
+        file.delete();
+
         pluginLogger.log(Level.INFO, "Disabled Damage API");
     }
 }

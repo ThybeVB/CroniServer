@@ -6,7 +6,7 @@
 
     <groupId>com.monstahhh.croniserver.plugin</groupId>
     <artifactId>croniserver</artifactId>
-    <version>1.5.0-SHAPSHOT</version>
+    <version>1.5.1-SHAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>CroniServer</name>
