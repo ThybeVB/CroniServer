@@ -12,9 +12,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class HomeCommand implements CommandExecutor {
+
+    private CommandSender sender;
+
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
+
+            sender = commandSender;
+
             Player player = (Player)commandSender;
 
             if (command.getName().equalsIgnoreCase("home")) {
@@ -33,7 +40,7 @@ public class HomeCommand implements CommandExecutor {
 
     private void callHome (Player player) {
         Config data = CroniServer.playerData;
-        Object playerLocation = data.getConfig().get(getPlayerLocationString(player));
+        Object playerLocation = data.getConfig().get("players." + player.getDisplayName());
         if (playerLocation == null) {
             player.sendMessage(ChatColor.DARK_RED + "You have not set a home yet! Set one with " + ChatColor.AQUA + "/sethome");
         } else {
@@ -55,26 +62,18 @@ public class HomeCommand implements CommandExecutor {
         data.saveConfig();
     }
 
-    private String getPlayerLocationString (Player player)  {
-
-        String username = player.getDisplayName();
-        double x = player.getLocation().getX();
-        double y = player.getLocation().getY();
-        double z = player.getLocation().getZ();
-        String world = player.getLocation().getWorld().getName();
-
-        String finalString = "players." + username + ":" + x + ":" + y + ":" + z + ":" + world;
-        return finalString;
-    }
-
     private Location locationFromString (String string) {
         String[] dataLocation = string.split("\\.");
         String[] locationData = dataLocation[1].split("\\:");
 
-        double x = Double.parseDouble(locationData[1]);
-        double y = Double.parseDouble(locationData[2]);
-        double z = Double.parseDouble(locationData[3]);
-        World world = Bukkit.getWorld(locationData[4]);
+        System.out.println(string);
+        double x = Double.parseDouble(locationData[0]);
+        System.out.println(x);
+        double y = Double.parseDouble(locationData[1]);
+        System.out.println(x);
+        double z = Double.parseDouble(locationData[2]);
+        System.out.println(x);
+        World world = Bukkit.getWorld(locationData[3]);
 
         return new Location(world, x, y, z);
     }
