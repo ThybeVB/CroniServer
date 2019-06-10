@@ -13,15 +13,9 @@ import org.bukkit.entity.Player;
 
 public class HomeCommand implements CommandExecutor {
 
-    private CommandSender sender;
-
-
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
-
-            sender = commandSender;
-
             Player player = (Player)commandSender;
 
             if (command.getName().equalsIgnoreCase("home")) {
@@ -70,10 +64,11 @@ public class HomeCommand implements CommandExecutor {
         double x = Double.parseDouble(locationData[0]);
         System.out.println(x);
         double y = Double.parseDouble(locationData[1]);
-        System.out.println(x);
+        System.out.println(y);
         double z = Double.parseDouble(locationData[2]);
-        System.out.println(x);
+        System.out.println(z);
         World world = Bukkit.getWorld(locationData[3]);
+        System.out.println(world);
 
         return new Location(world, x, y, z);
     }
