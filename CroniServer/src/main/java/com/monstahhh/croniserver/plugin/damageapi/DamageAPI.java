@@ -11,8 +11,8 @@ public class DamageAPI {
     private JavaPlugin _plugin;
     private PluginLogger pluginLogger;
 
-    public static Config config;
-    public static boolean debug = false;
+    private static Config config;
+    private static boolean debug = false;
 
     public DamageAPI (JavaPlugin plugin, PluginLogger logger) {
         _plugin = plugin;
@@ -35,7 +35,7 @@ public class DamageAPI {
             config.getConfig().set("debug", false);
             config.saveConfig();
         } else {
-            if (debugObj.toString() == "true") {
+            if (debugObj.toString().equals("true")) {
                 debug = true;
             }
         }

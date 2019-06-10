@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdfeac34-ce85-4f32-bccd-8cac52541dae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/PlayerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/events/PlayerDamageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/events/PlayerDamageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/CroniServer/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/events/PlayerDamageEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="418">
+              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+            <state relative-caret-position="408">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1282#1283#0" expanded="true" />
@@ -132,13 +131,13 @@
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/commands/InfoCommand.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/commands/DistanceCommand.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/configapi/Config.java" />
-        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/CroniServer.java" />
         <option value="$PROJECT_DIR$/CroniServer/pom.xml" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/commands/HomeCommand.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/events/PlayerDamageEvent.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/PlayerHandler.java" />
+        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java" />
       </list>
     </option>
   </component>
@@ -302,7 +301,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560170636958" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560171460362" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -474,18 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1282#1283#0" expanded="true" />
-            <element signature="e#1349#1350#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.2-R0.1-SNAPSHOT/spigot-api-1.14.2-R0.1-20190610.091236-18.jar!/org/bukkit/entity/Damageable.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -502,10 +489,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/events/PlayerDamageEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="418">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/damageapi/DamageAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1282#1283#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
           </folding>
         </state>
       </provider>
