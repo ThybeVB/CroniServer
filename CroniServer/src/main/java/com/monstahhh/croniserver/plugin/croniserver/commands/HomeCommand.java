@@ -51,6 +51,7 @@ public class HomeCommand implements CommandExecutor {
 
         String resString = ":" + x + ":" + y + ":" + z + ":" + world;
         data.getConfig().set("players." + username, resString);
+        player.sendMessage(resString);
         data.saveConfig();
     }
 
