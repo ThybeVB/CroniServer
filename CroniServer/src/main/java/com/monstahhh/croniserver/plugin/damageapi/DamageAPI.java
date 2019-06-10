@@ -9,10 +9,11 @@ import java.util.logging.Level;
 public class DamageAPI {
 
     private JavaPlugin _plugin;
-    private PluginLogger pluginLogger;
+    private static PluginLogger pluginLogger;
 
-    private static Config config;
-    private static boolean debug = false;
+    public static Config config;
+    public static Config playerData;
+    public static boolean debug = false;
 
     public DamageAPI (JavaPlugin plugin, PluginLogger logger) {
         _plugin = plugin;
@@ -38,6 +39,14 @@ public class DamageAPI {
             if (debugObj.toString().equals("true")) {
                 debug = true;
             }
+        }
+
+        playerData = new Config("plugins/DamageAPI", "player_data.yml", _plugin);
+    }
+
+    public static void debugLog(String str) {
+        if (debug) {
+            pluginLogger.log(Level.INFO, str);
         }
     }
 

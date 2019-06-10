@@ -1,6 +1,8 @@
 package com.monstahhh.croniserver.plugin.damageapi.events;
 
+import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
 import com.monstahhh.croniserver.plugin.damageapi.PlayerHandler;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,10 +18,9 @@ public class PlayerDamageEvent implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
-            Player p = (Player) event.getEntity();
-            if (!isPlayerFullHealth(p)) {
-                handler.setPlayerDamaged(p);
-            }
+            Player p = (Player)event.getEntity();
+            DamageAPI.debugLog(p.getDisplayName() + " DAMAGE: SETDAMAGED");
+            handler.setPlayerDamaged(p);
         }
     }
 
@@ -28,15 +29,25 @@ public class PlayerDamageEvent implements Listener {
         if (event.getEntityType() == EntityType.PLAYER) {
             Player p = (Player)event.getEntity();
             if (isPlayerFullHealth(p)) {
+                DamageAPI.debugLog(p.getDisplayName() + " REGAIN: SETHEALTHY");
                 handler.setPlayerHealthy(p);
+            } else {
+                DamageAPI.debugLog(p.getDisplayName() + " REGAIN: SETDAMAGED");
+                handler.setPlayerDamaged(p);
             }
         }
     }
 
     private boolean isPlayerFullHealth (Player player) {
-        if (player.getHealth() == 20.0) {
+        double fixedHealth = player.getHealth() + 1.0;
+        DamageAPI.debugLog(player.getDisplayName() + " Current Health: " + Math.round(fixedHealth));
+        DamageAPI.debugLog(player.getDisplayName() + " Max Health: " + player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
+
+        if (Math.round(fixedHealth) >= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue()) {
+            DamageAPI.debugLog( player.getDisplayName() + " At Max Health!");
             return true;
         }
+        DamageAPI.debugLog(player.getDisplayName() + " Not at Full Health!");
         return false;
     }
 }
