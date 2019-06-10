@@ -19,11 +19,14 @@ public class HomeCommand implements CommandExecutor {
             Player player = (Player)commandSender;
 
             if (command.getName().equalsIgnoreCase("home")) {
-                callHome(player);
+                if (player.hasPermission("croniserver.home")) {
+                    callHome(player);
+                }
             }
-
             if (command.getName().equalsIgnoreCase("sethome")) {
-                callSetHome(player);
+                if (player.hasPermission("croniserver.sethome")) {
+                    callSetHome(player);
+                }
             }
 
         } else {
@@ -59,18 +62,11 @@ public class HomeCommand implements CommandExecutor {
     private Location locationFromString (String string) {
 
         String[] locationData = string.split(":");
-        System.out.println(string);
         double x = Double.parseDouble(locationData[0]);
-        System.out.println(x);
         double y = Double.parseDouble(locationData[1]);
-        System.out.println(y);
         double z = Double.parseDouble(locationData[2]);
-        System.out.println(z);
         World world = Bukkit.getWorld(locationData[3]);
-        System.out.println(world);
 
         return new Location(world, x, y, z);
     }
-
-    //string format = 'players. {player}:100:150:0:world '
 }
