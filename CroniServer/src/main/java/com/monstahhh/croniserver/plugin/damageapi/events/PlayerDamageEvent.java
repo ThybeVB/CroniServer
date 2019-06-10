@@ -14,8 +14,8 @@ public class PlayerDamageEvent implements Listener {
         if (event.getEntityType() == EntityType.PLAYER) {
             Player p = (Player)event.getEntity();
             p.getServer().getConsoleSender().sendMessage("plr entity dmg");
-            DamageAPI.config.getConfig().set("this.is.a.location", "plr damaged");
-            DamageAPI.config.saveConfig();
+            //DamageAPI.config.getConfig().set("this.is.a.location", "plr damaged");
+            //DamageAPI.config.saveConfig();
         }
     }
 }

@@ -10,7 +10,9 @@ public class DamageAPI {
 
     private JavaPlugin _plugin;
     private PluginLogger pluginLogger;
+
     public static Config config;
+    public static boolean debug = false;
 
     public DamageAPI (JavaPlugin plugin, PluginLogger logger) {
         _plugin = plugin;
@@ -20,8 +22,6 @@ public class DamageAPI {
     public void enable () {
 
         this.setupPluginFiles();
-        config.getConfig().set("this.is.a.location", "null");
-        config.saveConfig();
 
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), _plugin);
 
@@ -30,14 +30,18 @@ public class DamageAPI {
 
     private void setupPluginFiles () {
         config = new Config("plugins/DamageAPI", "config.yml", _plugin);
+        Object debugObj = config.getConfig().get("debug");
+        if (debugObj == null) {
+            config.getConfig().set("debug", false);
+            config.saveConfig();
+        } else {
+            if (debugObj.toString() == "true") {
+                debug = true;
+            }
+        }
     }
 
     public void disable () {
-
-        Object str = config.getConfig().get("this.is.a.location");
-        pluginLogger.log(Level.INFO, str.toString());
-
         pluginLogger.log(Level.INFO, "Disabled Damage API");
-        _plugin = null;
     }
 }
