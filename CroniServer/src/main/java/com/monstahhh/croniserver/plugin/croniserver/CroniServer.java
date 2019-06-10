@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.croniserver;
 
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
+import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
@@ -37,6 +38,8 @@ public final class CroniServer extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         this.getCommand("hub").setExecutor(new WarpCommands());
         this.getCommand("spawn").setExecutor(new WarpCommands());
+        this.getCommand("home").setExecutor(new HomeCommand());
+        this.getCommand("sethome").setExecutor(new HomeCommand());
         this.getCommand("distance").setExecutor(new DistanceCommand());
         this.getCommand("pdistance").setExecutor((new DistanceCommand()));
         this.getCommand("lol").setExecutor(new DistanceCommand());

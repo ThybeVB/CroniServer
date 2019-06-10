@@ -6,6 +6,15 @@ authors: [monstahhhy]
 softdepend: [AuthMe]
 
 commands:
+
+  home:
+    description: Takes you to your home
+    usage: /home
+
+  sethome:
+    description: Sets your home to your current location
+    usage: /sethome
+
   distance:
     description: Shows you the distance to a certain point
     usage: /distance x y z
