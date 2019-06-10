@@ -50,16 +50,15 @@ public class HomeCommand implements CommandExecutor {
         double z = player.getLocation().getZ();
         String world = player.getLocation().getWorld().getName();
 
-        String resString = ":" + x + ":" + y + ":" + z + ":" + world;
+        String resString = x + ":" + y + ":" + z + ":" + world;
         data.getConfig().set("players." + username, resString);
         player.sendMessage(resString);
         data.saveConfig();
     }
 
     private Location locationFromString (String string) {
-        String[] dataLocation = string.split("\\.");
-        String[] locationData = dataLocation[1].split("\\:");
 
+        String[] locationData = string.split(":");
         System.out.println(string);
         double x = Double.parseDouble(locationData[0]);
         System.out.println(x);
