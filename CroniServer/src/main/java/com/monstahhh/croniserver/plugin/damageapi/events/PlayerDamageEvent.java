@@ -8,12 +8,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class PlayerDamageEvent implements Listener {
 
     PlayerHandler handler = new PlayerHandler();
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getEntityType() == EntityType.PLAYER) {
+            if (event.getDamager() instanceof Player) {
+                Player attacker = (Player)event.getDamager();
+                Player defender = (Player)event.getEntity();
+
+                handler.setPlayerInCombat(attacker);
+                handler.setPlayerInCombat(defender);
+            }
+        }
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageEvent event) {

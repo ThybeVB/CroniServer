@@ -5,6 +5,10 @@ import org.bukkit.entity.Player;
 
 public class PlayerHandler {
 
+    public void setPlayerInCombat (Player player) {
+        //foo
+    }
+
     public void setPlayerDamaged (Player player) {
         Config playerData = DamageAPI.playerData;
 
