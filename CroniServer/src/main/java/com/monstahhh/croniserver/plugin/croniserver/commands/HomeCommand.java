@@ -60,8 +60,9 @@ public class HomeCommand implements CommandExecutor {
 
         String resString = x + ":" + y + ":" + z + ":" + world;
         data.getConfig().set("players." + username, resString);
-        player.sendMessage(resString);
         data.saveConfig();
+        player.sendMessage(ChatColor.GREEN + "Your home has been set to " + ChatColor.WHITE + resString);
+        player.sendMessage(ChatColor.GREEN + "Use /home to access it.");
     }
 
     private Location locationFromString (String string, Player player) {
