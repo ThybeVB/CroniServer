@@ -7,7 +7,7 @@ import java.util.*;
 
 public class PlayerHandler {
 
-    HashMap<Player, Timer> timedPlayers = new HashMap<>();
+    private HashMap<Player, Timer> timedPlayers = new HashMap<>();
 
     public void setPlayerInCombat (Player player) {
         Config playerData = DamageAPI.playerData;
@@ -31,7 +31,10 @@ public class PlayerHandler {
         DamageAPI.debugLog("Starting Timer for " + player.getDisplayName());
 
         if (timedPlayers.get(player) != null) {
-            timedPlayers.remove(player);
+            Object oldTimer = timedPlayers.get(player);
+            ((Timer) oldTimer).cancel();
+            ((Timer) oldTimer).purge();
+            timedPlayers.remove(player, oldTimer);
             DamageAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getDisplayName());
         }
         Timer timer = new Timer();
@@ -40,11 +43,15 @@ public class PlayerHandler {
 
             @Override
             public void run() {
+
                 DamageAPI.debugLog("COMBAT FINISHED FOR " + player.getDisplayName());
-                timedPlayers.remove(player);
+                timer.cancel();
+                timer.purge();
+
+                timedPlayers.remove(player, timer);
                 setPlayerInNeutral(player);
             }
-        }, 0, 30000);
+        }, 30000, 30000);
     }
 
     public void setPlayerDamaged (Player player) {

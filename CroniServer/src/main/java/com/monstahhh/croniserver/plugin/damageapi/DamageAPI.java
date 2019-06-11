@@ -2,6 +2,8 @@ package com.monstahhh.croniserver.plugin.damageapi;
 
 import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDamageEvent;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,6 +31,33 @@ public class DamageAPI {
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), _plugin);
 
         pluginLogger.log(Level.INFO, "Enabled Damage API");
+    }
+
+    public static boolean isDangerous (Player player) {
+
+        boolean damagedBool = false;
+        boolean inCombatBool = false;
+
+        String displayName = player.getDisplayName();
+        Object damaged = playerData.getConfig().get("players." + displayName + ".damaged");
+        Object inCombat = playerData.getConfig().get("players." + displayName + ".inCombat");
+
+        if (damaged != null) {
+            if (damaged.toString().equals("true")) {
+                damagedBool = true;
+            }
+        }
+        if (inCombat != null) {
+            if (inCombat.toString().equals("true")) {
+                inCombatBool = true;
+            }
+        }
+
+        if (damagedBool || inCombatBool) {
+            return true;
+        }
+
+        return false;
     }
 
     private void setupPluginFiles () {

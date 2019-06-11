@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.croniserver.commands;
 
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
+import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
 import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -41,7 +42,11 @@ public class HomeCommand implements CommandExecutor {
         if (playerLocation == null) {
             player.sendMessage(ChatColor.DARK_RED + "You have not set a home yet! Set one with " + ChatColor.AQUA + "/sethome");
         } else {
-            player.teleport(locationFromString(playerLocation.toString()));
+            if (DamageAPI.isDangerous(player)) {
+                player.teleport(locationFromString(playerLocation.toString(), player));
+            } else {
+                player.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
+            }
         }
     }
 
@@ -59,7 +64,7 @@ public class HomeCommand implements CommandExecutor {
         data.saveConfig();
     }
 
-    private Location locationFromString (String string) {
+    private Location locationFromString (String string, Player player) {
 
         String[] locationData = string.split(":");
         double x = Double.parseDouble(locationData[0]);
@@ -67,6 +72,9 @@ public class HomeCommand implements CommandExecutor {
         double z = Double.parseDouble(locationData[2]);
         World world = Bukkit.getWorld(locationData[3]);
 
-        return new Location(world, x, y, z);
+        float yaw = player.getLocation().getYaw();
+        float pitch = player.getLocation().getPitch();
+
+        return new Location(world, x, y, z, yaw, pitch);
     }
 }
