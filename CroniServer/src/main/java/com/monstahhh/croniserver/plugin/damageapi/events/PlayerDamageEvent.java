@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
 import com.monstahhh.croniserver.plugin.damageapi.PlayerHandler;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,6 +26,10 @@ public class PlayerDamageEvent implements Listener {
 
                 handler.setPlayerInCombat(attacker);
                 handler.setPlayerInCombat(defender);
+            } else {
+                if (event.getDamager() instanceof Mob) {
+                    handler.setPlayerInCombat((Player)event.getEntity());
+                }
             }
         }
     }
