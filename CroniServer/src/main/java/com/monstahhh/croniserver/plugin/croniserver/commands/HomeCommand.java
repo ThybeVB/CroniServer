@@ -42,7 +42,7 @@ public class HomeCommand implements CommandExecutor {
         if (playerLocation == null) {
             player.sendMessage(ChatColor.DARK_RED + "You have not set a home yet! Set one with " + ChatColor.AQUA + "/sethome");
         } else {
-            if (DamageAPI.isDangerous(player)) {
+            if (!DamageAPI.isDangerous(player)) {
                 player.teleport(locationFromString(playerLocation.toString(), player));
             } else {
                 player.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");

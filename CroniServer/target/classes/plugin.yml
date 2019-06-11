@@ -1,5 +1,5 @@
 name: CroniServer
-version: 1.5.1-SHAPSHOT
+version: 1.5.1
 api-version: 1.14
 main: com.monstahhh.croniserver.plugin.croniserver.CroniServer
 authors: [monstahhhy]
