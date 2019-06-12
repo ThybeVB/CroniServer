@@ -2,6 +2,7 @@ package com.monstahhh.croniserver.plugin.damageapi;
 
 import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDamageEvent;
+import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDeathEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +29,7 @@ public class DamageAPI {
         this.setupPluginFiles();
 
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), _plugin);
 
         pluginLogger.log(Level.INFO, "Enabled Damage API");
     }

@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class PlayerDamageEvent implements Listener {
 
-    PlayerHandler handler = new PlayerHandler();
+    private PlayerHandler handler = new PlayerHandler();
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
@@ -59,14 +59,14 @@ public class PlayerDamageEvent implements Listener {
 
     private boolean isPlayerFullHealth (Player player) {
         double fixedHealth = player.getHealth() + 1.0;
-        DamageAPI.debugLog(player.getDisplayName() + " Current Health: " + Math.round(fixedHealth));
-        DamageAPI.debugLog(player.getDisplayName() + " Max Health: " + player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
+        DamageAPI.debugLog(player.getDisplayName() + "'s Current Health: " + Math.round(fixedHealth));
+        DamageAPI.debugLog(player.getDisplayName() + "'s Max Health: " + player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
 
         if (Math.round(fixedHealth) >= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue()) {
-            DamageAPI.debugLog( player.getDisplayName() + " At Max Health!");
+            DamageAPI.debugLog( player.getDisplayName() + " is at Max Health!");
             return true;
         }
-        DamageAPI.debugLog(player.getDisplayName() + " Not at Full Health!");
+        DamageAPI.debugLog(player.getDisplayName() + " is not at Full Health!");
         return false;
     }
 }
