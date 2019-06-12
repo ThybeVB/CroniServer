@@ -12,10 +12,10 @@ public class PlayerMoveEvent implements Listener {
     @EventHandler
     public void onPlayerMove(org.bukkit.event.player.PlayerMoveEvent event) {
         Player p = event.getPlayer();
-        if (p.getVelocity().getY() < 0) {
-            handler.setFalling(p);
-        } else if (p.getVelocity().getY() >= 0) {
+        if (p.isOnGround()) {
             handler.setStill(p);
+        } else {
+            handler.setFalling(p);
         }
     }
 }
