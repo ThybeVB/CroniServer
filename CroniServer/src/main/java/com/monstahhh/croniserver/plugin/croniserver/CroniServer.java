@@ -5,8 +5,8 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
-import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
-import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
+import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
+import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
@@ -22,7 +22,7 @@ public final class CroniServer extends JavaPlugin {
     public static int onlinePlayers = 0;
     public static int maxPlayers = 0;
 
-    private DamageAPI damageAPI;
+    private DangerAPI dangerApi;
 
     @Override
     public void onEnable() {
@@ -30,8 +30,8 @@ public final class CroniServer extends JavaPlugin {
         PluginLogger logger = new PluginLogger(this);
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
 
-        damageAPI = new DamageAPI(this, logger);
-        damageAPI.enable();
+        dangerApi = new DangerAPI(this, logger);
+        dangerApi.enable();
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
@@ -54,7 +54,7 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onDisable () {
 
-        damageAPI.disable();
+        dangerApi.disable();
 
         logger.log(new LogRecord(Level.INFO, "Disabled CroniServer"));
     }

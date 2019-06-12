@@ -1,8 +1,8 @@
 package com.monstahhh.croniserver.plugin.croniserver.commands;
 
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
-import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
-import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
+import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
+import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -42,7 +42,7 @@ public class HomeCommand implements CommandExecutor {
         if (playerLocation == null) {
             player.sendMessage(ChatColor.DARK_RED + "You have not set a home yet! Set one with " + ChatColor.AQUA + "/sethome");
         } else {
-            if (!DamageAPI.isDangerous(player)) {
+            if (!DangerAPI.isDangerous(player)) {
                 player.teleport(locationFromString(playerLocation.toString(), player));
             } else {
                 player.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");

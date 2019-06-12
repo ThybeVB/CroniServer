@@ -1,8 +1,9 @@
-package com.monstahhh.croniserver.plugin.damageapi;
+package com.monstahhh.croniserver.plugin.dangerapi;
 
-import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
-import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDamageEvent;
-import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDeathEvent;
+import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
+import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDamageEvent;
+import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDeathEvent;
+import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerMoveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,16 +11,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.logging.Level;
 
-public class DamageAPI {
+public class DangerAPI {
 
     private JavaPlugin _plugin;
     private static PluginLogger pluginLogger;
 
-    public static Config config;
+    private static Config config;
     public static Config playerData;
-    public static boolean debug = false;
+    private static boolean debug = false;
 
-    public DamageAPI (JavaPlugin plugin, PluginLogger logger) {
+    public DangerAPI (JavaPlugin plugin, PluginLogger logger) {
         _plugin = plugin;
         pluginLogger = logger;
     }
@@ -30,18 +31,21 @@ public class DamageAPI {
 
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), _plugin);
 
-        pluginLogger.log(Level.INFO, "Enabled Damage API");
+        pluginLogger.log(Level.INFO, "Enabled Danger API");
     }
 
     public static boolean isDangerous (Player player) {
 
         boolean damagedBool = false;
         boolean inCombatBool = false;
+        boolean fallingBool = false;
 
         String displayName = player.getDisplayName();
         Object damaged = playerData.getConfig().get("players." + displayName + ".damaged");
         Object inCombat = playerData.getConfig().get("players." + displayName + ".inCombat");
+        Object falling = playerData.getConfig().get("players." + displayName + ".falling");
 
         if (damaged != null) {
             if (damaged.toString().equals("true")) {
@@ -53,8 +57,13 @@ public class DamageAPI {
                 inCombatBool = true;
             }
         }
+        if (falling != null) {
+            if (falling.toString().equals("true")) {
+                fallingBool = true;
+            }
+        }
 
-        if (damagedBool || inCombatBool) {
+        if (damagedBool || inCombatBool || fallingBool) {
             return true;
         }
 
@@ -62,7 +71,7 @@ public class DamageAPI {
     }
 
     private void setupPluginFiles () {
-        config = new Config("plugins/DamageAPI", "config.yml", _plugin);
+        config = new Config("plugins/DangerAPI", "config.yml", _plugin);
         Object debugObj = config.getConfig().get("debug");
         if (debugObj == null) {
             config.getConfig().set("debug", false);
@@ -73,7 +82,7 @@ public class DamageAPI {
             }
         }
 
-        playerData = new Config("plugins/DamageAPI", "player_data.yml", _plugin);
+        playerData = new Config("plugins/DangerAPI", "player_data.yml", _plugin);
     }
 
     public static void debugLog(String str) {
@@ -83,10 +92,10 @@ public class DamageAPI {
     }
 
     public void disable () {
-        File file = new File("plugins/DamageAPI/player_data.yml");
+        File file = new File("plugins/DangerAPI/player_data.yml");
         pluginLogger.log(Level.INFO, "Deleting Damage Data...");
         file.delete();
 
-        pluginLogger.log(Level.INFO, "Disabled Damage API");
+        pluginLogger.log(Level.INFO, "Disabled Danger API");
     }
 }

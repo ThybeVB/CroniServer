@@ -1,7 +1,7 @@
-package com.monstahhh.croniserver.plugin.damageapi.events;
+package com.monstahhh.croniserver.plugin.dangerapi.events;
 
-import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
-import com.monstahhh.croniserver.plugin.damageapi.PlayerHandler;
+import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
+import com.monstahhh.croniserver.plugin.dangerapi.PlayerHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,6 +16,6 @@ public class PlayerDeathEvent implements Listener {
         Player player = event.getEntity();
         handler.setPlayerHealthy(player);
         handler.setPlayerInNeutral(player);
-        DamageAPI.debugLog(player.getDisplayName() + " has died, damage data has been reset");
+        DangerAPI.debugLog(player.getDisplayName() + " has died, damage data has been reset");
     }
 }
