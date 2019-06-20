@@ -58,11 +58,15 @@ public class HomeCommand implements CommandExecutor {
         double z = player.getLocation().getZ();
         String world = player.getLocation().getWorld().getName();
 
-        String resString = x + ":" + y + ":" + z + ":" + world;
-        data.getConfig().set("players." + username, resString);
-        data.saveConfig();
-        player.sendMessage(ChatColor.GREEN + "Your home has been set to " + ChatColor.WHITE + resString);
-        player.sendMessage(ChatColor.GREEN + "Use /home to access it.");
+        if (player.isOnGround()) {
+            String resString = x + ":" + y + ":" + z + ":" + world;
+            data.getConfig().set("players." + username, resString);
+            data.saveConfig();
+            player.sendMessage(ChatColor.GREEN + "Your home has been set to " + ChatColor.WHITE + resString);
+            player.sendMessage(ChatColor.GREEN + "Use /home to access it.");
+        } else {
+            player.sendMessage(ChatColor.DARK_RED + "Your home must be set on the ground!");
+        }
     }
 
     private Location locationFromString (String string, Player player) {

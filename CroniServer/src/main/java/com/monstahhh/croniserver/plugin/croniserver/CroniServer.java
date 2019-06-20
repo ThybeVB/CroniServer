@@ -7,14 +7,16 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.damageapi.DamageAPI;
 import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
 
-    PluginLogger logger = new PluginLogger(this);
+    Logger logger;
     public static Config playerData;
 
     public static String version = null;
@@ -27,7 +29,7 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        PluginLogger logger = new PluginLogger(this);
+        logger = Bukkit.getLogger();
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
 
         damageAPI = new DamageAPI(this, logger);

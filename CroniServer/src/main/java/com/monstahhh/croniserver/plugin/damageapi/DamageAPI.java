@@ -3,22 +3,22 @@ package com.monstahhh.croniserver.plugin.damageapi;
 import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.damageapi.events.PlayerDamageEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DamageAPI {
 
     private JavaPlugin _plugin;
-    private static PluginLogger pluginLogger;
+    private static Logger pluginLogger;
 
     public static Config config;
     public static Config playerData;
     public static boolean debug = false;
 
-    public DamageAPI (JavaPlugin plugin, PluginLogger logger) {
+    public DamageAPI (JavaPlugin plugin, Logger logger) {
         _plugin = plugin;
         pluginLogger = logger;
     }
