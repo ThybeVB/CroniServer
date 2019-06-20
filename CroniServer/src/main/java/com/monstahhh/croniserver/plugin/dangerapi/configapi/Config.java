@@ -1,4 +1,4 @@
-package com.monstahhh.croniserver.plugin.damageapi.configapi;
+package com.monstahhh.croniserver.plugin.dangerapi.configapi;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,16 +1,18 @@
-package com.monstahhh.croniserver.plugin.damageapi;
+package com.monstahhh.croniserver.plugin.dangerapi;
 
-import com.monstahhh.croniserver.plugin.damageapi.configapi.Config;
+import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PlayerHandler {
 
     private HashMap<Player, Timer> timedPlayers = new HashMap<>();
 
     public void setPlayerInCombat (Player player) {
-        Config playerData = DamageAPI.playerData;
+        Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", true);
         playerData.saveConfig();
@@ -20,7 +22,7 @@ public class PlayerHandler {
     }
 
     public void setPlayerInNeutral (Player player) {
-        Config playerData = DamageAPI.playerData;
+        Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", false);
         playerData.saveConfig();
@@ -28,14 +30,14 @@ public class PlayerHandler {
 
     private void startTimerForPlayer (Player player) {
 
-        DamageAPI.debugLog("Starting Timer for " + player.getDisplayName());
+        DangerAPI.debugLog("Starting Timer for " + player.getDisplayName());
 
         if (timedPlayers.get(player) != null) {
             Object oldTimer = timedPlayers.get(player);
             ((Timer) oldTimer).cancel();
             ((Timer) oldTimer).purge();
             timedPlayers.remove(player, oldTimer);
-            DamageAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getDisplayName());
+            DangerAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getDisplayName());
         }
         Timer timer = new Timer();
         timedPlayers.put(player, timer);
@@ -44,7 +46,7 @@ public class PlayerHandler {
             @Override
             public void run() {
 
-                DamageAPI.debugLog("COMBAT FINISHED FOR " + player.getDisplayName());
+                DangerAPI.debugLog("COMBAT FINISHED FOR " + player.getDisplayName());
                 timer.cancel();
                 timer.purge();
 
@@ -55,16 +57,30 @@ public class PlayerHandler {
     }
 
     public void setPlayerDamaged (Player player) {
-        Config playerData = DamageAPI.playerData;
+        Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", true);
         playerData.saveConfig();
     }
 
     public void setPlayerHealthy (Player player) {
-        Config playerData = DamageAPI.playerData;
+        Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", false);
+        playerData.saveConfig();
+    }
+
+    public void setFalling (Player player) {
+        Config playerData = DangerAPI.playerData;
+
+        playerData.getConfig().set("players." + player.getDisplayName() + ".falling", true);
+        playerData.saveConfig();
+    }
+
+    public void setStill (Player player) {
+        Config playerData = DangerAPI.playerData;
+
+        playerData.getConfig().set("players." + player.getDisplayName() + ".falling", false);
         playerData.saveConfig();
     }
 }
