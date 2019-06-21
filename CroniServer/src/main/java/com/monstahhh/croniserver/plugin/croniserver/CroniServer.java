@@ -5,6 +5,7 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
+import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.Bukkit;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
@@ -25,6 +26,7 @@ public final class CroniServer extends JavaPlugin {
     public static int maxPlayers = 0;
 
     private DangerAPI dangerApi;
+    private Sleep sleep;
 
     @Override
     public void onEnable() {
@@ -35,6 +37,9 @@ public final class CroniServer extends JavaPlugin {
 
         dangerApi = new DangerAPI(this, logger);
         dangerApi.enable();
+
+        sleep = new Sleep(this, logger);
+        sleep.enable();
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
@@ -58,6 +63,7 @@ public final class CroniServer extends JavaPlugin {
     public void onDisable () {
 
         dangerApi.disable();
+        sleep.disable();
 
         logger.log(new LogRecord(Level.INFO, "Disabled CroniServer"));
     }
