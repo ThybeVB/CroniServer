@@ -8,6 +8,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class MessageReceivedEvent extends ListenerAdapter {
 
@@ -26,7 +27,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         try {
             origin = args[1];
             destination = args[2];
-            msg = args[3];
+            msg = event.getMessage().getContentRaw().substring(16);
         } catch (ArrayIndexOutOfBoundsException e) {
             event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: 'translate id en kontol'").queue();
             return;

@@ -35,6 +35,9 @@ public class MrWorldWide {
         } else {
             try {
                 _jda = new JDABuilder(debugObj.toString())
+                        .setAudioEnabled(false)
+                        .setAutoReconnect(true)
+                        .setContextEnabled(false)
                         .build();
 
                 _jda.addEventListener(new MessageReceivedEvent());
