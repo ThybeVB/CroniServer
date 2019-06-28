@@ -13,8 +13,8 @@ import com.jafregle.http.HttpResponse;
 
 public class FreeGoogleTranslator implements Translator {
     
-    private final String GOOGLE_URL_API = "http://translate.google.com/translate_a/";    
-    private final String GOOGLE_PARAMS  = "single?client=z&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
+    private final String GOOGLE_URL_API = "https://translate.googleapis.com/translate_a/";
+    private final String GOOGLE_PARAMS  = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
     private final String PATTERN = "\"(.*?)\"";
     
     @Override

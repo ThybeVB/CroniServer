@@ -3,8 +3,13 @@ package com.monstahhh.croniserver.plugin.mrworldwide.event;
 import com.jafregle.Jafregle.Jafregle;
 import com.jafregle.Jafregle.Language;
 import com.jafregle.Jafregle.Translator;
+import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+
+import java.awt.*;
+import java.io.IOException;
 
 public class MessageReceivedEvent extends ListenerAdapter {
 
@@ -17,12 +22,33 @@ public class MessageReceivedEvent extends ListenerAdapter {
     }
 
     private void carryCommand (GuildMessageReceivedEvent event) {
-        try {
-            Jafregle jafregle = new Jafregle("nl", "en");
-            String result = jafregle.translate("dit is een test");
-            event.getChannel().sendMessage(result).queue();
-        } catch (Exception e) {
+        String origin, destination, msg;
 
+        String[] args = event.getMessage().getContentRaw().split(" ");
+        origin = args[1];
+        destination = args[2];
+        msg = args[3];
+
+        String result = getTranslation(origin, destination, msg);
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Google Translate");
+        eb.addField(origin + " -> " + destination, result, false);
+        eb.setColor(Color.PINK);
+
+        event.getChannel().sendMessage(eb.build()).queue();
+    }
+
+    private String getTranslation (String origin, String destination, String msg) {
+        String result = "null";
+
+        try {
+            Jafregle jafregle = new Jafregle(origin, destination);
+            result = jafregle.translate(msg);
+        } catch (IOException e) {
+            MrWorldWide.debugLog(e.getMessage());
         }
+
+        return result;
     }
 }
