@@ -1,8 +1,6 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.event;
 
 import com.jafregle.Jafregle.Jafregle;
-import com.jafregle.Jafregle.Language;
-import com.jafregle.Jafregle.Translator;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -25,9 +23,14 @@ public class MessageReceivedEvent extends ListenerAdapter {
         String origin, destination, msg;
 
         String[] args = event.getMessage().getContentRaw().split(" ");
-        origin = args[1];
-        destination = args[2];
-        msg = args[3];
+        try {
+            origin = args[1];
+            destination = args[2];
+            msg = args[3];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: 'translate id en kontol'").queue();
+            return;
+        }
 
         String result = getTranslation(origin, destination, msg);
 

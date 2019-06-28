@@ -6,7 +6,7 @@
 
     <groupId>com.monstahhh.croniserver.plugin</groupId>
     <artifactId>croniserver</artifactId>
-    <version>1.5.3</version>
+    <version>1.6</version>
     <packaging>jar</packaging>
 
     <name>CroniServer</name>
@@ -98,6 +98,12 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>3.8.3_464</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>club.minnced</groupId>
+                    <artifactId>opus-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

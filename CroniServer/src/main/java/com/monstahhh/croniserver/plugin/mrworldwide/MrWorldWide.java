@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,7 +38,7 @@ public class MrWorldWide {
                         .build();
 
                 _jda.addEventListener(new MessageReceivedEvent());
-
+                _jda.getPresence().setGame(Game.watching("the world"));
                 _jda.awaitReady();
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
@@ -50,6 +51,7 @@ public class MrWorldWide {
     }
 
     public void disable () {
-
+        _jda.shutdown();
+        _logger.log(Level.INFO, "Mr. Worldwide has shut down!");
     }
 }
