@@ -2,6 +2,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide;
 
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
+import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
@@ -34,15 +35,15 @@ public class MrWorldWide {
             _logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
-                _jda = new JDABuilder(debugObj.toString())
+                _jda = new JDABuilder(AccountType.BOT)
+                        .setToken(debugObj.toString())
                         .setAudioEnabled(false)
                         .setAutoReconnect(true)
+                        .addEventListener(new MessageReceivedEvent())
+                        .setGame(Game.watching("the world"))
                         .setContextEnabled(false)
-                        .build();
+                        .build().awaitReady();
 
-                _jda.addEventListener(new MessageReceivedEvent());
-                _jda.getPresence().setGame(Game.watching("the world"));
-                _jda.awaitReady();
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
