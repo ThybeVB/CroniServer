@@ -14,6 +14,8 @@ public class BedEvents implements Listener {
 
     private List<Player> sleepingPlayers = new ArrayList<>();
 
+    private int sleepRequirement = 1;
+
     @EventHandler
     public void onPlayerBedEnter(PlayerBedEnterEvent event) {
         if (event.getPlayer().hasPermission("croniserver.sleep")) {
@@ -33,7 +35,7 @@ public class BedEvents implements Listener {
     }
 
     private void doCheck (World w) {
-        if (sleepingPlayers.size() >= 1) {
+        if (sleepingPlayers.size() >= sleepRequirement) {
             skipNight(w);
         }
     }
