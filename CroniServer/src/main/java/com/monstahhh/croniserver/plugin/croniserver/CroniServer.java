@@ -43,7 +43,7 @@ public final class CroniServer extends JavaPlugin {
         sleep = new Sleep(this, logger);
         sleep.enable();
 
-        mrWorldWide = new MrWorldWide(this);
+        mrWorldWide = new MrWorldWide(this, logger);
         mrWorldWide.enable();
 
         version = this.getDescription().getVersion();
