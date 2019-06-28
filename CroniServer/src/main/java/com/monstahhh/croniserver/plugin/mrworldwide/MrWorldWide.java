@@ -13,8 +13,7 @@ import java.util.logging.Level;
 
 public class MrWorldWide {
 
-    public static Config botConfig;
-    public static PluginLogger _logger;
+    private static PluginLogger _logger;
 
     private JavaPlugin _plugin;
     private JDA _jda;
@@ -25,10 +24,10 @@ public class MrWorldWide {
     }
 
     public void enable () {
-
+        Config botConfig;
         botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
-        Object debugObj = botConfig.getConfig().get("token");
-        if (debugObj == null) {
+        Object tokenObj = botConfig.getConfig().get("token");
+        if (tokenObj == null) {
             botConfig.getConfig().set("token", "/");
             botConfig.saveConfig();
 
@@ -36,7 +35,7 @@ public class MrWorldWide {
         } else {
             try {
                 _jda = new JDABuilder(AccountType.BOT)
-                        .setToken(debugObj.toString())
+                        .setToken(tokenObj.toString())
                         .setAudioEnabled(false)
                         .setAutoReconnect(true)
                         .addEventListener(new MessageReceivedEvent())

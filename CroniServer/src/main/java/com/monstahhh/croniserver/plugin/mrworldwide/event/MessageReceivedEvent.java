@@ -8,7 +8,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class MessageReceivedEvent extends ListenerAdapter {
 
