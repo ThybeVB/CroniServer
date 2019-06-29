@@ -33,54 +33,16 @@ public class Jafregle
     private Translator translator;
     
     private JafregleCache jafregleCache;
-    
-    /**
-     * Instantiate with a given {@link Translator.class} to be used
-     *
-     * @param  translator       ITranslator Interface
-     * 
-     */
-    public Jafregle(Translator translator) {
-        this.translator = translator;
-    }
 
     public Jafregle(String from, String to)
     {
         this.from = from;
         this.to   = to;
     }
-    
-    /**
-     * This constructor will be deprecated cause 
-     * 
-     * @deprecated use {@link #constructor(Translator translator)} instead
-     * @param from
-     * @param to
-     */
-    @Deprecated
-    public Jafregle(Language from, Language to)
-    {
-        this.from = from.value();
-        this.to   = to.value();
-    }
 
     public String translate(String textToTranslate) throws IOException
     {
         return translate(textToTranslate, from, to);
-    }
-    
-    /**
-     *  Translate text string from language (Param "from") to especific language (Param "to") 
-     *
-     * @param  textToTranslate  String text to translate
-     * @param  from             Enum language from text
-     * @param  to               Enum language to translate
-     * @return                  String whit text translated
-     * 
-     */
-    public String translate(String textToTranslate, Language from, Language to) throws IOException
-    {
-        return translate(textToTranslate, from.value(), to.value());
     }
     
     /**
@@ -104,17 +66,6 @@ public class Jafregle
         getCacheHandler().add(result);
            
         return result;
-    }
-    
-    /**
-     * Set translator to be used
-     *
-     * @param  translator       ITranslator Interface
-     * 
-     */
-    public void setTranslator(Translator translator)
-    {
-        this.translator = translator;
     }
     
     /**

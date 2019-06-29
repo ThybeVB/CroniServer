@@ -27,6 +27,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
             origin = args[1];
             destination = args[2];
             msg = event.getMessage().getContentRaw().substring(16);
+            msg = msg.replaceAll("\n", " ");
         } catch (ArrayIndexOutOfBoundsException e) {
             event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: 'translate id en kontol'").queue();
             return;
