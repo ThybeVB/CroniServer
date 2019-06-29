@@ -75,6 +75,6 @@ public final class CroniServer extends JavaPlugin {
         sleep.disable();
         mrWorldWide.disable();
 
-        this.getLogger().log(new LogRecord(Level.INFO, "Disabled CroniServer"));
+        System.out.println(new LogRecord(Level.INFO, "Disabled CroniServer"));
     }
 }
