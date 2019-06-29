@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.mrworldwide;
 
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.core.AccountType;
@@ -28,7 +29,7 @@ public class MrWorldWide {
             botConfig.getConfig().set("token", "/");
             botConfig.saveConfig();
 
-            _plugin.getLogger().log(Level.SEVERE, "Mr. Worldwide token is not provided.");
+            CroniServer.logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
                 _jda = new JDABuilder(AccountType.BOT)
@@ -47,11 +48,11 @@ public class MrWorldWide {
     }
 
     public static void debugLog(String str) {
-        _plugin.getLogger().log(Level.INFO, str);
+        CroniServer.logger.log(Level.INFO, str);
     }
 
     public void disable () {
         _jda.shutdown();
-        _plugin.getLogger().log(Level.INFO, "Mr. Worldwide has shut down!");
+        CroniServer.logger.log(Level.INFO, "Mr. Worldwide has shut down!");
     }
 }

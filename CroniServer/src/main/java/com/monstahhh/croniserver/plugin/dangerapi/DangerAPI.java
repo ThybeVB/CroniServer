@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.dangerapi;
 
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDamageEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDeathEvent;
@@ -32,7 +33,7 @@ public class DangerAPI {
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), _plugin);
 
-        _plugin.getLogger().log(Level.INFO, "Enabled Danger API");
+        CroniServer.logger.log(Level.INFO, "Enabled Danger API");
     }
 
     public static boolean isDangerous (Player player) {
@@ -84,17 +85,17 @@ public class DangerAPI {
         playerData = new Config("plugins/DangerAPI", "player_data.yml", _plugin);
     }
 
-    public static void debugLog(String str) {
-        if (debug) {
-            _plugin.getLogger().log(Level.INFO, str);
-        }
-    }
-
     public void disable () {
         File file = new File("plugins/DangerAPI/player_data.yml");
         debugLog("Deleting Damage Data...");
         file.delete();
 
         debugLog("Disabled Danger API");
+    }
+
+    public static void debugLog(String str) {
+        if (debug) {
+            CroniServer.logger.log(Level.INFO, str);
+        }
     }
 }

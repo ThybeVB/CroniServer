@@ -9,7 +9,6 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
-import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -26,24 +25,28 @@ public final class CroniServer extends JavaPlugin {
     private Sleep sleep;
     private MrWorldWide mrWorldWide;
 
+    public static Logger logger;
+
     @Override
     public void onEnable() {
 
-        playerData = new Config("plugins/CroniServer", "player_data.yml", this);
-
-        dangerApi = new DangerAPI(this);
-        dangerApi.enable();
-
-        sleep = new Sleep(this);
-        sleep.enable();
-
-        mrWorldWide = new MrWorldWide(this);
-        mrWorldWide.enable();
+        logger = this.getLogger();
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
 
+        playerData = new Config("plugins/CroniServer", "player_data.yml", this);
+
+        this.enableExtensions();
+
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+
+        this.registerCommands();
+
+        this.getLogger().log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
+    }
+
+    private void registerCommands () {
         this.getCommand("hub").setExecutor(new WarpCommands());
         this.getCommand("spawn").setExecutor(new WarpCommands());
         this.getCommand("home").setExecutor(new HomeCommand());
@@ -52,8 +55,17 @@ public final class CroniServer extends JavaPlugin {
         this.getCommand("pdistance").setExecutor((new DistanceCommand()));
         this.getCommand("lol").setExecutor(new DistanceCommand());
         this.getCommand("crinfo").setExecutor(new InfoCommand());
+    }
 
-        this.getLogger().log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
+    private void enableExtensions () {
+        dangerApi = new DangerAPI(this);
+        dangerApi.enable();
+
+        sleep = new Sleep(this);
+        sleep.enable();
+
+        mrWorldWide = new MrWorldWide(this);
+        mrWorldWide.enable();
     }
 
     @Override

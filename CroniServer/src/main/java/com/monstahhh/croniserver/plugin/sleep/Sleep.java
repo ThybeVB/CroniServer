@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.sleep;
 
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.sleep.events.BedEvents;
 import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,10 +18,10 @@ public class Sleep {
     public void enable () {
         _plugin.getServer().getPluginManager().registerEvents(new BedEvents(), _plugin);
 
-        _plugin.getLogger().log(Level.INFO, "Enabled Sleep");
+        CroniServer.logger.log(Level.INFO, "Enabled Sleep");
     }
 
     public void disable () {
-        _plugin.getLogger().log(Level.INFO, "Disabled Sleep Extension");
+        CroniServer.logger.log(Level.INFO, "Disabled Sleep Extension");
     }
 }
