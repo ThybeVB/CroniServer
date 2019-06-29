@@ -43,7 +43,7 @@ public final class CroniServer extends JavaPlugin {
 
         this.registerCommands();
 
-        this.getLogger().log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
+        logger.log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
     }
 
     private void registerCommands () {
