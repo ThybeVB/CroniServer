@@ -21,8 +21,6 @@ public final class CroniServer extends JavaPlugin {
 
     public static String version = null;
     public static String author = null;
-    public static int onlinePlayers = 0;
-    public static int maxPlayers = 0;
 
     private DangerAPI dangerApi;
     private Sleep sleep;
@@ -44,8 +42,6 @@ public final class CroniServer extends JavaPlugin {
 
         version = this.getDescription().getVersion();
         author = (this.getDescription().getAuthors().toArray())[0].toString();
-        onlinePlayers = this.getServer().getOnlinePlayers().size();
-        maxPlayers = this.getServer().getMaxPlayers();
 
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         this.getCommand("hub").setExecutor(new WarpCommands());
