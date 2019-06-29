@@ -13,10 +13,10 @@ import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
 
-    PluginLogger logger;
     public static Config playerData;
 
     public static String version = null;
@@ -31,17 +31,15 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        logger = new PluginLogger(this);
-
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
 
-        dangerApi = new DangerAPI(this, logger);
+        dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
-        sleep = new Sleep(this, logger);
+        sleep = new Sleep(this);
         sleep.enable();
 
-        mrWorldWide = new MrWorldWide(this, logger);
+        mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
 
         version = this.getDescription().getVersion();
@@ -59,7 +57,7 @@ public final class CroniServer extends JavaPlugin {
         this.getCommand("lol").setExecutor(new DistanceCommand());
         this.getCommand("crinfo").setExecutor(new InfoCommand());
 
-        logger.log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
+        this.getLogger().log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
     }
 
     @Override
@@ -69,6 +67,6 @@ public final class CroniServer extends JavaPlugin {
         sleep.disable();
         mrWorldWide.disable();
 
-        logger.log(new LogRecord(Level.INFO, "Disabled CroniServer"));
+        this.getLogger().log(new LogRecord(Level.INFO, "Disabled CroniServer"));
     }
 }

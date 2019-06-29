@@ -14,16 +14,14 @@ import java.util.logging.Logger;
 
 public class DangerAPI {
 
-    private JavaPlugin _plugin;
-    private static Logger pluginLogger;
+    private static JavaPlugin _plugin;
 
     private static Config config;
     public static Config playerData;
     private static boolean debug = false;
 
-    public DangerAPI (JavaPlugin plugin, PluginLogger logger) {
+    public DangerAPI (JavaPlugin plugin) {
         _plugin = plugin;
-        pluginLogger = logger;
     }
 
     public void enable () {
@@ -34,7 +32,7 @@ public class DangerAPI {
         _plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), _plugin);
 
-        pluginLogger.log(Level.INFO, "Enabled Danger API");
+        _plugin.getLogger().log(Level.INFO, "Enabled Danger API");
     }
 
     public static boolean isDangerous (Player player) {
@@ -88,15 +86,15 @@ public class DangerAPI {
 
     public static void debugLog(String str) {
         if (debug) {
-            pluginLogger.log(Level.INFO, str);
+            _plugin.getLogger().log(Level.INFO, str);
         }
     }
 
     public void disable () {
         File file = new File("plugins/DangerAPI/player_data.yml");
-        pluginLogger.log(Level.INFO, "Deleting Damage Data...");
+        debugLog("Deleting Damage Data...");
         file.delete();
 
-        pluginLogger.log(Level.INFO, "Disabled Danger API");
+        debugLog("Disabled Danger API");
     }
 }

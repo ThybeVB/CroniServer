@@ -13,14 +13,11 @@ import java.util.logging.Level;
 
 public class MrWorldWide {
 
-    private static PluginLogger _logger;
-
-    private JavaPlugin _plugin;
+    private static JavaPlugin _plugin;
     private JDA _jda;
 
-    public MrWorldWide (JavaPlugin plugin, PluginLogger logger) {
+    public MrWorldWide (JavaPlugin plugin) {
         _plugin = plugin;
-        _logger = logger;
     }
 
     public void enable () {
@@ -31,7 +28,7 @@ public class MrWorldWide {
             botConfig.getConfig().set("token", "/");
             botConfig.saveConfig();
 
-            _logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
+            _plugin.getLogger().log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
                 _jda = new JDABuilder(AccountType.BOT)
@@ -50,11 +47,11 @@ public class MrWorldWide {
     }
 
     public static void debugLog(String str) {
-        _logger.log(Level.INFO, str);
+        _plugin.getLogger().log(Level.INFO, str);
     }
 
     public void disable () {
         _jda.shutdown();
-        _logger.log(Level.INFO, "Mr. Worldwide has shut down!");
+        _plugin.getLogger().log(Level.INFO, "Mr. Worldwide has shut down!");
     }
 }
