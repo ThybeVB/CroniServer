@@ -17,7 +17,6 @@ public class Sleep {
 
     public void enable () {
         _plugin.getServer().getPluginManager().registerEvents(new BedEvents(), _plugin);
-
         CroniServer.logger.log(Level.INFO, "Enabled Sleep");
     }
 

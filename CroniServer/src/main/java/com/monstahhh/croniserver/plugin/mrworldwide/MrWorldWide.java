@@ -52,7 +52,7 @@ public class MrWorldWide {
     }
 
     public void disable () {
-        _jda.shutdown();
+        _jda.shutdownNow();
         CroniServer.logger.log(Level.INFO, "Mr. Worldwide has shut down!");
     }
 }
