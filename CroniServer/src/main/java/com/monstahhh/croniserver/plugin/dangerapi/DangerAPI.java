@@ -6,12 +6,10 @@ import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDamageEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDeathEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerMoveEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DangerAPI {
 
@@ -21,11 +19,11 @@ public class DangerAPI {
     public static Config playerData;
     private static boolean debug = false;
 
-    public DangerAPI (JavaPlugin plugin) {
+    public DangerAPI(JavaPlugin plugin) {
         _plugin = plugin;
     }
 
-    public void enable () {
+    public void enable() {
 
         this.setupPluginFiles();
 
@@ -36,7 +34,7 @@ public class DangerAPI {
         CroniServer.logger.log(Level.INFO, "Enabled Danger API");
     }
 
-    public static boolean isDangerous (Player player) {
+    public static boolean isDangerous(Player player) {
 
         boolean damagedBool = false;
         boolean inCombatBool = false;
@@ -70,7 +68,7 @@ public class DangerAPI {
         return false;
     }
 
-    private void setupPluginFiles () {
+    private void setupPluginFiles() {
         config = new Config("plugins/DangerAPI", "config.yml", _plugin);
         Object debugObj = config.getConfig().get("debug");
         if (debugObj == null) {
@@ -85,12 +83,12 @@ public class DangerAPI {
         playerData = new Config("plugins/DangerAPI", "player_data.yml", _plugin);
     }
 
-    public void disable () {
+    public void disable() {
         File file = new File("plugins/DangerAPI/player_data.yml");
         debugLog("Deleting Damage Data...");
         file.delete();
 
-        debugLog("Disabled Danger API");
+        System.out.println("Disabled Danger API");
     }
 
     public static void debugLog(String str) {

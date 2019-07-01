@@ -1,8 +1,8 @@
 package com.jafregle.Jafregle;
 
-import java.io.IOException;
-
 import com.jafregle.Jafregle.translators.FreeGoogleTranslator;
+
+import java.io.IOException;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -23,80 +23,68 @@ import com.jafregle.Jafregle.translators.FreeGoogleTranslator;
  * @author Cristian Oliveira
  * @author www.cristianoliveira.com.br
  */
-  
 
-public class Jafregle 
-{
+
+public class Jafregle {
     private String from;
     private String to;
-    
+
     private Translator translator;
-    
+
     private JafregleCache jafregleCache;
 
-    public Jafregle(String from, String to)
-    {
+    public Jafregle(String from, String to) {
         this.from = from;
-        this.to   = to;
+        this.to = to;
     }
 
-    public String translate(String textToTranslate) throws IOException
-    {
+    public String translate(String textToTranslate) throws IOException {
         return translate(textToTranslate, from, to);
     }
-    
+
     /**
-     *  Translate text string from language (Param "from") to especific language (Param "to") 
+     * Translate text string from language (Param "from") to especific language (Param "to")
      *
-     * @param  textToTranslate  String text to translate
-     * @param  from             String language from text
-     * @param  to               String language to translate
-     * @return                  String with text translated
-     * 
+     * @param textToTranslate String text to translate
+     * @param from            String language from text
+     * @param to              String language to translate
+     * @return String with text translated
      */
-    public String translate(String textToTranslate, String from, String to) throws IllegalArgumentException, IOException
-    {
-        if(textToTranslate.isEmpty() || from.isEmpty() || to.isEmpty() )
-        {
-           throw new IllegalArgumentException("All params must be informed");
+    public String translate(String textToTranslate, String from, String to) throws IllegalArgumentException, IOException {
+        if (textToTranslate.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            throw new IllegalArgumentException("All params must be informed");
         }
-        
+
         String result = getTranslator().requestTranslation(textToTranslate, from, to);
-           
+
         getCacheHandler().add(result);
-           
+
         return result;
     }
-    
+
     /**
-     * Get current translator 
+     * Get current translator
      *
-     * @return  translator       ITranslator Interface
-     * 
+     * @return translator       ITranslator Interface
      */
-    public Translator getTranslator() 
-    {
-        if (translator == null) 
-        {
+    public Translator getTranslator() {
+        if (translator == null) {
             translator = new FreeGoogleTranslator();
         }
-        
+
         return translator;
     }
-    
+
     /**
      * Get cache handler
      *
-     * @return  JafregleCache    
-     * 
+     * @return JafregleCache
      */
-    public JafregleCache getCacheHandler()
-    {
-        if(jafregleCache == null)
-        {
+    public JafregleCache getCacheHandler() {
+        if (jafregleCache == null) {
             jafregleCache = new JafregleCache();
         }
-        
+
         return jafregleCache;
     }
 }

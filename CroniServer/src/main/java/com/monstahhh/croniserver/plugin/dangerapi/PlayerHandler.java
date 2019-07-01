@@ -11,7 +11,7 @@ public class PlayerHandler {
 
     private HashMap<Player, Timer> timedPlayers = new HashMap<>();
 
-    public void setPlayerInCombat (Player player) {
+    public void setPlayerInCombat(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", true);
@@ -21,14 +21,14 @@ public class PlayerHandler {
         startTimerForPlayer(player);
     }
 
-    public void setPlayerInNeutral (Player player) {
+    public void setPlayerInNeutral(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", false);
         playerData.saveConfig();
     }
 
-    private void startTimerForPlayer (Player player) {
+    private void startTimerForPlayer(Player player) {
 
         DangerAPI.debugLog("Starting Timer for " + player.getDisplayName());
 
@@ -56,28 +56,28 @@ public class PlayerHandler {
         }, 30000, 30000);
     }
 
-    public void setPlayerDamaged (Player player) {
+    public void setPlayerDamaged(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", true);
         playerData.saveConfig();
     }
 
-    public void setPlayerHealthy (Player player) {
+    public void setPlayerHealthy(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", false);
         playerData.saveConfig();
     }
 
-    public void setFalling (Player player) {
+    public void setFalling(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".falling", true);
         playerData.saveConfig();
     }
 
-    public void setStill (Player player) {
+    public void setStill(Player player) {
         Config playerData = DangerAPI.playerData;
 
         playerData.getConfig().set("players." + player.getDisplayName() + ".falling", false);

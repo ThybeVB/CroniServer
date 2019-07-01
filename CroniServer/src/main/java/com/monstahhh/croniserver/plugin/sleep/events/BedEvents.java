@@ -32,14 +32,14 @@ public class BedEvents implements Listener {
         }
     }
 
-    private void doCheck (World w) {
+    private void doCheck(World w) {
         int sleepRequirement = 1;
         if (sleepingPlayers.size() >= sleepRequirement) {
             skipNight(w);
         }
     }
 
-    private void skipNight (World w) {
+    private void skipNight(World w) {
         sleepingPlayers = new ArrayList<>();
         w.setTime(1000L);
     }

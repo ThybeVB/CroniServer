@@ -5,11 +5,12 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
-import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
-import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
+import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
+import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -46,7 +47,7 @@ public final class CroniServer extends JavaPlugin {
         logger.log(new LogRecord(Level.INFO, "Loaded CroniServer v" + version));
     }
 
-    private void registerCommands () {
+    private void registerCommands() {
         this.getCommand("hub").setExecutor(new WarpCommands());
         this.getCommand("spawn").setExecutor(new WarpCommands());
         this.getCommand("home").setExecutor(new HomeCommand());
@@ -57,24 +58,24 @@ public final class CroniServer extends JavaPlugin {
         this.getCommand("crinfo").setExecutor(new InfoCommand());
     }
 
-    private void enableExtensions () {
+    private void enableExtensions() {
         dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
-        sleep = new Sleep(this);
-        sleep.enable();
-
         mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
+
+        sleep = new Sleep(this);
+        sleep.enable();
     }
 
     @Override
-    public void onDisable () {
+    public void onDisable() {
 
         dangerApi.disable();
-        sleep.disable();
         mrWorldWide.disable();
+        sleep.disable();
 
-        System.out.println(new LogRecord(Level.INFO, "Disabled CroniServer"));
+        System.out.println("[CroniServer] Disabled CroniServer");
     }
 }

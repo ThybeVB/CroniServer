@@ -21,14 +21,14 @@ public class PlayerDamageEvent implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
             if (event.getDamager() instanceof Player) {
-                Player attacker = (Player)event.getDamager();
-                Player defender = (Player)event.getEntity();
+                Player attacker = (Player) event.getDamager();
+                Player defender = (Player) event.getEntity();
 
                 handler.setPlayerInCombat(attacker);
                 handler.setPlayerInCombat(defender);
             } else {
                 if (event.getDamager() instanceof Mob) {
-                    handler.setPlayerInCombat((Player)event.getEntity());
+                    handler.setPlayerInCombat((Player) event.getEntity());
                 }
             }
         }
@@ -37,7 +37,7 @@ public class PlayerDamageEvent implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
-            Player p = (Player)event.getEntity();
+            Player p = (Player) event.getEntity();
             DangerAPI.debugLog(p.getDisplayName() + " DAMAGE: SETDAMAGED");
             handler.setPlayerDamaged(p);
         }
@@ -46,7 +46,7 @@ public class PlayerDamageEvent implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityRegainHealth(EntityRegainHealthEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
-            Player p = (Player)event.getEntity();
+            Player p = (Player) event.getEntity();
             if (isPlayerFullHealth(p)) {
                 DangerAPI.debugLog(p.getDisplayName() + " REGAIN: SETHEALTHY");
                 handler.setPlayerHealthy(p);
@@ -57,13 +57,13 @@ public class PlayerDamageEvent implements Listener {
         }
     }
 
-    private boolean isPlayerFullHealth (Player player) {
+    private boolean isPlayerFullHealth(Player player) {
         double fixedHealth = player.getHealth() + 1.0;
         DangerAPI.debugLog(player.getDisplayName() + "'s Current Health: " + Math.round(fixedHealth));
         DangerAPI.debugLog(player.getDisplayName() + "'s Max Health: " + player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
 
         if (Math.round(fixedHealth) >= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue()) {
-            DangerAPI.debugLog( player.getDisplayName() + " is at Max Health!");
+            DangerAPI.debugLog(player.getDisplayName() + " is at Max Health!");
             return true;
         }
         DangerAPI.debugLog(player.getDisplayName() + " is not at Full Health!");

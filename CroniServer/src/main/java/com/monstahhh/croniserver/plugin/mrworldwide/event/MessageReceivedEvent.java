@@ -19,7 +19,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
     }
 
-    private void carryCommand (GuildMessageReceivedEvent event) {
+    private void carryCommand(GuildMessageReceivedEvent event) {
         String origin, destination, msg;
 
         String[] args = event.getMessage().getContentRaw().split(" ");
@@ -43,7 +43,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         event.getChannel().sendMessage(eb.build()).queue();
     }
 
-    private String getTranslation (String origin, String destination, String msg) {
+    private String getTranslation(String origin, String destination, String msg) {
         String result = "null";
 
         try {

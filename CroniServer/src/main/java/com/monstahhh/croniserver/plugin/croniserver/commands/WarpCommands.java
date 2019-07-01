@@ -11,12 +11,12 @@ public class WarpCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("hub")) {
-            Player player = (Player)sender;
+            Player player = (Player) sender;
             player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
         }
 
         if (command.getName().equalsIgnoreCase("spawn")) {
-            Player player = (Player)sender;
+            Player player = (Player) sender;
             player.teleport(new Location(player.getWorld(), 3, 69, -2));
         }
 

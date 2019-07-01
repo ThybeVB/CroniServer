@@ -1,10 +1,5 @@
 package com.monstahhh.croniserver.plugin.dangerapi.configapi;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,21 +9,24 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.inventory.meta.SpawnEggMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Config {
 
     private File file;
     private FileConfiguration fileConfig;
 
-    /** Creates a new config at the path, with the fileName, with a configCreate method caller, and uses the Plugin */
+    /**
+     * Creates a new config at the path, with the fileName, with a configCreate method caller, and uses the Plugin
+     */
     public Config(String path, String fileName, Runnable callback, Plugin plugin) {
         if (!fileName.contains(".yml")) {
             fileName = fileName + ".yml";
@@ -47,7 +45,9 @@ public class Config {
         }
     }
 
-    /** Creates a new config at the path, with the fileName, and uses the Plugin */
+    /**
+     * Creates a new config at the path, with the fileName, and uses the Plugin
+     */
     public Config(String path, String fileName, Plugin plugin) {
         if (!fileName.contains(".yml")) {
             fileName = fileName + ".yml";
@@ -65,12 +65,16 @@ public class Config {
         }
     }
 
-    /** Get the Configuration section */
+    /**
+     * Get the Configuration section
+     */
     public FileConfiguration getConfig() {
         return fileConfig;
     }
 
-    /** Save the config */
+    /**
+     * Save the config
+     */
     public void saveConfig() {
         try {
             fileConfig.save(file);
@@ -79,7 +83,9 @@ public class Config {
         }
     }
 
-    /** Set a location in the config */
+    /**
+     * Set a location in the config
+     */
     public void setLocation(String path, Location location) {
         fileConfig.set(path + ".World", location.getWorld().getName());
         fileConfig.set(path + ".X", location.getX());
@@ -90,7 +96,9 @@ public class Config {
         saveConfig();
     }
 
-    /** Get a location in the config */
+    /**
+     * Get a location in the config
+     */
     public Location getLocation(String path) {
         if (fileConfig.getString(path + ".World") == null) {
             return null;

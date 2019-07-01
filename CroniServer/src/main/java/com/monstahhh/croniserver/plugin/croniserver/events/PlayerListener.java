@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
 
-    AuthMeApi authApi = AuthMeApi.getInstance();
+    private AuthMeApi authApi = AuthMeApi.getInstance();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

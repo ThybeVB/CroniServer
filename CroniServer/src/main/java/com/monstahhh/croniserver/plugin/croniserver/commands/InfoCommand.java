@@ -15,7 +15,7 @@ public class InfoCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.DARK_PURPLE + "====== CroniServer Info ======");
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Plugin Version: v" + CroniServer.version);
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spigot/Bukkit Version: " + sender.getServer().getBukkitVersion());
-                sender.sendMessage(ChatColor.LIGHT_PURPLE + "Author: " +  CroniServer.author);
+                sender.sendMessage(ChatColor.LIGHT_PURPLE + "Author: " + CroniServer.author);
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Hooked into AuthMe");
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + "Online Players: " + sender.getServer().getOnlinePlayers().size() + "/" + sender.getServer().getMaxPlayers());
             }

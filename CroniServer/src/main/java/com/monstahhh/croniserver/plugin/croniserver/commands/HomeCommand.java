@@ -17,7 +17,7 @@ public class HomeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
-            Player player = (Player)commandSender;
+            Player player = (Player) commandSender;
 
             if (command.getName().equalsIgnoreCase("home")) {
                 if (player.hasPermission("croniserver.home")) {
@@ -36,7 +36,7 @@ public class HomeCommand implements CommandExecutor {
         return true;
     }
 
-    private void callHome (Player player) {
+    private void callHome(Player player) {
         Config data = CroniServer.playerData;
         Object playerLocation = data.getConfig().get("players." + player.getDisplayName());
         if (playerLocation == null) {
@@ -50,7 +50,7 @@ public class HomeCommand implements CommandExecutor {
         }
     }
 
-    private void callSetHome (Player player) {
+    private void callSetHome(Player player) {
         Config data = CroniServer.playerData;
         String username = player.getDisplayName();
         double x = player.getLocation().getX();
@@ -69,7 +69,7 @@ public class HomeCommand implements CommandExecutor {
         }
     }
 
-    private Location locationFromString (String string, Player player) {
+    private Location locationFromString(String string, Player player) {
 
         String[] locationData = string.split(":");
         double x = Double.parseDouble(locationData[0]);
