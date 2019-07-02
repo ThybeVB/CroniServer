@@ -4,10 +4,14 @@ import com.jafregle.http.HttpClient;
 import com.jafregle.http.HttpMethod;
 import com.jafregle.http.HttpResponse;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Weather {
 
@@ -17,7 +21,7 @@ public class Weather {
     public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(8);
         if (providedLoc.contains(",")) {
-            getWeatherFor(providedLoc, weatherToken, event);
+            event.getChannel().sendMessage(getWeatherFor(providedLoc, weatherToken, event)).queue();
         } else {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Mr. Error");
@@ -29,21 +33,49 @@ public class Weather {
         }
     }
 
-    private void getWeatherFor(String providedLocation, String token, GuildMessageReceivedEvent event) {
+    private MessageEmbed getWeatherFor(String providedLocation, String token, GuildMessageReceivedEvent event) {
         try {
             HttpClient client = new HttpClient();
             String formattedSend = String.format(params, providedLocation, token);
-
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
-            event.getChannel().sendMessage(result.asString()).queue();
 
-        } catch (IOException e) {
+            return getEmbedForLocationJson(result.asString());
+
+        } catch (Exception e) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Mr. Error");
             eb.setColor(Color.RED);
-            eb.addField("IO Error", e.getMessage(), false);
+            eb.addField("Exception", e.getMessage(), false);
 
             event.getChannel().sendMessage(eb.build()).queue();
         }
+
+        return null;
+    }
+
+    private MessageEmbed getEmbedForLocationJson(String json) throws JSONException {
+        JSONObject object = new JSONObject(json);
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setColor(Color.ORANGE);
+        eb.setTitle("Weather for " + object.getString("name"));
+        eb.addField("Temperature", object.getJSONObject("main").get("temp").toString() + "°C", false);
+        eb.addField("Minimum", object.getJSONObject("main").get("temp_min").toString() + "°C", true);
+        eb.addField("Maximum", object.getJSONObject("main").get("temp_max").toString() + "°C", true);
+
+        Object sunRise = object.getJSONObject("sys").get("sunrise");
+        Date sunRiseDate = new Date(Long.parseLong(sunRise.toString())*1000L);
+        Object sunSet = object.getJSONObject("sys").get("sunset");
+        Date sunSetDate = new Date(Long.parseLong(sunSet.toString())*1000L);
+
+        SimpleDateFormat simpleRise = new java.text.SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat simpleSet = new java.text.SimpleDateFormat("HH:mm:ss");
+
+        eb.addField("Sunrise", simpleRise.format(sunRiseDate), false);
+        eb.addField("Sunset", simpleSet.format(sunSetDate), true);
+
+        eb.setFooter("Crafted with lots of love by Monstahhh and OpenWeather API", null);
+
+        return eb.build();
     }
 }
