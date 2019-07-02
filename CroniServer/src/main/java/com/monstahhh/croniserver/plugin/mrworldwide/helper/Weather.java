@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Weather {
 
@@ -73,15 +74,19 @@ public class Weather {
         eb.addBlankField(true);
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
-        Date sunRiseDate = new Date(Long.parseLong(sunRise.toString())*1000L);
+        Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
         Object sunSet = object.getJSONObject("sys").get("sunset");
-        Date sunSetDate = new Date(Long.parseLong(sunSet.toString())*1000L);
+        Date sunSetDate = new Date(Long.parseLong(sunSet.toString()) * 1000L + (object.getInt("timezone") * 1000L));
 
-        SimpleDateFormat simpleRise = new java.text.SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat simpleSet = new java.text.SimpleDateFormat("HH:mm:ss");
+        Date current = new Date();
+        current.setTime(current.getTime() + (object.getInt("timezone") * 1000L));
 
-        eb.addField("Sunrise", simpleRise.format(sunRiseDate), true);
-        eb.addField("Sunset", simpleSet.format(sunSetDate), true);
+        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
+        simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        eb.addField("Sunrise", simpleTime.format(sunRiseDate), true);
+        eb.addField("Sunset", simpleTime.format(sunSetDate), true);
+        eb.addField("Current", simpleTime.format(current), false);
 
         eb.setFooter("Crafted with lots of love by Monstahhh and OpenWeather API", null);
 
