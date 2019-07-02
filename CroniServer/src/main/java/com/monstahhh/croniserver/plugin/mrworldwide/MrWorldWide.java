@@ -44,6 +44,11 @@ public class MrWorldWide {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
         }
+        Object weatherToken = botConfig.getConfig().get("weatherToken");
+        if (weatherToken == null) {
+            botConfig.getConfig().set("weatherToken", "/");
+            botConfig.saveConfig();
+        }
     }
 
     public static void debugLog(String str) {
