@@ -16,6 +16,8 @@ public class MrWorldWide {
     private static JavaPlugin _plugin;
     private JDA _jda;
 
+    public static String weatherToken = "";
+
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
     }
@@ -44,10 +46,14 @@ public class MrWorldWide {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
         }
-        Object weatherToken = botConfig.getConfig().get("weatherToken");
-        if (weatherToken == null) {
+        Object _weatherToken = botConfig.getConfig().get("weatherToken");
+        if (_weatherToken == null) {
             botConfig.getConfig().set("weatherToken", "/");
             botConfig.saveConfig();
+
+            CroniServer.logger.log(Level.SEVERE, "Weather Data token is not provided.");
+        } else {
+            weatherToken = _weatherToken.toString();
         }
     }
 
@@ -56,7 +62,10 @@ public class MrWorldWide {
     }
 
     public void disable() {
-        _jda.shutdownNow();
+        if (_jda != null) {
+            _jda.shutdownNow();
+        }
+
         System.out.println("Mr. Worldwide has shut down!");
     }
 }
