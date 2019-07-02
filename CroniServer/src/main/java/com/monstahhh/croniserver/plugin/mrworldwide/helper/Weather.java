@@ -23,7 +23,7 @@ public class Weather {
             eb.setTitle("Mr. Error");
             eb.setColor(Color.RED);
             eb.addField("Argument Error", "It seems that you have not entered the location correctly.", false);
-            eb.addField("Example", "'weather Kortrijk,BE'", false);
+            eb.addField("Example", "weather Kortrijk,BE", false);
 
             event.getChannel().sendMessage(eb.build()).queue();
         }
@@ -38,7 +38,12 @@ public class Weather {
             event.getChannel().sendMessage(result.asString()).queue();
 
         } catch (IOException e) {
-            event.getChannel().sendMessage(e.getMessage()).queue();
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Mr. Error");
+            eb.setColor(Color.RED);
+            eb.addField("IO Error", e.getMessage(), false);
+
+            event.getChannel().sendMessage(eb.build()).queue();
         }
     }
 }
