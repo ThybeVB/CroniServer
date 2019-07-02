@@ -56,12 +56,21 @@ public class Weather {
     private MessageEmbed getEmbedForLocationJson(String json) throws JSONException {
         JSONObject object = new JSONObject(json);
 
+        String tempStr = object.getJSONObject("main").get("temp").toString();
+        String minStr = object.getJSONObject("main").get("temp_min").toString();
+        String maxStr = object.getJSONObject("main").get("temp_max").toString();
+
+        int temp = Math.round(Float.parseFloat(tempStr));
+        int min = Math.round(Float.parseFloat(minStr));
+        int max = Math.round(Float.parseFloat(maxStr));
+
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.ORANGE);
-        eb.setTitle("Weather for " + object.getString("name"));
-        eb.addField("Temperature", object.getJSONObject("main").get("temp").toString() + "°C", false);
-        eb.addField("Minimum", object.getJSONObject("main").get("temp_min").toString() + "°C", true);
-        eb.addField("Maximum", object.getJSONObject("main").get("temp_max").toString() + "°C", true);
+        eb.setTitle("Weather for " + object.getString("name") + ", " + object.getJSONObject("sys").getString("country"));
+        eb.addField("Temperature", temp + "°C", false);
+        eb.addField("Minimum",min + "°C", true);
+        eb.addField("Maximum",max + "°C", true);
+        eb.addBlankField(true);
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString())*1000L);
@@ -71,7 +80,7 @@ public class Weather {
         SimpleDateFormat simpleRise = new java.text.SimpleDateFormat("HH:mm:ss");
         SimpleDateFormat simpleSet = new java.text.SimpleDateFormat("HH:mm:ss");
 
-        eb.addField("Sunrise", simpleRise.format(sunRiseDate), false);
+        eb.addField("Sunrise", simpleRise.format(sunRiseDate), true);
         eb.addField("Sunset", simpleSet.format(sunSetDate), true);
 
         eb.setFooter("Crafted with lots of love by Monstahhh and OpenWeather API", null);
