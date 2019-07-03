@@ -12,8 +12,8 @@ public class Weather {
     public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(8);
         if (providedLoc.contains(",")) {
-            City city = new City();
-            MessageEmbed embed = city.getWeatherFor(providedLoc, weatherToken, event.getChannel());
+            City city = new City(weatherToken, event.getChannel());
+            MessageEmbed embed = city.getWeatherFor(providedLoc);
             if (embed != null) {
                 event.getChannel().sendMessage(embed).queue();
             }

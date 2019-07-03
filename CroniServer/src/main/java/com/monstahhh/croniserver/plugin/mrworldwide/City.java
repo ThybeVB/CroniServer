@@ -19,10 +19,18 @@ public class City {
     private final String baseLink = "http://api.openweathermap.org/data/2.5/weather";
     private final String params = "?q=%s&appid=%s&units=metric";
 
-    public MessageEmbed getWeatherFor(String providedLocation, String token, TextChannel channel) {
+    private String weatherToken;
+    private TextChannel textChannel;
+
+    public City(String token, TextChannel channel) {
+        weatherToken = token;
+        textChannel = channel;
+    }
+
+    public MessageEmbed getWeatherFor(String providedLocation) {
         try {
             HttpClient client = new HttpClient();
-            String formattedSend = String.format(params, providedLocation, token);
+            String formattedSend = String.format(params, providedLocation, weatherToken);
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
 
             return getEmbedForLocationJson(result.asString());
@@ -37,7 +45,7 @@ public class City {
                 eb.addField("Exception", e.getMessage(), false);
             }
 
-            channel.sendMessage(eb.build()).queue();
+            textChannel.sendMessage(eb.build()).queue();
 
             return null;
         }
