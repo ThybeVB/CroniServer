@@ -11,8 +11,6 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {

@@ -10,7 +10,6 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
