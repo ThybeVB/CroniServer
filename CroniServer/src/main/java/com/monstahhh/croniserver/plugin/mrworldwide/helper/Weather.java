@@ -69,9 +69,7 @@ public class Weather {
         eb.setColor(Color.ORANGE);
         eb.setTitle("Weather for " + object.getString("name") + ", " + object.getJSONObject("sys").getString("country"));
         eb.addField("Temperature", temp + "°C", false);
-        eb.addField("Minimum",min + "°C", true);
-        eb.addField("Maximum",max + "°C", true);
-        eb.addBlankField(true);
+        eb.addField("Minimum & Maximum", min + "°C | " + max + "°C", true);
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
@@ -84,11 +82,10 @@ public class Weather {
         SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-        eb.addField("Sunrise", simpleTime.format(sunRiseDate), true);
-        eb.addField("Sunset", simpleTime.format(sunSetDate), true);
-        eb.addField("Current", simpleTime.format(current), false);
+        eb.addField("Sunrise & Sunset", "Sunrise: " + simpleTime.format(sunRiseDate) + " | Sunset: " + simpleTime.format(sunSetDate), false);
+        eb.addField("Current Time", simpleTime.format(current), false);
 
-        eb.setFooter("Crafted with lots of love by Monstahhh and OpenWeather API", null);
+        eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 
         return eb.build();
     }
