@@ -51,7 +51,7 @@ public class Weather {
             eb.setTitle("Mr. Error");
             eb.setColor(Color.RED);
             if (e.getMessage().contains("error: 404")) {
-                eb.addField("Exception", "The provided city could not be found.", false);
+                eb.addField("Error 404", "The provided city could not be found.", false);
             } else {
                 eb.addField("Exception", e.getMessage(), false);
             }
