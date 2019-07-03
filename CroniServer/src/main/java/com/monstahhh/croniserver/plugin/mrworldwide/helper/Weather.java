@@ -50,7 +50,11 @@ public class Weather {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Mr. Error");
             eb.setColor(Color.RED);
-            eb.addField("Exception", e.getMessage(), false);
+            if (e.getMessage().contains("error: 404")) {
+                eb.addField("Exception", "The provided city could not be found.", false);
+            } else {
+                eb.addField("Exception", e.getMessage(), false);
+            }
 
             channel.sendMessage(eb.build()).queue();
 
@@ -61,6 +65,9 @@ public class Weather {
     private MessageEmbed getEmbedForLocationJson(String json) throws JSONException {
         JSONObject object = new JSONObject(json);
 
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setColor(Color.ORANGE);
+
         String tempStr = object.getJSONObject("main").get("temp").toString();
         String minStr = object.getJSONObject("main").get("temp_min").toString();
         String maxStr = object.getJSONObject("main").get("temp_max").toString();
@@ -69,8 +76,7 @@ public class Weather {
         int min = Math.round(Float.parseFloat(minStr));
         int max = Math.round(Float.parseFloat(maxStr));
 
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setColor(Color.ORANGE);
+
         eb.setTitle("Weather for " + object.getString("name") + ", " + object.getJSONObject("sys").getString("country"));
         eb.addField("Temperature", temp + "°C", false);
         eb.addField("Minimum & Maximum", min + "°C | " + max + "°C", true);
