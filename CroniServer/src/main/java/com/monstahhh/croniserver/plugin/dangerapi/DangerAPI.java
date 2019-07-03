@@ -86,7 +86,10 @@ public class DangerAPI {
     public void disable() {
         File file = new File("plugins/DangerAPI/player_data.yml");
         debugLog("Deleting Damage Data...");
-        file.delete();
+        boolean deleted = file.delete();
+        if (!deleted) {
+            CroniServer.logger.log(Level.SEVERE, "Failed to delete Damage Data!");
+        }
 
         System.out.println("Disabled Danger API");
     }
