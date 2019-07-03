@@ -5,10 +5,12 @@ import com.jafregle.http.HttpMethod;
 import com.jafregle.http.HttpResponse;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +24,10 @@ public class Weather {
     public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(8);
         if (providedLoc.contains(",")) {
-            event.getChannel().sendMessage(getWeatherFor(providedLoc, weatherToken, event)).queue();
+            MessageEmbed embed = getWeatherFor(providedLoc, weatherToken, event.getChannel());
+            if (embed != null) {
+                event.getChannel().sendMessage(embed).queue();
+            }
         } else {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Mr. Error");
@@ -34,7 +39,7 @@ public class Weather {
         }
     }
 
-    private MessageEmbed getWeatherFor(String providedLocation, String token, GuildMessageReceivedEvent event) {
+    private MessageEmbed getWeatherFor(String providedLocation, String token, TextChannel channel) {
         try {
             HttpClient client = new HttpClient();
             String formattedSend = String.format(params, providedLocation, token);
@@ -48,10 +53,10 @@ public class Weather {
             eb.setColor(Color.RED);
             eb.addField("Exception", e.getMessage(), false);
 
-            event.getChannel().sendMessage(eb.build()).queue();
-        }
+            channel.sendMessage(eb.build()).queue();
 
-        return null;
+            return null;
+        }
     }
 
     private MessageEmbed getEmbedForLocationJson(String json) throws JSONException {
