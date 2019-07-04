@@ -101,8 +101,7 @@ public class City {
 
         StringBuilder sb = new StringBuilder();
         for (String word : words) {
-            char c = word.charAt(0);
-            c = Character.toUpperCase(c);
+            char c = Character.toUpperCase(word.charAt(0));
             word = word.substring(1);
             String newWord = c + word + " ";
             sb.append(newWord);
