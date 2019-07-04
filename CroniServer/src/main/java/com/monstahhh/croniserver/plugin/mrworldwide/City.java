@@ -6,6 +6,7 @@ import com.jafregle.http.HttpResponse;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,10 +66,12 @@ public class City {
         int min = Math.round(Float.parseFloat(minStr));
         int max = Math.round(Float.parseFloat(maxStr));
 
-
         eb.setTitle("Weather for " + object.getString("name") + ", " + object.getJSONObject("sys").getString("country"));
         eb.addField("Temperature", temp + "°C", false);
-        eb.addField("Minimum & Maximum", min + "°C | " + max + "°C", true);
+
+        if (min != max) {
+            eb.addField("Minimum & Maximum", min + "°C | " + max + "°C", true);
+        }
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
@@ -84,8 +87,27 @@ public class City {
         eb.addField("Sunrise & Sunset", "Sunrise: " + simpleTime.format(sunRiseDate) + " | Sunset: " + simpleTime.format(sunSetDate), false);
         eb.addField("Current Time", simpleTime.format(current), false);
 
+        JSONArray currentWeatherArray = object.getJSONArray("weather");
+        JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
+        eb.addField(currentWeather.getString("main"), fixWeatherDescription(currentWeather.getString("description")), false);
+
         eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 
         return eb.build();
+    }
+
+    private String fixWeatherDescription(String unfixedWeather) {
+        String[] words = unfixedWeather.split(" ");
+
+        StringBuilder sb = new StringBuilder();
+        for (String word : words) {
+            char c = word.charAt(0);
+            c = Character.toUpperCase(c);
+            word = word.substring(1);
+            String newWord = c + word + " ";
+            sb.append(newWord);
+        }
+
+        return sb.toString();
     }
 }
