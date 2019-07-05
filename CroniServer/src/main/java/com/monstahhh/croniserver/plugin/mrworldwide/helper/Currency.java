@@ -15,7 +15,7 @@ public class Currency {
     private final String baseLink = "https://free.currconv.com/api/v7/";
     private final String params = "convert?q=%s_%s&compact=ultra&apiKey=%s";
 
-    public void carryCommand (GuildMessageReceivedEvent event, String token) {
+    public void carryCommand(GuildMessageReceivedEvent event, String token) {
         try {
             String providedLoc = event.getMessage().getContentRaw().substring(8);
             String[] words = providedLoc.split(" ");
@@ -51,14 +51,14 @@ public class Currency {
             float baseValue = Float.parseFloat(obj.get(formedLanguageCode).toString());
             float newPrice = baseValue * amount;
 
-            return new float[] {amount, newPrice};
+            return new float[]{amount, newPrice};
 
         } catch (Exception e) {
             return null;
         }
     }
 
-    private MessageEmbed getCurrencyEmbed (float old, float newPrice, String origin, String destination) {
+    private MessageEmbed getCurrencyEmbed(float old, float newPrice, String origin, String destination) {
         String title = origin.toUpperCase() + " -> " + destination.toUpperCase();
         String priceStr = String.format("%.2f", newPrice);
         String finalStr = old + " " + origin.toUpperCase() + " -> " + priceStr + " " + destination.toUpperCase();
