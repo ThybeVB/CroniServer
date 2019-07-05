@@ -17,6 +17,7 @@ public class MrWorldWide {
     private JDA _jda;
 
     public static String weatherToken = "";
+    public static String currencyToken = "";
 
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
@@ -54,6 +55,16 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "Weather Data token is not provided.");
         } else {
             weatherToken = _weatherToken.toString();
+        }
+
+        Object _currencyToken = botConfig.getConfig().get("currencyToken");
+        if (_currencyToken == null) {
+            botConfig.getConfig().set("currencyToken", "/");
+            botConfig.saveConfig();
+
+            CroniServer.logger.log(Level.SEVERE, "Currency Converter token is not provided.");
+        } else {
+            currencyToken = _currencyToken.toString();
         }
     }
 
