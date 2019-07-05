@@ -65,7 +65,8 @@ public class Currency {
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.GREEN);
-        eb.addField(title, finalStr, false);
+        eb.setTitle("Currency Converter");
+        eb.addField(title, finalStr, true);
 
         return eb.build();
     }

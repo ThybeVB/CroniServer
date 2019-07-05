@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f091221d-459a-4990-9147-3cad118e2a48" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/MrWorldWide.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/MrWorldWide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CroniServer/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/CroniServer/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CroniServer/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -43,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="56" column="24" lean-forward="true" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+            <state relative-caret-position="483">
+              <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="24" column="58" lean-forward="true" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
+              <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -129,8 +127,8 @@
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/City.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/MrWorldWide.java" />
-        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" />
         <option value="$PROJECT_DIR$/CroniServer/pom.xml" />
+        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" />
       </list>
     </option>
   </component>
@@ -401,7 +399,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562363096680" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562363724607" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CroniServer/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -437,7 +435,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -460,7 +458,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" visible="true" weight="0.16684435" />
+      <window_info active="true" anchor="right" id="Maven" order="6" visible="true" weight="0.16684435" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
@@ -549,16 +547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="24" lean-forward="true" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Translate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -569,14 +557,24 @@
     <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="24" column="58" lean-forward="true" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
+          <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CroniServer/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
