@@ -91,6 +91,7 @@ public class City {
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
         eb.addField(currentWeather.getString("main"), fixWeatherDescription(currentWeather.getString("description")), false);
 
+        eb.setThumbnail("http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png");
         eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 
         return eb.build();

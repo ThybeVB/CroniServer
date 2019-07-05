@@ -18,6 +18,7 @@ public class PlayerListener implements Listener {
         if (p.getLocation().getBlock().getType() == Material.NETHER_PORTAL) {
             p.sendMessage(ChatColor.GREEN + "Noticed you are in a portal, force logging in...");
             authApi.forceLogin(p);
+            p.getServer().broadcastMessage(ChatColor.RED + "Force Login was performed for " + p.getDisplayName());
         }
 
         p.getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
