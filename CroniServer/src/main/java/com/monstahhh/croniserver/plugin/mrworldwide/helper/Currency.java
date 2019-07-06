@@ -3,6 +3,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide.helper;
 import com.jafregle.http.HttpClient;
 import com.jafregle.http.HttpMethod;
 import com.jafregle.http.HttpResponse;
+import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -24,10 +25,28 @@ public class Currency {
             String base = words[1];
             String destination = words[2];
 
-            float[] prices = getValueFor(base, destination, amount, token);
-            MessageEmbed embed = getCurrencyEmbed(prices[0], prices[1], base, destination);
+            if (base.equalsIgnoreCase(destination)) {
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.setTitle("Mr. Error");
+                eb.setColor(Color.RED);
+                eb.addField("Converter Error", "You can't enter the same currency twice!", false);
+                eb.addField("Example", "convert 1.25 eur usd", false);
+                event.getChannel().sendMessage(eb.build()).queue();
+                return;
+            }
 
-            event.getChannel().sendMessage(embed).queue();
+            float[] prices = getValueFor(base, destination, amount, token);
+            if (prices != null) {
+                MessageEmbed embed = getCurrencyEmbed(prices[0], prices[1], base, destination);
+                event.getChannel().sendMessage(embed).queue();
+            } else {
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.setTitle("Mr. Error");
+                eb.setColor(Color.RED);
+                eb.addField("Currency Error", "It seems that one or both of the currencies are wrong or don't exist.", false);
+                eb.addField("Example", "convert 1.25 eur usd", false);
+                event.getChannel().sendMessage(eb.build()).queue();
+            }
         } catch (Exception e) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Mr. Error");
@@ -54,6 +73,7 @@ public class Currency {
             return new float[]{amount, newPrice};
 
         } catch (Exception e) {
+            MrWorldWide.debugLog("Currency#getValueFor Error:" + e.getMessage());
             return null;
         }
     }
