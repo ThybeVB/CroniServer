@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f091221d-459a-4990-9147-3cad118e2a48" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_14_3_R0_1_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_14_3_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CroniServer/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/CroniServer/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,24 +13,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/CroniServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CroniServer/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/MrWorldWide.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -47,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="55" column="63" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
+            <state relative-caret-position="-177">
+              <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,10 +39,41 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/events/PlayerDamageEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-483">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+              <folding>
+                <element signature="e#761#762#0" expanded="true" />
+                <element signature="e#793#794#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/PlayerHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-282">
+              <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
+            <state relative-caret-position="425">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -128,13 +138,13 @@
         <option value="$PROJECT_DIR$/CroniServer/.gitignore" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Weather.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/CroniServer.java" />
-        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/croniserver/events/PlayerListener.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/City.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/MrWorldWide.java" />
         <option value="$PROJECT_DIR$/CroniServer/pom.xml" />
         <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java" />
+        <option value="$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java" />
       </list>
     </option>
   </component>
@@ -441,7 +451,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -450,7 +460,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.29577464" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.29577464" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -483,17 +493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
-          <folding>
-            <element signature="e#761#762#0" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/Calendar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-16813">
@@ -523,13 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -580,11 +572,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/helper/Currency.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="55" column="63" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
+        <state relative-caret-position="-177">
+          <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/events/PlayerDamageEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-483">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/DangerAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+          <folding>
+            <element signature="e#761#762#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/dangerapi/PlayerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-282">
+          <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CroniServer/src/main/java/com/monstahhh/croniserver/plugin/mrworldwide/event/MessageReceivedEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>

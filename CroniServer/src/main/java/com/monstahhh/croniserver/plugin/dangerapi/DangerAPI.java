@@ -88,7 +88,7 @@ public class DangerAPI {
         debugLog("Deleting Damage Data...");
         boolean deleted = file.delete();
         if (!deleted) {
-            CroniServer.logger.log(Level.SEVERE, "Failed to delete Damage Data!");
+            CroniServer.logger.log(Level.SEVERE, "Failed to delete Damage Data");
         }
 
         System.out.println("Disabled Danger API");
