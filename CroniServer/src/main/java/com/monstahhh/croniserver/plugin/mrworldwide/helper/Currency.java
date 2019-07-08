@@ -73,9 +73,6 @@ public class Currency {
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
 
             String res = result.asString();
-            if (res.contains("503")) {
-                return new float[]{503, 0};
-            }
 
             JSONObject obj = new JSONObject(res);
             String formedLanguageCode = base.toUpperCase() + "_" + destination.toUpperCase();
@@ -86,6 +83,9 @@ public class Currency {
             return new float[]{amount, newPrice};
 
         } catch (Exception e) {
+            if (e.getMessage().contains("503")) {
+                return new float[]{503, 0};
+            }
             MrWorldWide.debugLog("Currency#getValueFor Error:" + e.getMessage());
             return null;
         }
