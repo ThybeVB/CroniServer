@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
 public class PlayerListener implements Listener {
 
     private AuthMeApi authApi = AuthMeApi.getInstance();
@@ -23,6 +22,4 @@ public class PlayerListener implements Listener {
 
         p.getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
     }
-
-
 }

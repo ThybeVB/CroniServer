@@ -37,8 +37,17 @@ public class Currency {
 
             float[] prices = getValueFor(base, destination, amount, token);
             if (prices != null) {
-                MessageEmbed embed = getCurrencyEmbed(prices[0], prices[1], base, destination);
-                event.getChannel().sendMessage(embed).queue();
+                if(prices[0] == 503) {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.setTitle("Mr. Error");
+                    eb.setColor(Color.RED);
+                    eb.addField("Server Error", "503: Currency Server was unable to be reached.", false);
+
+                    event.getChannel().sendMessage(eb.build()).queue();
+                } else {
+                    MessageEmbed embed = getCurrencyEmbed(prices[0], prices[1], base, destination);
+                    event.getChannel().sendMessage(embed).queue();
+                }
             } else {
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setTitle("Mr. Error");
@@ -64,6 +73,10 @@ public class Currency {
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
 
             String res = result.asString();
+            if (res.contains("503")) {
+                return new float[]{503, 0};
+            }
+
             JSONObject obj = new JSONObject(res);
             String formedLanguageCode = base.toUpperCase() + "_" + destination.toUpperCase();
 
