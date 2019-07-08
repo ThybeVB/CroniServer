@@ -22,7 +22,7 @@ public class Weather {
             eb.setTitle("Mr. Error");
             eb.setColor(Color.RED);
             eb.addField("Argument Error", "It seems that you have not entered the location correctly.", false);
-            eb.addField("Example", "weather Kortrijk,BE", false);
+            eb.addField("Example", "weather kortrijk,be", false);
 
             event.getChannel().sendMessage(eb.build()).queue();
         }

@@ -20,7 +20,7 @@ public class Translate {
             msg = event.getMessage().getContentRaw().substring(16);
             msg = msg.replaceAll("\n", " ");
         } catch (ArrayIndexOutOfBoundsException e) {
-            event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: 'translate id en kontol'").queue();
+            event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
             return;
         }
 
