@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.TextChannel;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -43,6 +45,8 @@ public class MrWorldWide {
                         .setContextEnabled(false)
                         .build().awaitReady();
 
+                _jda.getGuildById(305792249877364738L).getTextChannelById(560486517043232768L).sendMessage("Oh damn i'm back!").queue();
+
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
@@ -74,6 +78,9 @@ public class MrWorldWide {
 
     public void disable() {
         if (_jda != null) {
+            TextChannel ch = _jda.getGuildById(305792249877364738L).getTextChannelById(560486517043232768L);
+            ch.sendMessage("Woaaaaah I'm passing out").queue();
+
             _jda.shutdownNow();
         }
 

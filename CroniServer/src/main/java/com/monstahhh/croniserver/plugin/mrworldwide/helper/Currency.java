@@ -80,7 +80,7 @@ public class Currency {
 
         } catch (Exception e) {
             if (e.getMessage().contains("503")) {
-                return new float[]{503, 0};
+                return new float[]{503};
             }
             MrWorldWide.debugLog("Currency#getValueFor Error:" + e.getMessage());
             return null;

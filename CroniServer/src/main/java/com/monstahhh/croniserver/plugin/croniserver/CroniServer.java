@@ -59,7 +59,7 @@ public final class CroniServer extends JavaPlugin {
         carrotRecipe.setIngredient('%', Material.GOLD_INGOT);
         carrotRecipe.setIngredient('C', Material.CARROT);
 
-        getServer().addRecipe(carrotRecipe);
+        this.getServer().addRecipe(carrotRecipe);
 
         ItemStack glisterLemon = new ItemStack(Material.GLISTERING_MELON_SLICE, 1);
 
@@ -70,7 +70,7 @@ public final class CroniServer extends JavaPlugin {
         lemonRecipe.setIngredient('%', Material.GOLD_INGOT);
         lemonRecipe.setIngredient('C', Material.MELON_SLICE);
 
-        getServer().addRecipe(lemonRecipe);
+        this.getServer().addRecipe(lemonRecipe);
 
 
         System.out.println("[CroniServer] Loaded CroniServer v" + version);
