@@ -9,8 +9,13 @@ import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
@@ -42,8 +47,49 @@ public final class CroniServer extends JavaPlugin {
 
         this.registerCommands();
 
+        remove(Material.GLISTERING_MELON_SLICE);
+        remove(Material.GOLDEN_CARROT);
+
+        ItemStack goldenCarrot = new ItemStack(Material.GOLDEN_CARROT, 1);
+
+        ShapedRecipe carrotRecipe = new ShapedRecipe(goldenCarrot);
+
+        carrotRecipe.shape("%%%","%C%","%%%");
+
+        carrotRecipe.setIngredient('%', Material.GOLD_INGOT);
+        carrotRecipe.setIngredient('C', Material.CARROT);
+
+        getServer().addRecipe(carrotRecipe);
+
+        ItemStack glisterLemon = new ItemStack(Material.GLISTERING_MELON_SLICE, 1);
+
+        ShapedRecipe lemonRecipe = new ShapedRecipe(glisterLemon);
+
+        lemonRecipe.shape("%%%","%C%","%%%");
+
+        lemonRecipe.setIngredient('%', Material.GOLD_INGOT);
+        lemonRecipe.setIngredient('C', Material.MELON_SLICE);
+
+        getServer().addRecipe(lemonRecipe);
+
+
         System.out.println("[CroniServer] Loaded CroniServer v" + version);
     }
+
+    private void remove(Material m) {
+
+        Iterator<Recipe> it = getServer().recipeIterator();
+        Recipe recipe;
+        while(it.hasNext())
+        {
+            recipe = it.next();
+            if (recipe != null && recipe.getResult().getType() == m)
+            {
+                it.remove();
+            }
+        }
+    }
+
 
     private void registerCommands() {
         this.getCommand("hub").setExecutor(new WarpCommands());
