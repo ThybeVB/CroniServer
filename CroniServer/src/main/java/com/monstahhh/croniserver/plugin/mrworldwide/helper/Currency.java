@@ -16,6 +16,10 @@ public class Currency {
     private final String baseLink = "https://free.currconv.com/api/v7/";
     private final String params = "convert?q=%s_%s&compact=ultra&apiKey=%s";
 
+    private EmbedBuilder defaultError = new EmbedBuilder()
+            .setTitle("Mr. Error")
+            .setColor(Color.RED);
+
     public void carryCommand(GuildMessageReceivedEvent event, String token) {
         try {
             String providedLoc = event.getMessage().getContentRaw().substring(8);
@@ -26,9 +30,7 @@ public class Currency {
             String destination = words[2];
 
             if (base.equalsIgnoreCase(destination)) {
-                EmbedBuilder eb = new EmbedBuilder();
-                eb.setTitle("Mr. Error");
-                eb.setColor(Color.RED);
+                EmbedBuilder eb = defaultError;
                 eb.addField("Converter Error", "You can't enter the same currency twice!", false);
                 eb.addField("Example", "convert 1.25 eur usd", false);
                 event.getChannel().sendMessage(eb.build()).queue();
@@ -38,9 +40,7 @@ public class Currency {
             float[] prices = getValueFor(base, destination, amount, token);
             if (prices != null) {
                 if(prices[0] == 503) {
-                    EmbedBuilder eb = new EmbedBuilder();
-                    eb.setTitle("Mr. Error");
-                    eb.setColor(Color.RED);
+                    EmbedBuilder eb = defaultError;
                     eb.addField("Server Error", "503: Currency Server was unable to be reached.", false);
 
                     event.getChannel().sendMessage(eb.build()).queue();
@@ -49,17 +49,13 @@ public class Currency {
                     event.getChannel().sendMessage(embed).queue();
                 }
             } else {
-                EmbedBuilder eb = new EmbedBuilder();
-                eb.setTitle("Mr. Error");
-                eb.setColor(Color.RED);
+                EmbedBuilder eb = defaultError;
                 eb.addField("Currency Error", "It seems that one or both of the currencies are wrong or don't exist.", false);
                 eb.addField("Example", "convert 1.25 eur usd", false);
                 event.getChannel().sendMessage(eb.build()).queue();
             }
         } catch (Exception e) {
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Mr. Error");
-            eb.setColor(Color.RED);
+            EmbedBuilder eb = defaultError;
             eb.addField("Argument Error", "It seems that you have not entered the currencies correctly.", false);
             eb.addField("Example", "convert 1.25 eur usd", false);
             event.getChannel().sendMessage(eb.build()).queue();
