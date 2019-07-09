@@ -45,7 +45,10 @@ public class MrWorldWide {
                         .setContextEnabled(false)
                         .build().awaitReady();
 
-                _jda.getGuildById(305792249877364738L).getTextChannelById(560486517043232768L).sendMessage("Oh damn i'm back!").queue();
+                _jda.getGuildById(305792249877364738L)
+                        .getTextChannelById(560486517043232768L)
+                        .sendMessage("Oh damn i'm back!")
+                        .queue();
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
@@ -78,8 +81,10 @@ public class MrWorldWide {
 
     public void disable() {
         if (_jda != null) {
-            _jda.getGuildById(305792249877364738L).getTextChannelById(560486517043232768L)
-                    .sendMessage("Woaaaah i'm passing out!").queue();
+            _jda.getGuildById(305792249877364738L)
+                    .getTextChannelById(560486517043232768L)
+                    .sendMessage("Woaaaah i'm passing out!")
+                    .queue();
         }
 
         System.out.println("Mr. Worldwide has shut down!");
