@@ -81,7 +81,7 @@ public class City {
         Date current = new Date();
         current.setTime(current.getTime() + (object.getInt("timezone") * 1000L));
 
-        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("hh:mm");
+        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         eb.addField("Sunrise & Sunset", "Sunrise: " + simpleTime.format(sunRiseDate) + " | Sunset: " + simpleTime.format(sunSetDate), false);
