@@ -19,17 +19,18 @@ public class HomeCommand implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
 
-            if (command.getName().equalsIgnoreCase("home")) {
-                if (player.hasPermission("croniserver.home")) {
-                    callHome(player);
+            if (!player.getWorld().getName().equalsIgnoreCase("uhc2")) {
+                if (command.getName().equalsIgnoreCase("home")) {
+                    if (player.hasPermission("croniserver.home")) {
+                        callHome(player);
+                    }
+                }
+                if (command.getName().equalsIgnoreCase("sethome")) {
+                    if (player.hasPermission("croniserver.sethome")) {
+                        callSetHome(player);
+                    }
                 }
             }
-            if (command.getName().equalsIgnoreCase("sethome")) {
-                if (player.hasPermission("croniserver.sethome")) {
-                    callSetHome(player);
-                }
-            }
-
         } else {
             commandSender.getServer().getConsoleSender().sendMessage("Command can only be executed by Player");
         }

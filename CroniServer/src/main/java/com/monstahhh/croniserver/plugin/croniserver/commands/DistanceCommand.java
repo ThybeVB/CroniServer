@@ -18,7 +18,7 @@ public class DistanceCommand implements CommandExecutor {
 
                 Player player = (Player) sender;
 
-                if (player.getWorld().getName().equalsIgnoreCase("uhc")) {
+                if (player.getWorld().getName().equalsIgnoreCase("uhc2")) {
                     player.sendMessage(ChatColor.DARK_RED + "Nice try, but no.");
                     return true;
                 }
@@ -47,7 +47,7 @@ public class DistanceCommand implements CommandExecutor {
 
                     Player player1 = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (((Player) sender).getWorld().getName().equalsIgnoreCase("uhc")) {
+                    if (((Player) sender).getWorld().getName().equalsIgnoreCase("uhc2")) {
                         sender.sendMessage(ChatColor.DARK_RED + "Nice try, but no.");
                         return true;
                     }
