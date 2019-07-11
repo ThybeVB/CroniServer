@@ -39,7 +39,7 @@ public class Currency {
 
             float[] prices = getValueFor(base, destination, amount, token);
             if (prices != null) {
-                if(prices[0] == 503) {
+                if (prices[0] == 503) {
                     EmbedBuilder eb = defaultError;
                     eb.addField("Server Error", "503: Currency Server was unable to be reached.", false);
 

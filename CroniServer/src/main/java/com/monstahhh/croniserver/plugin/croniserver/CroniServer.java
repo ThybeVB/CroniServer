@@ -9,7 +9,6 @@ import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +19,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
@@ -29,12 +27,10 @@ public final class CroniServer extends JavaPlugin {
 
     public static String version = null;
     public static String author = null;
-
+    public static Logger logger;
     private DangerAPI dangerApi;
     private Sleep sleep;
     private MrWorldWide mrWorldWide;
-
-    public static Logger logger;
 
     @Override
     public void onEnable() {
@@ -110,12 +106,12 @@ public final class CroniServer extends JavaPlugin {
         }
     }
 
-    private void addRecipes () {
+    private void addRecipes() {
         ItemStack goldenCarrot = new ItemStack(Material.GOLDEN_CARROT, 1);
 
         ShapedRecipe carrotRecipe = new ShapedRecipe(new NamespacedKey(this, "gayboy"), goldenCarrot);
 
-        carrotRecipe.shape("%%%","%C%","%%%");
+        carrotRecipe.shape("%%%", "%C%", "%%%");
 
         carrotRecipe.setIngredient('%', Material.GOLD_INGOT);
         carrotRecipe.setIngredient('C', Material.CARROT);
@@ -126,7 +122,7 @@ public final class CroniServer extends JavaPlugin {
 
         ShapedRecipe lemonRecipe = new ShapedRecipe(new NamespacedKey(this, "gayboy2"), glisterLemon);
 
-        lemonRecipe.shape("%%%","%C%","%%%");
+        lemonRecipe.shape("%%%", "%C%", "%%%");
 
         lemonRecipe.setIngredient('%', Material.GOLD_INGOT);
         lemonRecipe.setIngredient('C', Material.MELON_SLICE);

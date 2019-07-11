@@ -7,22 +7,23 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 
 public class MrWorldWide {
 
+    public static String weatherToken = "";
+    public static String currencyToken = "";
     private static JavaPlugin _plugin;
     private JDA _jda;
 
-    public static String weatherToken = "";
-    public static String currencyToken = "";
-
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
+    }
+
+    public static void debugLog(String str) {
+        CroniServer.logger.log(Level.INFO, str);
     }
 
     public void enable() {
@@ -73,10 +74,6 @@ public class MrWorldWide {
         } else {
             currencyToken = _currencyToken.toString();
         }
-    }
-
-    public static void debugLog(String str) {
-        CroniServer.logger.log(Level.INFO, str);
     }
 
     public void disable() {
