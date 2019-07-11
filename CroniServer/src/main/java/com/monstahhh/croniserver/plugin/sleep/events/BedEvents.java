@@ -35,7 +35,9 @@ public class BedEvents implements Listener {
     private void doCheck(World w) {
         int sleepRequirement = 1;
         if (sleepingPlayers.size() >= sleepRequirement) {
-            skipNight(w);
+            if (!w.getName().equalsIgnoreCase("uhc2")) {
+                skipNight(w);
+            }
         }
     }
 
