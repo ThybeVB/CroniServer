@@ -18,11 +18,6 @@ public class DistanceCommand implements CommandExecutor {
 
                 Player player = (Player) sender;
 
-                if (player.getWorld().getName().equalsIgnoreCase("uhc2") || player.getWorld().getName().equalsIgnoreCase("uhc2_nether")) {
-                    player.sendMessage(ChatColor.DARK_RED + "Nice try, but no.");
-                    return true;
-                }
-
                 if (args == null || args[0] == null) {
                     sender.sendMessage(ChatColor.RED + "You need to provide Coordinates. Example: /distance 1 2 3");
                     return true;
@@ -46,11 +41,6 @@ public class DistanceCommand implements CommandExecutor {
                 if (args[0] != null) {
 
                     Player player1 = Bukkit.getServer().getPlayer(args[0]);
-
-                    if (((Player) sender).getWorld().getName().equalsIgnoreCase("uhc2") || ((Player) sender).getWorld().getName().equalsIgnoreCase("uhc2_nether")) {
-                        sender.sendMessage(ChatColor.DARK_RED + "Nice try, but no.");
-                        return true;
-                    }
 
                     if (((Player) sender).getWorld().getEnvironment() == player1.getWorld().getEnvironment() && ((Player) sender).getWorld() == player1.getWorld()) {
 

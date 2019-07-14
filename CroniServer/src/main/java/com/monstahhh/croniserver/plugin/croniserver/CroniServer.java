@@ -9,16 +9,8 @@ import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
@@ -48,9 +40,6 @@ public final class CroniServer extends JavaPlugin {
 
         this.registerCommands();
 
-        this.remove();
-        this.addRecipes();
-
         System.out.println("[CroniServer] Loaded CroniServer v" + version);
     }
 
@@ -74,60 +63,6 @@ public final class CroniServer extends JavaPlugin {
 
         sleep = new Sleep(this);
         sleep.enable();
-    }
-
-    private void remove() {
-        List<Recipe> backup = new ArrayList<>();
-
-        Iterator<Recipe> iterator = getServer().recipeIterator();
-
-        while (iterator.hasNext()) {
-            Recipe recipe = iterator.next();
-            backup.add(recipe);
-        }
-
-        Iterator<Recipe> backupIterator = backup.iterator();
-
-        while (backupIterator.hasNext()) {
-            Recipe recipe = backupIterator.next();
-            if (recipe != null) {
-                switch (recipe.getResult().getType()) {
-                    case GLISTERING_MELON_SLICE:
-                    case GOLDEN_CARROT:
-                        backupIterator.remove();
-                }
-            }
-        }
-
-        getServer().clearRecipes();
-
-        for (Recipe r : backup) {
-            getServer().addRecipe(r);
-        }
-    }
-
-    private void addRecipes() {
-        ItemStack goldenCarrot = new ItemStack(Material.GOLDEN_CARROT, 1);
-
-        ShapedRecipe carrotRecipe = new ShapedRecipe(new NamespacedKey(this, "gayboy"), goldenCarrot);
-
-        carrotRecipe.shape("%%%", "%C%", "%%%");
-
-        carrotRecipe.setIngredient('%', Material.GOLD_INGOT);
-        carrotRecipe.setIngredient('C', Material.CARROT);
-
-        this.getServer().addRecipe(carrotRecipe);
-
-        ItemStack glisterLemon = new ItemStack(Material.GLISTERING_MELON_SLICE, 1);
-
-        ShapedRecipe lemonRecipe = new ShapedRecipe(new NamespacedKey(this, "gayboy2"), glisterLemon);
-
-        lemonRecipe.shape("%%%", "%C%", "%%%");
-
-        lemonRecipe.setIngredient('%', Material.GOLD_INGOT);
-        lemonRecipe.setIngredient('C', Material.MELON_SLICE);
-
-        this.getServer().addRecipe(lemonRecipe);
     }
 
     @Override

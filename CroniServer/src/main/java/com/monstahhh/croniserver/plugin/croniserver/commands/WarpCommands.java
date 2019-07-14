@@ -14,9 +14,6 @@ public class WarpCommands implements CommandExecutor {
 
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
-                if (((Player) sender).getWorld().getName().equalsIgnoreCase("uhc2") || ((Player) sender).getWorld().getName().equalsIgnoreCase("uhc2_nether")) {
-                    sender.sendMessage(ChatColor.DARK_RED + "Nice try, but no :)");
-                } else {
                     if (command.getName().equalsIgnoreCase("hub")) {
                         Player player = (Player) sender;
                         player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
@@ -25,7 +22,6 @@ public class WarpCommands implements CommandExecutor {
                         Player player = (Player) sender;
                         player.teleport(new Location(player.getWorld(), 3, 69, -2));
                     }
-                }
             } else {
                 Player player = (Player) sender;
                 player.sendMessage(ChatColor.DARK_RED + "Nice try, but no :)");
