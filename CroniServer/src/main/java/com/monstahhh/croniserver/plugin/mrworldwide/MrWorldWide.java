@@ -29,6 +29,9 @@ public class MrWorldWide {
     public void enable() {
         Config botConfig;
         botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
+
+        this.checkServices(botConfig);
+
         Object tokenObj = botConfig.getConfig().get("token");
         if (tokenObj == null) {
             botConfig.getConfig().set("token", "/");
@@ -55,6 +58,10 @@ public class MrWorldWide {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
         }
+    }
+
+    private void checkServices (Config botConfig) {
+
         Object _weatherToken = botConfig.getConfig().get("weatherToken");
         if (_weatherToken == null) {
             botConfig.getConfig().set("weatherToken", "/");
