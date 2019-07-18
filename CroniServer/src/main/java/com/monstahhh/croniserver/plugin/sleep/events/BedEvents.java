@@ -42,5 +42,6 @@ public class BedEvents implements Listener {
     private void skipNight(World w) {
         sleepingPlayers = new ArrayList<>();
         w.setTime(1000L);
+        w.setStorm(false);
     }
 }
