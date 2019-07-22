@@ -1,4 +1,4 @@
-package com.jafregle.http;
+package com.monstahhh.croniserver.http;
 
 import java.util.ArrayList;
 import java.util.List;

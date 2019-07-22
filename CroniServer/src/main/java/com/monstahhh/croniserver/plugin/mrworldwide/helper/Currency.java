@@ -1,8 +1,8 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.helper;
 
-import com.jafregle.http.HttpClient;
-import com.jafregle.http.HttpMethod;
-import com.jafregle.http.HttpResponse;
+import com.monstahhh.croniserver.http.HttpClient;
+import com.monstahhh.croniserver.http.HttpMethod;
+import com.monstahhh.croniserver.http.HttpResponse;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;

@@ -1,4 +1,4 @@
-package com.jafregle.http;
+package com.monstahhh.croniserver.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;

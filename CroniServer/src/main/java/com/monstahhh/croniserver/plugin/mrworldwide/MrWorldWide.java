@@ -22,6 +22,10 @@ public class MrWorldWide {
         _plugin = plugin;
     }
 
+    public static void debugLog(String str) {
+        CroniServer.logger.log(Level.INFO, str);
+    }
+
     public void enable() {
         Config botConfig;
         botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
@@ -56,7 +60,7 @@ public class MrWorldWide {
         }
     }
 
-    private void checkServices (Config botConfig) {
+    private void checkServices(Config botConfig) {
 
         Object _weatherToken = botConfig.getConfig().get("weatherToken");
         if (_weatherToken == null) {
@@ -77,10 +81,6 @@ public class MrWorldWide {
         } else {
             currencyToken = _currencyToken.toString();
         }
-    }
-
-    public static void debugLog(String str) {
-        CroniServer.logger.log(Level.INFO, str);
     }
 
     public void disable() {
