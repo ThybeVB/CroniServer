@@ -19,7 +19,8 @@ public class City {
 
     private final String baseLink = "http://api.openweathermap.org/data/2.5/weather";
     private final String params = "?q=%s&appid=%s&units=metric";
-    EmbedBuilder defaultError = new EmbedBuilder()
+
+    private EmbedBuilder defaultError = new EmbedBuilder()
             .setTitle("Mr. Error")
             .setColor(Color.RED);
     private String weatherToken;
