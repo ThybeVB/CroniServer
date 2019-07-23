@@ -49,6 +49,8 @@ public class MrWorldWide {
                         .setContextEnabled(false)
                         .build().awaitReady();
 
+                _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Started");
+
                 _jda.getGuildById(305792249877364738L)
                         .getTextChannelById(560486517043232768L)
                         .sendMessage("Oh damn i'm back!")

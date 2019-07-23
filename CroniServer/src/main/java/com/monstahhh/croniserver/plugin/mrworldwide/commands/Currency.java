@@ -1,4 +1,4 @@
-package com.monstahhh.croniserver.plugin.mrworldwide.helper;
+package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;

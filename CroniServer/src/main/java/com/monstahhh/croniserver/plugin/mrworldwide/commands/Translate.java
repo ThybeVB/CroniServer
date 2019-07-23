@@ -1,4 +1,4 @@
-package com.monstahhh.croniserver.plugin.mrworldwide.helper;
+package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
@@ -29,6 +29,8 @@ public class Translate {
             destination = args[2];
             msg = event.getMessage().getContentRaw().substring(16);
             msg = msg.replaceAll("\n", " ");
+            msg = msg.replaceAll("\\?", ".");
+            msg = msg.replaceAll("!", ".");
         } catch (ArrayIndexOutOfBoundsException e) {
             event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
             return;

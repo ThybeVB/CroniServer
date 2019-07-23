@@ -1,9 +1,9 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.event;
 
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
-import com.monstahhh.croniserver.plugin.mrworldwide.helper.Currency;
-import com.monstahhh.croniserver.plugin.mrworldwide.helper.Translate;
-import com.monstahhh.croniserver.plugin.mrworldwide.helper.Weather;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 

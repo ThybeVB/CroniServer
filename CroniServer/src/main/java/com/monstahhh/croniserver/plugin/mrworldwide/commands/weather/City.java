@@ -1,4 +1,4 @@
-package com.monstahhh.croniserver.plugin.mrworldwide;
+package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class City {
+
     public int temperature;
     public int min;
     public int max;

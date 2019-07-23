@@ -1,22 +1,15 @@
-package com.monstahhh.croniserver.plugin.mrworldwide.helper;
+package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
-import com.monstahhh.croniserver.plugin.mrworldwide.City;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
-public class TranslateHelper {
+public class WeatherHelper {
 
     private final String baseLink = "http://api.openweathermap.org/data/2.5/weather";
     private final String params = "?q=%s&appid=%s&units=metric";
@@ -27,7 +20,7 @@ public class TranslateHelper {
     private String weatherToken;
     private TextChannel textChannel;
 
-    public TranslateHelper(String token, TextChannel channel) {
+    public WeatherHelper(String token, TextChannel channel) {
         weatherToken = token;
         textChannel = channel;
     }
@@ -67,8 +60,8 @@ public class TranslateHelper {
         }
 
         eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
-        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription, false);
         eb.addField("Current Time", city.currentTime, false);
+        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription, false);
 
         eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 
