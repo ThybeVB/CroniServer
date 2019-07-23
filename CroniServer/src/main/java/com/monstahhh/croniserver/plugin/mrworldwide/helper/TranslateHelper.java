@@ -38,7 +38,7 @@ public class TranslateHelper {
             String formattedSend = String.format(params, providedLocation, weatherToken);
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
 
-            return getCityObjectForJson(result.asString());
+            return new City().getCityObjectForJson(result.asString());
 
         } catch (Exception e) {
             EmbedBuilder eb = defaultError;
@@ -54,50 +54,10 @@ public class TranslateHelper {
         }
     }
 
-    private City getCityObjectForJson(String json) throws JSONException {
-        JSONObject object = new JSONObject(json);
-        City city = new City();
-
-        String tempStr = object.getJSONObject("main").get("temp").toString();
-        String minStr = object.getJSONObject("main").get("temp_min").toString();
-        String maxStr = object.getJSONObject("main").get("temp_max").toString();
-
-        city.temperature = Math.round(Float.parseFloat(tempStr));
-        city.min = Math.round(Float.parseFloat(minStr));
-        city.max = Math.round(Float.parseFloat(maxStr));
-
-        city.cityName = object.getString("name");
-        city.countryCode = object.getJSONObject("sys").getString("country");
-
-        Object sunRise = object.getJSONObject("sys").get("sunrise");
-        Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
-        Object sunSet = object.getJSONObject("sys").get("sunset");
-        Date sunSetDate = new Date(Long.parseLong(sunSet.toString()) * 1000L + (object.getInt("timezone") * 1000L));
-
-        Date current = new Date();
-        current.setTime(current.getTime() + (object.getInt("timezone") * 1000L));
-
-        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
-        simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        city.sunRiseTime = simpleTime.format(sunRiseDate);
-        city.sunSetTime = simpleTime.format(sunSetDate);
-        city.currentTime = simpleTime.format(current);
-
-        JSONArray currentWeatherArray = object.getJSONArray("weather");
-        JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
-
-        city.currentWeatherTitle = currentWeather.getString("main");
-        city.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
-
-        city.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
-
-        return city;
-    }
-
     public MessageEmbed getEmbedFor(City city) {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.ORANGE);
+        eb.setThumbnail(city.iconUrl);
 
         eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
         eb.addField("Temperature", city.temperature + "°C", false);
@@ -107,28 +67,11 @@ public class TranslateHelper {
         }
 
         eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
-
         eb.addField(city.currentWeatherTitle, city.currentWeatherDescription, false);
-
         eb.addField("Current Time", city.currentTime, false);
 
-        eb.setThumbnail(city.iconUrl);
         eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 
         return eb.build();
-    }
-
-    private String fixWeatherDescription(String unfixedWeather) {
-        String[] words = unfixedWeather.split(" ");
-
-        StringBuilder sb = new StringBuilder();
-        for (String word : words) {
-            char c = Character.toUpperCase(word.charAt(0));
-            word = word.substring(1);
-            String newWord = c + word + " ";
-            sb.append(newWord);
-        }
-
-        return sb.toString();
     }
 }
