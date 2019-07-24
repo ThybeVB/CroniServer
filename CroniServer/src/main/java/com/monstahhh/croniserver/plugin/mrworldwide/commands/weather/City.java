@@ -10,32 +10,32 @@ import java.util.TimeZone;
 
 public class City {
 
-    public int temperature;
-    public int min;
-    public int max;
-    public String cityName;
-    public String countryCode;
-    public String sunRiseTime;
-    public String sunSetTime;
-    public String currentTime;
-    public String currentWeatherTitle;
-    public String currentWeatherDescription;
-    public String iconUrl;
+    int temperature;
+    int min;
+    int max;
 
-    public City getCityObjectForJson(String json) throws JSONException {
+    String cityName;
+    String countryCode;
+    String sunRiseTime;
+    String sunSetTime;
+    String currentTime;
+    String currentWeatherTitle;
+    String currentWeatherDescription;
+    String iconUrl;
+
+    City getCityObjectForJson(String json) throws JSONException {
         JSONObject object = new JSONObject(json);
-        City city = new City();
 
         String tempStr = object.getJSONObject("main").get("temp").toString();
         String minStr = object.getJSONObject("main").get("temp_min").toString();
         String maxStr = object.getJSONObject("main").get("temp_max").toString();
 
-        city.temperature = Math.round(Float.parseFloat(tempStr));
-        city.min = Math.round(Float.parseFloat(minStr));
-        city.max = Math.round(Float.parseFloat(maxStr));
+        this.temperature = Math.round(Float.parseFloat(tempStr));
+        this.min = Math.round(Float.parseFloat(minStr));
+        this.max = Math.round(Float.parseFloat(maxStr));
 
-        city.cityName = object.getString("name");
-        city.countryCode = object.getJSONObject("sys").getString("country");
+        this.cityName = object.getString("name");
+        this.countryCode = object.getJSONObject("sys").getString("country");
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
@@ -48,19 +48,19 @@ public class City {
         SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-        city.sunRiseTime = simpleTime.format(sunRiseDate);
-        city.sunSetTime = simpleTime.format(sunSetDate);
-        city.currentTime = simpleTime.format(current);
+        this.sunRiseTime = simpleTime.format(sunRiseDate);
+        this.sunSetTime = simpleTime.format(sunSetDate);
+        this.currentTime = simpleTime.format(current);
 
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
-        city.currentWeatherTitle = currentWeather.getString("main");
-        city.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
+        this.currentWeatherTitle = currentWeather.getString("main");
+        this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
 
-        city.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
+        this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
 
-        return city;
+        return this;
     }
 
     private String fixWeatherDescription(String unfixedWeather) {

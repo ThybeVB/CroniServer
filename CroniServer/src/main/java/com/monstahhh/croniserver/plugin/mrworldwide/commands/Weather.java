@@ -29,7 +29,7 @@ public class Weather {
         }
     }
 
-    private void argError (GuildMessageReceivedEvent event) {
+    private void argError(GuildMessageReceivedEvent event) {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Mr. Error");
         eb.setColor(Color.RED);
