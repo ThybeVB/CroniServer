@@ -13,9 +13,8 @@ import java.util.logging.Level;
 
 public class DangerAPI {
 
-    public static Config playerData;
+    static Config playerData;
     private static JavaPlugin _plugin;
-    private static Config config;
     private static boolean debug = false;
 
     public DangerAPI(JavaPlugin plugin) {
@@ -74,7 +73,7 @@ public class DangerAPI {
     }
 
     private void setupPluginFiles() {
-        config = new Config("plugins/DangerAPI", "config.yml", _plugin);
+        Config config = new Config("plugins/DangerAPI", "config.yml", _plugin);
         Object debugObj = config.getConfig().get("debug");
         if (debugObj == null) {
             config.getConfig().set("debug", false);
