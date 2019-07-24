@@ -66,7 +66,8 @@ public class Translate {
             StringBuilder sb = new StringBuilder();
             for (String sentence : sentences) {
                 String singleResult = castResult(doTranslateFor(sentence, from, to).asString());
-                sb.append(singleResult + ". ");
+                sb.append(singleResult);
+                sb.append(". ");
             }
 
             return sb.toString();

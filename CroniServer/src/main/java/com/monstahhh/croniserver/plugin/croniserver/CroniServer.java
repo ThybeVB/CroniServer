@@ -26,7 +26,6 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         logger = this.getLogger();
 
         version = this.getDescription().getVersion();
@@ -37,7 +36,6 @@ public final class CroniServer extends JavaPlugin {
         this.enableExtensions();
 
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-
         this.registerCommands();
 
         System.out.println("[CroniServer] Loaded CroniServer v" + version);
@@ -67,7 +65,6 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
         dangerApi.disable();
         mrWorldWide.disable();
         sleep.disable();

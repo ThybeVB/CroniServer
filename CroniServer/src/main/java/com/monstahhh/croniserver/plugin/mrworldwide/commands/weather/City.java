@@ -30,13 +30,6 @@ public class City {
         String minStr = object.getJSONObject("main").get("temp_min").toString();
         String maxStr = object.getJSONObject("main").get("temp_max").toString();
 
-        this.temperature = Math.round(Float.parseFloat(tempStr));
-        this.min = Math.round(Float.parseFloat(minStr));
-        this.max = Math.round(Float.parseFloat(maxStr));
-
-        this.cityName = object.getString("name");
-        this.countryCode = object.getJSONObject("sys").getString("country");
-
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
         Object sunSet = object.getJSONObject("sys").get("sunset");
@@ -48,13 +41,17 @@ public class City {
         SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-        this.sunRiseTime = simpleTime.format(sunRiseDate);
-        this.sunSetTime = simpleTime.format(sunSetDate);
-        this.currentTime = simpleTime.format(current);
-
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
+        this.temperature = Math.round(Float.parseFloat(tempStr));
+        this.min = Math.round(Float.parseFloat(minStr));
+        this.max = Math.round(Float.parseFloat(maxStr));
+        this.cityName = object.getString("name");
+        this.countryCode = object.getJSONObject("sys").getString("country");
+        this.sunRiseTime = simpleTime.format(sunRiseDate);
+        this.sunSetTime = simpleTime.format(sunSetDate);
+        this.currentTime = simpleTime.format(current);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
 

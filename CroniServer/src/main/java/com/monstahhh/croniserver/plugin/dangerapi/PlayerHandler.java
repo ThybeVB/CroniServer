@@ -17,7 +17,6 @@ public class PlayerHandler {
         playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", true);
         playerData.saveConfig();
 
-
         startTimerForPlayer(player);
     }
 
@@ -29,7 +28,6 @@ public class PlayerHandler {
     }
 
     private void startTimerForPlayer(Player player) {
-
         DangerAPI.debugLog("Starting Timer for " + player.getDisplayName());
 
         if (timedPlayers.get(player) != null) {
