@@ -27,10 +27,21 @@ public class Translate {
         try {
             origin = args[1];
             destination = args[2];
-            msg = event.getMessage().getContentRaw().substring(16);
-            msg = msg.replaceAll("\n", " ");
-            msg = msg.replaceAll("\\?", ".");
-            msg = msg.replaceAll("!", ".");
+            if (origin.equalsIgnoreCase(destination)) {
+                event.getChannel().sendMessage("You have to translate one language to the other.\nExample: *'translate id en kontol'*").queue();
+                return;
+            } else {
+                if (destination.length() > 2) {
+                    destination = "en";
+                    msg = event.getMessage().getContentRaw().substring(13);
+                } else {
+                    msg = event.getMessage().getContentRaw().substring(16);
+                }
+
+                msg = msg.replaceAll("\n", " ");
+                msg = msg.replaceAll("\\?", ".");
+                msg = msg.replaceAll("!", ".");
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
             return;
