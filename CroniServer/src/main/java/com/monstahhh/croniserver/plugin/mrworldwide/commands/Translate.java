@@ -35,6 +35,9 @@ public class Translate {
                     destination = "en";
                     msg = event.getMessage().getContentRaw().substring(13);
                 } else {
+                    if (destination.length() != 2) {
+                        destination = "en";
+                    }
                     msg = event.getMessage().getContentRaw().substring(16);
                 }
 
