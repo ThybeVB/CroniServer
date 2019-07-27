@@ -15,8 +15,9 @@ public class MrWorldWide {
 
     public static String weatherToken = "";
     public static String currencyToken = "";
-    private static JavaPlugin _plugin;
+    public static JavaPlugin _plugin;
     private JDA _jda;
+    public static Config botConfig;
 
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
@@ -27,7 +28,6 @@ public class MrWorldWide {
     }
 
     public void enable() {
-        Config botConfig;
         botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
 
         this.checkServices(botConfig);
