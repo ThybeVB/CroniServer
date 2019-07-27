@@ -15,7 +15,7 @@ public class WarpCommands implements CommandExecutor {
 
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
-                if (!DangerAPI.isDangerous((Player)sender)) {
+                if (!DangerAPI.isDangerous((Player) sender)) {
                     if (command.getName().equalsIgnoreCase("hub")) {
                         Player player = (Player) sender;
                         player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));

@@ -31,14 +31,18 @@ public class Translate {
                 event.getChannel().sendMessage("You have to translate one language to the other.\nExample: *'translate id en kontol'*").queue();
                 return;
             } else {
-                if (destination.length() > 2) {
-                    destination = "en";
-                    msg = event.getMessage().getContentRaw().substring(13);
+                if (origin.length() != 2) {
+                    throw new NullPointerException();
                 } else {
-                    if (destination.length() != 2) {
+                    if (destination.length() > 2) {
                         destination = "en";
+                        msg = event.getMessage().getContentRaw().substring(13);
+                    } else {
+                        if (destination.length() != 2) {
+                            destination = "en";
+                        }
+                        msg = event.getMessage().getContentRaw().substring(16);
                     }
-                    msg = event.getMessage().getContentRaw().substring(16);
                 }
 
                 msg = msg.replaceAll("\n", " ");
@@ -99,7 +103,7 @@ public class Translate {
 
     private String castResult(String result) {
         Pattern pat = Pattern.compile(PATTERN);
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
 
         Matcher matcher = pat.matcher(result);
         while (matcher.find()) {
