@@ -53,10 +53,10 @@ public class MrWorldWide {
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
 
-                if (!debug) {
+                if (debug) {
                     _jda.getGuildById(305792249877364738L)
                             .getTextChannelById(560486517043232768L)
-                            .sendMessage("Oh damn i'm back!")
+                            .sendMessage("Worldwide detected on Local Machine, giving priority...")
                             .queue();
                 }
 
@@ -106,7 +106,7 @@ public class MrWorldWide {
             if (!debug) {
                 channel.sendMessage("Woaaaah i'm passing out!").queue();
             } else {
-                channel.sendMessage("Worldwide detected on Local Machine, giving priority...").queue();
+                channel.sendMessage("Worldwide giving control back to server").queue();
             }
         }
 

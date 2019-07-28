@@ -51,12 +51,8 @@ public class MessageReceivedEvent extends ListenerAdapter {
             data = new Config("plugins/MrWorldWide", "data.yml", MrWorldWide._plugin);
         }
 
-        int translate = data.getConfig().getInt("usage.translateCommand");
-        int weather = data.getConfig().getInt("usage.weatherCommand");
-        int currency = data.getConfig().getInt("usage.currencyCommand");
-
-        translateCount = translate;
-        weatherCount = weather;
-        currencyCount = currency;
+        translateCount = data.getConfig().getInt("usage.translateCommand");
+        weatherCount = data.getConfig().getInt("usage.weatherCommand");
+        currencyCount = data.getConfig().getInt("usage.currencyCommand");
     }
 }
