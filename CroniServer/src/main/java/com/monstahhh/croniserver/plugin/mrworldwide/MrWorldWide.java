@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.TextChannel;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -17,7 +18,8 @@ public class MrWorldWide {
     public static String currencyToken = "";
     public static JavaPlugin _plugin;
     private JDA _jda;
-    public static Config botConfig;
+
+    private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
@@ -28,7 +30,7 @@ public class MrWorldWide {
     }
 
     public void enable() {
-        botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
+        Config botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
 
         this.checkServices(botConfig);
 
@@ -49,12 +51,14 @@ public class MrWorldWide {
                         .setContextEnabled(false)
                         .build().awaitReady();
 
-                _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Started");
+                _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
 
-                _jda.getGuildById(305792249877364738L)
-                        .getTextChannelById(560486517043232768L)
-                        .sendMessage("Oh damn i'm back!")
-                        .queue();
+                if (!debug) {
+                    _jda.getGuildById(305792249877364738L)
+                            .getTextChannelById(560486517043232768L)
+                            .sendMessage("Oh damn i'm back!")
+                            .queue();
+                }
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
@@ -83,14 +87,27 @@ public class MrWorldWide {
         } else {
             currencyToken = _currencyToken.toString();
         }
+
+        Object debugObj = botConfig.getConfig().get("debug");
+        if (debugObj == null) {
+            botConfig.getConfig().set("debug", false);
+            botConfig.saveConfig();
+        } else {
+            if (debugObj.toString().equals("true")) {
+                debug = true;
+            }
+        }
     }
 
     public void disable() {
         if (_jda != null) {
-            _jda.getGuildById(305792249877364738L)
-                    .getTextChannelById(560486517043232768L)
-                    .sendMessage("Woaaaah i'm passing out!")
-                    .queue();
+            TextChannel channel = _jda.getGuildById(305792249877364738L)
+                    .getTextChannelById(560486517043232768L);
+            if (!debug) {
+                channel.sendMessage("Woaaaah i'm passing out!").queue();
+            } else {
+                channel.sendMessage("Worldwide detected on Local Machine, giving priority...").queue();
+            }
         }
 
         System.out.println("Mr. Worldwide has shut down!");

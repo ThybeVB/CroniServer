@@ -19,8 +19,8 @@ public class MessageReceivedEvent extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         this.getUsageData();
-
         String message = event.getMessage().getContentRaw();
+
         if (message.toLowerCase().startsWith("translate ")) {
             Translate translate = new Translate();
             data.getConfig().set("usage.translateCommand", translateCount + 1);
@@ -39,7 +39,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
             currency.carryCommand(event, MrWorldWide.currencyToken);
         }
 
-        if (message.toLowerCase().startsWith("usage") && event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
+        if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
             event.getChannel().sendMessage("translateCount="+translateCount+";weatherCount="+weatherCount+";currencyCount="+currencyCount).queue();
         }
 

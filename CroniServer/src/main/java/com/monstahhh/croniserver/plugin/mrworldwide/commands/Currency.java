@@ -39,7 +39,7 @@ public class Currency {
 
             float[] prices = getValueFor(base, destination, amount, token);
             if (prices != null) {
-                if (prices[0] == 503) {
+                if (prices[0] == 503 && prices[1] == 0) {
                     EmbedBuilder eb = defaultError;
                     eb.addField("Server Error", "503: Currency Server was unable to be reached.", false);
 
@@ -80,7 +80,7 @@ public class Currency {
 
         } catch (Exception e) {
             if (e.getMessage().contains("503")) {
-                return new float[]{503};
+                return new float[]{503, 0};
             }
             MrWorldWide.debugLog("Currency#getValueFor Error:" + e.getMessage());
             return null;
