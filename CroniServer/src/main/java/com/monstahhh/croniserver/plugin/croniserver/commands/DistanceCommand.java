@@ -42,6 +42,7 @@ public class DistanceCommand implements CommandExecutor {
 
                     Player player1 = Bukkit.getServer().getPlayer(args[0]);
 
+                    assert player1 != null;
                     if (((Player) sender).getWorld().getEnvironment() == player1.getWorld().getEnvironment() && ((Player) sender).getWorld() == player1.getWorld()) {
 
                         double originX = ((Player) sender).getLocation().getX();

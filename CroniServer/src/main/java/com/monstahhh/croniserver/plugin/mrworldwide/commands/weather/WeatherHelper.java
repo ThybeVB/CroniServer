@@ -39,7 +39,7 @@ public class WeatherHelper {
             if (statusCode == 200) {
                 return new City().getCityObjectForJson(resultStr);
             } else {
-                throw new Exception("Server returned code "+ statusCode);
+                throw new Exception("Server returned code " + statusCode);
             }
         } catch (Exception e) {
             EmbedBuilder eb = defaultError;

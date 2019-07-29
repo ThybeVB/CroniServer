@@ -40,13 +40,13 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
-            event.getChannel().sendMessage("translateCount="+translateCount+";weatherCount="+weatherCount+";currencyCount="+currencyCount).queue();
+            event.getChannel().sendMessage("translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount).queue();
         }
 
         data.saveConfig();
     }
 
-    private void getUsageData () {
+    private void getUsageData() {
         if (data == null) {
             data = new Config("plugins/MrWorldWide", "data.yml", MrWorldWide._plugin);
         }

@@ -12,6 +12,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class HomeCommand implements CommandExecutor {
 
     @Override
@@ -55,7 +57,7 @@ public class HomeCommand implements CommandExecutor {
         double x = player.getLocation().getX();
         double y = player.getLocation().getY();
         double z = player.getLocation().getZ();
-        String world = player.getLocation().getWorld().getName();
+        String world = Objects.requireNonNull(player.getLocation().getWorld()).getName();
 
         if (player.isOnGround()) {
             String resString = x + ":" + y + ":" + z + ":" + world;

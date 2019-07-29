@@ -48,11 +48,7 @@ public class DangerAPI {
             }
         }
 
-        if (damagedBool || inCombatBool || fallingBool) {
-            return true;
-        }
-
-        return false;
+        return damagedBool || inCombatBool || fallingBool;
     }
 
     public static void debugLog(String str) {

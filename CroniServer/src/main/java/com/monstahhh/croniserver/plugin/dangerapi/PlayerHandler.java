@@ -31,9 +31,9 @@ public class PlayerHandler {
         DangerAPI.debugLog("Starting Timer for " + player.getDisplayName());
 
         if (timedPlayers.get(player) != null) {
-            Object oldTimer = timedPlayers.get(player);
-            ((Timer) oldTimer).cancel();
-            ((Timer) oldTimer).purge();
+            Timer oldTimer = timedPlayers.get(player);
+            oldTimer.cancel();
+            oldTimer.purge();
             timedPlayers.remove(player, oldTimer);
             DangerAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getDisplayName());
         }

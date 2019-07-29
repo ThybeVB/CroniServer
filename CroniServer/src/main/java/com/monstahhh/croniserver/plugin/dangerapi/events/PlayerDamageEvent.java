@@ -13,6 +13,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 
+import java.util.Objects;
+
 public class PlayerDamageEvent implements Listener {
 
     private PlayerHandler handler = new PlayerHandler();
@@ -60,9 +62,9 @@ public class PlayerDamageEvent implements Listener {
     private boolean isPlayerFullHealth(Player player) {
         double fixedHealth = player.getHealth() + 1.0;
         DangerAPI.debugLog(player.getDisplayName() + "'s Current Health: " + Math.round(fixedHealth));
-        DangerAPI.debugLog(player.getDisplayName() + "'s Max Health: " + player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
+        DangerAPI.debugLog(player.getDisplayName() + "'s Max Health: " + Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue());
 
-        if (Math.round(fixedHealth) >= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue()) {
+        if (Math.round(fixedHealth) >= Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue()) {
             DangerAPI.debugLog(player.getDisplayName() + " is at Max Health!");
             return true;
         }

@@ -15,7 +15,9 @@ public class WarpCommands implements CommandExecutor {
 
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
-                if (!DangerAPI.isDangerous((Player) sender)) {
+                if (DangerAPI.isDangerous((Player) sender)) {
+                    sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
+                } else {
                     if (command.getName().equalsIgnoreCase("hub")) {
                         Player player = (Player) sender;
                         player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
@@ -24,8 +26,6 @@ public class WarpCommands implements CommandExecutor {
                         Player player = (Player) sender;
                         player.teleport(new Location(player.getWorld(), 3, 69, -2));
                     }
-                } else {
-                    sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
                 }
             } else {
                 Player player = (Player) sender;

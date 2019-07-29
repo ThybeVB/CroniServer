@@ -25,7 +25,7 @@ public class Currency {
             String providedLoc = event.getMessage().getContentRaw().substring(8);
             String[] words = providedLoc.split(" ");
 
-            Float amount = Float.parseFloat(words[0]);
+            float amount = Float.parseFloat(words[0]);
             String base = words[1];
             String destination = words[2];
 

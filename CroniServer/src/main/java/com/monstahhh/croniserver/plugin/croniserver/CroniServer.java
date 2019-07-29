@@ -11,6 +11,7 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class CroniServer extends JavaPlugin {
@@ -42,14 +43,14 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("hub").setExecutor(new WarpCommands());
-        this.getCommand("spawn").setExecutor(new WarpCommands());
-        this.getCommand("home").setExecutor(new HomeCommand());
-        this.getCommand("sethome").setExecutor(new HomeCommand());
-        this.getCommand("distance").setExecutor(new DistanceCommand());
-        this.getCommand("pdistance").setExecutor((new DistanceCommand()));
-        this.getCommand("lol").setExecutor(new DistanceCommand());
-        this.getCommand("crinfo").setExecutor(new InfoCommand());
+        Objects.requireNonNull(this.getCommand("hub")).setExecutor(new WarpCommands());
+        Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new WarpCommands());
+        Objects.requireNonNull(this.getCommand("home")).setExecutor(new HomeCommand());
+        Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
+        Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
+        Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
+        Objects.requireNonNull(this.getCommand("lol")).setExecutor(new DistanceCommand());
+        Objects.requireNonNull(this.getCommand("crinfo")).setExecutor(new InfoCommand());
     }
 
     private void enableExtensions() {
