@@ -24,6 +24,7 @@ public class City {
     String iconUrl;
 
     City getCityObjectForJson(String json) throws JSONException {
+
         JSONObject object = new JSONObject(json);
 
         String tempStr = object.getJSONObject("main").get("temp").toString();

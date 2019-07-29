@@ -6,6 +6,7 @@ import com.monstahhh.croniserver.http.HttpResponse;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
+import org.json.JSONObject;
 
 import java.awt.*;
 
@@ -31,11 +32,18 @@ public class WeatherHelper {
             String formattedSend = String.format(params, providedLocation, weatherToken);
             HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
 
-            return new City().getCityObjectForJson(result.asString());
+            String resultStr = result.asString();
+            JSONObject obj = new JSONObject(resultStr);
+            int statusCode = obj.getInt("cod");
 
+            if (statusCode == 200) {
+                return new City().getCityObjectForJson(resultStr);
+            } else {
+                throw new Exception("Server returned code "+ statusCode);
+            }
         } catch (Exception e) {
             EmbedBuilder eb = defaultError;
-            if (e.getMessage().contains("error: 404")) {
+            if (e.getMessage().contains("404")) {
                 eb.addField("Error 404", "The provided city could not be found.", false);
             } else {
                 eb.addField("Exception", e.getMessage(), false);
