@@ -66,8 +66,7 @@ public class Currency {
         try {
             HttpClient client = new HttpClient();
             String formattedSend = String.format(params, base.toUpperCase(), destination.toUpperCase(), token);
-            HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
-
+            HttpResponse result = client.request(HttpMethod.GET, (baseLink + formattedSend));
             String res = result.asString();
 
             JSONObject obj = new JSONObject(res);

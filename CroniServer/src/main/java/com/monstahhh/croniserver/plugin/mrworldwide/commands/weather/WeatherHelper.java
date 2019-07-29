@@ -30,7 +30,7 @@ public class WeatherHelper {
         try {
             HttpClient client = new HttpClient();
             String formattedSend = String.format(params, providedLocation, weatherToken);
-            HttpResponse result = client.request(HttpMethod.GET, new StringBuilder(baseLink).append(formattedSend).toString());
+            HttpResponse result = client.request(HttpMethod.GET, (baseLink + formattedSend));
 
             String resultStr = result.asString();
             JSONObject obj = new JSONObject(resultStr);

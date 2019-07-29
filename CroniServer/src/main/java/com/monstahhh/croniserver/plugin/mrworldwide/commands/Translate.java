@@ -98,7 +98,7 @@ public class Translate {
         String encodedText = java.net.URLEncoder.encode(textToTranslate, "UTF-8");
         String params = String.format(GOOGLE_PARAMS, from, to, encodedText);
 
-        return new HttpClient().request(HttpMethod.GET, new StringBuilder(GOOGLE_URL_API).append(params).toString());
+        return new HttpClient().request(HttpMethod.GET, (GOOGLE_URL_API + params));
     }
 
     private String castResult(String result) {
