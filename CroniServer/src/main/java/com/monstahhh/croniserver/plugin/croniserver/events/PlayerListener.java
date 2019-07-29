@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
@@ -22,5 +23,15 @@ public class PlayerListener implements Listener {
         }
 
         p.getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
+    }
+
+    @EventHandler
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if (event.getPlayer().getDisplayName().equalsIgnoreCase("Guaka25")) {
+            if (event.getMessage().equalsIgnoreCase("/ban monstahhhy")) {
+                event.getPlayer().sendMessage(ChatColor.DARK_RED + "<3");
+                event.setCancelled(true);
+            }
+        }
     }
 }
