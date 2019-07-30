@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.sleep.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -43,5 +44,9 @@ public class BedEvents implements Listener {
         sleepingPlayers = new ArrayList<>();
         w.setTime(1000L);
         w.setStorm(false);
+
+        for (Player p : w.getPlayers()) {
+            p.sendMessage(ChatColor.YELLOW + "Night has been skipped.");
+        }
     }
 }

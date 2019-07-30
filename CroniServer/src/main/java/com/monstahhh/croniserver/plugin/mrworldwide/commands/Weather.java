@@ -14,27 +14,37 @@ public class Weather {
         String providedLoc = (event.getMessage().getContentRaw()).substring(8);
         if (providedLoc.contains(",")) {
             if ((providedLoc.split(","))[1].length() > 2) {
-                argError(event);
+                argError(event, providedLoc, 1);
             } else {
-                WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                City city = helper.getWeatherFor(providedLoc);
-                MessageEmbed embed = helper.getEmbedFor(city);
+                String[] letters = providedLoc.split(",");
+                if (letters.length >= 2) {
+                    argError(event, providedLoc, 0);
+                } else {
+                    WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
+                    City city = helper.getWeatherFor(providedLoc);
+                    MessageEmbed embed = helper.getEmbedFor(city);
 
-                if (embed != null) {
-                    event.getChannel().sendMessage(embed).queue();
+                    if (embed != null) {
+                        event.getChannel().sendMessage(embed).queue();
+                    }
                 }
             }
         } else {
-            argError(event);
+            argError(event, providedLoc, 0);
         }
     }
 
-    private void argError(GuildMessageReceivedEvent event) {
+    private void argError(GuildMessageReceivedEvent event, String input, int code) {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Mr. Error");
         eb.setColor(Color.RED);
-        eb.addField("Argument Error", "It seems that you have not entered the location correctly.", false);
+        if (code == 1) {
+            eb.addField("Argument Error", "You seem to have entered 2 lines.", false);
+        } else {
+            eb.addField("Argument Error", "It seems that you have not entered the location correctly.", false);
+        }
         eb.addField("Example", "weather kortrijk,be", false);
+        eb.setFooter("Your Input: weather " + input, null);
 
         event.getChannel().sendMessage(eb.build()).queue();
     }
