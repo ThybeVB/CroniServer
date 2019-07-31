@@ -6,7 +6,6 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;

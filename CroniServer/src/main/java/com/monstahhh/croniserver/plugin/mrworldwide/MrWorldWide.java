@@ -58,6 +58,11 @@ public class MrWorldWide {
                             .getTextChannelById(560486517043232768L)
                             .sendMessage("Worldwide detected on Local Machine, giving priority...")
                             .queue();
+                } else {
+                    _jda.getGuildById(305792249877364738L)
+                            .getTextChannelById(560486517043232768L)
+                            .sendMessage("*dale!*")
+                            .queue();
                 }
 
             } catch (Exception e) {
