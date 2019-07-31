@@ -3,7 +3,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide.event;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
-import com.monstahhh.croniserver.plugin.mrworldwide.commands.SetCity;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;

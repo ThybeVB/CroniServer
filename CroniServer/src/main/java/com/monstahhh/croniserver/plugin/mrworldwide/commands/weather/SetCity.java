@@ -1,4 +1,4 @@
-package com.monstahhh.croniserver.plugin.mrworldwide.commands;
+package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
