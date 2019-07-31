@@ -3,6 +3,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide.event;
 import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.SetCity;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -27,10 +28,15 @@ public class MessageReceivedEvent extends ListenerAdapter {
             translate.carryCommand(event);
         }
 
-        if (message.toLowerCase().startsWith("weather ")) {
+        if (message.toLowerCase().startsWith("weather")) {
             Weather weather = new Weather();
             data.getConfig().set("usage.weatherCommand", weatherCount + 1);
             weather.carryCommand(event, MrWorldWide.weatherToken);
+        }
+
+        if (message.toLowerCase().startsWith("setcity ")) {
+            SetCity setCity = new SetCity();
+            setCity.carryCommand(event);
         }
 
         if (message.toLowerCase().startsWith("convert ")) {
