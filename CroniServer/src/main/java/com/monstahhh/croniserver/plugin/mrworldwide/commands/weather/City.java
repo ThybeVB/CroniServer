@@ -22,6 +22,7 @@ public class City {
     String windSpeed;
     String currentWeatherTitle;
     String currentWeatherDescription;
+    String timeOfCalculation;
     String iconUrl;
 
     City getCityObjectForJson(String json) throws JSONException {
@@ -36,6 +37,8 @@ public class City {
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
         Object sunSet = object.getJSONObject("sys").get("sunset");
         Date sunSetDate = new Date(Long.parseLong(sunSet.toString()) * 1000L + (object.getInt("timezone") * 1000L));
+        Object timeOfCalculation = object.get("dt");
+        Date timeOfCalculationDate = new Date(Long.parseLong(timeOfCalculation.toString()) * 1000L + (object.getInt("timezone") * 1000L));
 
         Date current = new Date();
         current.setTime(current.getTime() + (object.getInt("timezone") * 1000L));
@@ -57,6 +60,7 @@ public class City {
         this.currentTime = simpleTime.format(current);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
+        this.timeOfCalculation = simpleTime.format(timeOfCalculationDate);
 
         this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
 
