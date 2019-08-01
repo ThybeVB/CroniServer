@@ -69,7 +69,7 @@ public class WeatherHelper {
 
         eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
         eb.addField("Current Time", city.currentTime, false);
-        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription, false);
+        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + ", " + city.windSpeed + "km/h", false);
 
         eb.setFooter("Crafted with lots of love by Pitbull and OpenWeather API", null);
 

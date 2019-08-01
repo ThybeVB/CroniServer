@@ -19,6 +19,7 @@ public class City {
     String sunRiseTime;
     String sunSetTime;
     String currentTime;
+    String windSpeed;
     String currentWeatherTitle;
     String currentWeatherDescription;
     String iconUrl;
@@ -45,6 +46,7 @@ public class City {
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
+        this.windSpeed = object.getJSONObject("wind").get("speed").toString();
         this.temperature = Math.round(Float.parseFloat(tempStr));
         this.min = Math.round(Float.parseFloat(minStr));
         this.max = Math.round(Float.parseFloat(maxStr));
