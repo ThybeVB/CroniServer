@@ -53,14 +53,13 @@ public class SetCity {
                 return false;
             }
             System.out.println("cityExists Error: " + exception.getMessage());
+            return false;
         }
-
-        return false;
     }
 
     private void setCityForUser(String location, long userId) {
         Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
-        data.getConfig().set("locations.users." + userId, location);
+        data.getConfig().set("locations.users." + userId, location.toLowerCase());
         data.saveConfig();
     }
 
