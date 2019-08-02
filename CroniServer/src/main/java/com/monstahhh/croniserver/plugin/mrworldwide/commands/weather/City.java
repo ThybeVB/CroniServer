@@ -13,6 +13,7 @@ public class City {
     int temperature;
     int min;
     int max;
+    int humidity;
 
     String cityName;
     String countryCode;
@@ -32,6 +33,7 @@ public class City {
         String tempStr = object.getJSONObject("main").get("temp").toString();
         String minStr = object.getJSONObject("main").get("temp_min").toString();
         String maxStr = object.getJSONObject("main").get("temp_max").toString();
+        String humidityStr = object.getJSONObject("main").get("humidity").toString();
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
@@ -53,6 +55,7 @@ public class City {
         this.temperature = Math.round(Float.parseFloat(tempStr));
         this.min = Math.round(Float.parseFloat(minStr));
         this.max = Math.round(Float.parseFloat(maxStr));
+        this.humidity = Math.round(Float.parseFloat(humidityStr));
         this.cityName = object.getString("name");
         this.countryCode = object.getJSONObject("sys").getString("country");
         this.sunRiseTime = simpleTime.format(sunRiseDate);
