@@ -48,6 +48,9 @@ public class City {
         SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
+        SimpleDateFormat secondsTime = new java.text.SimpleDateFormat("HH:mm:ss");
+        simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
@@ -63,7 +66,7 @@ public class City {
         this.currentTime = simpleTime.format(current);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
-        this.timeOfCalculation = simpleTime.format(timeOfCalculationDate);
+        this.timeOfCalculation = secondsTime.format(timeOfCalculationDate);
 
         this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
 

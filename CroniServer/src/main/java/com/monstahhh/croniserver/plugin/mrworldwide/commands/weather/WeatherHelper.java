@@ -69,7 +69,7 @@ public class WeatherHelper {
 
         eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
         eb.addField("Current Time", city.currentTime, false);
-        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h, " + city.humidity + "% humidity", false);
+        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
         eb.setFooter("Made by Pitbull, Recorded at " + city.timeOfCalculation, null);
 
