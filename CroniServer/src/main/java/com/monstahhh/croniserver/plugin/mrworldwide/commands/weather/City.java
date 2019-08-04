@@ -49,7 +49,7 @@ public class City {
         simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         SimpleDateFormat secondsTime = new java.text.SimpleDateFormat("HH:mm:ss");
-        simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+        secondsTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
