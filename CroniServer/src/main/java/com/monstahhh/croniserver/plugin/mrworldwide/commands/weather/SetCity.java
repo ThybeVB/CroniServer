@@ -46,8 +46,8 @@ public class SetCity {
             String resultStr = result.asString();
             JSONObject obj = new JSONObject(resultStr);
             int statusCode = obj.getInt("cod");
-            return statusCode == 200;
 
+            return statusCode == 200;
         } catch (IOException exception) {
             if (exception.getMessage().contains("404")) {
                 return false;

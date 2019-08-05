@@ -54,7 +54,7 @@ public class City {
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
-        Date recordedTime =  new Date(current.getTime() - timeOfCalculationDate.getTime());
+        Date recordedTime = new Date(current.getTime() - timeOfCalculationDate.getTime());
 
         this.windSpeed = object.getJSONObject("wind").get("speed").toString();
         this.temperature = Math.round(Float.parseFloat(tempStr));

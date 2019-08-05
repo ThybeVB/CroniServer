@@ -56,27 +56,35 @@ public class WeatherHelper {
     }
 
     public MessageEmbed getEmbedFor(City city) {
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setColor(Color.ORANGE);
-        eb.setThumbnail(city.iconUrl);
+        try {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.ORANGE);
 
-        eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
-        eb.addField("Temperature", city.temperature + "°C", false);
+            eb.setThumbnail(city.iconUrl);
 
-        if (city.min != city.max) {
-            eb.addField("Minimum & Maximum", city.min + "°C | " + city.max + "°C", true);
+            eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
+            eb.addField("Temperature", city.temperature + "°C", false);
+
+            if (city.min != city.max) {
+                eb.addField("Minimum & Maximum", city.min + "°C | " + city.max + "°C", true);
+            }
+
+            eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
+            eb.addField("Current Time", city.currentTime, false);
+            eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
+
+            if (city.timeOfCalculation.equals("00:00")) {
+                eb.setFooter("Made by Pitbull, Recorded just now", null);
+            } else {
+                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation + " minutes ago", null);
+            }
+
+            return eb.build();
+        } catch (Exception e) {
+            EmbedBuilder failEmbed = defaultError;
+            failEmbed.addField("City Error", e.getMessage(), false);
+
+            return failEmbed.build();
         }
-
-        eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
-        eb.addField("Current Time", city.currentTime, false);
-        eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
-
-        if (city.timeOfCalculation.equals("00:00")) {
-            eb.setFooter("Made by Pitbull.", null);
-        } else {
-            eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation + " minutes ago", null);
-        }
-
-        return eb.build();
     }
 }
