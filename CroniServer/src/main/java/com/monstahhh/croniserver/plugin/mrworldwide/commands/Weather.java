@@ -38,14 +38,12 @@ public class Weather {
     private void carryMentionCommand (GuildMessageReceivedEvent event) {
         User mentionedUser = event.getMessage().getMentionedUsers().get(0);
         Member guildMember = event.getGuild().getMember(mentionedUser);
-        if (event.getAuthor() != mentionedUser) {
             if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
                 EmbedBuilder eb = errorEmbed;
                 eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
                 eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
                 event.getChannel().sendMessage(eb.build()).queue();
                 event.getMessage().delete().queue();
-            }
         } else {
             String possibleCity = this.checkForCity(mentionedUser);
             try {
