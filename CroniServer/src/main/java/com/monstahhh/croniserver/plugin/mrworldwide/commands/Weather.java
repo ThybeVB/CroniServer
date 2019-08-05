@@ -21,78 +21,92 @@ public class Weather {
             .setTitle("Mr. Error")
             .setColor(Color.RED);
 
-    public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
-        if (event.getMessage().getMentions().size() > 0) {
-            User mentionedUser = event.getMessage().getMentionedUsers().get(0);
-            Member guildMember = event.getGuild().getMember(mentionedUser);
-            if (event.getAuthor() != mentionedUser) {
-                if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
-                    EmbedBuilder eb = errorEmbed;
-                    eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
-                    eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
-                    event.getChannel().sendMessage(eb.build()).queue();
-                    event.getMessage().delete().queue();
-                }
-            } else {
-                String possibleCity = this.checkForCity(mentionedUser);
-                try {
-                    if (!possibleCity.isEmpty()) {
-                        WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                        City city = helper.getWeatherFor(possibleCity);
-                        MessageEmbed embed = helper.getEmbedFor(city);
+    private String weatherToken;
 
-                        if (embed != null) {
-                            event.getChannel().sendMessage(embed).queue();
-                        }
-                    } else {
-                        event.getChannel().sendMessage(mentionedUser.getName() + " has not set a city.").queue();
-                    }
-                } catch (NullPointerException e) {
-                    EmbedBuilder eb = errorEmbed;
-                    eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
-                    eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
-                    eb.setFooter("Example: weather london,uk", null);
-                    event.getChannel().sendMessage(eb.build()).queue();
-                }
+    public Weather (String token) {
+        this.weatherToken = token;
+    }
+
+    public void carryCommand(GuildMessageReceivedEvent event) {
+        if (event.getMessage().getMentions().size() > 0) {
+            this.carryMentionCommand(event);
+        } else {
+            this.carryNormalCommand(event);
+        }
+    }
+
+    private void carryMentionCommand (GuildMessageReceivedEvent event) {
+        User mentionedUser = event.getMessage().getMentionedUsers().get(0);
+        Member guildMember = event.getGuild().getMember(mentionedUser);
+        if (event.getAuthor() != mentionedUser) {
+            if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
+                EmbedBuilder eb = errorEmbed;
+                eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
+                eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
+                event.getChannel().sendMessage(eb.build()).queue();
+                event.getMessage().delete().queue();
             }
         } else {
-            String providedLoc = (event.getMessage().getContentRaw()).substring(7);
-
-            if (providedLoc.contains(",")) {
-                if ((providedLoc.split(","))[1].length() > 2) {
-                    argError(event, providedLoc);
-                } else {
-                    WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                    City city = helper.getWeatherFor(providedLoc.trim());
+            String possibleCity = this.checkForCity(mentionedUser);
+            try {
+                if (!possibleCity.isEmpty()) {
+                    WeatherHelper helper = new WeatherHelper(this.weatherToken, event.getChannel());
+                    City city = helper.getWeatherFor(possibleCity);
                     MessageEmbed embed = helper.getEmbedFor(city);
 
                     if (embed != null) {
                         event.getChannel().sendMessage(embed).queue();
                     }
+                } else {
+                    event.getChannel().sendMessage(mentionedUser.getName() + " has not set a city.").queue();
                 }
-            } else {
-                String possibleCity = this.checkForCity(event.getAuthor());
-                try {
-                    if (!possibleCity.isEmpty()) {
-                        WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                        City city = helper.getWeatherFor(possibleCity);
-                        MessageEmbed embed = helper.getEmbedFor(city);
+            } catch (NullPointerException e) {
+                EmbedBuilder eb = errorEmbed;
+                eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
+                eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
+                eb.setFooter("Example: weather london,uk", null);
+                event.getChannel().sendMessage(eb.build()).queue();
+            }
+        }
+    }
 
-                        if (embed != null) {
-                            event.getChannel().sendMessage(embed).queue();
-                        } else {
-                            argError(event, providedLoc);
-                        }
+    private void carryNormalCommand (GuildMessageReceivedEvent event) {
+        String providedLoc = (event.getMessage().getContentRaw()).substring(7);
+
+        if (providedLoc.contains(",")) {
+            if ((providedLoc.split(","))[1].length() > 2) {
+                argError(event, providedLoc);
+            } else {
+                WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
+                City city = helper.getWeatherFor(providedLoc.trim());
+                MessageEmbed embed = helper.getEmbedFor(city);
+
+                if (embed != null) {
+                    event.getChannel().sendMessage(embed).queue();
+                }
+            }
+        } else {
+            String possibleCity = this.checkForCity(event.getAuthor());
+            try {
+                if (!possibleCity.isEmpty()) {
+                    WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
+                    City city = helper.getWeatherFor(possibleCity);
+                    MessageEmbed embed = helper.getEmbedFor(city);
+
+                    if (embed != null) {
+                        event.getChannel().sendMessage(embed).queue();
                     } else {
                         argError(event, providedLoc);
                     }
-                } catch (NullPointerException e) {
-                    EmbedBuilder eb = errorEmbed;
-                    eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
-                    eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
-                    eb.setFooter("Example: weather london,uk", null);
-                    event.getChannel().sendMessage(eb.build()).queue();
+                } else {
+                    argError(event, providedLoc);
                 }
+            } catch (NullPointerException e) {
+                EmbedBuilder eb = errorEmbed;
+                eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
+                eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
+                eb.setFooter("Example: weather london,uk", null);
+                event.getChannel().sendMessage(eb.build()).queue();
             }
         }
     }

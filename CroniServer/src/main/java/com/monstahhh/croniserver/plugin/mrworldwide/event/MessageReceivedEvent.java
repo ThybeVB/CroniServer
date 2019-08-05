@@ -29,9 +29,9 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         if (message.toLowerCase().startsWith("weather")) {
-            Weather weather = new Weather();
+            Weather weather = new Weather(MrWorldWide.weatherToken);
             data.getConfig().set("usage.weatherCommand", weatherCount + 1);
-            weather.carryCommand(event, MrWorldWide.weatherToken);
+            weather.carryCommand(event);
         }
 
         if (message.toLowerCase().startsWith("setcity ")) {
