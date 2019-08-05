@@ -109,10 +109,12 @@ public class MrWorldWide {
             TextChannel channel = _jda.getGuildById(305792249877364738L)
                     .getTextChannelById(560486517043232768L);
             if (!debug) {
-                channel.sendMessage("Woaaaah i'm passing out!").queue();
+                channel.sendMessage("Woaaaah i'm passing out!").complete();
             } else {
-                channel.sendMessage("Worldwide giving control back to server").queue();
+                channel.sendMessage("Worldwide giving control back to server").complete();
             }
+
+            _jda.shutdown();
         }
 
         System.out.println("Mr. Worldwide has shut down!");

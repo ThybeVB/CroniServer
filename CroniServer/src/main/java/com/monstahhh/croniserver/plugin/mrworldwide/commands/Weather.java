@@ -21,7 +21,7 @@ public class Weather {
             .setTitle("Mr. Error")
             .setColor(Color.RED);
 
-    private String weatherToken;
+    private final String weatherToken;
 
     public Weather (String token) {
         this.weatherToken = token;
