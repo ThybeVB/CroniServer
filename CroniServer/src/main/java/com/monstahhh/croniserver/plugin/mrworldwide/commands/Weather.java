@@ -5,6 +5,8 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -20,6 +22,14 @@ public class Weather {
     public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
         if (event.getMessage().getMentions().size() > 0) {
             User mentionedUser = event.getMessage().getMentionedUsers().get(0);
+            Member guildMember = event.getGuild().getMember(mentionedUser);
+
+            if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
+                event.getChannel().sendMessage("Don't mention an offline user >:(").queue();
+                event.getMessage().delete().queue();
+                return;
+            }
+
             String possibleCity = this.checkForCity(mentionedUser);
             try {
                 if (!possibleCity.isEmpty()) {
