@@ -54,7 +54,7 @@ public class City {
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
 
-        Date recordedTime = new Date(current.getTime() - timeOfCalculationDate.getTime());
+        Date timeSinceRecording = new Date(current.getTime() - timeOfCalculationDate.getTime());
 
         this.windSpeed = object.getJSONObject("wind").get("speed").toString();
         this.temperature = Math.round(Float.parseFloat(tempStr));
@@ -68,7 +68,7 @@ public class City {
         this.currentTime = simpleTime.format(current);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
-        this.timeOfCalculation = secondsTime.format(recordedTime);
+        this.timeOfCalculation = secondsTime.format(timeSinceRecording);
 
         this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
 
