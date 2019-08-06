@@ -36,7 +36,11 @@ public class Weather {
         if (event.getMessage().getMentions().size() > 0) {
             this.carryMentionCommand(event);
         } else {
-            this.carryNormalCommand(event);
+            if ((event.getMessage().getContentRaw().substring(7)).contains(",")) {
+                this.carryCommandWithParams(event);
+            } else {
+                this.carryCommandWithNoParams(event);
+            }
         }
     }
 
@@ -69,10 +73,8 @@ public class Weather {
         }
     }
 
-    private void carryNormalCommand(GuildMessageReceivedEvent event) {
+    private void carryCommandWithParams(GuildMessageReceivedEvent event) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(7);
-
-        if (providedLoc.contains(",")) {
             if ((providedLoc.split(","))[1].length() > 2) {
                 argError(event, providedLoc);
             } else {
@@ -84,25 +86,28 @@ public class Weather {
                     event.getChannel().sendMessage(embed).queue();
                 }
             }
-        } else {
-            String possibleCity = this.checkForCity(event.getAuthor());
-            try {
-                if (!possibleCity.isEmpty()) {
-                    WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                    City city = helper.getWeatherFor(possibleCity);
-                    MessageEmbed embed = helper.getEmbedFor(city);
 
-                    if (embed != null) {
-                        event.getChannel().sendMessage(embed).queue();
-                    } else {
-                        argError(event, providedLoc);
-                    }
+    }
+
+    private void carryCommandWithNoParams(GuildMessageReceivedEvent event) {
+        String providedLoc = (event.getMessage().getContentRaw()).substring(7);
+        String possibleCity = this.checkForCity(event.getAuthor());
+        try {
+            if (!possibleCity.isEmpty()) {
+                WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
+                City city = helper.getWeatherFor(possibleCity);
+                MessageEmbed embed = helper.getEmbedFor(city);
+
+                if (embed != null) {
+                    event.getChannel().sendMessage(embed).queue();
                 } else {
                     argError(event, providedLoc);
                 }
-            } catch (NullPointerException e) {
-                event.getChannel().sendMessage(invalidLocError.build()).queue();
+            } else {
+                argError(event, providedLoc);
             }
+        } catch (NullPointerException e) {
+            event.getChannel().sendMessage(invalidLocError.build()).queue();
         }
     }
 
