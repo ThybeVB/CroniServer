@@ -11,7 +11,7 @@
 
     <name>CroniServer</name>
 
-    <description>A plugin for the Cronibet Survival Server</description>
+    <description>Main plugin for the Cronibet Minecraft Server</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <authme.version>5.6.0-SNAPSHOT</authme.version>

@@ -7,11 +7,9 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelp
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.requests.restaction.MessageAction;
 
 import java.awt.*;
 
@@ -21,9 +19,16 @@ public class Weather {
             .setTitle("Mr. Error")
             .setColor(Color.RED);
 
+    private final EmbedBuilder invalidLocError = new EmbedBuilder()
+            .setTitle("Mr. Error")
+            .setColor(Color.RED)
+            .addField("Argument Error", "It seems that you did not enter a valid location", false)
+            .addField("Notice", "If you want to set your own city, use the setcity command.", false)
+            .setFooter("Example: weather london,uk", null);
+
     private final String weatherToken;
 
-    public Weather (String token) {
+    public Weather(String token) {
         this.weatherToken = token;
     }
 
@@ -35,15 +40,15 @@ public class Weather {
         }
     }
 
-    private void carryMentionCommand (GuildMessageReceivedEvent event) {
+    private void carryMentionCommand(GuildMessageReceivedEvent event) {
         User mentionedUser = event.getMessage().getMentionedUsers().get(0);
         Member guildMember = event.getGuild().getMember(mentionedUser);
-            if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
-                EmbedBuilder eb = errorEmbed;
-                eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
-                eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
-                event.getChannel().sendMessage(eb.build()).queue();
-                event.getMessage().delete().queue();
+        if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
+            EmbedBuilder eb = errorEmbed;
+            eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
+            eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
+            event.getChannel().sendMessage(eb.build()).queue();
+            event.getMessage().delete().queue();
         } else {
             String possibleCity = this.checkForCity(mentionedUser);
             try {
@@ -59,16 +64,12 @@ public class Weather {
                     event.getChannel().sendMessage(mentionedUser.getName() + " has not set a city.").queue();
                 }
             } catch (NullPointerException e) {
-                EmbedBuilder eb = errorEmbed;
-                eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
-                eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
-                eb.setFooter("Example: weather london,uk", null);
-                event.getChannel().sendMessage(eb.build()).queue();
+                event.getChannel().sendMessage(invalidLocError.build()).queue();
             }
         }
     }
 
-    private void carryNormalCommand (GuildMessageReceivedEvent event) {
+    private void carryNormalCommand(GuildMessageReceivedEvent event) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(7);
 
         if (providedLoc.contains(",")) {
@@ -100,11 +101,7 @@ public class Weather {
                     argError(event, providedLoc);
                 }
             } catch (NullPointerException e) {
-                EmbedBuilder eb = errorEmbed;
-                eb.addField("Argument Error", "It seems that you did not enter a valid location", false);
-                eb.addField("Notice", "If you want to set your own city, use the setcity command.", false);
-                eb.setFooter("Example: weather london,uk", null);
-                event.getChannel().sendMessage(eb.build()).queue();
+                event.getChannel().sendMessage(invalidLocError.build()).queue();
             }
         }
     }

@@ -21,7 +21,7 @@ public class Translate {
     private final String PATTERN = "\"(.*?)\"";
 
     public void carryCommand(GuildMessageReceivedEvent event) {
-        String origin, destination, msg;
+        String origin, destination, msg = "";
 
         String[] args = event.getMessage().getContentRaw().split(" ");
         try {
@@ -32,7 +32,7 @@ public class Translate {
                 return;
             } else {
                 if (origin.length() != 2) {
-                    throw new NullPointerException();
+                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
                 } else {
                     if (destination.length() > 2) {
                         destination = "en";
