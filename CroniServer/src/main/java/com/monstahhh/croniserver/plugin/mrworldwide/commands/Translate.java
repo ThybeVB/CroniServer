@@ -33,6 +33,7 @@ public class Translate {
             } else {
                 if (origin.length() != 2) {
                     event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                    return;
                 } else {
                     if (destination.length() > 2) {
                         destination = "en";
