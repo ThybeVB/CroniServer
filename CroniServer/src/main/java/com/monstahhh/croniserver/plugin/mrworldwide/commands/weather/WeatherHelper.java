@@ -82,7 +82,7 @@ public class WeatherHelper {
             return eb.build();
         } catch (Exception e) {
             EmbedBuilder failEmbed = defaultError;
-            failEmbed.addField("City Error", e.getMessage(), false);
+            failEmbed.addField("City Error", "Embed Creation failed: " + e.getMessage(), false);
 
             return failEmbed.build();
         }
