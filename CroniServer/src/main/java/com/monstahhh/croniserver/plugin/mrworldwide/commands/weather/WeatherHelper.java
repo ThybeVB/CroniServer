@@ -73,10 +73,12 @@ public class WeatherHelper {
             eb.addField("Current Time", city.currentTime, false);
             eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
-            if (city.timeOfCalculation.equals("00:00")) {
+            if (city.timeOfCalculation[0].equals("0") && city.timeOfCalculation[1].equals("0")) {
                 eb.setFooter("Made by Pitbull, Recorded just now", null);
+            } else if (city.timeOfCalculation[0].equals("0")) {
+                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation[1] + " seconds ago", null);
             } else {
-                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation + " minutes ago", null);
+                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago", null);
             }
 
             return eb.build();

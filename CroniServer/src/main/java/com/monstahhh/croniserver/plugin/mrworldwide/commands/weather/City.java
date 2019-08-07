@@ -23,7 +23,7 @@ public class City {
     String windSpeed;
     String currentWeatherTitle;
     String currentWeatherDescription;
-    String timeOfCalculation;
+    String[] timeOfCalculation;
     String iconUrl;
 
     City getCityObjectForJson(String json) throws JSONException {
@@ -45,11 +45,16 @@ public class City {
         Date current = new Date();
         current.setTime(current.getTime() + (object.getInt("timezone") * 1000L));
 
-        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
-        simpleTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+        TimeZone utc = TimeZone.getTimeZone("UTC");
 
-        SimpleDateFormat secondsTime = new java.text.SimpleDateFormat("mm:ss");
-        secondsTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
+        simpleTime.setTimeZone(utc);
+
+        SimpleDateFormat minutesTime = new java.text.SimpleDateFormat("m");
+        simpleTime.setTimeZone(utc);
+
+        SimpleDateFormat secondsTime = new java.text.SimpleDateFormat("s");
+        simpleTime.setTimeZone(utc);
 
         JSONArray currentWeatherArray = object.getJSONArray("weather");
         JSONObject currentWeather = currentWeatherArray.getJSONObject(0);
@@ -68,7 +73,7 @@ public class City {
         this.currentTime = simpleTime.format(current);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
-        this.timeOfCalculation = secondsTime.format(timeSinceRecording);
+        this.timeOfCalculation = new String[] {minutesTime.format(timeSinceRecording), secondsTime.format(timeSinceRecording)};
 
         this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
 
