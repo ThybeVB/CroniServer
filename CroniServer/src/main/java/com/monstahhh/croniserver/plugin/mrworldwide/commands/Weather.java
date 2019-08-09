@@ -28,8 +28,8 @@ public class Weather {
 
     private final String weatherToken;
 
-    public Weather(String token) {
-        this.weatherToken = token;
+    public Weather(String weatherToken) {
+        this.weatherToken = weatherToken;
     }
 
     public void carryCommand(GuildMessageReceivedEvent event) {
