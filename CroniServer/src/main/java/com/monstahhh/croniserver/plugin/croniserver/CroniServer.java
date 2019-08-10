@@ -2,7 +2,6 @@ package com.monstahhh.croniserver.plugin.croniserver;
 
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
-import com.monstahhh.croniserver.plugin.croniserver.commands.InfoCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
@@ -50,7 +49,6 @@ public final class CroniServer extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
         Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
         Objects.requireNonNull(this.getCommand("lol")).setExecutor(new DistanceCommand());
-        Objects.requireNonNull(this.getCommand("crinfo")).setExecutor(new InfoCommand());
     }
 
     private void enableExtensions() {
