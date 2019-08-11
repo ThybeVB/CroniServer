@@ -17,10 +17,12 @@ public class BedEvents implements Listener {
 
     @EventHandler
     public void onPlayerBedEnter(PlayerBedEnterEvent event) {
-        if (event.getPlayer().hasPermission("croniserver.sleep")) {
-            Player p = event.getPlayer();
-            sleepingPlayers.add(p);
-            doCheck(event.getPlayer().getWorld());
+        if (event.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK) {
+            if (event.getPlayer().hasPermission("croniserver.sleep")) {
+                Player p = event.getPlayer();
+                sleepingPlayers.add(p);
+                doCheck(event.getPlayer().getWorld());
+            }
         }
     }
 
