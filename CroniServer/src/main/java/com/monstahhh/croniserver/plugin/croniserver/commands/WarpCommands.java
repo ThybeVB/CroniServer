@@ -15,17 +15,14 @@ public class WarpCommands implements CommandExecutor {
 
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
-                if (DangerAPI.isDangerous((Player) sender)) {
-                    sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
+                if (((Player) sender).getWorld().getName().equalsIgnoreCase("world")) {
+                    if (DangerAPI.isDangerous((Player) sender)) {
+                        sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
+                    } else {
+                        this.doTp((Player)sender, command);
+                    }
                 } else {
-                    if (command.getName().equalsIgnoreCase("hub")) {
-                        Player player = (Player) sender;
-                        player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
-                    }
-                    if (command.getName().equalsIgnoreCase("spawn")) {
-                        Player player = (Player) sender;
-                        player.teleport(new Location(player.getWorld(), 3, 69, -2));
-                    }
+                    this.doTp((Player)sender, command);
                 }
             } else {
                 Player player = (Player) sender;
@@ -34,5 +31,14 @@ public class WarpCommands implements CommandExecutor {
         }
 
         return true;
+    }
+
+    private void doTp(Player player, Command command) {
+        if (command.getName().equalsIgnoreCase("hub")) {
+            player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+        }
+        if (command.getName().equalsIgnoreCase("spawn")) {
+            player.teleport(new Location(player.getWorld(), 3, 69, -2));
+        }
     }
 }
