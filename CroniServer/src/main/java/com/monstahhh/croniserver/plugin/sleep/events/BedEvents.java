@@ -20,7 +20,7 @@ public class BedEvents implements Listener {
         if (event.getBedEnterResult() == PlayerBedEnterEvent.BedEnterResult.OK) {
             if (event.getPlayer().hasPermission("croniserver.sleep")) {
                 Player p = event.getPlayer();
-                sleepingPlayers.add(p);
+                this.sleepingPlayers.add(p);
                 doCheck(event.getPlayer().getWorld());
             }
         }
@@ -30,20 +30,20 @@ public class BedEvents implements Listener {
     public void onPlayerBedLeave(PlayerBedLeaveEvent event) {
         if (event.getPlayer().hasPermission("croniserver.sleep")) {
             Player p = event.getPlayer();
-            sleepingPlayers.remove(p);
+            this.sleepingPlayers.remove(p);
             doCheck(event.getPlayer().getWorld());
         }
     }
 
     private void doCheck(World w) {
         int sleepRequirement = 1;
-        if (sleepingPlayers.size() >= sleepRequirement) {
+        if (this.sleepingPlayers.size() >= sleepRequirement) {
             skipNight(w);
         }
     }
 
     private void skipNight(World w) {
-        sleepingPlayers = new ArrayList<>();
+        this.sleepingPlayers = new ArrayList<>();
         w.setTime(1000L);
         w.setStorm(false);
 

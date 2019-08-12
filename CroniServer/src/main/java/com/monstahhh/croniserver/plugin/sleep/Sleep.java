@@ -8,14 +8,14 @@ import java.util.logging.Level;
 
 public class Sleep {
 
-    private JavaPlugin _plugin;
+    private JavaPlugin plugin;
 
     public Sleep(JavaPlugin plugin) {
-        _plugin = plugin;
+        this.plugin = plugin;
     }
 
     public void enable() {
-        _plugin.getServer().getPluginManager().registerEvents(new BedEvents(), _plugin);
+        plugin.getServer().getPluginManager().registerEvents(new BedEvents(), plugin);
         CroniServer.logger.log(Level.INFO, "Enabled Sleep");
     }
 

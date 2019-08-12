@@ -19,10 +19,10 @@ public class WarpCommands implements CommandExecutor {
                     if (DangerAPI.isDangerous((Player) sender)) {
                         sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
                     } else {
-                        this.doTp((Player)sender, command);
+                        this.doTp((Player) sender, command);
                     }
                 } else {
-                    this.doTp((Player)sender, command);
+                    this.doTp((Player) sender, command);
                 }
             } else {
                 Player player = (Player) sender;
