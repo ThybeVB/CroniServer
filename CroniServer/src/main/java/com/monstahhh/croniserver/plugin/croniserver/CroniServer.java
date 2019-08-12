@@ -17,8 +17,6 @@ public final class CroniServer extends JavaPlugin {
 
     public static Config playerData;
 
-    public static String version = null;
-    public static String author = null;
     public static Logger logger;
     private DangerAPI dangerApi;
     private Sleep sleep;
@@ -27,10 +25,6 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onEnable() {
         logger = this.getLogger();
-
-        version = this.getDescription().getVersion();
-        author = (this.getDescription().getAuthors().toArray())[0].toString();
-
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
 
         this.enableExtensions();
@@ -38,7 +32,7 @@ public final class CroniServer extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         this.registerCommands();
 
-        System.out.println("[CroniServer] Loaded CroniServer v" + version);
+        System.out.println("[CroniServer] Loaded CroniServer v" + this.getDescription().getVersion());
     }
 
     private void registerCommands() {
@@ -52,11 +46,11 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void enableExtensions() {
-        dangerApi = new DangerAPI(this);
-        dangerApi.enable();
-
         mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
+
+        dangerApi = new DangerAPI(this);
+        dangerApi.enable();
 
         sleep = new Sleep(this);
         sleep.enable();
@@ -64,8 +58,8 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        dangerApi.disable();
         mrWorldWide.disable();
+        dangerApi.disable();
         sleep.disable();
 
         System.out.println("[CroniServer] Disabled CroniServer");
