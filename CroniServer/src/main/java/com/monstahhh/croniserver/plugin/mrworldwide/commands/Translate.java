@@ -18,7 +18,6 @@ public class Translate {
 
     private final String GOOGLE_URL_API = "https://translate.googleapis.com/translate_a/";
     private final String GOOGLE_PARAMS = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
-    private final String PATTERN = "\"(.*?)\"";
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         String origin, destination, msg = "";
@@ -103,7 +102,7 @@ public class Translate {
     }
 
     private String castResult(String result) {
-        Pattern pat = Pattern.compile(PATTERN);
+        Pattern pat = Pattern.compile("\"(.*?)\"");
         List<String> allMatches = new ArrayList<>();
 
         Matcher matcher = pat.matcher(result);

@@ -75,7 +75,8 @@ public class City {
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
         this.timeOfCalculation = new String[]{minutesTime.format(timeSinceRecording), secondsTime.format(timeSinceRecording)};
 
-        this.iconUrl = "http://openweathermap.org/img/w/" + currentWeather.getString("icon") + ".png";
+        String iconUrl = "http://openweathermap.org/img/w/%s.png";
+        this.iconUrl = String.format(iconUrl, currentWeather.getString("icon"));
 
         return this;
     }

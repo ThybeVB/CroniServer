@@ -14,12 +14,14 @@ import java.util.logging.Level;
 
 public class MrWorldWide {
 
+    private JDA _jda;
+    public static JavaPlugin _plugin;
+
     public static String weatherToken = "";
     public static String currencyToken = "";
-    public static JavaPlugin _plugin;
-    private JDA _jda;
 
     private boolean debug = false;
+    public static long OwnerId = 257247527630274561L;
 
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;

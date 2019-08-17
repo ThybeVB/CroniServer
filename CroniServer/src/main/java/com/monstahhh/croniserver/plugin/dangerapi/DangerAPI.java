@@ -14,34 +14,35 @@ import java.util.logging.Level;
 public class DangerAPI {
 
     static Config playerData;
-    private static JavaPlugin _plugin;
+    private static JavaPlugin plugin;
     private static boolean debug = false;
 
     public DangerAPI(JavaPlugin plugin) {
-        _plugin = plugin;
+        DangerAPI.plugin = plugin;
     }
 
     public static boolean isDangerous(Player player) {
-
-        boolean damagedBool = false;
-        boolean inCombatBool = false;
-        boolean fallingBool = false;
 
         String displayName = player.getDisplayName();
         Object damaged = playerData.getConfig().get("players." + displayName + ".damaged");
         Object inCombat = playerData.getConfig().get("players." + displayName + ".inCombat");
         Object falling = playerData.getConfig().get("players." + displayName + ".falling");
 
+        boolean damagedBool = false;
         if (damaged != null) {
             if (damaged.toString().equals("true")) {
                 damagedBool = true;
             }
         }
+
+        boolean inCombatBool = false;
         if (inCombat != null) {
             if (inCombat.toString().equals("true")) {
                 inCombatBool = true;
             }
         }
+
+        boolean fallingBool = false;
         if (falling != null) {
             if (falling.toString().equals("true")) {
                 fallingBool = true;
@@ -61,15 +62,15 @@ public class DangerAPI {
 
         this.setupPluginFiles();
 
-        _plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), _plugin);
-        _plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), _plugin);
-        _plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), _plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), plugin);
 
         CroniServer.logger.log(Level.INFO, "Enabled Danger API");
     }
 
     private void setupPluginFiles() {
-        Config config = new Config("plugins/DangerAPI", "config.yml", _plugin);
+        Config config = new Config("plugins/DangerAPI", "config.yml", plugin);
         Object debugObj = config.getConfig().get("debug");
         if (debugObj == null) {
             config.getConfig().set("debug", false);
@@ -80,7 +81,7 @@ public class DangerAPI {
             }
         }
 
-        playerData = new Config("plugins/DangerAPI", "player_data.yml", _plugin);
+        playerData = new Config("plugins/DangerAPI", "player_data.yml", plugin);
     }
 
     public void disable() {

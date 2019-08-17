@@ -45,8 +45,9 @@ public class MessageReceivedEvent extends ListenerAdapter {
             currency.carryCommand(event, MrWorldWide.currencyToken);
         }
 
-        if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
-            event.getChannel().sendMessage("translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount).queue();
+        if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
+            String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount;
+            event.getChannel().sendMessage(dataString).queue();
         }
 
         data.saveConfig();
