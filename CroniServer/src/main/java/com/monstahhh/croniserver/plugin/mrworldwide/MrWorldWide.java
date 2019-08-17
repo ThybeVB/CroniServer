@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.mrworldwide;
 
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;

@@ -1,8 +1,8 @@
 package com.monstahhh.croniserver.plugin.croniserver.commands;
 
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

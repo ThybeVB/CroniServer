@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.dangerapi;
 
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDamageEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDeathEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerMoveEvent;

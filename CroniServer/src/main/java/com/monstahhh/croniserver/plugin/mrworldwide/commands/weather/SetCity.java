@@ -1,9 +1,9 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;

@@ -1,6 +1,6 @@
 package com.monstahhh.croniserver.plugin.dangerapi;
 
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
+import com.monstahhh.croniserver.configapi.Config;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

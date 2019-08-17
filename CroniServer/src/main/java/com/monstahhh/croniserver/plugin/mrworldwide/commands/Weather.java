@@ -1,6 +1,6 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
@@ -75,17 +75,17 @@ public class Weather {
 
     private void carryCommandWithParams(GuildMessageReceivedEvent event) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(7);
-            if ((providedLoc.split(","))[1].length() > 2) {
-                argError(event, providedLoc);
-            } else {
-                WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                City city = helper.getWeatherFor(providedLoc.trim());
-                MessageEmbed embed = helper.getEmbedFor(city);
+        if ((providedLoc.split(","))[1].length() > 2) {
+            argError(event, providedLoc);
+        } else {
+            WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
+            City city = helper.getWeatherFor(providedLoc.trim());
+            MessageEmbed embed = helper.getEmbedFor(city);
 
-                if (embed != null) {
-                    event.getChannel().sendMessage(embed).queue();
-                }
+            if (embed != null) {
+                event.getChannel().sendMessage(embed).queue();
             }
+        }
 
     }
 

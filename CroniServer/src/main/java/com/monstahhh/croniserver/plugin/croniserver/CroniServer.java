@@ -1,11 +1,11 @@
 package com.monstahhh.croniserver.plugin.croniserver;
 
+import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
-import com.monstahhh.croniserver.plugin.dangerapi.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +18,7 @@ public final class CroniServer extends JavaPlugin {
     public static Config playerData;
 
     public static Logger logger;
+
     private DangerAPI dangerApi;
     private Sleep sleep;
     private MrWorldWide mrWorldWide;
