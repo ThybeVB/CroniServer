@@ -19,29 +19,69 @@ public class Translate {
     private final String GOOGLE_URL_API = "https://translate.googleapis.com/translate_a/";
     private final String GOOGLE_PARAMS = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
 
+    public void carryConversationCommand(GuildMessageReceivedEvent event) {
+        try {
+            String[] results = doTranslate(event, true);
+            if (results != null) {
+                event.getChannel().sendMessage(event.getAuthor().getName() + " (" + results[2].toUpperCase() + "): " + results[0]).queue();
+                event.getMessage().delete().queue();
+            }
+        } catch (Exception e) {
+            event.getChannel().sendMessage(e.getMessage()).queue();
+        }
+    }
+
     public void carryCommand(GuildMessageReceivedEvent event) {
-        String origin, destination, msg = "";
+        String[] results = doTranslate(event, false);
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Google Translate");
+        assert results != null;
+        eb.addField(results[1] + " -> " + results[2], results[0], false);
+        eb.setColor(Color.PINK);
+
+        event.getChannel().sendMessage(eb.build()).queue();
+    }
+
+    private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion) {
+        String origin, destination, msg;
 
         String[] args = event.getMessage().getContentRaw().split(" ");
         try {
             origin = args[1];
             destination = args[2];
             if (origin.equalsIgnoreCase(destination)) {
-                event.getChannel().sendMessage("You have to translate one language to the other.\nExample: *'translate id en kontol'*").queue();
-                return;
+                if (conversationVersion) {
+                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+                } else {
+                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                }
+                return null;
             } else {
                 if (origin.length() != 2) {
-                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
-                    return;
+                    if (conversationVersion) {
+                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+                    } else {
+                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                    }
+                    return null;
                 } else {
                     if (destination.length() > 2) {
                         destination = "en";
-                        msg = event.getMessage().getContentRaw().substring(13);
+                        if (conversationVersion) {
+                            msg = event.getMessage().getContentRaw().substring(6);
+                        } else {
+                            msg = event.getMessage().getContentRaw().substring(13);
+                        }
                     } else {
                         if (destination.length() != 2) {
                             destination = "en";
                         }
-                        msg = event.getMessage().getContentRaw().substring(16);
+                        if (conversationVersion) {
+                            msg = event.getMessage().getContentRaw().substring(9);
+                        } else {
+                            msg = event.getMessage().getContentRaw().substring(16);
+                        }
                     }
                 }
 
@@ -50,18 +90,19 @@ public class Translate {
                 msg = msg.replaceAll("!", ".");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
-            return;
+            if (conversationVersion) {
+                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+            } else {
+                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+            }
+            return null;
         }
+        String[] strArray = new String[3];
+        strArray[0] = getTranslation(origin, destination, msg);
+        strArray[1] = origin;
+        strArray[2] = destination;
 
-        String result = getTranslation(origin, destination, msg);
-
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Google Translate");
-        eb.addField(origin + " -> " + destination, result, false);
-        eb.setColor(Color.PINK);
-
-        event.getChannel().sendMessage(eb.build()).queue();
+        return strArray;
     }
 
     private String getTranslation(String origin, String destination, String msg) {

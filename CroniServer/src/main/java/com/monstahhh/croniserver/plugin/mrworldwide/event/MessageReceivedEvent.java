@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class MessageReceivedEvent extends ListenerAdapter {
 
     private int translateCount = 0;
+    private int conversationCount = 0;
     private int weatherCount = 0;
     private int currencyCount = 0;
 
@@ -26,6 +27,12 @@ public class MessageReceivedEvent extends ListenerAdapter {
             Translate translate = new Translate();
             data.getConfig().set("usage.translateCommand", translateCount + 1);
             translate.carryCommand(event);
+        }
+
+        if (message.toLowerCase().startsWith("trs")) {
+            Translate translate = new Translate();
+            data.getConfig().set("usage.translateCommand", conversationCount + 1);
+            translate.carryConversationCommand(event);
         }
 
         if (message.toLowerCase().startsWith("weather")) {
@@ -46,7 +53,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
-            String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount;
+            String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
             event.getChannel().sendMessage(dataString).queue();
         }
 
@@ -59,6 +66,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         this.translateCount = data.getConfig().getInt("usage.translateCommand");
+        this.conversationCount = data.getConfig().getInt(("usage.conversationCommand"));
         this.weatherCount = data.getConfig().getInt("usage.weatherCommand");
         this.currencyCount = data.getConfig().getInt("usage.currencyCommand");
     }
