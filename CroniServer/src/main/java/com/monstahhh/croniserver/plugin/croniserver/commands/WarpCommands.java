@@ -3,6 +3,7 @@ package com.monstahhh.croniserver.plugin.croniserver.commands;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,10 +18,12 @@ public class WarpCommands implements CommandExecutor {
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
                 if (((Player) sender).getWorld().getName().equalsIgnoreCase("world")) {
-                    if (DangerAPI.isDangerous((Player) sender)) {
-                        sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
-                    } else {
-                        this.doTp((Player) sender, command);
+                    if (((Player) sender).getGameMode() == GameMode.SURVIVAL) {
+                        if (DangerAPI.isDangerous((Player) sender)) {
+                            sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
+                        } else {
+                            this.doTp((Player) sender, command);
+                        }
                     }
                 } else {
                     this.doTp((Player) sender, command);
