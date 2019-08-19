@@ -29,9 +29,9 @@ public class MessageReceivedEvent extends ListenerAdapter {
             translate.carryCommand(event);
         }
 
-        if (message.toLowerCase().startsWith("trs")) {
+        if (message.toLowerCase().startsWith("trs ")) {
             Translate translate = new Translate();
-            data.getConfig().set("usage.translateCommand", conversationCount + 1);
+            data.getConfig().set("usage.conversationCommand", conversationCount + 1);
             translate.carryConversationCommand(event);
         }
 
