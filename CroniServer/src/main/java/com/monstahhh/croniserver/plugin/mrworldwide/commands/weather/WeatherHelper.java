@@ -83,7 +83,7 @@ public class WeatherHelper {
 
             return eb.build();
         } catch (Exception e) {
-            if (e.getMessage().equals("null")) {
+            if (e instanceof NullPointerException || e.getMessage() == null) {
                 return null;
             }
 
