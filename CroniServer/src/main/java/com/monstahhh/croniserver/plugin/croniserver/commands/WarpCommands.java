@@ -44,5 +44,12 @@ public class WarpCommands implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("spawn")) {
             player.teleport(new Location(player.getWorld(), 3, 69, -2));
         }
+        if (command.getName().equalsIgnoreCase("survival")) {
+            player.teleport(new Location(Bukkit.getWorld("world"), 0, 69, 0));
+        }
+        if (command.getName().equalsIgnoreCase("creative")) {
+            player.teleport(new Location(Bukkit.getWorld("creative"), 0, 100, 0));
+            player.setFlying(true);
+        }
     }
 }

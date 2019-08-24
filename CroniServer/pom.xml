@@ -6,7 +6,7 @@
 
     <groupId>com.monstahhh.croniserver.plugin</groupId>
     <artifactId>croniserver</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.2</version>
     <packaging>jar</packaging>
 
     <name>CroniServer</name>
@@ -17,6 +17,7 @@
         <authme.version>5.6.0-SNAPSHOT</authme.version>
         <spigot.version>1.14.4-R0.1-SNAPSHOT</spigot.version>
         <jda.version>3.8.3_464</jda.version>
+        <apiVersion>1.14</apiVersion>
     </properties>
     <url>https://github.com/MonstahGames/</url>
 

@@ -39,6 +39,8 @@ public final class CroniServer extends JavaPlugin {
     private void registerCommands() {
         Objects.requireNonNull(this.getCommand("hub")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new WarpCommands());
+        Objects.requireNonNull(this.getCommand("survival")).setExecutor(new WarpCommands());
+        Objects.requireNonNull(this.getCommand("creative")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());

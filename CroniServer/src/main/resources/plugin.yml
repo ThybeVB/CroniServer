@@ -1,11 +1,23 @@
 name: CroniServer
 version: ${project.version}
-api-version: 1.14
+api-version: ${apiVersion}
 main: com.monstahhh.croniserver.plugin.croniserver.CroniServer
 authors: [monstahhhy]
 softdepend: [AuthMe]
 
 commands:
+
+  hub:
+    description: Takes you to the hub
+    usage: /hub
+
+  survival:
+    description: Takes you to survival
+    usage: /survival
+
+  creative:
+    description: Takes you to creative
+    usage: /creative
 
   home:
     description: Takes you to your home
@@ -26,10 +38,6 @@ commands:
   lol:
     description: xd
     usage: /lol
-
-  hub:
-    description: Takes you to the hub
-    usage: /hub
 
   spawn:
     description: Takes you to spawn
