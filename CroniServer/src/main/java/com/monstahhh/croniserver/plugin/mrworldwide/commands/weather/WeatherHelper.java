@@ -44,7 +44,7 @@ public class WeatherHelper {
         } catch (Exception e) {
             EmbedBuilder eb = defaultError;
             if (e.getMessage().contains("404")) {
-                eb.addField("Error 404", "The provided city could not be found.", false);
+                eb.addField("Error 404", "The provided city could not be found", false);
             } else {
                 eb.addField("Exception", e.getMessage(), false);
             }
@@ -73,12 +73,16 @@ public class WeatherHelper {
             eb.addField("Current Time", city.currentTime, false);
             eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
+            String responsePrefix = "Made by Pitbull, ";
             if (city.timeOfCalculation[0].equals("0") && city.timeOfCalculation[1].equals("0")) {
-                eb.setFooter("Made by Pitbull, Recorded just now", null);
+                eb.setFooter(responsePrefix + "Recorded just now", null);
             } else if (city.timeOfCalculation[0].equals("0")) {
-                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation[1] + " seconds ago", null);
+                eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[1] + " seconds ago", null);
             } else {
-                eb.setFooter("Made by Pitbull, Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago", null);
+                if (city.timeOfCalculation[1].equalsIgnoreCase("1")) {
+                    eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " second ago", null);
+                }
+                eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago", null);
             }
 
             return eb.build();

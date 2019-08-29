@@ -50,7 +50,7 @@ public class Weather {
         if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
             EmbedBuilder eb = errorEmbed;
             eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
-            eb.setFooter("Input: " + event.getMessage().getContentRaw(), null);
+            eb.setFooter("Your Input: " + event.getMessage().getContentRaw(), null);
             event.getChannel().sendMessage(eb.build()).queue();
             event.getMessage().delete().queue();
         } else {

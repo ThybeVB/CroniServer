@@ -59,7 +59,7 @@ public class SetCity {
 
     private void setCityForUser(String location, long userId) {
         Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
-        data.getConfig().set("locations.users." + userId, location.toLowerCase());
+        data.getConfig().set("locations.users." + userId, location.toLowerCase().trim());
         data.saveConfig();
     }
 
