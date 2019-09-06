@@ -61,7 +61,9 @@ public class City {
 
         Date timeSinceRecording = new Date(current.getTime() - timeOfCalculationDate.getTime());
 
-        this.windSpeed = object.getJSONObject("wind").get("speed").toString();
+        double windKilometersPerHour = object.getJSONObject("wind").getDouble("speed") * 3.6;
+
+        this.windSpeed = String.valueOf((int)windKilometersPerHour);
         this.temperature = Math.round(Float.parseFloat(tempStr));
         this.min = Math.round(Float.parseFloat(minStr));
         this.max = Math.round(Float.parseFloat(maxStr));

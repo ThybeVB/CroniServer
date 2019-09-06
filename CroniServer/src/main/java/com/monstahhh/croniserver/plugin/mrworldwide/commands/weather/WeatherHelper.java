@@ -12,9 +12,6 @@ import java.awt.*;
 
 public class WeatherHelper {
 
-    private final String baseLink = "http://api.openweathermap.org/data/2.5/weather";
-    private final String params = "?q=%s&appid=%s&units=metric";
-
     private EmbedBuilder defaultError = new EmbedBuilder()
             .setTitle("Mr. Error")
             .setColor(Color.RED);
@@ -29,8 +26,8 @@ public class WeatherHelper {
     public City getWeatherFor(String providedLocation) {
         try {
             HttpClient client = new HttpClient();
-            String formattedSend = String.format(params, providedLocation, weatherToken);
-            HttpResponse result = client.request(HttpMethod.GET, (baseLink + formattedSend));
+            String formattedSend = String.format("?q=%s&appid=%s&units=metric", providedLocation, weatherToken);
+            HttpResponse result = client.request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
 
             String resultStr = result.asString();
             JSONObject obj = new JSONObject(resultStr);
