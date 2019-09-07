@@ -63,7 +63,6 @@ public class City {
 
         double windKilometersPerHour = object.getJSONObject("wind").getDouble("speed") * 3.6;
 
-        this.windSpeed = String.valueOf((int)windKilometersPerHour);
         this.temperature = Math.round(Float.parseFloat(tempStr));
         this.min = Math.round(Float.parseFloat(minStr));
         this.max = Math.round(Float.parseFloat(maxStr));
@@ -73,6 +72,7 @@ public class City {
         this.sunRiseTime = simpleTime.format(sunRiseDate);
         this.sunSetTime = simpleTime.format(sunSetDate);
         this.currentTime = simpleTime.format(current);
+        this.windSpeed = String.valueOf((int)windKilometersPerHour);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
         this.timeOfCalculation = new String[]{minutesTime.format(timeSinceRecording), secondsTime.format(timeSinceRecording)};
@@ -88,9 +88,8 @@ public class City {
 
         StringBuilder sb = new StringBuilder();
         for (String word : words) {
-            char c = Character.toUpperCase(word.charAt(0));
-            word = word.substring(1);
-            String newWord = c + word + " ";
+            char beginCharacter = Character.toUpperCase(word.charAt(0));
+            String newWord = beginCharacter + word.substring(1) + " ";
             sb.append(newWord);
         }
 
