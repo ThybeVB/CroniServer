@@ -3,13 +3,14 @@ package com.monstahhh.croniserver.plugin.mrworldwide;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class MrWorldWide {
@@ -44,23 +45,22 @@ public class MrWorldWide {
             try {
                 _jda = new JDABuilder(AccountType.BOT)
                         .setToken(tokenObj.toString())
-                        .setAudioEnabled(false)
                         .setAutoReconnect(true)
-                        .addEventListener(new MessageReceivedEvent())
-                        .setGame(Game.watching("the world"))
+                        .addEventListeners(new MessageReceivedEvent())
+                        .setActivity(Activity.watching("the world"))
                         .setContextEnabled(false)
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
 
                 if (debug) {
-                    _jda.getGuildById(305792249877364738L)
-                            .getTextChannelById(560486517043232768L)
+                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
+                            .getTextChannelById(560486517043232768L))
                             .sendMessage("Worldwide detected on Local Machine, giving priority...")
                             .queue();
                 } else {
-                    _jda.getGuildById(305792249877364738L)
-                            .getTextChannelById(560486517043232768L)
+                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
+                            .getTextChannelById(560486517043232768L))
                             .sendMessage("*dale!*")
                             .queue();
                 }
@@ -106,12 +106,14 @@ public class MrWorldWide {
 
     public void disable() {
         if (_jda != null) {
-            TextChannel channel = _jda.getGuildById(305792249877364738L)
+            TextChannel channel = Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
                     .getTextChannelById(560486517043232768L);
-            if (!debug) {
-                channel.sendMessage("Woaaaah i'm passing out!").complete();
-            } else {
-                channel.sendMessage("Worldwide giving control back to server").complete();
+            if (channel != null) {
+                if (!debug) {
+                    channel.sendMessage("Woaaaah i'm passing out!").complete();
+                } else {
+                    channel.sendMessage("Worldwide giving control back to server").complete();
+                }
             }
 
             _jda.shutdown();

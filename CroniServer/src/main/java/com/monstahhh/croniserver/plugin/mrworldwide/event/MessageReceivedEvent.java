@@ -6,8 +6,8 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class MessageReceivedEvent extends ListenerAdapter {
 
