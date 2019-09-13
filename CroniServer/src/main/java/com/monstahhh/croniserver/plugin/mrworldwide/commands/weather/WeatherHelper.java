@@ -55,7 +55,7 @@ public class WeatherHelper {
     public MessageEmbed getEmbedFor(City city) {
         try {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setColor(Color.ORANGE);
+            eb.setColor(city.embedColor);
 
             eb.setThumbnail(city.iconUrl);
 

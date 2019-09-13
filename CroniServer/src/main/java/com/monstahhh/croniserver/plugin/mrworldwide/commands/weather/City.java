@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -25,6 +26,8 @@ public class City {
     String currentWeatherDescription;
     String[] timeOfCalculation;
     String iconUrl;
+
+    Color embedColor;
 
     City getCityObjectForJson(String json) throws JSONException {
 
@@ -63,7 +66,8 @@ public class City {
 
         double windKilometersPerHour = object.getJSONObject("wind").getDouble("speed") * 3.6;
 
-        this.temperature = Math.round(Float.parseFloat(tempStr));
+        int temperature = Math.round(Float.parseFloat(tempStr));
+        this.temperature = temperature;
         this.min = Math.round(Float.parseFloat(minStr));
         this.max = Math.round(Float.parseFloat(maxStr));
         this.humidity = Math.round(Float.parseFloat(humidityStr));
@@ -80,7 +84,23 @@ public class City {
         String iconUrl = "http://openweathermap.org/img/w/%s.png";
         this.iconUrl = String.format(iconUrl, currentWeather.getString("icon"));
 
+        this.embedColor = getEmbedColor(temperature);
+
         return this;
+    }
+
+    private Color getEmbedColor(int temperature) {
+        if (temperature >= 40) {
+            return Color.BLACK;
+        }
+        if (temperature >= 30) {
+            return Color.RED;
+        }
+        if (temperature <= 10) {
+            return Color.BLUE;
+        }
+
+        return Color.ORANGE;
     }
 
     private String fixWeatherDescription(String unfixedWeather) {
