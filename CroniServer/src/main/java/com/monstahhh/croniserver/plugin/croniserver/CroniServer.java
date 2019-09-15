@@ -31,7 +31,7 @@ public final class CroniServer extends JavaPlugin {
 
         UHC uhc = new UHC(this);
         long epoch = System.currentTimeMillis() / 1000;
-        if (epoch >= 1568389958) {
+        if (epoch >= 1568389958L) {
             uhc.enable();
         }
 

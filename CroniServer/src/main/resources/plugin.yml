@@ -6,7 +6,6 @@ authors: [monstahhhy]
 softdepend: [AuthMe]
 
 commands:
-
   hub:
     description: Takes you to the hub
     usage: /hub

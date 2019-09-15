@@ -47,6 +47,7 @@ public class Weather {
     private void carryMentionCommand(GuildMessageReceivedEvent event) {
         User mentionedUser = event.getMessage().getMentionedUsers().get(0);
         Member guildMember = event.getGuild().getMember(mentionedUser);
+        assert guildMember != null;
         if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
             EmbedBuilder eb = errorEmbed;
             eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);

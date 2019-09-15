@@ -59,7 +59,11 @@ public class WeatherHelper {
 
             eb.setThumbnail(city.iconUrl);
 
-            eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
+            if (city.temperature >= 40) {
+                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode + " <:40DEGREESFUCK:617781121236860963>");
+            } else {
+                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
+            }
             eb.addField("Temperature", city.temperature + "°C", false);
 
             if (city.min != city.max) {

@@ -6,8 +6,10 @@ import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.utils.Compression;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -19,7 +21,7 @@ public class MrWorldWide {
     public static String weatherToken = "";
     public static String currencyToken = "";
     public static long OwnerId = 257247527630274561L;
-    private JDA _jda;
+    private JDA _jda = null;
     private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
@@ -47,6 +49,7 @@ public class MrWorldWide {
                         .setToken(tokenObj.toString())
                         .setAutoReconnect(true)
                         .addEventListeners(new MessageReceivedEvent())
+                        .setCompression(Compression.NONE)
                         .setActivity(Activity.watching("the world"))
                         .setContextEnabled(false)
                         .build().awaitReady();
