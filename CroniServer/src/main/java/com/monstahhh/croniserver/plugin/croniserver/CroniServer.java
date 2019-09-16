@@ -30,8 +30,8 @@ public final class CroniServer extends JavaPlugin {
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
 
         UHC uhc = new UHC(this);
-        long epoch = System.currentTimeMillis() / 1000;
-        if (epoch >= 1568389958L) {
+        long epoch = System.currentTimeMillis();
+        if (epoch >= 1570233600000L) {
             uhc.enable();
         }
 

@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import org.json.JSONObject;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class WeatherHelper {
 
@@ -60,9 +61,9 @@ public class WeatherHelper {
             eb.setThumbnail(city.iconUrl);
 
             if (city.temperature >= 40) {
-                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode + " <:40DEGREESFUCK:617781121236860963>");
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " <:40DEGREESFUCK:617781121236860963>");
             } else {
-                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode);
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
             eb.addField("Temperature", city.temperature + "°C", false);
 
@@ -96,6 +97,18 @@ public class WeatherHelper {
             failEmbed.addField("City Error", "Embed Creation failed: " + e.getMessage(), false);
 
             return failEmbed.build();
+        }
+    }
+    private String getCountryName(String countryCode) {
+        try {
+            HttpClient client = new HttpClient();
+            HttpResponse result = client.request(HttpMethod.GET, ("https://restcountries.eu/rest/v2/alpha/" + countryCode));
+            String res = result.asString();
+
+            JSONObject obj = new JSONObject(res);
+            return obj.getString("name");
+        } catch (IOException exception) {
+            return countryCode;
         }
     }
 }
