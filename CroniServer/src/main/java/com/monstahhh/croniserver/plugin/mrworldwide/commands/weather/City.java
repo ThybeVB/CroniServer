@@ -76,7 +76,7 @@ public class City {
         this.sunRiseTime = simpleTime.format(sunRiseDate);
         this.sunSetTime = simpleTime.format(sunSetDate);
         this.currentTime = simpleTime.format(current);
-        this.windSpeed = String.valueOf((int)windKilometersPerHour);
+        this.windSpeed = String.valueOf((int) windKilometersPerHour);
         this.currentWeatherTitle = currentWeather.getString("main");
         this.currentWeatherDescription = fixWeatherDescription(currentWeather.getString("description"));
         this.timeOfCalculation = new String[]{minutesTime.format(timeSinceRecording), secondsTime.format(timeSinceRecording)};

@@ -76,11 +76,12 @@ public class Weather {
 
     private void carryCommandWithParams(GuildMessageReceivedEvent event) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(7);
+        providedLoc = providedLoc.replaceAll("\\s+", "");
         if ((providedLoc.split(","))[1].length() > 2) {
             argError(event, providedLoc);
         } else {
             WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-            City city = helper.getWeatherFor(providedLoc.trim());
+            City city = helper.getWeatherFor(providedLoc.trim().toLowerCase());
             MessageEmbed embed = helper.getEmbedFor(city);
 
             if (embed != null) {

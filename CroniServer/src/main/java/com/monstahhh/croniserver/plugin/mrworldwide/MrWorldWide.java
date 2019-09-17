@@ -6,7 +6,6 @@ import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.Compression;
@@ -17,11 +16,16 @@ import java.util.logging.Level;
 
 public class MrWorldWide {
 
-    public static JavaPlugin _plugin;
+    public static JavaPlugin _plugin = null;
+    private JDA _jda = null;
+
     public static String weatherToken = "";
     public static String currencyToken = "";
+
     public static long OwnerId = 257247527630274561L;
-    private JDA _jda = null;
+    private static long guildId = 305792249877364738L;
+    private static long statusChannelId = 560486517043232768L;
+
     private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
@@ -57,13 +61,13 @@ public class MrWorldWide {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
 
                 if (debug) {
-                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
-                            .getTextChannelById(560486517043232768L))
+                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
+                            .getTextChannelById(statusChannelId))
                             .sendMessage("Worldwide detected on Local Machine, giving priority...")
                             .queue();
                 } else {
-                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
-                            .getTextChannelById(560486517043232768L))
+                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
+                            .getTextChannelById(statusChannelId))
                             .sendMessage("*dale!*")
                             .queue();
                 }
@@ -109,8 +113,8 @@ public class MrWorldWide {
 
     public void disable() {
         if (_jda != null) {
-            TextChannel channel = Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
-                    .getTextChannelById(560486517043232768L);
+            TextChannel channel = Objects.requireNonNull(_jda.getGuildById(guildId))
+                    .getTextChannelById(statusChannelId);
             if (channel != null) {
                 if (!debug) {
                     channel.sendMessage("Woaaaah i'm passing out!").complete();

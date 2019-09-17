@@ -20,8 +20,8 @@ public class WeatherHelper {
     private TextChannel textChannel;
 
     public WeatherHelper(String token, TextChannel channel) {
-        weatherToken = token;
-        textChannel = channel;
+        this.weatherToken = token;
+        this.textChannel = channel;
     }
 
     public City getWeatherFor(String providedLocation) {
@@ -94,11 +94,12 @@ public class WeatherHelper {
             }
 
             EmbedBuilder failEmbed = defaultError;
-            failEmbed.addField("City Error", "Embed Creation failed: " + e.getMessage(), false);
+            failEmbed.addField("City Error", "Embed Creation failed: " + e.getCause().toString(), false);
 
             return failEmbed.build();
         }
     }
+
     private String getCountryName(String countryCode) {
         try {
             HttpClient client = new HttpClient();

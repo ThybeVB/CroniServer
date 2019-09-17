@@ -32,7 +32,7 @@ commands:
 
   pdistance:
     description: Shows you the distance to a certain player
-    usage: /pdistance player
+    usage: /pdistance playername
 
   lol:
     description: xd
