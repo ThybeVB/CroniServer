@@ -61,9 +61,9 @@ public class WeatherHelper {
             eb.setThumbnail(city.iconUrl);
 
             if (city.temperature >= 40) {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + "(" + getSubregion(city.countryCode) + ")" + " <:40DEGREESFUCK:617781121236860963>");
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " (" + getSubregion(city.countryCode) + ")" + " <:40DEGREESFUCK:617781121236860963>");
             } else {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + "(" + getSubregion(city.countryCode) + ")");
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " (" + getSubregion(city.countryCode) + ")");
             }
             eb.addField("Temperature", city.temperature + "°C", false);
 
