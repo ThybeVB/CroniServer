@@ -118,8 +118,8 @@ public class WeatherHelper {
         JSONObject obj = getCountryInformation(countryCode);
         assert obj != null;
         String subregion = obj.getString("subregion");
-        if (subregion.isEmpty()) {
-            return "";
+        if (countryCode.equalsIgnoreCase("aq")) {
+            return "Antarctica";
         }
         if (subregion.equalsIgnoreCase("Australia and New Zealand")) {
             return "AU/NZ of Oceania";
