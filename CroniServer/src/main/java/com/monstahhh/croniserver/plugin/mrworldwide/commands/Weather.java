@@ -76,7 +76,6 @@ public class Weather {
 
     private void carryCommandWithParams(GuildMessageReceivedEvent event) {
         String providedLoc = (event.getMessage().getContentRaw()).substring(7);
-        providedLoc = providedLoc.replaceAll("\\s+", "");
         if ((providedLoc.split(","))[1].length() > 2) {
             argError(event, providedLoc);
         } else {

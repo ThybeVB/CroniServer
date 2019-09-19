@@ -96,11 +96,17 @@ public class City {
         if (temperature >= 30) {
             return Color.RED;
         }
-        if (temperature <= 10) {
+        if (temperature >= 15) {
+            return Color.ORANGE;
+        }
+        if (temperature > 0) {
+            return Color.CYAN;
+        }
+        if (temperature < 0) {
             return Color.BLUE;
         }
 
-        return Color.ORANGE;
+        return null;
     }
 
     private String fixWeatherDescription(String unfixedWeather) {

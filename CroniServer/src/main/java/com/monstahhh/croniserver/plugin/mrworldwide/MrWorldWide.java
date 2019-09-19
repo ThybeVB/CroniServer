@@ -17,15 +17,12 @@ import java.util.logging.Level;
 public class MrWorldWide {
 
     public static JavaPlugin _plugin = null;
-    private JDA _jda = null;
-
     public static String weatherToken = "";
     public static String currencyToken = "";
-
     public static long OwnerId = 257247527630274561L;
     private static long guildId = 305792249877364738L;
     private static long statusChannelId = 560486517043232768L;
-
+    private JDA _jda = null;
     private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
