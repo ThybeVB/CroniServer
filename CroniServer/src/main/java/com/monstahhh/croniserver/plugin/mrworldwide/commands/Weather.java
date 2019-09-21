@@ -1,17 +1,23 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
 import com.monstahhh.croniserver.configapi.Config;
+import com.monstahhh.croniserver.http.HttpClient;
+import com.monstahhh.croniserver.http.HttpMethod;
+import com.monstahhh.croniserver.http.HttpResponse;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.json.JSONObject;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class Weather {
 
@@ -41,6 +47,21 @@ public class Weather {
             } else {
                 this.carryCommandWithNoParams(event);
             }
+        }
+    }
+
+    public void carryRawCommand(GuildMessageReceivedEvent event) {
+        try  {
+            HttpClient client = new HttpClient();
+            String formattedSend = String.format("?q=%s&appid=%s&units=metric", event.getMessage().getContentRaw().substring(9), weatherToken);
+            HttpResponse result = client.request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
+
+            String resultStr = result.asString();
+            JSONObject obj = new JSONObject(resultStr);
+
+            event.getChannel().sendMessage(obj.toString()).queue();
+        } catch (IOException e) {
+            event.getChannel().sendMessage(e.getMessage()).queue();
         }
     }
 

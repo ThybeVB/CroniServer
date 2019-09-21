@@ -52,10 +52,20 @@ public class MessageReceivedEvent extends ListenerAdapter {
             currency.carryCommand(event, MrWorldWide.currencyToken);
         }
 
-        if (message.toLowerCase().equals("usage") && event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
-            String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
-            event.getChannel().sendMessage(dataString).queue();
+        if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
+            if (message.toLowerCase().equals("usage")) {
+                String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
+                event.getChannel().sendMessage(dataString).queue();
+            }
+
+            if (message.toLowerCase().startsWith("rawweather ")) {
+                Weather weather = new Weather(MrWorldWide.weatherToken);
+                weather.carryRawCommand(event);
+            }
         }
+
+
+
 
         data.saveConfig();
     }
