@@ -12,8 +12,6 @@ import java.util.TimeZone;
 public class City {
 
     int temperature;
-    int min;
-    int max;
     int humidity;
 
     String cityName;
@@ -34,8 +32,6 @@ public class City {
         JSONObject object = new JSONObject(json);
 
         String tempStr = object.getJSONObject("main").get("temp").toString();
-        String minStr = object.getJSONObject("main").get("temp_min").toString();
-        String maxStr = object.getJSONObject("main").get("temp_max").toString();
         String humidityStr = object.getJSONObject("main").get("humidity").toString();
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
@@ -68,8 +64,6 @@ public class City {
 
         int temperature = Math.round(Float.parseFloat(tempStr));
         this.temperature = temperature;
-        this.min = Math.round(Float.parseFloat(minStr));
-        this.max = Math.round(Float.parseFloat(maxStr));
         this.humidity = Math.round(Float.parseFloat(humidityStr));
         this.cityName = object.getString("name");
         this.countryCode = object.getJSONObject("sys").getString("country");
@@ -106,7 +100,7 @@ public class City {
             return Color.BLUE;
         }
 
-        return null;
+        return Color.BLUE;
     }
 
     private String fixWeatherDescription(String unfixedWeather) {
