@@ -65,8 +65,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
 
-
-
         data.saveConfig();
     }
 
