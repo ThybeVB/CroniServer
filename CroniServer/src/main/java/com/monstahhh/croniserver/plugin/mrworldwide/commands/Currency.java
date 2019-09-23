@@ -64,9 +64,8 @@ public class Currency {
 
     private float[] getValueFor(String base, String destination, float amount, String token) {
         try {
-            HttpClient client = new HttpClient();
             String formattedSend = String.format(params, base.toUpperCase(), destination.toUpperCase(), token);
-            HttpResponse result = client.request(HttpMethod.GET, (baseLink + formattedSend));
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, (baseLink + formattedSend));
             String res = result.asString();
 
             JSONObject obj = new JSONObject(res);

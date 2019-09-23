@@ -98,8 +98,7 @@ public class WeatherHelper {
 
     private JSONObject getCountryInformation(String countryCode) {
         try {
-            HttpClient client = new HttpClient();
-            HttpResponse result = client.request(HttpMethod.GET, ("https://restcountries.eu/rest/v2/alpha/" + countryCode));
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, ("https://restcountries.eu/rest/v2/alpha/" + countryCode));
             String res = result.asString();
 
             return new JSONObject(res);

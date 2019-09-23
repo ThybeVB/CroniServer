@@ -39,9 +39,8 @@ public class SetCity {
 
     private boolean cityExists(String location, String weatherToken) {
         try {
-            HttpClient client = new HttpClient();
             String formattedSend = String.format("?q=%s&appid=%s&units=metric", location, weatherToken);
-            HttpResponse result = client.request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
 
             String resultStr = result.asString();
             JSONObject obj = new JSONObject(resultStr);

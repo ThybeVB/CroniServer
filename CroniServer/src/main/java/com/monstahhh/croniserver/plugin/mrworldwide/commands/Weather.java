@@ -51,9 +51,8 @@ public class Weather {
 
     public void carryRawCommand(GuildMessageReceivedEvent event) {
         try {
-            HttpClient client = new HttpClient();
             String formattedSend = String.format("?q=%s&appid=%s&units=metric", event.getMessage().getContentRaw().substring(10), weatherToken);
-            HttpResponse result = client.request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
 
             String resultStr = result.asString();
             JSONObject obj = new JSONObject(resultStr);

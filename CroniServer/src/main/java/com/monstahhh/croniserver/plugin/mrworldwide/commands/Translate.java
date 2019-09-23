@@ -106,7 +106,7 @@ public class Translate {
     }
 
     private String getTranslation(String origin, String destination, String msg) {
-        String result = "null";
+        String result = null;
 
         try {
             result = requestTranslation(msg, origin, destination);
