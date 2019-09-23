@@ -61,9 +61,9 @@ public class WeatherHelper {
             eb.setThumbnail(city.iconUrl);
 
             if (city.temperature >= 40) {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " (" + getSubregion(city.countryCode) + ")" + " <:40DEGREESFUCK:617781121236860963>");
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " <:40DEGREESFUCK:617781121236860963>");
             } else {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " (" + getSubregion(city.countryCode) + ")");
+                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
             eb.addField("Temperature", city.temperature + "°C", false);
 
@@ -111,19 +111,6 @@ public class WeatherHelper {
     private String getCountryName(String countryCode) {
         JSONObject obj = getCountryInformation(countryCode);
         assert obj != null;
-        return obj.getString("name");
-    }
-
-    private String getSubregion(String countryCode) {
-        JSONObject obj = getCountryInformation(countryCode);
-        assert obj != null;
-        String subregion = obj.getString("subregion");
-        if (countryCode.equalsIgnoreCase("aq")) {
-            return "Antarctica";
-        }
-        if (subregion.equalsIgnoreCase("Australia and New Zealand")) {
-            return "AU/NZ of Oceania";
-        }
-        return subregion;
+        return obj.getString("nativeName");
     }
 }
