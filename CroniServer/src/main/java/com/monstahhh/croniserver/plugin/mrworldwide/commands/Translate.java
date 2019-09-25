@@ -39,7 +39,7 @@ public class Translate {
         if (results != null) {
             eb.addField(results[1] + " -> " + results[2], results[0], false);
         } else {
-            eb.addField("Google Translate", "A null has occured in the Translate Command. Also guaka is gay", false);
+            return;
         }
         eb.setColor(Color.PINK);
 
