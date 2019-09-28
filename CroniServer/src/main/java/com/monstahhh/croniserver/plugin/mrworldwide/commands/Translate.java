@@ -36,8 +36,11 @@ public class Translate {
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Google Translate");
-        assert results != null;
-        eb.addField(results[1] + " -> " + results[2], results[0], false);
+        if (results != null) {
+            eb.addField(results[1] + " -> " + results[2], results[0], false);
+        } else {
+            return;
+        }
         eb.setColor(Color.PINK);
 
         event.getChannel().sendMessage(eb.build()).queue();
