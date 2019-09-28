@@ -5,6 +5,7 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -44,6 +45,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
         if (message.toLowerCase().startsWith("setcity ")) {
             SetCity setCity = new SetCity();
             setCity.carryCommand(event, MrWorldWide.weatherToken);
+        }
+
+        if (message.toLowerCase().equalsIgnoreCase("changeclock")) {
+            ChangeClock changeClock = new ChangeClock();
+            changeClock.carryCommand(event);
         }
 
         if (message.toLowerCase().startsWith("convert ")) {

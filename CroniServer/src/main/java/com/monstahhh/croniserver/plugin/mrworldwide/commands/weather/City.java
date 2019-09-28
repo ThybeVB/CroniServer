@@ -27,7 +27,7 @@ public class City {
 
     Color embedColor;
 
-    City getCityObjectForJson(String json) throws JSONException {
+    City getCityObjectForJson(String json, ChangeClock.Time time) throws JSONException {
 
         JSONObject object = new JSONObject(json);
 
@@ -46,7 +46,12 @@ public class City {
 
         TimeZone utc = TimeZone.getTimeZone("UTC");
 
-        SimpleDateFormat simpleTime = new java.text.SimpleDateFormat("HH:mm");
+        SimpleDateFormat simpleTime;
+        if (time == ChangeClock.Time.TWENTYFOURHOUR) {
+            simpleTime = new java.text.SimpleDateFormat("HH:mm");
+        } else {
+            simpleTime = new java.text.SimpleDateFormat("hh:mm a");
+        }
         simpleTime.setTimeZone(utc);
 
         SimpleDateFormat minutesTime = new java.text.SimpleDateFormat("m");

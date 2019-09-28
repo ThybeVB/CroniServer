@@ -24,7 +24,7 @@ public class WeatherHelper {
         this.textChannel = channel;
     }
 
-    public City getWeatherFor(String providedLocation) {
+    public City getWeatherFor(String providedLocation, long userId) {
         try {
             HttpClient client = new HttpClient();
             String formattedSend = String.format("?q=%s&appid=%s&units=metric", providedLocation, weatherToken);
@@ -35,7 +35,7 @@ public class WeatherHelper {
             int statusCode = obj.getInt("cod");
 
             if (statusCode == 200) {
-                return new City().getCityObjectForJson(resultStr);
+                return new City().getCityObjectForJson(resultStr, new ChangeClock().getUserTimeSetting(userId));
             } else {
                 throw new Exception("Server returned code " + statusCode);
             }
@@ -68,7 +68,11 @@ public class WeatherHelper {
             eb.addField("Temperature", city.temperature + "°C", false);
 
             eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
-            eb.addField("Current Time", city.currentTime, false);
+            if (city.currentTime.charAt(0) == '0') {
+                eb.addField("Current Time", city.currentTime.substring(1), false);
+            } else {
+                eb.addField("Current Time", city.currentTime, false);
+            }
             eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
             String responsePrefix = "Made by Pitbull, ";
@@ -110,6 +114,6 @@ public class WeatherHelper {
     private String getCountryName(String countryCode) {
         JSONObject obj = getCountryInformation(countryCode);
         assert obj != null;
-        return obj.getString("nativeName");
+        return obj.getString("name");
     }
 }

@@ -78,7 +78,7 @@ public class Weather {
             try {
                 if (!possibleCity.isEmpty()) {
                     WeatherHelper helper = new WeatherHelper(this.weatherToken, event.getChannel());
-                    City city = helper.getWeatherFor(possibleCity);
+                    City city = helper.getWeatherFor(possibleCity, guildMember.getIdLong());
                     MessageEmbed embed = helper.getEmbedFor(city);
 
                     if (embed != null) {
@@ -99,7 +99,7 @@ public class Weather {
             argError(event, providedLoc);
         } else {
             WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-            City city = helper.getWeatherFor(providedLoc.trim().toLowerCase());
+            City city = helper.getWeatherFor(providedLoc.trim().toLowerCase(), event.getAuthor().getIdLong());
             MessageEmbed embed = helper.getEmbedFor(city);
 
             if (embed != null) {
@@ -115,7 +115,7 @@ public class Weather {
         try {
             if (!possibleCity.isEmpty()) {
                 WeatherHelper helper = new WeatherHelper(weatherToken, event.getChannel());
-                City city = helper.getWeatherFor(possibleCity);
+                City city = helper.getWeatherFor(possibleCity, event.getAuthor().getIdLong());
                 MessageEmbed embed = helper.getEmbedFor(city);
 
                 if (embed != null) {
