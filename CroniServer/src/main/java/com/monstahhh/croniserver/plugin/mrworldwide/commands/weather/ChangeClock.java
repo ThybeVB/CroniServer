@@ -11,10 +11,12 @@ public class ChangeClock {
         TWELVEHOUR
     }
 
+    private Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
+
     public void carryCommand(GuildMessageReceivedEvent event) {
         long userId = event.getAuthor().getIdLong();
 
-        Time currentTime = this.getUserTimeSetting(userId);
+        Time currentTime = getUserTimeSetting(userId);
         Time newTime = getNewTime(currentTime);
 
         setUserTimeSetting(userId, newTime);
@@ -22,13 +24,11 @@ public class ChangeClock {
     }
 
     private void setUserTimeSetting(long userId, Time time) {
-        Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
         data.getConfig().set("times.users." + userId, time.toString());
         data.saveConfig();
     }
 
     Time getUserTimeSetting(long userId) {
-        Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
         String timeObj = data.getConfig().getString("times.users." + userId);
         if (timeObj == null) {
             return Time.TWENTYFOURHOUR;

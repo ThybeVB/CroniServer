@@ -57,7 +57,6 @@ public class WeatherHelper {
         try {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(city.embedColor);
-
             eb.setThumbnail(city.iconUrl);
 
             if (city.temperature >= 40) {
@@ -65,14 +64,16 @@ public class WeatherHelper {
             } else {
                 eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
-            eb.addField("Temperature", city.temperature + "°C", false);
 
+            eb.addField("Temperature", city.temperature + "°C", false);
             eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
-            if (city.currentTime.charAt(0) == '0') {
+
+            if (city.currentTime.charAt(0) == '0' && (city.currentTime.contains("AM") || city.currentTime.contains("PM"))) {
                 eb.addField("Current Time", city.currentTime.substring(1), false);
             } else {
                 eb.addField("Current Time", city.currentTime, false);
             }
+
             eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
             String responsePrefix = "Made by Pitbull, ";
