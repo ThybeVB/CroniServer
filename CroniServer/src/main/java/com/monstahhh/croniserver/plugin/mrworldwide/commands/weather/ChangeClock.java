@@ -6,11 +6,6 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class ChangeClock {
 
-    public enum Time {
-        TWENTYFOURHOUR,
-        TWELVEHOUR
-    }
-
     private Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
 
     public void carryCommand(GuildMessageReceivedEvent event) {
@@ -20,7 +15,7 @@ public class ChangeClock {
         Time newTime = getNewTime(currentTime);
 
         setUserTimeSetting(userId, newTime);
-        event.getChannel().sendMessage("Time has been changed from `"  + currentTime + "` to `" + newTime + "` for " + event.getAuthor().getAsMention()).queue();
+        event.getChannel().sendMessage("Time has been changed from `" + currentTime + "` to `" + newTime + "` for " + event.getAuthor().getAsMention()).queue();
     }
 
     private void setUserTimeSetting(long userId, Time time) {
@@ -37,7 +32,7 @@ public class ChangeClock {
         return Time.valueOf(timeObj);
     }
 
-    private Time getNewTime (Time currentTime) {
+    private Time getNewTime(Time currentTime) {
         Time newTime;
 
         switch (currentTime) {
@@ -52,5 +47,10 @@ public class ChangeClock {
         }
 
         return newTime;
+    }
+
+    public enum Time {
+        TWENTYFOURHOUR,
+        TWELVEHOUR
     }
 }

@@ -37,15 +37,15 @@ public class BedEvents implements Listener {
 
     private void doCheck(World w) {
         int sleepRequirement = 1;
-        if (sleepingPlayers.size() >= sleepRequirement) {
+        if (sleepingPlayers.size() > sleepRequirement) {
             skipNight(w);
         } else {
             doReminder(w, sleepRequirement);
         }
+        sleepingPlayers = new ArrayList<>();
     }
 
     private void skipNight(World w) {
-        sleepingPlayers = new ArrayList<>();
         w.setTime(1000L);
         w.setStorm(false);
 
@@ -56,7 +56,7 @@ public class BedEvents implements Listener {
 
     private void doReminder(World w, int requiredSleepers) {
         for (Player p : w.getPlayers()) {
-            p.sendMessage(ChatColor.YELLOW + String.valueOf(sleepingPlayers.size()) + "/" + requiredSleepers + " Are sleeping.");
+            p.sendMessage(ChatColor.YELLOW + String.valueOf(sleepingPlayers.size()) + "/" + requiredSleepers + " required players are sleeping.");
         }
     }
 }
