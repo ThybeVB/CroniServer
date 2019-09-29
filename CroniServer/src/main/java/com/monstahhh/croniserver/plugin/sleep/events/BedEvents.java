@@ -39,10 +39,10 @@ public class BedEvents implements Listener {
         int sleepRequirement = 1;
         if (sleepingPlayers.size() > sleepRequirement) {
             skipNight(w);
+            sleepingPlayers = new ArrayList<>();
         } else {
             doReminder(w, sleepRequirement);
         }
-        sleepingPlayers = new ArrayList<>();
     }
 
     private void skipNight(World w) {
