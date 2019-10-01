@@ -24,18 +24,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
         this.getUsageData();
         String message = event.getMessage().getContentRaw();
 
-        if (message.toLowerCase().startsWith("translate ")) {
-            Translate translate = new Translate();
-            data.getConfig().set("usage.translateCommand", translateCount + 1);
-            translate.carryCommand(event);
-        }
-
-        if (message.toLowerCase().startsWith("trs ")) {
-            Translate translate = new Translate();
-            data.getConfig().set("usage.conversationCommand", conversationCount + 1);
-            translate.carryConversationCommand(event);
-        }
-
         if (message.toLowerCase().startsWith("weather")) {
             Weather weather = new Weather(MrWorldWide.weatherToken);
             data.getConfig().set("usage.weatherCommand", weatherCount + 1);
@@ -50,6 +38,35 @@ public class MessageReceivedEvent extends ListenerAdapter {
         if (message.toLowerCase().equalsIgnoreCase("changeclock")) {
             ChangeClock changeClock = new ChangeClock();
             changeClock.carryCommand(event);
+        }
+
+        if (event.getMessage().getMentions().size() > 0) {
+            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
+                if (event.getMessage().getContentRaw().contains("help")) {
+                    event.getChannel().sendMessage("```----- Mr. Worldwide Commands -----" +
+                                                        "\n> weather cityname,countrycode" +
+                                                        "\n> weather *(If 'setcity' has been used)*" +
+                                                        "\n> weather @Monstahhh#9629" +
+                                                        "\n> setcity cityname,countrycode" +
+                                                        "\n> changeclock" +
+                                                        "\n> translate <originLanguage> <newLanguage> <message>" +
+                                                        "\n> trs <originLanguage> <newLanguage> <message>" +
+                                                        "\n> convert <originCurrency> <newCurrency> <amount>" +
+                                                        "\n----------------------------------```").queue();
+                }
+            }
+        }
+
+        if (message.toLowerCase().startsWith("translate ")) {
+            Translate translate = new Translate();
+            data.getConfig().set("usage.translateCommand", translateCount + 1);
+            translate.carryCommand(event);
+        }
+
+        if (message.toLowerCase().startsWith("trs ")) {
+            Translate translate = new Translate();
+            data.getConfig().set("usage.conversationCommand", conversationCount + 1);
+            translate.carryConversationCommand(event);
         }
 
         if (message.toLowerCase().startsWith("convert ")) {
