@@ -51,7 +51,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                                                         "\n> changeclock" +
                                                         "\n> translate <originLanguage> <newLanguage> <message>" +
                                                         "\n> trs <originLanguage> <newLanguage> <message>" +
-                                                        "\n> convert <originCurrency> <newCurrency> <amount>" +
+                                                        "\n> convert <amount> <originCurrency> <newCurrency>" +
                                                         "\n----------------------------------```").queue();
                 }
             }
