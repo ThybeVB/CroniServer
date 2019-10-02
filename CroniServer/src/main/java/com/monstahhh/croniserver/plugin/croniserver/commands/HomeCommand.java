@@ -23,12 +23,12 @@ public class HomeCommand implements CommandExecutor {
             Player player = (Player) commandSender;
 
             if (command.getName().equalsIgnoreCase("home")) {
-                if (player.hasPermission("croniserver.home")) {
+                if (player.hasPermission("croniserver.command.home")) {
                     callHome(player);
                 }
             }
             if (command.getName().equalsIgnoreCase("sethome")) {
-                if (player.hasPermission("croniserver.sethome")) {
+                if (player.hasPermission("croniserver.command.sethome")) {
                     callSetHome(player);
                 }
             }
