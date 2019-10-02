@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDamageEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerDeathEvent;
+import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerLeaveEvent;
 import com.monstahhh.croniserver.plugin.dangerapi.events.PlayerMoveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +14,7 @@ import java.util.logging.Level;
 
 public class DangerAPI {
 
-    static Config playerData;
+    public static Config playerData;
     private static JavaPlugin plugin;
     private static boolean debug = false;
 
@@ -65,6 +66,7 @@ public class DangerAPI {
         plugin.getServer().getPluginManager().registerEvents(new PlayerDamageEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerMoveEvent(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), plugin);
 
         CroniServer.logger.log(Level.INFO, "Enabled Danger API");
     }

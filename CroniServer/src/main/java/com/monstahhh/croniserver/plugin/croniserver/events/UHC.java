@@ -25,9 +25,6 @@ public class UHC implements Listener {
 
     public void enable() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-
-        remove();
-        addRecipes();
     }
 
     @EventHandler
@@ -40,59 +37,4 @@ public class UHC implements Listener {
             }
         }
     }
-
-
-    private void remove() {
-        List<Recipe> backup = new ArrayList<>();
-
-        Iterator<Recipe> iterator = plugin.getServer().recipeIterator();
-
-        while (iterator.hasNext()) {
-            Recipe recipe = iterator.next();
-            backup.add(recipe);
-        }
-
-        Iterator<Recipe> backupIterator = backup.iterator();
-
-        while (backupIterator.hasNext()) {
-            Recipe recipe = backupIterator.next();
-            if (recipe != null) {
-                switch (recipe.getResult().getType()) {
-                    case GLISTERING_MELON_SLICE:
-                        backupIterator.remove();
-                    case GOLDEN_CARROT:
-                        backupIterator.remove();
-                }
-            }
-        }
-
-        plugin.getServer().clearRecipes();
-
-        for (Recipe r : backup) {
-            plugin.getServer().addRecipe(r);
-        }
-    }
-
-    private void addRecipes() {
-        ItemStack goldenCarrot = new ItemStack(Material.GOLDEN_CARROT, 1);
-        ShapedRecipe carrotRecipe = new ShapedRecipe(new NamespacedKey("croniserver", "gayboy"), goldenCarrot);
-
-        carrotRecipe.shape("%%%", "%C%", "%%%");
-
-        carrotRecipe.setIngredient('%', Material.GOLD_INGOT);
-        carrotRecipe.setIngredient('C', Material.CARROT);
-
-        plugin.getServer().addRecipe(carrotRecipe);
-
-        ItemStack glisterLemon = new ItemStack(Material.GLISTERING_MELON_SLICE, 1);
-        ShapedRecipe lemonRecipe = new ShapedRecipe(new NamespacedKey("croniserver", "gayboy2"), glisterLemon);
-
-        lemonRecipe.shape("%%%", "%C%", "%%%");
-
-        lemonRecipe.setIngredient('%', Material.GOLD_INGOT);
-        lemonRecipe.setIngredient('C', Material.MELON_SLICE);
-
-        plugin.getServer().addRecipe(lemonRecipe);
-    }
-
 }
