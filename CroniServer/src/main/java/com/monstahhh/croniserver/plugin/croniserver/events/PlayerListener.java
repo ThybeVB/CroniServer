@@ -1,11 +1,15 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
 import fr.xephi.authme.api.v3.AuthMeApi;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -23,6 +27,18 @@ public class PlayerListener implements Listener {
         }
 
         p.getServer().broadcastMessage(ChatColor.GREEN + "Welcome " + event.getPlayer().getDisplayName() + "!");
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (player.getWorld().getName().startsWith("uhc3")) {
+            if (player.getDisplayName().equalsIgnoreCase("Guaka25")) {
+                player.sendMessage(ChatColor.DARK_RED + "YOU FUCKING DIED BITCH");
+            }
+            Location hub = new Location(Bukkit.getWorld("hub"), 0, 101, 0);
+            player.teleport(hub);
+        }
     }
 
     @EventHandler
