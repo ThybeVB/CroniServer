@@ -5,7 +5,6 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
-import com.monstahhh.croniserver.plugin.croniserver.events.UHC;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
@@ -28,9 +27,6 @@ public final class CroniServer extends JavaPlugin {
     public void onEnable() {
         logger = this.getLogger();
         playerData = new Config("plugins/CroniServer", "player_data.yml", this);
-
-        UHC uhc = new UHC(this);
-        uhc.enable();
 
         this.enableExtensions();
 
