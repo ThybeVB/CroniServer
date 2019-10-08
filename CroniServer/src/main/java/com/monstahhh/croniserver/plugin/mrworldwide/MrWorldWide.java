@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.Compression;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,6 +57,12 @@ public class MrWorldWide {
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
+
+                Config serverBackup = new Config("plugins/MrWorldWide", "roles.yml", _plugin);
+                for (Role r : Objects.requireNonNull(_jda.getGuildById(464096930511978518L)).getRoles()) {
+                    serverBackup.getConfig().set(r.getName(), r.getColorRaw());
+                }
+                serverBackup.saveConfig();
 
                 if (debug) {
                     Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
