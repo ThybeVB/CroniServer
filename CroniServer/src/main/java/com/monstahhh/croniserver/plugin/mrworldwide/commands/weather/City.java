@@ -38,6 +38,7 @@ public class City {
         Date sunRiseDate = new Date(Long.parseLong(sunRise.toString()) * 1000L + (object.getInt("timezone") * 1000L));
         Object sunSet = object.getJSONObject("sys").get("sunset");
         Date sunSetDate = new Date(Long.parseLong(sunSet.toString()) * 1000L + (object.getInt("timezone") * 1000L));
+
         Object timeOfCalculation = object.get("dt");
         Date timeOfCalculationDate = new Date(Long.parseLong(timeOfCalculation.toString()) * 1000L + (object.getInt("timezone") * 1000L));
 
@@ -66,8 +67,8 @@ public class City {
         Date timeSinceRecording = new Date(current.getTime() - timeOfCalculationDate.getTime());
 
         double windKilometersPerHour = object.getJSONObject("wind").getDouble("speed") * 3.6;
-
         int temperature = Math.round(Float.parseFloat(tempStr));
+
         this.temperature = temperature;
         this.humidity = Math.round(Float.parseFloat(humidityStr));
         this.cityName = object.getString("name");

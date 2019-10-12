@@ -43,16 +43,18 @@ public class MessageReceivedEvent extends ListenerAdapter {
         if (event.getMessage().getMentions().size() > 0) {
             if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
                 if (event.getMessage().getContentRaw().contains("help")) {
-                    event.getChannel().sendMessage("```----- Mr. Worldwide Commands -----" +
-                                                        "\n> weather cityname,countrycode" +
-                                                        "\n> weather *(If 'setcity' has been used)*" +
-                                                        "\n> weather @Monstahhh#9629" +
-                                                        "\n> setcity cityname,countrycode" +
-                                                        "\n> changeclock" +
-                                                        "\n> translate <originLanguage> <newLanguage> <message>" +
-                                                        "\n> trs <originLanguage> <newLanguage> <message>" +
-                                                        "\n> convert <amount> <originCurrency> <newCurrency>" +
-                                                        "\n----------------------------------```").queue();
+                    String helpMsg = "```----- Mr. Worldwide Commands -----" +
+                            "\n*<> = Required Field*" +
+                            "\n> weather <cityname,countrycode>" +
+                            "\n> weather *(If 'setcity' has been used)*" +
+                            "\n> weather <@Debiller#7777>" +
+                            "\n> setcity <cityname,countrycode>" +
+                            "\n> changeclock" +
+                            "\n> translate <originLanguage> <newLanguage> <message>" +
+                            "\n> trs <originLanguage> <newLanguage> <message>" +
+                            "\n> convert <amount> <originCurrency> <newCurrency>" +
+                            "\n----------------------------------```";
+                    event.getChannel().sendMessage(helpMsg).queue();
                 }
             }
         }
