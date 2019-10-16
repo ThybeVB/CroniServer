@@ -66,7 +66,7 @@ public class WeatherHelper {
             }
 
             eb.addField("Temperature", city.temperature + "°C", false);
-            eb.addField("Sunrise & Sunset", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
+            eb.addField("Horizon Events", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
 
             if (city.currentTime.charAt(0) == '0' && (city.currentTime.contains("AM") || city.currentTime.contains("PM"))) {
                 eb.addField("Current Time", city.currentTime.substring(1), false);
