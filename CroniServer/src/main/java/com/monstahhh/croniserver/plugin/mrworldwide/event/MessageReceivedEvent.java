@@ -46,6 +46,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
                             "\n*<> = Required Field*" +
                             "\n> weather <cityname,countrycode>" +
+							"\n> weather <countryname>" +
                             "\n> weather *(If 'setcity' has been used)*" +
                             "\n> weather <@Debiller#7777>" +
                             "\n> setcity <cityname,countrycode>" +

@@ -58,12 +58,6 @@ public class MrWorldWide {
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
 
-                Config serverBackup = new Config("plugins/MrWorldWide", "roles.yml", _plugin);
-                for (Role r : Objects.requireNonNull(_jda.getGuildById(464096930511978518L)).getRoles()) {
-                    serverBackup.getConfig().set(r.getName(), r.getColorRaw());
-                }
-                serverBackup.saveConfig();
-
                 if (debug) {
                     Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
                             .getTextChannelById(statusChannelId))

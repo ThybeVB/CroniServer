@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
+import com.google.gson.JsonObject;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
@@ -9,10 +10,9 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -38,14 +38,50 @@ public class Weather {
     }
 
     public void carryCommand(GuildMessageReceivedEvent event) {
-        if (event.getMessage().getMentions().size() > 0) {
+        Message msg = event.getMessage();
+        if (msg.getMentions().size() > 0) {
             this.carryMentionCommand(event);
         } else {
-            if ((event.getMessage().getContentRaw().substring(7)).contains(",")) {
+            if ((msg.getContentRaw().substring(7)).contains(",")) {
                 this.carryCommandWithParams(event);
             } else {
-                this.carryCommandWithNoParams(event);
+                if (!msg.getContentRaw().substring(7).isEmpty()) {
+                    this.carryCommandWithCountry(event);
+                } else {
+                    this.carryCommandWithNoParams(event);
+                }
             }
+        }
+    }
+
+    private void carryCommandWithCountry(GuildMessageReceivedEvent event) {
+        String stripped = event.getMessage().getContentRaw().substring(8);
+        if (stripped.toCharArray().length > 2) {
+            JSONObject country = getCountryInformation(stripped);
+            if (country == null) {
+                event.getChannel().sendMessage("Could not find this country.").queue();
+            } else {
+                WeatherHelper helper = new WeatherHelper(this.weatherToken, event.getChannel());
+                String cityStr = String.format("%s,%s", country.getString("capital"), country.getString("alpha2Code"));
+                City city = helper.getWeatherFor(cityStr, event.getAuthor().getIdLong());
+                MessageEmbed embed = helper.getEmbedFor(city);
+
+                event.getChannel().sendMessage(embed).queue();
+            }
+        }
+    }
+
+    private JSONObject getCountryInformation(String countryName) {
+        try {
+            String formattedSend = String.format("https://restcountries.eu/rest/v2/name/%s", countryName);
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, formattedSend);
+
+            String resultStr = result.asString();
+            JSONArray arr = new JSONArray(resultStr);
+
+            return arr.getJSONObject(0);
+        } catch (IOException e) {
+            return null;
         }
     }
 
