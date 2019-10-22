@@ -1,6 +1,5 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
-import com.google.gson.JsonObject;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
@@ -10,7 +9,10 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -66,7 +68,11 @@ public class Weather {
                 City city = helper.getWeatherFor(cityStr, event.getAuthor().getIdLong());
                 MessageEmbed embed = helper.getEmbedFor(city);
 
-                event.getChannel().sendMessage(embed).queue();
+                if (embed != null) {
+                    event.getChannel().sendMessage(embed).queue();
+                } else {
+                    event.getChannel().sendMessage("Capital of this country does not have a weather station").queue();
+                }
             }
         }
     }
