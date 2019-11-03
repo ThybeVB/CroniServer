@@ -44,7 +44,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
             if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
                 if (event.getMessage().getContentRaw().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
-                            "\n*<> = Required Field*" +
+                            "\n* <> = Required Field*" +
                             "\n> weather <cityname,countrycode>" +
                             "\n> weather <countryname>" +
                             "\n> weather *(If 'setcity' has been used)*" +
