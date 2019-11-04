@@ -82,7 +82,9 @@ public class WeatherHelper {
             } else if (city.timeOfCalculation[0].equals("0")) {
                 eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[1] + " seconds ago", null);
             } else {
-                if (city.timeOfCalculation[1].equalsIgnoreCase("1")) {
+                if (city.timeOfCalculation[1].equalsIgnoreCase("0")) {
+                    eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minute ago", null);
+                } else if (city.timeOfCalculation[1].equalsIgnoreCase("1")) {
                     eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " second ago", null);
                 }
                 eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago", null);
