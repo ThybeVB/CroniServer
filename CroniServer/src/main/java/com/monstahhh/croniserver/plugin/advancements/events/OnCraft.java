@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 
 public class OnCraft implements Listener {
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onCraftItem(CraftItemEvent event) {
         if (event.getCurrentItem() != null) {
             if (event.getCurrentItem().getType() == Material.COOKIE) {

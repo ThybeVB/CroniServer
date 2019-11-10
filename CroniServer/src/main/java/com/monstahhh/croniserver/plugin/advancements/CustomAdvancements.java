@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CustomAdvancements {
 
-    public static JavaPlugin _plugin;
+    private static JavaPlugin _plugin;
     public static AdvancementManager _manager;
 
     public CustomAdvancements(JavaPlugin plugin) {
@@ -21,7 +21,7 @@ public class CustomAdvancements {
         _manager = CrazyAdvancements.getNewAdvancementManager();
 
         AdvancementDisplay rootDisplay = new AdvancementDisplay(Material.ARMOR_STAND, "CroniServer Advancements!", "Made by you", AdvancementDisplay.AdvancementFrame.TASK, false, false, AdvancementVisibility.ALWAYS);
-        rootDisplay.setBackgroundTexture("textures/block/concrete_yellow.png");
+        rootDisplay.setBackgroundTexture("textures/block/cobblestone.png");
         Advancement root = new Advancement(null, new NameKey("croniserver", "root"), rootDisplay);
 
         AdvancementDisplay childrenDisplay = new AdvancementDisplay(Material.COOKIE, "Cookies!", "Cookietastic", AdvancementDisplay.AdvancementFrame.TASK, true, true, AdvancementVisibility.ALWAYS);
@@ -37,7 +37,6 @@ public class CustomAdvancements {
     public void disable () {
         for (Player p : _plugin.getServer().getOnlinePlayers()) {
             _manager.saveProgress(p, "croniserver");
-            _manager.removePlayer(p);
         }
 
         System.out.println("[CroniServer] Disabled Advancements");

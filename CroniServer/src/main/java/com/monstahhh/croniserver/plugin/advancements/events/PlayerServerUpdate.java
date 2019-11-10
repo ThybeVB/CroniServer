@@ -13,13 +13,15 @@ public class PlayerServerUpdate implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
 
-        CustomAdvancements._manager.addPlayer(p);
+        if (!CustomAdvancements._manager.getPlayers().contains(p)) {
+            CustomAdvancements._manager.addPlayer(p);
+        }
         CustomAdvancements._manager.loadProgress(p, "croniserver");
+        CustomAdvancements._manager.update(p);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         CustomAdvancements._manager.saveProgress(event.getPlayer(), "croniserver");
-        CustomAdvancements._manager.removePlayer(event.getPlayer());
     }
 }
