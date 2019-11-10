@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.croniserver;
 
 import com.monstahhh.croniserver.configapi.Config;
+import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
@@ -21,6 +22,7 @@ public final class CroniServer extends JavaPlugin {
 
     private DangerAPI dangerApi;
     private Sleep sleep;
+    private CustomAdvancements customAdvancements;
     private MrWorldWide mrWorldWide;
 
     @Override
@@ -52,6 +54,9 @@ public final class CroniServer extends JavaPlugin {
         mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
 
+        customAdvancements = new CustomAdvancements(this);
+        customAdvancements.enable();
+
         dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
@@ -62,6 +67,7 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onDisable() {
         mrWorldWide.disable();
+        customAdvancements.disable();
         dangerApi.disable();
         sleep.disable();
 
