@@ -20,7 +20,7 @@ public class OnDeath implements Listener {
         Player p = event.getEntity();
         if (p.getKiller() != null) {
             System.out.println(p.getKiller().getItemOnCursor().getType().toString());
-            if (p.getKiller().getItemOnCursor().getType().toString().endsWith("SHOVEL")) {
+            if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
                 Advancement advancement = CustomAdvancements._manager.getAdvancement(new NameKey("croniserver", "getkilledbyshovel"));
                 CustomAdvancements.grantAdvancement(p, advancement);
                 return;
@@ -28,11 +28,20 @@ public class OnDeath implements Listener {
         }
 
         double xPos = p.getLocation().getX();
+        double yPos = p.getLocation().getY();
         double zPos = p.getLocation().getZ();
         if (xPos >= 203 && xPos <= 210) {
             if (zPos <= -275 && zPos >= -281) {
                 Advancement advancement = CustomAdvancements._manager.getAdvancement(new NameKey("croniserver", "killedbynursery"));
                 CustomAdvancements.grantAdvancement(p, advancement);
+            }
+        }
+        if (xPos == 175 || xPos == 174) {
+            if (zPos == -475) {
+                if (yPos == 81) {
+                    Advancement advancement = CustomAdvancements._manager.getAdvancement(new NameKey("croniserver", "guakahouse"));
+                    CustomAdvancements.grantAdvancement(p, advancement);
+                }
             }
         }
 

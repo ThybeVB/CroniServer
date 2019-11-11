@@ -57,10 +57,14 @@ public class CustomAdvancements {
         Advancement craftHay = new Advancement(root, new NameKey("croniserver", "businessman"), craftHayDisplay);
 
         AdvancementDisplay netherlandsDisplay = new AdvancementDisplay(Material.ORANGE_WOOL, "Welkom in Nederland", "Ga nu dood.\n-Darmuth", AdvancementDisplay.AdvancementFrame.TASK, true, true, AdvancementVisibility.VANILLA);
-        netherlandsDisplay.setCoordinates(-1, 1);
+        netherlandsDisplay.setCoordinates(-1, 0);
         Advancement netherlands = new Advancement(root, new NameKey("croniserver", "netherlands"), netherlandsDisplay);
 
-        _manager.addAdvancement(root, craftACookie, getKilledByAShovel, getKilledByTheNursery, craftHay, netherlands);
+        AdvancementDisplay guakaHouseDisplay = new AdvancementDisplay(Material.BLUE_CONCRETE, "Guaka51", "Enter Guaka's Base\n-Sebas", AdvancementDisplay.AdvancementFrame.TASK, true, true, AdvancementVisibility.VANILLA);
+        guakaHouseDisplay.setCoordinates(-1, -1);
+        Advancement guakaHouse = new Advancement(root, new NameKey("croniserver", "guakahouse"), guakaHouseDisplay);
+
+        _manager.addAdvancement(root, craftACookie, getKilledByAShovel, getKilledByTheNursery, craftHay, netherlands, guakaHouse);
     }
 
     public void disable() {
