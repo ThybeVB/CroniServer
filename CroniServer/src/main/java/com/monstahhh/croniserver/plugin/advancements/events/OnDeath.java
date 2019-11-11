@@ -36,8 +36,8 @@ public class OnDeath implements Listener {
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
         }
-        if (xPos == 175 || xPos == 174) {
-            if (zPos == -475) {
+        if (xPos == -175 || xPos == -174) {
+            if (zPos == -474) {
                 if (yPos == 81) {
                     Advancement advancement = CustomAdvancements._manager.getAdvancement(new NameKey("croniserver", "guakahouse"));
                     CustomAdvancements.grantAdvancement(p, advancement);
