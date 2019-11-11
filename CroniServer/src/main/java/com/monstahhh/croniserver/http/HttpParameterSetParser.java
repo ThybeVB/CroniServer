@@ -10,7 +10,7 @@ public class HttpParameterSetParser {
 
     public String asString() {
         if (this.parameters == null || this.parameters.toList().isEmpty())
-            return new String();
+            return "";
 
         StringBuilder par = new StringBuilder("?");
 

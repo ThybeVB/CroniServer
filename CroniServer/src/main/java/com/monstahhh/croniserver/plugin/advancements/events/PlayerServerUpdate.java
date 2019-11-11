@@ -13,6 +13,9 @@ public class PlayerServerUpdate implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
+        if (!event.getPlayer().isOp()) {
+            return;
+        }
         Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
             Player p = event.getPlayer();
 
