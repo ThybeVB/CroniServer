@@ -12,11 +12,13 @@ import org.bukkit.event.inventory.CraftItemEvent;
 public class OnCraft implements Listener {
     @EventHandler
     public void onCraftItem(CraftItemEvent event) {
+        Player p = (Player)event.getWhoClicked();
+
         if (event.getCurrentItem() != null) {
             if (event.getCurrentItem().getType() == Material.COOKIE) {
                 Advancement advancement = CustomAdvancements._manager.getAdvancement(new NameKey("croniserver", "craftacookie"));
-                CustomAdvancements._manager.grantAdvancement((Player)event.getWhoClicked(), advancement);
-                CustomAdvancements._manager.update((Player)event.getWhoClicked());
+                CustomAdvancements._manager.grantAdvancement(p, advancement);
+                CustomAdvancements._manager.saveProgress(p, "croniserver");
             }
         }
     }
