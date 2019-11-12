@@ -24,8 +24,10 @@ public class OnCraft implements Listener {
                 Advancement advancement = AdvancementEnum.BUSINESSMAN.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
+            if (event.getCurrentItem().getType() == Material.CAKE) {
+                Advancement advancement = AdvancementEnum.THELIE.getAdvancement();
+                CustomAdvancements.grantAdvancement(p, advancement);
+            }
         }
     }
-
-
 }
