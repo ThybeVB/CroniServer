@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.advancements.events;
 
-import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
+import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class OnMove implements Listener {
+
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player p = event.getPlayer();

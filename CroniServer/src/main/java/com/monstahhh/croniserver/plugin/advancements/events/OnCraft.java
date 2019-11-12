@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.advancements.events;
 
-import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
+import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,4 +26,6 @@ public class OnCraft implements Listener {
             }
         }
     }
+
+
 }

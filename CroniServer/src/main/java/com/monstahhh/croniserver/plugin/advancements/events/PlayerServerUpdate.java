@@ -13,7 +13,7 @@ public class PlayerServerUpdate implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (!event.getPlayer().isOp()) {
+        if (!event.getPlayer().hasPermission("croniserver.advancements")) {
             return;
         }
         Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
@@ -23,7 +23,7 @@ public class PlayerServerUpdate implements Listener {
             if (!CustomAdvancements._manager.getPlayers().contains(p)) {
                 CustomAdvancements._manager.addPlayer(p);
             }
-        }, 3);
+        }, 2);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

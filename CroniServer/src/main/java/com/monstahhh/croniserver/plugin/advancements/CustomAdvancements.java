@@ -1,14 +1,12 @@
 package com.monstahhh.croniserver.plugin.advancements;
 
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
-import com.monstahhh.croniserver.plugin.advancements.events.OnCraft;
-import com.monstahhh.croniserver.plugin.advancements.events.OnDamage;
-import com.monstahhh.croniserver.plugin.advancements.events.OnMove;
-import com.monstahhh.croniserver.plugin.advancements.events.PlayerServerUpdate;
+import com.monstahhh.croniserver.plugin.advancements.events.*;
 import eu.endercentral.crazy_advancements.Advancement;
 import eu.endercentral.crazy_advancements.CrazyAdvancements;
 import eu.endercentral.crazy_advancements.manager.AdvancementManager;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CustomAdvancements {
@@ -32,10 +30,12 @@ public class CustomAdvancements {
 
         AdvancementEnum.registerAdvancements();
 
-        _plugin.getServer().getPluginManager().registerEvents(new OnCraft(), _plugin);
-        _plugin.getServer().getPluginManager().registerEvents(new OnDamage(), _plugin);
-        _plugin.getServer().getPluginManager().registerEvents(new OnMove(), _plugin);
-        _plugin.getServer().getPluginManager().registerEvents(new PlayerServerUpdate(), _plugin);
+        PluginManager pluginManager = _plugin.getServer().getPluginManager();
+        pluginManager.registerEvents(new OnCraft(), _plugin);
+        pluginManager.registerEvents(new OnDamage(), _plugin);
+        pluginManager.registerEvents(new OnInventory(), _plugin);
+        pluginManager.registerEvents(new OnMove(), _plugin);
+        pluginManager.registerEvents(new PlayerServerUpdate(), _plugin);
     }
 
     public void disable() {

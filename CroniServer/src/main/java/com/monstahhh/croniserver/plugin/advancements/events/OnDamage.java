@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.advancements.events;
 
-import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
+import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -15,12 +15,13 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import java.util.Objects;
 
 public class OnDamage implements Listener {
+
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player) {
             if (event.getDamager() instanceof Snowball) {
                 Advancement advancement = AdvancementEnum.SNOWBALL.getAdvancement();
-                CustomAdvancements.grantAdvancement((Player)event.getDamager(), advancement);
+                CustomAdvancements.grantAdvancement((Player) event.getEntity(), advancement);
             }
         }
     }
@@ -29,7 +30,6 @@ public class OnDamage implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
         if (p.getKiller() != null) {
-            System.out.println(p.getKiller().getItemOnCursor().getType().toString());
             if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
                 Advancement advancement = AdvancementEnum.GETKILLEDBYSHOVEL.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);

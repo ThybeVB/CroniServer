@@ -18,7 +18,8 @@ public enum AdvancementEnum {
     BUSINESSMAN(AdvancementEnum.ROOT, Material.HAY_BLOCK, 0, "Businessman", "Craft a Hay Block\n-monstahhhy", AdvancementFrame.TASK, -1, 1, true, true, null),
     NETHERLANDS(AdvancementEnum.ROOT, Material.ORANGE_WOOL, 0, "Welkom in Nederland", "Ga nu dood.\n-Darmuth", AdvancementFrame.TASK, -1, 0, true, true, null),
     GUAKAHOUSE(AdvancementEnum.ROOT, Material.BLUE_CONCRETE, 0, "Guaka51", "Enter Guaka's Base\n-Sebas", AdvancementFrame.TASK, -1, -1, true, true, null),
-    SNOWBALL(AdvancementEnum.ROOT, Material.SNOWBALL, 0, "Finland", "This is Finland\n-iiiomiii", AdvancementFrame.TASK, 0, 1, true, true, null);
+    SNOWBALL(AdvancementEnum.ROOT, Material.SNOWBALL, 0, "Finland", "This is Finland\n-iiiomiii", AdvancementFrame.TASK, 0, 1, true, true, null),
+    HACKEDBALLS(AdvancementEnum.ROOT, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.TASK, 0, -1, true, true, null);
 
     private final Material icon;
     private final int required;
