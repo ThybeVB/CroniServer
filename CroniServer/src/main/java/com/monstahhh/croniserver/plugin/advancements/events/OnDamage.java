@@ -45,8 +45,10 @@ public class OnDamage implements Listener {
         double zPos = p.getLocation().getZ();
         if (xPos >= 203 && xPos <= 210) {
             if (zPos <= -275 && zPos >= -281) {
-                Advancement advancement = AdvancementEnum.KILLEDBYNURSERY.getAdvancement();
-                CustomAdvancements.grantAdvancement(p, advancement);
+                if (p.getKiller().getDisplayName().equalsIgnoreCase("MyZone03")) {
+                    Advancement advancement = AdvancementEnum.KILLEDBYNURSERY.getAdvancement();
+                    CustomAdvancements.grantAdvancement(p, advancement);
+                }
             }
         }
 
