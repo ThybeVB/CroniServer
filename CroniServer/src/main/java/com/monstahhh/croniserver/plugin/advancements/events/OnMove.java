@@ -25,5 +25,10 @@ public class OnMove implements Listener {
                 }
             }
         }
+
+        if (yPos >= 2000) {
+            Advancement advancement = AdvancementEnum.FALLINGUP.getAdvancement();
+            CustomAdvancements.grantAdvancement(p, advancement);
+        }
     }
 }
