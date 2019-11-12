@@ -5,6 +5,7 @@ import com.monstahhh.croniserver.plugin.advancements.events.*;
 import eu.endercentral.crazy_advancements.Advancement;
 import eu.endercentral.crazy_advancements.CrazyAdvancements;
 import eu.endercentral.crazy_advancements.manager.AdvancementManager;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,8 +21,10 @@ public class CustomAdvancements {
 
     public static void grantAdvancement(Player p, Advancement adv) {
         if (!adv.isGranted(p)) {
-            _manager.grantAdvancement(p, adv);
-            _manager.saveProgress(p, "croniserver");
+            if (p.getGameMode() == GameMode.SURVIVAL) {
+                _manager.grantAdvancement(p, adv);
+                _manager.saveProgress(p, "croniserver");
+            }
         }
     }
 
