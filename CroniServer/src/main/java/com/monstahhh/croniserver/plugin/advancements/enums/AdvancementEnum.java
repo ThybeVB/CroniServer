@@ -22,7 +22,8 @@ public enum AdvancementEnum {
     HACKEDBALLS(AdvancementEnum.ROOT, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.TASK, 0, -1, true, true, null),
     FALLINGUP(AdvancementEnum.ROOT, Material.FIREWORK_ROCKET, 0, "Falling Up", "NAAAAA NAAAAAAA NAAANANANANANANANAAAA NAAAAA\n-Guaka25", AdvancementFrame.TASK, 2, 0, true, true, null),
     THELIE(AdvancementEnum.ROOT, Material.CAKE, 0, "The Lie", "My health goes down, I need a cow\n-Guaka25", AdvancementFrame.TASK, 2, 1, true, true, null),
-    GUAKAAPPROVED(AdvancementEnum.ROOT, Material.BLUE_CONCRETE_POWDER, 0, "Guaka Approved!", "Guaka broke your legs\n-GabrielArt", AdvancementFrame.TASK, 2, -1, true, true, null);
+    GUAKAAPPROVED(AdvancementEnum.ROOT, Material.BLUE_CONCRETE_POWDER, 0, "Guaka Approved!", "Guaka broke your legs\n-GabrielArt", AdvancementFrame.TASK, 2, -1, true, true, null),
+    NOTPACIFIST(AdvancementEnum.ROOT, Material.IRON_SWORD, 0, "Not Pacifist", "RIP PACIFIST\n-DSpectrumNGK", AdvancementFrame.TASK, -2, 1, true, true, null);
 
     private final Material icon;
     private final int required;

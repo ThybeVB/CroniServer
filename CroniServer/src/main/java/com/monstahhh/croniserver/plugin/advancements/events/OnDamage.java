@@ -30,10 +30,14 @@ public class OnDamage implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
         if (p.getKiller() != null) {
+            Advancement notPacifistAdvancement = AdvancementEnum.NOTPACIFIST.getAdvancement();
+            CustomAdvancements.grantAdvancement(p, notPacifistAdvancement);
+
             if (p.getKiller().getDisplayName().equalsIgnoreCase("Guaka25")) {
                 Advancement advancement = AdvancementEnum.GUAKAAPPROVED.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
+
             if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
                 Advancement advancement = AdvancementEnum.GETKILLEDBYSHOVEL.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
