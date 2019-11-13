@@ -43,11 +43,14 @@ public class CustomAdvancements {
     }
 
     public void disable() {
+        StringBuilder s = new StringBuilder("Removed From Advancement Manager: ");
         for (Player p : _manager.getPlayers()) {
             _manager.saveProgress(p, "croniserver");
             _manager.removePlayer(p);
+            s.append(p.getDisplayName());
+            s.append(", ");
         }
-
+        System.out.println(s.toString());
         System.out.println("[CroniServer] Disabled Advancements");
     }
 }
