@@ -38,6 +38,7 @@ public class CustomAdvancements {
         pluginManager.registerEvents(new OnDamage(), _plugin);
         pluginManager.registerEvents(new OnInventory(), _plugin);
         pluginManager.registerEvents(new OnMove(), _plugin);
+        pluginManager.registerEvents(new OnSleep(), _plugin);
         pluginManager.registerEvents(new PlayerServerUpdate(), _plugin);
     }
 

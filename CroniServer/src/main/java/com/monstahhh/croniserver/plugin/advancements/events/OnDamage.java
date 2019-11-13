@@ -6,11 +6,13 @@ import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.Objects;
 
@@ -27,11 +29,25 @@ public class OnDamage implements Listener {
     }
 
     @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        if (event.getHitEntity() instanceof Player) {
+            if (event.getEntity() instanceof Trident) {
+                Trident t = (Trident) event.getEntity();
+                if (t.getShooter() instanceof Player) {
+                    Player p = (Player) t.getShooter();
+                    Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
+                    CustomAdvancements.grantAdvancement(p, advancement);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
         if (p.getKiller() != null) {
             Advancement notPacifistAdvancement = AdvancementEnum.NOTPACIFIST.getAdvancement();
-            CustomAdvancements.grantAdvancement(p, notPacifistAdvancement);
+            CustomAdvancements.grantAdvancement(p.getKiller(), notPacifistAdvancement);
 
             if (p.getKiller().getDisplayName().equalsIgnoreCase("Guaka25")) {
                 Advancement advancement = AdvancementEnum.GUAKAAPPROVED.getAdvancement();
