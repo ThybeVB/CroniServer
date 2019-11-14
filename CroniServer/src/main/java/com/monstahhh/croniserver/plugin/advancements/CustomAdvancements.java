@@ -36,6 +36,7 @@ public class CustomAdvancements {
         PluginManager pluginManager = _plugin.getServer().getPluginManager();
         pluginManager.registerEvents(new OnCraft(), _plugin);
         pluginManager.registerEvents(new OnDamage(), _plugin);
+        pluginManager.registerEvents(new OnExp(), _plugin);
         pluginManager.registerEvents(new OnInventory(), _plugin);
         pluginManager.registerEvents(new OnMove(), _plugin);
         pluginManager.registerEvents(new OnSleep(), _plugin);

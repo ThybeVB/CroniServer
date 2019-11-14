@@ -25,7 +25,8 @@ public enum AdvancementEnum {
     GUAKAAPPROVED(AdvancementEnum.ROOT, Material.BLUE_CONCRETE_POWDER, 0, "Guaka Approved!", "Guaka broke your legs\n-GabrielArt", AdvancementFrame.TASK, 2, -1, true, true, null),
     NOTPACIFIST(AdvancementEnum.ROOT, Material.IRON_SWORD, 0, "Not Pacifist", "RIP PACIFIST\n-DSpectrumNGK", AdvancementFrame.TASK, -2, 1, true, true, null),
     LUDICROUS(AdvancementEnum.ROOT, Material.TRIDENT, 0, "Ludicrous Speed", "I Am Speed.\n-Guaka25", AdvancementFrame.TASK, -2, 0, true, true, null),
-    SWEETDREAMS(AdvancementEnum.ROOT, Material.RED_BED, 0, "Sweet Dreams", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, -2, -1, true, true, null);
+    SWEETDREAMS(AdvancementEnum.ROOT, Material.RED_BED, 0, "Sweet Dreams", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, -2, -1, true, true, null),
+    POUNDS(AdvancementEnum.ROOT, Material.ANVIL, "Pounds!", 0, "Pounds!", AdvancementFrame.TASK, -2, -3, true, true, null);
 
     private final Material icon;
     private final int required;

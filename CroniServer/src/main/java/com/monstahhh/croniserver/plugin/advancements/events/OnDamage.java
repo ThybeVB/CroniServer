@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Trident;
@@ -35,8 +36,10 @@ public class OnDamage implements Listener {
                 Trident t = (Trident) event.getEntity();
                 if (t.getShooter() instanceof Player) {
                     Player p = (Player) t.getShooter();
-                    Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
-                    CustomAdvancements.grantAdvancement(p, advancement);
+                    if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.RIPTIDE)) {
+                        Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
+                        CustomAdvancements.grantAdvancement(p, advancement);
+                    }
                 }
             }
         }
