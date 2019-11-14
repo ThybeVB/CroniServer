@@ -57,6 +57,17 @@ public class OnDamage implements Listener {
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
 
+            if (p.getKiller().getDisplayName().equalsIgnoreCase("Cronibet")) {
+                Advancement advancement = AdvancementEnum.FURNITURYDEATH.getAdvancement();
+                int progress = CustomAdvancements._manager.getCriteriaProgress(p, advancement);
+                if (progress < advancement.getCriteria()) {
+                    CustomAdvancements._manager.setCriteriaProgress(p, advancement, progress + 1);
+                    CustomAdvancements._manager.update(p);
+                } else {
+                    CustomAdvancements.grantAdvancement(p, advancement);
+                }
+            }
+
             if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
                 Advancement advancement = AdvancementEnum.GETKILLEDBYSHOVEL.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);

@@ -6,6 +6,7 @@ import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.audio.factory.IAudioSendFactory;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.Compression;
@@ -56,7 +57,7 @@ public class MrWorldWide {
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
-
+                _jda.getAudioManagers().clear();
                 if (debug) {
                     Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
                             .getTextChannelById(statusChannelId))
