@@ -25,7 +25,7 @@ public enum AdvancementEnum {
     GUAKAAPPROVED(AdvancementEnum.ROOT, Material.BLUE_CONCRETE_POWDER, 0, "Guaka Approved!", "Guaka broke your legs\n-GabrielArt", AdvancementFrame.TASK, 2, -1, true, true, null),
     NOTPACIFIST(AdvancementEnum.ROOT, Material.IRON_SWORD, 0, "Not Pacifist", "RIP PACIFIST\n-DSpectrumNGK", AdvancementFrame.TASK, -2, 1, true, true, null),
     LUDICROUS(AdvancementEnum.ROOT, Material.TRIDENT, 0, "Ludicrous Speed", "I Am Speed.\n-Guaka25", AdvancementFrame.TASK, -2, 0, true, true, null),
-    SWEETDREAMS(AdvancementEnum.ROOT, Material.RED_BED, 0, "Sweet Dreams", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, -2, -1, true, true, null),
+    SWEETDREAMS(AdvancementEnum.ROOT, Material.RED_BED, 0, "Sweet Dreams Are Made Of These", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, -2, -1, true, true, null),
     POUNDS(AdvancementEnum.ROOT, Material.ANVIL, 0, "Pounds!", "Pounds!\n-DSpectrumNGK", AdvancementFrame.TASK, -2, -2, true, true, null),
     AGIRLHASNONAME(AdvancementEnum.ROOT, Material.ZOMBIE_HEAD, 0, "A girl has no name", "The many-faced god has requested a name\n-Guaka25", AdvancementFrame.TASK, -1, -2, true, true, null),
     BIGBOY(AdvancementEnum.ROOT, Material.BREAD, 10, "Big Boy", "You're officially a big boy\n-iiiomiii", AdvancementFrame.TASK, 0, -2, true, true, null),

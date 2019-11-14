@@ -57,7 +57,6 @@ public class MrWorldWide {
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
-                _jda.getAudioManagers().clear();
                 if (debug) {
                     Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
                             .getTextChannelById(statusChannelId))
