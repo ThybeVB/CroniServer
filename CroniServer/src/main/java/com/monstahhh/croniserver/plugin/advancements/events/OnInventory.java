@@ -26,6 +26,4 @@ public class OnInventory implements Listener {
             CustomAdvancements.grantAdvancement(p, advancement);
         }
     }
-
-
 }
