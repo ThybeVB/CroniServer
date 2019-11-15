@@ -6,6 +6,7 @@ import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
@@ -25,22 +26,6 @@ public class OnDamage implements Listener {
             if (event.getDamager() instanceof Snowball) {
                 Advancement advancement = AdvancementEnum.SNOWBALL.getAdvancement();
                 CustomAdvancements.grantAdvancement((Player) event.getEntity(), advancement);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
-        if (event.getHitEntity() instanceof Player) {
-            if (event.getEntity() instanceof Trident) {
-                Trident t = (Trident) event.getEntity();
-                if (t.getShooter() instanceof Player) {
-                    Player p = (Player) t.getShooter();
-                    if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.RIPTIDE)) {
-                        Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
-                        CustomAdvancements.grantAdvancement(p, advancement);
-                    }
-                }
             }
         }
     }
