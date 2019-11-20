@@ -7,7 +7,6 @@ import eu.endercentral.crazy_advancements.CrazyAdvancements;
 import eu.endercentral.crazy_advancements.manager.AdvancementManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CustomAdvancements {
@@ -33,25 +32,20 @@ public class CustomAdvancements {
 
         AdvancementEnum.registerAdvancements();
 
-        PluginManager pluginManager = _plugin.getServer().getPluginManager();
-        pluginManager.registerEvents(new OnCraft(), _plugin);
-        pluginManager.registerEvents(new OnDamage(), _plugin);
-        pluginManager.registerEvents(new OnExp(), _plugin);
-        pluginManager.registerEvents(new OnInventory(), _plugin);
-        pluginManager.registerEvents(new OnMove(), _plugin);
-        pluginManager.registerEvents(new OnSleep(), _plugin);
-        pluginManager.registerEvents(new PlayerServerUpdate(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnCraft(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnDamage(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnExp(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnInventory(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnMove(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new OnSleep(), _plugin);
+        _plugin.getServer().getPluginManager().registerEvents(new PlayerServerUpdate(), _plugin);
     }
 
     public void disable() {
-        StringBuilder s = new StringBuilder("Removed From Advancement Manager: ");
         for (Player p : _manager.getPlayers()) {
             _manager.saveProgress(p, "croniserver");
             _manager.removePlayer(p);
-            s.append(p.getDisplayName());
-            s.append(", ");
         }
-        System.out.println(s.toString());
         System.out.println("[CroniServer] Disabled Advancements");
     }
 }

@@ -20,9 +20,9 @@ public final class CroniServer extends JavaPlugin {
 
     public static Logger logger;
 
+    private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
-    private CustomAdvancements customAdvancements;
     private MrWorldWide mrWorldWide;
 
     @Override
@@ -51,9 +51,6 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void enableExtensions() {
-        mrWorldWide = new MrWorldWide(this);
-        mrWorldWide.enable();
-
         customAdvancements = new CustomAdvancements(this);
         customAdvancements.enable();
 
@@ -62,14 +59,17 @@ public final class CroniServer extends JavaPlugin {
 
         sleep = new Sleep(this);
         sleep.enable();
+
+        mrWorldWide = new MrWorldWide(this);
+        mrWorldWide.enable();
     }
 
     @Override
     public void onDisable() {
-        mrWorldWide.disable();
         customAdvancements.disable();
         dangerApi.disable();
         sleep.disable();
+        mrWorldWide.disable();
 
         System.out.println("[CroniServer] Disabled CroniServer");
     }

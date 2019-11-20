@@ -3,14 +3,12 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.Objects;
 
 public class OnMove implements Listener {
 
@@ -22,7 +20,7 @@ public class OnMove implements Listener {
         double yPos = Math.round(p.getLocation().getY());
         double zPos = Math.round(p.getLocation().getZ());
         if (xPos == -173 || xPos == -174) {
-            if (zPos == -474.5) {
+            if (zPos == 474) {
                 if (yPos == 81) {
                     Advancement advancement = AdvancementEnum.GUAKAHOUSE.getAdvancement();
                     CustomAdvancements.grantAdvancement(p, advancement);
@@ -37,15 +35,12 @@ public class OnMove implements Listener {
     }
 
     @EventHandler
-    public void onEntityPotionEffect(EntityPotionEffectEvent event) {
-        System.out.println("a");
-        if (event.getModifiedType() == PotionEffectType.SPEED) {
-            System.out.println("b");
-            if (Objects.requireNonNull(event.getNewEffect()).getAmplifier() == 3) {
-                System.out.println("c");
-                Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
-                CustomAdvancements.grantAdvancement((Player)event.getEntity(), advancement);
-            }
+    public void onPlayerInteractEvent(org.bukkit.event.player.PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+
+        if (player.getInventory().getItemInMainHand().getType().equals(Material.POTION) && player.getInventory().getItemInMainHand().getData().getData() == PotionEffectType.SPEED.getId()) {
+            Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
+            CustomAdvancements.grantAdvancement(e.getPlayer(), advancement);
         }
     }
 }
