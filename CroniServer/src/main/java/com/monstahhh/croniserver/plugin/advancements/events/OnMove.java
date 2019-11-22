@@ -19,8 +19,8 @@ public class OnMove implements Listener {
         double xPos = Math.round(p.getLocation().getX());
         double yPos = Math.round(p.getLocation().getY());
         double zPos = Math.round(p.getLocation().getZ());
-        if (xPos == -173 || xPos == -174) {
-            if (zPos == 474) {
+        if (xPos <= -175 && xPos >= -173) {
+            if (zPos == -475) {
                 if (yPos == 81) {
                     Advancement advancement = AdvancementEnum.GUAKAHOUSE.getAdvancement();
                     CustomAdvancements.grantAdvancement(p, advancement);
