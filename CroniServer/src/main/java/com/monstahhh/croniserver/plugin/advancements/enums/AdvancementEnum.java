@@ -16,8 +16,8 @@ public enum AdvancementEnum {
 
     BUSINESSMAN(AdvancementEnum.ROOT, Material.HAY_BLOCK, 0, "Businessman", "Craft a Hay Block\n-monstahhhy", AdvancementFrame.GOAL, 1, -3.5F, true, true, null),
     CRAFTACOOKIE(AdvancementEnum.BUSINESSMAN, Material.COOKIE, 0, "Cookies!", "Cookietastic\n-Troloze", AdvancementFrame.TASK, 2, -4, true, true, null),
+    GUYSIFOUNDTHEFLOWER(AdvancementEnum.BUSINESSMAN, Material.AZURE_BLUET, 0, "Guys I found the flower", "ok guys we need an azure bluet and a dandelion\n-Darmuth", AdvancementFrame.TASK, 2, -3, true, true, null),
     THELIE(AdvancementEnum.CRAFTACOOKIE, Material.CAKE, 0, "The Lie", "My health goes down, I need a cow\n-Guaka25", AdvancementFrame.TASK, 3, -4, true, true, null),
-    GUYSIFOUNDTHEFLOWER(AdvancementEnum.CRAFTACOOKIE, Material.AZURE_BLUET, 0, "Guys I found the flower", "ok guys we need an azure bluet and a dandelion\n-Darmuth", AdvancementFrame.TASK, 2, -3, true, true, null),
 
     SNOWBALL(AdvancementEnum.ROOT, Material.SNOWBALL, 0, "Finland", "This is Finland\n-iiiomiii", AdvancementFrame.TASK, 1, -1, true, true, null),
     NOTPACIFIST(AdvancementEnum.SNOWBALL, Material.IRON_SWORD, 0, "Not Pacifist", "RIP PACIFIST\n-DSpectrumNGK", AdvancementFrame.TASK, 2, -2, true, true, null),

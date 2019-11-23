@@ -7,8 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryEvent;
-import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Objects;
@@ -33,9 +33,9 @@ public class OnInventory implements Listener {
     }
 
     @EventHandler
-    public void onInventoryPickupItem(InventoryPickupItemEvent event) {
-        if (event.getInventory().getHolder() instanceof Player) {
-            Player p = (Player)event.getInventory().getHolder();
+    public void onEntityPickupItem(EntityPickupItemEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player p = (Player) event.getEntity();
             if (event.getItem().getItemStack().getType() == Material.EMERALD_ORE) {
                 Advancement advancement = AdvancementEnum.SHINYSTONE.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);

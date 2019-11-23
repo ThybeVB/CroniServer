@@ -30,7 +30,7 @@ public class OnDamage implements Listener {
             if (event.getDamager() instanceof Player) {
                 if (event.getEntity().getLocation().getY() < 32) {
                     Advancement advancement = AdvancementEnum.CREEPER.getAdvancement();
-                    CustomAdvancements.grantAdvancement((Player)event.getDamager(), advancement);
+                    CustomAdvancements.grantAdvancement((Player) event.getDamager(), advancement);
                 }
             }
         }
