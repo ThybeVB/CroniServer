@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
 import org.bukkit.World;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,15 @@ public class OnDamage implements Listener {
             if (event.getDamager() instanceof Snowball) {
                 Advancement advancement = AdvancementEnum.SNOWBALL.getAdvancement();
                 CustomAdvancements.grantAdvancement((Player) event.getEntity(), advancement);
+            }
+        }
+
+        if (event.getEntity() instanceof Creeper) {
+            if (event.getDamager() instanceof Player) {
+                if (event.getEntity().getLocation().getY() < 32) {
+                    Advancement advancement = AdvancementEnum.CREEPER.getAdvancement();
+                    CustomAdvancements.grantAdvancement((Player)event.getDamager(), advancement);
+                }
             }
         }
     }
