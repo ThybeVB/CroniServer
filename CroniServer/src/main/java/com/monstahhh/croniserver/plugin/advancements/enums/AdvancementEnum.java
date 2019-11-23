@@ -28,7 +28,8 @@ public enum AdvancementEnum {
     SWEETDREAMS(AdvancementEnum.NETHERLANDS, Material.RED_BED, 0, "Sweet Dreams Are Made Of This", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, 4, 1, true, true, null),
 
     BIGBOY(AdvancementEnum.ROOT, Material.BREAD, 10, "Big Boy", "You're officially a big boy\n-iiiomiii", AdvancementFrame.TASK, 1, 2.5F, true, true, null),
-    POUNDS(AdvancementEnum.BIGBOY, Material.ANVIL, 0, "Pounds!", "Pounds!\n-DSpectrumNGK", AdvancementFrame.CHALLENGE, 2, 2, true, true, null),
+    POUNDS(AdvancementEnum.BIGBOY, Material.ANVIL, 0, "Pounds!", "Pounds!\n-DSpectrumNGK", AdvancementFrame.CHALLENGE, 3, 2, true, true, null),
+    SHINYSTONE(AdvancementEnum.BIGBOY, Material.EMERALD_ORE, 0, "Shiny Stone!", "Mined using high quality tools\n-Guaka25", AdvancementFrame.GOAL, 2, 2, true, true, null),
     GUAKAHOUSE(AdvancementEnum.BIGBOY, Material.BLUE_CONCRETE, 0, "Guaka51", "Enter Guaka's Base\n-Sebas", AdvancementFrame.CHALLENGE, 2, 3, true, true, null),
 
     AGIRLHASNONAME(AdvancementEnum.ROOT, Material.ZOMBIE_HEAD, 0, "A girl has no name", "The many-faced god has requested a name\n-Guaka25", AdvancementFrame.GOAL, 1, 4, true, true, null),

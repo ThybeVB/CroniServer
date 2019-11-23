@@ -8,26 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Objects;
 
 public class OnInventory implements Listener {
-
-    //@EventHandler
-    //public void onInventoryClick(InventoryClickEvent event) {
-    //    Player p = (Player) event.getWhoClicked();
-    //    if (event.getCurrentItem() != null) {
-    //        if (event.getCurrentItem().getType() == Material.ZOMBIE_HEAD) {
-    //            Advancement advancement = AdvancementEnum.AGIRLHASNONAME.getAdvancement();
-    //            CustomAdvancements.grantAdvancement(p, advancement);
-    //        }
-    //    }
-    //    if (p.getInventory().getItemInMainHand().getType() == Material.DRAGON_EGG && p.getInventory().getItemInOffHand().getType() == Material.DRAGON_EGG) {
-    //        Advancement advancement = AdvancementEnum.HACKEDBALLS.getAdvancement();
-    //        CustomAdvancements.grantAdvancement(p, advancement);
-    //    }
-    //}
 
     @EventHandler
     public void onInventory(InventoryEvent event) {
@@ -42,6 +28,16 @@ public class OnInventory implements Listener {
             if (p.getInventory().getItemInMainHand().getType() == Material.DRAGON_EGG && p.getInventory().getItemInOffHand().getType() == Material.DRAGON_EGG) {
                 Advancement advancement = AdvancementEnum.HACKEDBALLS.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onInventoryPickupItem(InventoryPickupItemEvent event) {
+        if (event.getInventory().getHolder() instanceof Player) {
+            if (event.getItem().getItemStack().getType() == Material.EMERALD_ORE) {
+                Advancement advancement = AdvancementEnum.SHINYSTONE.getAdvancement();
+                CustomAdvancements.grantAdvancement((Player)event.getInventory().getHolder(), advancement);
             }
         }
     }
