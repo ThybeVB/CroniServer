@@ -35,9 +35,14 @@ public class OnInventory implements Listener {
     @EventHandler
     public void onInventoryPickupItem(InventoryPickupItemEvent event) {
         if (event.getInventory().getHolder() instanceof Player) {
+            Player p = (Player)event.getInventory().getHolder();
             if (event.getItem().getItemStack().getType() == Material.EMERALD_ORE) {
                 Advancement advancement = AdvancementEnum.SHINYSTONE.getAdvancement();
-                CustomAdvancements.grantAdvancement((Player)event.getInventory().getHolder(), advancement);
+                CustomAdvancements.grantAdvancement(p, advancement);
+            }
+            if (event.getItem().getItemStack().getType() == Material.AZURE_BLUET) {
+                Advancement advancement = AdvancementEnum.GUYSIFOUNDTHEFLOWER.getAdvancement();
+                CustomAdvancements.grantAdvancement(p, advancement);
             }
         }
     }
