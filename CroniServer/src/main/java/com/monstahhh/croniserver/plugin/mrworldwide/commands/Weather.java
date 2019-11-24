@@ -42,7 +42,7 @@ public class Weather {
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
-        if (event.getChannel().getIdLong() == 305792249877364738L) {
+        if (event.getChannel().getIdLong() != 316310737419108354L) {
             event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
         } else {
             if (msg.getMentions().size() > 0) {
