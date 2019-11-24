@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Weather {
 
@@ -41,16 +42,20 @@ public class Weather {
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
-        if (msg.getMentions().size() > 0) {
-            this.carryMentionCommand(event);
+        if (event.getChannel().getIdLong() == 305792249877364738L) {
+            event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
         } else {
-            if ((msg.getContentRaw().substring(7)).contains(",")) {
-                this.carryCommandWithParams(event);
+            if (msg.getMentions().size() > 0) {
+                this.carryMentionCommand(event);
             } else {
-                if (!msg.getContentRaw().substring(7).isEmpty()) {
-                    this.carryCommandWithCountry(event);
+                if ((msg.getContentRaw().substring(7)).contains(",")) {
+                    this.carryCommandWithParams(event);
                 } else {
-                    this.carryCommandWithNoParams(event);
+                    if (!msg.getContentRaw().substring(7).isEmpty()) {
+                        this.carryCommandWithCountry(event);
+                    } else {
+                        this.carryCommandWithNoParams(event);
+                    }
                 }
             }
         }
