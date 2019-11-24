@@ -44,7 +44,7 @@ public class Weather {
         Message msg = event.getMessage();
         if (event.getChannel().getIdLong() != 316310737419108354L) {
             event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
-            event.getMessage().delete();
+            event.getMessage().delete().queue();
         } else {
             if (msg.getMentions().size() > 0) {
                 this.carryMentionCommand(event);
