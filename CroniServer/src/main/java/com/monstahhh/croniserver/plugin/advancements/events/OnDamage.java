@@ -78,6 +78,12 @@ public class OnDamage implements Listener {
                 }
             }
         }
+        if (xPos >= 880 && xPos <= 1016) {
+            if (zPos <= -87 && zPos <= 44) {
+                Advancement advancement = AdvancementEnum.SACRIFICE.getAdvancement();
+                CustomAdvancements.grantAdvancement(p, advancement);
+            }
+        }
 
         if (p.getWorld().getEnvironment() == World.Environment.NETHER) {
             if (Objects.requireNonNull(p.getLastDamageCause()).getCause() == EntityDamageEvent.DamageCause.LAVA) {
