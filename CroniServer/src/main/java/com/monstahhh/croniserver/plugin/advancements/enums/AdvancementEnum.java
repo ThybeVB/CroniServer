@@ -27,7 +27,7 @@ public enum AdvancementEnum {
     FURNITURYDEATH(AdvancementEnum.GUAKAAPPROVED, Material.LIME_BED, 5, "Furnitury Death", "Get IKEA'd by Cronibet 5 times\n-iiiomiii", AdvancementFrame.CHALLENGE, 4, -1, true, true, null),
     SACRIFICE(AdvancementEnum.GUAKAAPPROVED, Material.BREAD, 0, "Sacrifice", "Pray for the Holy Baguette\n-Runanova", AdvancementFrame.TASK, 4, -2, true, true, null),
     NURSERYRHYMES(AdvancementEnum.GUAKAAPPROVED, Material.CHICKEN, 0, "Nursery Rhymes", "AAAAAAA\n-jvsTSX", AdvancementFrame.TASK, 4, 0, true, true, null),
-    KILLEDBYNURSERY(AdvancementEnum.NURSERYRHYMES, Material.COOKED_CHICKEN, 0, "Have A Nice Day!", "One-Way Freedom\n-MyZone03", AdvancementFrame.GOAL, 6, 0, true, true, null),
+    KILLEDBYNURSERY(AdvancementEnum.NURSERYRHYMES, Material.COOKED_CHICKEN, 0, "Have A Nice Day!", "One-Way Freedom\n-MyZone03", AdvancementFrame.GOAL, 5.25F, 0, true, true, null),
     NETHERLANDS(AdvancementEnum.GETKILLEDBYSHOVEL, Material.ORANGE_WOOL, 0, "Welkom in Nederland", "Ga nu dood.\n-Darmuth", AdvancementFrame.TASK, 3, 1, true, true, null),
     SWEETDREAMS(AdvancementEnum.NETHERLANDS, Material.RED_BED, 0, "Sweet Dreams Are Made Of This", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, 4, 1, true, true, null),
 
