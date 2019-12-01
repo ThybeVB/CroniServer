@@ -29,9 +29,9 @@ public class CustomAdvancements {
 
     public void enable() {
         _manager = CrazyAdvancements.getNewAdvancementManager();
-
         AdvancementEnum.registerAdvancements();
 
+        _plugin.getServer().getPluginManager().registerEvents(new OnChat(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new OnCraft(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new OnDamage(), _plugin);
         _plugin.getServer().getPluginManager().registerEvents(new OnExp(), _plugin);

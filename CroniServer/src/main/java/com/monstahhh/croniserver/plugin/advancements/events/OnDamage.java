@@ -3,12 +3,14 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -81,6 +83,16 @@ public class OnDamage implements Listener {
             if (Objects.requireNonNull(p.getLastDamageCause()).getCause() == EntityDamageEvent.DamageCause.LAVA) {
                 Advancement advancement = AdvancementEnum.NETHERLANDS.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        if (event.getBlock().getType() == Material.DIAMOND_ORE) {
+            if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.AIR) {
+                Advancement advancement = AdvancementEnum.WHY.getAdvancement();
+                CustomAdvancements.grantAdvancement(event.getPlayer(), advancement);
             }
         }
     }

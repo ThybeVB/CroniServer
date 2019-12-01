@@ -26,18 +26,21 @@ public enum AdvancementEnum {
     GUAKAAPPROVED(AdvancementEnum.GETKILLEDBYSHOVEL, Material.BLUE_CONCRETE_POWDER, 0, "Guaka Approved!", "Guaka broke your legs\n-GabrielArt", AdvancementFrame.TASK, 3, -0.5F, true, true, null),
     FURNITURYDEATH(AdvancementEnum.GUAKAAPPROVED, Material.LIME_BED, 5, "Furnitury Death", "Get IKEA'd by Cronibet 5 times\n-iiiomiii", AdvancementFrame.CHALLENGE, 4, -1, true, true, null),
     KILLEDBYNURSERY(AdvancementEnum.GUAKAAPPROVED, Material.COOKED_CHICKEN, 0, "Have A Nice Day!", "One-Way Freedom\n-MyZone03", AdvancementFrame.GOAL, 4, 0, true, true, null),
+    NURSERYRHYMES(AdvancementEnum.KILLEDBYNURSERY, Material.CHICKEN, 0, "Nursery Rhymes", "AAAAAAA\n-jvsTSX", AdvancementFrame.TASK, 5, 0, true, true, null),
     NETHERLANDS(AdvancementEnum.GETKILLEDBYSHOVEL, Material.ORANGE_WOOL, 0, "Welkom in Nederland", "Ga nu dood.\n-Darmuth", AdvancementFrame.TASK, 3, 1, true, true, null),
     SWEETDREAMS(AdvancementEnum.NETHERLANDS, Material.RED_BED, 0, "Sweet Dreams Are Made Of This", "Hot Dreams :)\n-Guaka25", AdvancementFrame.TASK, 4, 1, true, true, null),
 
     BIGBOY(AdvancementEnum.ROOT, Material.BREAD, 10, "Big Boy", "You're officially a big boy\n-iiiomiii", AdvancementFrame.TASK, 1, 2.5F, true, true, null),
     POUNDS(AdvancementEnum.BIGBOY, Material.ANVIL, 0, "Pounds!", "Pounds!\n-DSpectrumNGK", AdvancementFrame.CHALLENGE, 3, 2, true, true, null),
     SHINYSTONE(AdvancementEnum.BIGBOY, Material.EMERALD_ORE, 0, "Shiny Stone!", "Mined using high quality tools\n-Guaka25", AdvancementFrame.GOAL, 2, 2, true, true, null),
+    WHY(AdvancementEnum.SHINYSTONE, Material.DIAMOND_ORE, 0, "Why", "Why would you do that?\n-Troloze", AdvancementFrame.TASK, 3, 2, true, true, null),
     GUAKAHOUSE(AdvancementEnum.BIGBOY, Material.BLUE_CONCRETE, 0, "Guaka51", "Enter Guaka's Base\n-Sebas", AdvancementFrame.CHALLENGE, 2, 3, true, true, null),
 
     AGIRLHASNONAME(AdvancementEnum.ROOT, Material.ZOMBIE_HEAD, 0, "A girl has no name", "The many-faced god has requested a name\n-Guaka25", AdvancementFrame.GOAL, 1, 4, true, true, null),
     LUDICROUS(AdvancementEnum.AGIRLHASNONAME, Material.FEATHER, 0, "Ludicrous Speed", "I Am Speed.\n-Guaka25", AdvancementFrame.TASK, 2, 4, true, true, null),
     FALLINGUP(AdvancementEnum.LUDICROUS, Material.FIREWORK_ROCKET, 0, "Falling Up", "NAAAAA NAAAAAAA NAAANANANANANANANAAAA NAAAAA\n-Guaka25", AdvancementFrame.CHALLENGE, 3, 4, true, true, null),
     HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 4, 4, true, true, null);
+
 
     private final Material icon;
     private final int required;
