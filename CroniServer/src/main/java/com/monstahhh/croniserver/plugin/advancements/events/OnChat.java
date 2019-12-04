@@ -19,10 +19,10 @@ public class OnChat implements Listener {
             double zPos = p.getLocation().getZ();
             if (xPos >= 203 && xPos <= 210) {
                 if (zPos <= -275 && zPos >= -281) {
-                    Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
+                    Bukkit.getScheduler().runTask(CustomAdvancements._plugin, () -> {
                         Advancement advancement = AdvancementEnum.NURSERYRHYMES.getAdvancement();
                         CustomAdvancements.grantAdvancement(p, advancement);
-                    }, 1);
+                    });
                 }
             }
         }
