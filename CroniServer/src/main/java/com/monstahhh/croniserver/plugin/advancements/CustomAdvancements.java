@@ -5,6 +5,8 @@ import com.monstahhh.croniserver.plugin.advancements.events.*;
 import eu.endercentral.crazy_advancements.Advancement;
 import eu.endercentral.crazy_advancements.CrazyAdvancements;
 import eu.endercentral.crazy_advancements.manager.AdvancementManager;
+import github.scarsz.discordsrv.DiscordSRV;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +25,9 @@ public class CustomAdvancements {
             if (p.getGameMode() == GameMode.SURVIVAL) {
                 _manager.grantAdvancement(p, adv);
                 _manager.saveProgress(p, "croniserver");
+
+                TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
+                serverChat.sendMessage(":medal: **" + p.getDisplayName() + " has made the advancement " + adv.getDisplay().getTitle().toString() + "**").queue();
             }
         }
     }
