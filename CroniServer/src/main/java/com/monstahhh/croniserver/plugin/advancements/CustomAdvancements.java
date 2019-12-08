@@ -27,7 +27,7 @@ public class CustomAdvancements {
                 _manager.saveProgress(p, "croniserver");
 
                 TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
-                String advName = adv.getDisplay().getTitle().toString().split("'")[2];
+                String advName = adv.getDisplay().getTitle().toString().split("\"")[3];
                 serverChat.sendMessage(":medal: **" + p.getDisplayName() + " has made the advancement " + advName + "**").queue();
             }
         }
