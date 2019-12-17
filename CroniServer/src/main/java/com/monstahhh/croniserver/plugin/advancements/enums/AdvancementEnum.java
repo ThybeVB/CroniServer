@@ -44,14 +44,14 @@ public enum AdvancementEnum {
     GUAKAHOUSE(AdvancementEnum.BIGBOY, Material.BLUE_CONCRETE, 0, "Guaka51", "Enter Guaka's Base\n-Sebas", AdvancementFrame.CHALLENGE, 4, 1.5F, true, true),
     FALLINGUP(AdvancementEnum.LUDICROUS, Material.FIREWORK_ROCKET, 0, "Falling Up", "NAAAAA NAAAAAAA NAAANANANANANANANAAAA NAAAAA\n-Guaka25", AdvancementFrame.CHALLENGE, 5, 1.5F, true, true),
     HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 6, 1.5F, true, true),
-    DRAGONSLAYER(AdvancementEnum.ROOT, Material.END_CRYSTAL, 0, "Dragonslayer", "Played the ender dragon event on 30th December 2018", AdvancementFrame.TASK, 1, 2.5F, true, true),
-    APPLESEEKER(AdvancementEnum.DRAGONSLAYER, Material.ENCHANTED_GOLDEN_APPLE, 0, "Apple Seeker", "Played UHC1 on 13th April 2019", AdvancementFrame.TASK, 2, 2.5F, true, true),
-    HUNTERSOFTHEUNDERWORLD(AdvancementEnum.APPLESEEKER, Material.NETHER_STAR, 0,"Hunters of the Underworld", "Played the wither boss event on 6th July 2019", AdvancementFrame.TASK, 3, 2.5F, true, true),
-    INSIDEABEDROCKCAGE(AdvancementEnum.HUNTERSOFTHEUNDERWORLD, Material.IRON_AXE, 0, "Inside a Bedrock Cage", "Played UHC2 on 13th July 2019", AdvancementFrame.TASK, 4, 2.5F, true, true),
-    THERESONLYDEATH(AdvancementEnum.INSIDEABEDROCKCAGE, Material.DIAMOND_SWORD, 0, "There's only Death", "Played UHC 3 on 5th October 2019", AdvancementFrame.TASK, 5, 2.5F, true, true),
-    UHCCHALLENGER(AdvancementEnum.ROOT, Material.GOLD_INGOT, 0, "UHC Challenger", "Win 1 UHC", AdvancementFrame.CHALLENGE, 1, 3.5F, true, true),
-    UHCWARRIOR(AdvancementEnum.UHCCHALLENGER, Material.GOLDEN_APPLE, 0, "UHC Warrior", "Win 2 UHCs", AdvancementFrame.CHALLENGE, 2, 3.5F, true, true),
-    UHCMASTER(AdvancementEnum.UHCWARRIOR, Material.GOLDEN_PICKAXE, 0, "UHC Master", "Win 3 UHCs", AdvancementFrame.CHALLENGE, 3, 3.5F, true, true);
+    DRAGONSLAYER(AdvancementEnum.ROOT, Material.END_CRYSTAL, 0, "Dragonslayer", "Played the ender dragon event on 30th December 2018", AdvancementFrame.TASK, 1, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    APPLESEEKER(AdvancementEnum.DRAGONSLAYER, Material.ENCHANTED_GOLDEN_APPLE, 0, "Apple Seeker", "Played UHC1 on 13th April 2019", AdvancementFrame.TASK, 2, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    HUNTERSOFTHEUNDERWORLD(AdvancementEnum.APPLESEEKER, Material.NETHER_STAR, 0,"Hunters of the Underworld", "Played the wither boss event on 6th July 2019", AdvancementFrame.TASK, 3, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    INSIDEABEDROCKCAGE(AdvancementEnum.HUNTERSOFTHEUNDERWORLD, Material.IRON_AXE, 0, "Inside a Bedrock Cage", "Played UHC2 on 13th July 2019", AdvancementFrame.TASK, 4, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    THERESONLYDEATH(AdvancementEnum.INSIDEABEDROCKCAGE, Material.DIAMOND_SWORD, 0, "There's only Death", "Played UHC 3 on 5th October 2019", AdvancementFrame.TASK, 5, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    UHCCHALLENGER(AdvancementEnum.ROOT, Material.GOLD_INGOT, 0, "UHC Challenger", "Win 1 UHC", AdvancementFrame.CHALLENGE, 1, 3.5F, true, true, AdvancementVisibility.ALWAYS),
+    UHCWARRIOR(AdvancementEnum.UHCCHALLENGER, Material.GOLDEN_APPLE, 0, "UHC Warrior", "Win 2 UHCs", AdvancementFrame.CHALLENGE, 2, 3.5F, true, true, AdvancementVisibility.ALWAYS),
+    UHCMASTER(AdvancementEnum.UHCWARRIOR, Material.GOLDEN_PICKAXE, 0, "UHC Master", "Win 3 UHCs", AdvancementFrame.CHALLENGE, 3, 3.5F, true, true, AdvancementVisibility.ALWAYS);
 
     private final Material icon;
     private final int required;
@@ -91,6 +91,21 @@ public enum AdvancementEnum {
         this.showToast = showToast;
         this.announceChat = announceChat;
         this.visibility = AdvancementVisibility.VANILLA;
+    }
+
+    AdvancementEnum(AdvancementEnum parent, Material icon, int required, String title, String description,
+                    AdvancementFrame frame, float x, float y, boolean showToast, boolean announceChat, AdvancementVisibility visibility) {
+        this.parent = parent;
+        this.icon = icon;
+        this.required = required;
+        this.title = title;
+        this.description = description;
+        this.frame = frame;
+        this.x = x;
+        this.y = y;
+        this.showToast = showToast;
+        this.announceChat = announceChat;
+        this.visibility = visibility;
     }
 
     public static void registerAdvancements() {
