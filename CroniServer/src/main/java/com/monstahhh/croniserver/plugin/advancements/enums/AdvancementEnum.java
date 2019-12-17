@@ -40,8 +40,9 @@ public enum AdvancementEnum {
     AGIRLHASNONAME(AdvancementEnum.ROOT, Material.ZOMBIE_HEAD, 0, "A girl has no name", "The many-faced god has requested a name\n-Guaka25", AdvancementFrame.GOAL, 1, 4, true, true),
     LUDICROUS(AdvancementEnum.AGIRLHASNONAME, Material.FEATHER, 0, "Ludicrous Speed", "I Am Speed.\n-Guaka25", AdvancementFrame.TASK, 2, 4, true, true),
     FALLINGUP(AdvancementEnum.LUDICROUS, Material.FIREWORK_ROCKET, 0, "Falling Up", "NAAAAA NAAAAAAA NAAANANANANANANANAAAA NAAAAA\n-Guaka25", AdvancementFrame.CHALLENGE, 3, 4, true, true),
-    HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 4, 4, true, true);
+    HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 4, 4, true, true),
 
+    SHALOM(AdvancementEnum.ROOT, Material.SHEARS, 0, "Shalom", "I am here to take your foreskin\n-Guaka25", AdvancementFrame.CHALLENGE, -1, 0, true, true);
 
     private final Material icon;
     private final int required;
@@ -63,22 +64,6 @@ public enum AdvancementEnum {
         this.description = description;
         this.frame = frame;
         this.backgroundTexture = backgroundTexture;
-        this.showToast = showToast;
-        this.announceChat = announceChat;
-        this.visibility = visibility;
-    }
-
-    AdvancementEnum(AdvancementEnum parent, Material icon, int required, String title, String description,
-                    AdvancementFrame frame, float x, float y, boolean showToast, boolean announceChat,
-                    AdvancementVisibility visibility) {
-        this.parent = parent;
-        this.icon = icon;
-        this.required = required;
-        this.title = title;
-        this.description = description;
-        this.frame = frame;
-        this.x = x;
-        this.y = y;
         this.showToast = showToast;
         this.announceChat = announceChat;
         this.visibility = visibility;
@@ -118,7 +103,7 @@ public enum AdvancementEnum {
                 display.setCoordinates(adv.getX(), adv.getY());
 
             adv.advancement = new Advancement(adv.getParent() == null ? null : adv.getParent().getAdvancement(),
-                    new NameKey("croniserver", adv.name().toLowerCase()), display);
+                    new NameKey(CustomAdvancements.namespace, adv.name().toLowerCase()), display);
             if (adv.getRequired() != 0) {
                 adv.advancement.setCriteria(adv.getRequired());
             }

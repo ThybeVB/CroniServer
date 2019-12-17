@@ -61,6 +61,11 @@ public class OnDamage implements Listener {
                 }
             }
 
+            if (p.getKiller().getDisplayName().equalsIgnoreCase("ongoaviv")) {
+                Advancement advancement = AdvancementEnum.SHALOM.getAdvancement();
+                CustomAdvancements.grantAdvancement(p, advancement);
+            }
+
             if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
                 Advancement advancement = AdvancementEnum.GETKILLEDBYSHOVEL.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);

@@ -16,6 +16,8 @@ public class CustomAdvancements {
     public static JavaPlugin _plugin;
     public static AdvancementManager _manager;
 
+    public static String namespace = "croniserver";
+
     public CustomAdvancements(JavaPlugin plugin) {
         _plugin = plugin;
     }
@@ -24,7 +26,7 @@ public class CustomAdvancements {
         if (!adv.isGranted(p)) {
             if (p.getGameMode() == GameMode.SURVIVAL) {
                 _manager.grantAdvancement(p, adv);
-                _manager.saveProgress(p, "croniserver");
+                _manager.saveProgress(p, namespace);
 
                 TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
                 String advName = adv.getDisplay().getTitle().toString().split("\"")[3];
@@ -35,6 +37,7 @@ public class CustomAdvancements {
 
     public void enable() {
         _manager = CrazyAdvancements.getNewAdvancementManager();
+        _manager.makeAccessible(namespace);
         AdvancementEnum.registerAdvancements();
 
         _plugin.getServer().getPluginManager().registerEvents(new OnChat(), _plugin);

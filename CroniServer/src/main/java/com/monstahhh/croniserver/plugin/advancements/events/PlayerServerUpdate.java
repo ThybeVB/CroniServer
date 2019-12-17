@@ -3,6 +3,7 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
+import net.dv8tion.jda.internal.requests.Route;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,7 +22,7 @@ public class PlayerServerUpdate implements Listener {
         Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
             Player p = event.getPlayer();
 
-            CustomAdvancements._manager.loadProgress(p, "croniserver");
+            CustomAdvancements._manager.loadProgress(p, CustomAdvancements.namespace);
             if (!CustomAdvancements._manager.getPlayers().contains(p)) {
                 CustomAdvancements._manager.addPlayer(p);
             }
