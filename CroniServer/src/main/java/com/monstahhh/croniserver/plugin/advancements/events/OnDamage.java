@@ -3,9 +3,11 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
+import eu.endercentral.crazy_advancements.AdvancementDisplay;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
@@ -34,6 +36,13 @@ public class OnDamage implements Listener {
                     Advancement advancement = AdvancementEnum.CREEPER.getAdvancement();
                     CustomAdvancements.grantAdvancement((Player) event.getDamager(), advancement);
                 }
+            }
+        }
+
+        if (event.getEntity() instanceof PigZombie) {
+            if (event.getDamager() instanceof Player) {
+                Advancement advancement = AdvancementEnum.ITWASATTHISMOMENT.getAdvancement();
+                CustomAdvancements.grantAdvancement((Player) event.getDamager(), advancement);
             }
         }
     }
@@ -67,7 +76,7 @@ public class OnDamage implements Listener {
             }
 
             if (p.getKiller().getInventory().getItemInMainHand().getType().toString().endsWith("SHOVEL")) {
-                Advancement advancement = AdvancementEnum.GETKILLEDBYSHOVEL.getAdvancement();
+                Advancement advancement = AdvancementEnum.YOUSUCK.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
                 return;
             }
@@ -89,7 +98,10 @@ public class OnDamage implements Listener {
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
         }
-
+        if (Objects.requireNonNull(p.getLastDamageCause()).getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+            Advancement advancement = AdvancementEnum.AFRICA.getAdvancement();
+            CustomAdvancements.grantAdvancement(p, advancement);
+        }
         if (p.getWorld().getEnvironment() == World.Environment.NETHER) {
             if (Objects.requireNonNull(p.getLastDamageCause()).getCause() == EntityDamageEvent.DamageCause.LAVA) {
                 Advancement advancement = AdvancementEnum.NETHERLANDS.getAdvancement();
