@@ -26,5 +26,10 @@ public class OnChat implements Listener {
                 }
             }
         }
+        if (event.getMessage().equalsIgnoreCase(":ripchain:")) {
+            Player p = event.getPlayer();
+            Advancement advancement = AdvancementEnum.BREAKEROFCHAINS.getAdvancement();
+            CustomAdvancements.grantAdvancement(p, advancement);
+        }
     }
 }

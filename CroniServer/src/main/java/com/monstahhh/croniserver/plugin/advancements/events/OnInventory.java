@@ -44,6 +44,10 @@ public class OnInventory implements Listener {
                 Advancement advancement = AdvancementEnum.GUYSIFOUNDTHEFLOWER.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
+            if (event.getItem().getItemStack().getType() == Material.MUSIC_DISC_STAL) {
+                Advancement advancement = AdvancementEnum.STAL.getAdvancement();
+                CustomAdvancements.grantAdvancement(p, advancement);
+            }
         }
     }
 }

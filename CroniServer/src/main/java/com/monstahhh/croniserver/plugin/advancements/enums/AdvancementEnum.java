@@ -42,6 +42,8 @@ public enum AdvancementEnum {
     FALLINGUP(AdvancementEnum.LUDICROUS, Material.FIREWORK_ROCKET, 0, "Falling Up", "NAAAAA NAAAAAAA NAAANANANANANANANAAAA NAAAAA\n-Guaka25", AdvancementFrame.CHALLENGE, 3, 4, true, true),
     HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 4, 4, true, true),
 
+    STAL(AdvancementEnum.ROOT, Material.MUSIC_DISC_STAL, 0, "Auschwitz Days", "This shit is cursed af\n-Guaka25", AdvancementFrame.CHALLENGE, -1, 1, true, true),
+    BREAKEROFCHAINS(AdvancementEnum.ROOT, Material.SHEARS, 0, "Breaker of Chains", "Mother of dr- wait\n-Guaka25", AdvancementFrame.CHALLENGE, -1, -1, true, true),
     SHALOM(AdvancementEnum.ROOT, Material.SHEARS, 0, "Shalom", "I am here to take your foreskin\n-Guaka25", AdvancementFrame.CHALLENGE, -1, 0, true, true);
 
     private final Material icon;
