@@ -3,7 +3,6 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
-import net.dv8tion.jda.internal.requests.Route;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -51,6 +51,7 @@ public class CustomAdvancements {
     }
 
     public void disable() {
+        _manager.resetAccessible();
         System.out.println("[CroniServer] Disabled Advancements");
     }
 }

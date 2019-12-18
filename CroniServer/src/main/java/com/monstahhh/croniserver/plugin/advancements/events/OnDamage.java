@@ -3,7 +3,6 @@ package com.monstahhh.croniserver.plugin.advancements.events;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
-import eu.endercentral.crazy_advancements.AdvancementDisplay;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Creeper;

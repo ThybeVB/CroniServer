@@ -46,7 +46,7 @@ public enum AdvancementEnum {
     HACKEDBALLS(AdvancementEnum.FALLINGUP, Material.DRAGON_EGG, 0, "Hacked Balls", "Where's the dragon eggplant?\n-Guaka25", AdvancementFrame.CHALLENGE, 6, 1.5F, true, true),
     DRAGONSLAYER(AdvancementEnum.ROOT, Material.END_CRYSTAL, 0, "Dragonslayer", "Played the ender dragon event on 30th December 2018", AdvancementFrame.TASK, 1, 2.5F, true, true, AdvancementVisibility.ALWAYS),
     APPLESEEKER(AdvancementEnum.DRAGONSLAYER, Material.ENCHANTED_GOLDEN_APPLE, 0, "Apple Seeker", "Played UHC1 on 13th April 2019", AdvancementFrame.TASK, 2, 2.5F, true, true, AdvancementVisibility.ALWAYS),
-    HUNTERSOFTHEUNDERWORLD(AdvancementEnum.APPLESEEKER, Material.NETHER_STAR, 0,"Hunters of the Underworld", "Played the wither boss event on 6th July 2019", AdvancementFrame.TASK, 3, 2.5F, true, true, AdvancementVisibility.ALWAYS),
+    HUNTERSOFTHEUNDERWORLD(AdvancementEnum.APPLESEEKER, Material.NETHER_STAR, 0, "Hunters of the Underworld", "Played the wither boss event on 6th July 2019", AdvancementFrame.TASK, 3, 2.5F, true, true, AdvancementVisibility.ALWAYS),
     INSIDEABEDROCKCAGE(AdvancementEnum.HUNTERSOFTHEUNDERWORLD, Material.IRON_AXE, 0, "Inside a Bedrock Cage", "Played UHC2 on 13th July 2019", AdvancementFrame.TASK, 4, 2.5F, true, true, AdvancementVisibility.ALWAYS),
     THERESONLYDEATH(AdvancementEnum.INSIDEABEDROCKCAGE, Material.DIAMOND_SWORD, 0, "There's only Death", "Played UHC 3 on 5th October 2019", AdvancementFrame.TASK, 5, 2.5F, true, true, AdvancementVisibility.ALWAYS),
     UHCCHALLENGER(AdvancementEnum.ROOT, Material.GOLD_INGOT, 0, "UHC Challenger", "Win 1 UHC", AdvancementFrame.CHALLENGE, 1, 3.5F, true, true, AdvancementVisibility.ALWAYS),
