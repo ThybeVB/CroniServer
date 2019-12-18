@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.advancements.events;
 
+import alexh.weak.ChildAbsence;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.advancements.enums.AdvancementEnum;
 import eu.endercentral.crazy_advancements.Advancement;
@@ -40,14 +41,16 @@ public class OnMove implements Listener {
     @EventHandler
     public void onPlayerInteractEvent(org.bukkit.event.player.PlayerInteractEvent e) {
         Player player = e.getPlayer();
-        if (Objects.requireNonNull(e.getItem()).getType() == Material.POTION) {
-            Advancement advancement = AdvancementEnum.IMTHIRSTY.getAdvancement();
-            CustomAdvancements.grantAdvancement(player, advancement);
-        }
+        try {
+            if (Objects.requireNonNull(e.getItem()).getType() == Material.POTION) {
+                Advancement advancement = AdvancementEnum.IMTHIRSTY.getAdvancement();
+                CustomAdvancements.grantAdvancement(player, advancement);
+            }
 
-        if (player.getInventory().getItemInMainHand().getType().equals(Material.POTION) && player.getInventory().getItemInMainHand().getData().getData() == PotionEffectType.SPEED.getId()) {
-            Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
-            CustomAdvancements.grantAdvancement(e.getPlayer(), advancement);
-        }
+            if (player.getInventory().getItemInMainHand().getType().equals(Material.POTION) && player.getInventory().getItemInMainHand().getData().getData() == PotionEffectType.SPEED.getId()) {
+                Advancement advancement = AdvancementEnum.LUDICROUS.getAdvancement();
+                CustomAdvancements.grantAdvancement(e.getPlayer(), advancement);
+            }
+        } catch (NullPointerException ignored) { }
     }
 }
