@@ -102,9 +102,6 @@ public class City {
         if (temperature > 0) {
             return Color.CYAN;
         }
-        if (temperature < 0) {
-            return Color.BLUE;
-        }
 
         return Color.BLUE;
     }

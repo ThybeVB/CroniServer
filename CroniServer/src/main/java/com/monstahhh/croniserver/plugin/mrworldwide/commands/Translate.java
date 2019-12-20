@@ -16,9 +16,6 @@ import java.util.regex.Pattern;
 
 public class Translate {
 
-    private final String GOOGLE_URL_API = "https://translate.googleapis.com/translate_a/";
-    private final String GOOGLE_PARAMS = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
-
     public void carryConversationCommand(GuildMessageReceivedEvent event) {
         try {
             String[] results = doTranslate(event, true);
@@ -140,9 +137,10 @@ public class Translate {
 
     private HttpResponse doTranslateFor(String textToTranslate, String from, String to) throws IOException {
         String encodedText = java.net.URLEncoder.encode(textToTranslate, "UTF-8");
-        String params = String.format(GOOGLE_PARAMS, from, to, encodedText);
+        String paramsLink = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
+        String params = String.format(paramsLink, from, to, encodedText);
 
-        return new HttpClient().request(HttpMethod.GET, (GOOGLE_URL_API + params));
+        return new HttpClient().request(HttpMethod.GET, ("https://translate.googleapis.com/translate_a/" + params));
     }
 
     private String castResult(String result) {

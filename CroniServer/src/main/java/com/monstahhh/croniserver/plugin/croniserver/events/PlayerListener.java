@@ -28,7 +28,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (event.getPlayer().getDisplayName().equalsIgnoreCase("Guaka25")) {
-            if (event.getMessage().equalsIgnoreCase("/ban monstahhhy") || event.getMessage().equalsIgnoreCase("/kick monstahhhy")) {
+            if (event.getMessage().equalsIgnoreCase("/ban monstahhhy") || event.getMessage().equalsIgnoreCase("/kick monstahhhy") || event.getMessage().equalsIgnoreCase("/demote monstahhhy")) {
                 event.getPlayer().sendMessage(ChatColor.DARK_RED + "<3");
                 event.setCancelled(true);
             }

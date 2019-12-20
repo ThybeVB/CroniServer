@@ -13,9 +13,6 @@ import java.awt.*;
 
 public class Currency {
 
-    private final String baseLink = "https://free.currconv.com/api/v7/";
-    private final String params = "convert?q=%s_%s&compact=ultra&apiKey=%s";
-
     private EmbedBuilder defaultError = new EmbedBuilder()
             .setTitle("Mr. Error")
             .setColor(Color.RED);
@@ -64,8 +61,9 @@ public class Currency {
 
     private float[] getValueFor(String base, String destination, float amount, String token) {
         try {
+            String params = "convert?q=%s_%s&compact=ultra&apiKey=%s";
             String formattedSend = String.format(params, base.toUpperCase(), destination.toUpperCase(), token);
-            HttpResponse result = new HttpClient().request(HttpMethod.GET, (baseLink + formattedSend));
+            HttpResponse result = new HttpClient().request(HttpMethod.GET, ("https://free.currconv.com/api/v7/" + formattedSend));
             String res = result.asString();
 
             JSONObject obj = new JSONObject(res);

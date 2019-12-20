@@ -11,7 +11,7 @@
 
     <name>CroniServer</name>
 
-    <description>Main plugin for the Cronibet Minecraft Server</description>
+    <description>Main Minecraft plugin for the Cronibet Server</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <authme.version>5.6.0-SNAPSHOT</authme.version>
@@ -85,7 +85,6 @@
             <id>codemc</id>
             <url>http://repo.codemc.org/repository/maven-public/</url>
         </repository>
-
     </repositories>
 
     <dependencies>
@@ -116,8 +115,8 @@
         <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
-            <version>1.18.1</version>
-            <scope>provided</scope>
+            <version>1.18.4</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>

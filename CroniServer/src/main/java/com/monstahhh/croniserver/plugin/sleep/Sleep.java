@@ -20,6 +20,6 @@ public class Sleep {
     }
 
     public void disable() {
-        System.out.println("Disabled Sleep Extension");
+        System.out.println("Disabled Sleep");
     }
 }
