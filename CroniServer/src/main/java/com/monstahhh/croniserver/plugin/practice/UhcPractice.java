@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.practice;
 
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
+import com.monstahhh.croniserver.plugin.practice.commands.UhcClearPlayers;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcPracticeCommand;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcStopCommand;
 import com.monstahhh.croniserver.plugin.practice.events.GameEvents;
@@ -25,6 +26,7 @@ public class UhcPractice {
         playerCooldownManager = new PlayerCooldownManager(plugin);
         plugin.getServer().getPluginManager().registerEvents(new GameEvents(), plugin);
 
+        Objects.requireNonNull(plugin.getCommand("clearuhcplayers")).setExecutor(new UhcClearPlayers());
         Objects.requireNonNull(plugin.getCommand("uhcpractice")).setExecutor(new UhcPracticeCommand());
         Objects.requireNonNull(plugin.getCommand("stopuhc")).setExecutor(new UhcStopCommand());
 

@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.practice.commands;
 
+import com.monstahhh.croniserver.plugin.practice.PlayerCooldownManager;
 import com.monstahhh.croniserver.plugin.practice.UhcPractice;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,12 +26,16 @@ public class UhcPracticeCommand implements CommandExecutor {
                 if (UhcPractice.playerCooldownManager.isPlaying(p)) {
                     p.sendMessage(ChatColor.DARK_RED + "You are already in-game");
                 } else {
-                    World world = Bukkit.getWorld("uhcpractice");
-                    if (world != null) {
-                        int x = getRandomCoord();
-                        int z = getRandomCoord();
-                        UhcPractice.playerCooldownManager.startGame(p);
-                        p.teleport(new Location(world, x, world.getHighestBlockAt(x, z).getY(), z));
+                    if (!PlayerCooldownManager.hasPlayed(p)) {
+                        World world = Bukkit.getWorld("uhcpractice");
+                        if (world != null) {
+                            int x = getRandomCoord();
+                            int z = getRandomCoord();
+                            UhcPractice.playerCooldownManager.startGame(p);
+                            p.teleport(new Location(world, x, world.getHighestBlockAt(x, z).getY(), z));
+                        }
+                    } else {
+                        p.sendMessage(ChatColor.DARK_RED + "You have already played today. Try again tommorow.");
                     }
                 }
             } else {

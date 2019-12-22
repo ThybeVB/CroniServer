@@ -13,6 +13,8 @@ import java.util.TimerTask;
 public class PlayerCooldownManager {
 
     private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
+    public static HashMap<Player, Boolean> playersPlayedMap = new HashMap<>();
+
     private static JavaPlugin plugin;
 
     public PlayerCooldownManager(JavaPlugin _plugin) {
@@ -55,14 +57,19 @@ public class PlayerCooldownManager {
                     timer.cancel();
                     timer.purge();
                     playerCooldownMap.remove(p, timer);
+                    playersPlayedMap.put(p, true);
                     showEndcard(p, true);
                 }
-            }, 20000, 20000); //20,000 == 20 SECONDS (Temporary)
+            }, 60000, 60000); //60,000 == 1 MINUTE (Temporary)
             //}, 3600000, 3600000); //3,600,000 == 2HOURS
         }
     }
 
     public boolean isPlaying(Player p) {
         return playerCooldownMap.get(p) != null;
+    }
+
+    public static boolean hasPlayed(Player p) {
+        return playersPlayedMap.get(p) != null;
     }
 }

@@ -26,6 +26,10 @@ commands:
     description: Stops your UHC Session
     usage: /stopuhc
 
+  clearuhcplayers:
+    description: Clears UHC Players
+    usage: /clearuhcplayers
+
   home:
     description: Takes you to your home
     usage: /home
