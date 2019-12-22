@@ -18,6 +18,10 @@ commands:
     description: Takes you to creative
     usage: /creative
 
+  uhcpractice:
+    description: Takes you to the UHC Practice world
+    usage: /uhcpractice
+
   home:
     description: Takes you to your home
     usage: /home

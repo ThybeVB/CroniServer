@@ -8,6 +8,7 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
+import com.monstahhh.croniserver.plugin.practice.UhcPractice;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,7 @@ public final class CroniServer extends JavaPlugin {
     private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
+    private UhcPractice practice;
     private MrWorldWide mrWorldWide;
 
     @Override
@@ -60,6 +62,9 @@ public final class CroniServer extends JavaPlugin {
         sleep = new Sleep(this);
         sleep.enable();
 
+        practice = new UhcPractice(this);
+        practice.enable();
+
         mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
     }
@@ -69,6 +74,7 @@ public final class CroniServer extends JavaPlugin {
         customAdvancements.disable();
         dangerApi.disable();
         sleep.disable();
+        practice.disable();
         mrWorldWide.disable();
 
         System.out.println("[CroniServer] Disabled CroniServer");
