@@ -27,8 +27,8 @@ public class UhcPracticeCommand implements CommandExecutor {
                 } else {
                     World world = Bukkit.getWorld("uhcpractice");
                     if (world != null) {
-                        int x = random.nextInt(5000 + 1 - -5000) + -5000;
-                        int z = random.nextInt(5000 + 1 - -5000) + -5000;
+                        int x = getRandomCoord();
+                        int z = getRandomCoord();
                         UhcPractice.playerCooldownManager.startGame(p);
                         p.teleport(new Location(world, x, world.getHighestBlockAt(x, z).getY(), z));
                     }
@@ -40,5 +40,9 @@ public class UhcPracticeCommand implements CommandExecutor {
             return true;
         }
         return false;
+    }
+
+    private int getRandomCoord () {
+        return random.nextInt(5000 + 1 - -5000) + -5000;
     }
 }

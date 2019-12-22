@@ -22,6 +22,10 @@ commands:
     description: Takes you to the UHC Practice world
     usage: /uhcpractice
 
+  stopuhc:
+    description: Stops your UHC Session
+    usage: /stopuhc
+
   home:
     description: Takes you to your home
     usage: /home
