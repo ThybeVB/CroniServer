@@ -41,6 +41,7 @@ public class PlayerCooldownManager {
         p.sendMessage(ChatColor.DARK_RED + "> Mobs Killed: " + UhcPractice.playerMobsKilled.getOrDefault(p, 0));
         p.sendMessage(ChatColor.GREEN + "-------------------------");
 
+        p.getInventory().clear();
         Bukkit.getScheduler().runTask(plugin, () -> {
             p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
         });
@@ -51,6 +52,9 @@ public class PlayerCooldownManager {
         if (!isPlaying(p)) {
             Timer timer = new Timer();
             playerCooldownMap.put(p, timer);
+            p.sendMessage(ChatColor.BLUE + "Starting UHC Practice! (2 Hours)");
+            p.sendMessage(ChatColor.BLUE + "You can use /stopuhc at any time to stop the session.");
+            p.sendMessage(ChatColor.BLUE + "Note: You can only play once per day.");
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {

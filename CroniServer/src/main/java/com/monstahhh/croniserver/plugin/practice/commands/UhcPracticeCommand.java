@@ -29,10 +29,8 @@ public class UhcPracticeCommand implements CommandExecutor {
                     if (!PlayerCooldownManager.hasPlayed(p)) {
                         World world = Bukkit.getWorld("uhcpractice");
                         if (world != null) {
-                            int x = getRandomCoord();
-                            int z = getRandomCoord();
                             UhcPractice.playerCooldownManager.startGame(p);
-                            p.teleport(new Location(world, x, world.getHighestBlockAt(x, z).getY(), z));
+                            p.teleport(getSpawnLocation(world));
                         }
                     } else {
                         p.sendMessage(ChatColor.DARK_RED + "You have already played today. Try again tommorow.");
@@ -45,6 +43,16 @@ public class UhcPracticeCommand implements CommandExecutor {
             return true;
         }
         return false;
+    }
+
+    private Location getSpawnLocation (World world) {
+        int x = getRandomCoord();
+        int z = getRandomCoord();
+        Location loc = new Location(world, x, world.getHighestBlockAt(x, z).getY(), z);
+        if (loc.getBlock().getBiome().name().endsWith("OCEAN")) {
+            getSpawnLocation(world);
+        }
+        return loc;
     }
 
     private int getRandomCoord () {
