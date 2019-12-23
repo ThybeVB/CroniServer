@@ -19,7 +19,7 @@ public class UhcPracticeCommand implements CommandExecutor {
     private Random random = new Random();
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (command.getName().equalsIgnoreCase("uhcpractice")) {
             if (commandSender instanceof Player) {
                 Player p = (Player) commandSender;
@@ -28,10 +28,16 @@ public class UhcPracticeCommand implements CommandExecutor {
                         p.sendMessage(ChatColor.DARK_RED + "You are already in-game");
                     } else {
                         if (!PlayerCooldownManager.hasPlayed(p)) {
-                            World world = Bukkit.getWorld("uhcpractice");
-                            if (world != null) {
-                                UhcPractice.playerCooldownManager.startGame(p);
-                                p.teleport(getSpawnLocation(world));
+                            if (args.length == 0) {
+                                p.sendMessage(ChatColor.BLUE + "Are you sure you want to start a UHC Session?");
+                                p.sendMessage(ChatColor.BLUE + "Use " + ChatColor.GREEN + "/uhcpractice confirm" + ChatColor.BLUE + " to confirm.");
+                                p.sendMessage(ChatColor.BLUE + "Note: You can only play once per day.");
+                            } else if (args[0].equalsIgnoreCase("confirm")) {
+                                World world = Bukkit.getWorld("uhcpractice");
+                                if (world != null) {
+                                    UhcPractice.playerCooldownManager.startGame(p);
+                                    p.teleport(getSpawnLocation(world));
+                                }
                             }
                         } else {
                             p.sendMessage(ChatColor.DARK_RED + "You have already played today. Try again tommorow.");
