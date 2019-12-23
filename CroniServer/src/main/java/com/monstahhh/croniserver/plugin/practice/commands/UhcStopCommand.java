@@ -26,6 +26,8 @@ public class UhcStopCommand implements CommandExecutor {
                     p.sendMessage(ChatColor.DARK_RED + "You are not currently in a UHC Session.");
                     p.sendMessage(ChatColor.BLUE + "Use " + ChatColor.GREEN + "/uhcpractice" + ChatColor.BLUE + " to start one.");
                 }
+            } else {
+                commandSender.sendMessage("Command can only be executed by Player");
             }
             return true;
         }

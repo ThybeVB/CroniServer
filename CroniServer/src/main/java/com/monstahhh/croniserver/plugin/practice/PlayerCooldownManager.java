@@ -1,8 +1,6 @@
 package com.monstahhh.croniserver.plugin.practice;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,9 +10,8 @@ import java.util.TimerTask;
 
 public class PlayerCooldownManager {
 
-    private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
     public static HashMap<Player, Boolean> playersPlayedMap = new HashMap<>();
-
+    private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
     private static JavaPlugin plugin;
 
     public PlayerCooldownManager(JavaPlugin _plugin) {
@@ -27,25 +24,12 @@ public class PlayerCooldownManager {
             timer.cancel();
             timer.purge();
             playerCooldownMap.remove(p, timer);
-            showEndcard(p, false);
+            UhcPractice.showEndcard(p, false);
         }
     }
 
-    private static void showEndcard(Player p, boolean survived) {
-        p.sendMessage(ChatColor.GREEN + "--- Game has finished ---");
-        if (survived) {
-            p.sendMessage(ChatColor.BLUE + "> You Survived!");
-        } else {
-            p.sendMessage(ChatColor.DARK_RED + "> You Died!");
-        }
-        p.sendMessage(ChatColor.DARK_RED + "> Mobs Killed: " + UhcPractice.playerMobsKilled.getOrDefault(p, 0));
-        p.sendMessage(ChatColor.GREEN + "-------------------------");
-
-        p.getInventory().clear();
-        Bukkit.getScheduler().runTask(plugin, () -> {
-            p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
-        });
-        UhcPractice.playerMobsKilled.remove(p);
+    public static boolean hasPlayed(Player p) {
+        return playersPlayedMap.get(p) != null;
     }
 
     public void startGame(Player p) {
@@ -62,7 +46,7 @@ public class PlayerCooldownManager {
                     timer.purge();
                     playerCooldownMap.remove(p, timer);
                     playersPlayedMap.put(p, true);
-                    showEndcard(p, true);
+                    UhcPractice.showEndcard(p, true);
                 }
             }, 60000, 60000); //60,000 == 1 MINUTE (Temporary)
             //}, 3600000, 3600000); //3,600,000 == 2HOURS
@@ -71,9 +55,5 @@ public class PlayerCooldownManager {
 
     public boolean isPlaying(Player p) {
         return playerCooldownMap.get(p) != null;
-    }
-
-    public static boolean hasPlayed(Player p) {
-        return playersPlayedMap.get(p) != null;
     }
 }

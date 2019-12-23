@@ -21,41 +21,45 @@ public class UhcPracticeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (command.getName().equalsIgnoreCase("uhcpractice")) {
-            Player p = (Player) commandSender;
-            if (p.hasPermission("croniserver.uhc.practice")) {
-                if (UhcPractice.playerCooldownManager.isPlaying(p)) {
-                    p.sendMessage(ChatColor.DARK_RED + "You are already in-game");
-                } else {
-                    if (!PlayerCooldownManager.hasPlayed(p)) {
-                        World world = Bukkit.getWorld("uhcpractice");
-                        if (world != null) {
-                            UhcPractice.playerCooldownManager.startGame(p);
-                            p.teleport(getSpawnLocation(world));
-                        }
+            if (commandSender instanceof Player) {
+                Player p = (Player) commandSender;
+                if (p.hasPermission("croniserver.uhc.practice")) {
+                    if (UhcPractice.playerCooldownManager.isPlaying(p)) {
+                        p.sendMessage(ChatColor.DARK_RED + "You are already in-game");
                     } else {
-                        p.sendMessage(ChatColor.DARK_RED + "You have already played today. Try again tommorow.");
+                        if (!PlayerCooldownManager.hasPlayed(p)) {
+                            World world = Bukkit.getWorld("uhcpractice");
+                            if (world != null) {
+                                UhcPractice.playerCooldownManager.startGame(p);
+                                p.teleport(getSpawnLocation(world));
+                            }
+                        } else {
+                            p.sendMessage(ChatColor.DARK_RED + "You have already played today. Try again tommorow.");
+                        }
                     }
+                } else {
+                    p.sendMessage(ChatColor.DARK_RED + "You do not have permissions to go to this world.");
+                    p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
                 }
             } else {
-                p.sendMessage(ChatColor.DARK_RED + "You do not have permissions to go to this world.");
-                p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+                commandSender.sendMessage("Command can only be executed by Player");
             }
             return true;
         }
         return false;
     }
 
-    private Location getSpawnLocation (World world) {
+    private Location getSpawnLocation(World world) {
         int x = getRandomCoord();
         int z = getRandomCoord();
         Location loc = new Location(world, x, world.getHighestBlockAt(x, z).getY(), z);
         if (loc.getBlock().getBiome().name().endsWith("OCEAN")) {
-            getSpawnLocation(world);
+            return getSpawnLocation(world);
         }
         return loc;
     }
 
-    private int getRandomCoord () {
+    private int getRandomCoord() {
         return random.nextInt(5000 + 1 - -5000) + -5000;
     }
 }
