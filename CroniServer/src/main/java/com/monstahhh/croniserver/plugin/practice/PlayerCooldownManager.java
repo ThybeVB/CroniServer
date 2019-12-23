@@ -12,11 +12,6 @@ public class PlayerCooldownManager {
 
     public static HashMap<Player, Boolean> playersPlayedMap = new HashMap<>();
     private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
-    private static JavaPlugin plugin;
-
-    public PlayerCooldownManager(JavaPlugin _plugin) {
-        plugin = _plugin;
-    }
 
     public static void killPlayer(Player p) {
         Timer timer = playerCooldownMap.getOrDefault(p, null);
@@ -24,6 +19,7 @@ public class PlayerCooldownManager {
             timer.cancel();
             timer.purge();
             playerCooldownMap.remove(p, timer);
+            playersPlayedMap.put(p, true);
             UhcPractice.showEndcard(p, false);
         }
     }

@@ -17,7 +17,7 @@ import java.util.logging.Level;
 
 public class UhcPractice {
 
-    public static PlayerCooldownManager playerCooldownManager = null;
+    public static PlayerCooldownManager playerCooldownManager = new PlayerCooldownManager();
     public static HashMap<Player, Integer> playerMobsKilled = new HashMap<>();
     private static JavaPlugin plugin;
 
@@ -43,7 +43,6 @@ public class UhcPractice {
     }
 
     public void enable() {
-        playerCooldownManager = new PlayerCooldownManager(plugin);
         plugin.getServer().getPluginManager().registerEvents(new GameEvents(), plugin);
 
         Objects.requireNonNull(plugin.getCommand("clearuhcplayers")).setExecutor(new UhcClearPlayers());
