@@ -6,7 +6,7 @@
 
     <groupId>com.monstahhh.croniserver.plugin</groupId>
     <artifactId>croniserver</artifactId>
-    <version>1.5.8</version>
+    <version>1.5.9</version>
     <packaging>jar</packaging>
 
     <name>CroniServer</name>
@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <authme.version>5.6.0-SNAPSHOT</authme.version>
         <spigot.version>1.15.1-R0.1-SNAPSHOT</spigot.version>
-        <jda.version>4.0.0_46</jda.version>
+        <jda.version>4.1.0_81</jda.version>
         <apiVersion>1.15</apiVersion>
     </properties>
     <url>https://github.com/MonstahGames/</url>
@@ -76,6 +76,10 @@
             <url>https://nexus.scarsz.me/content/groups/public/</url>
         </repository>
         <repository>
+            <id>enginehub-maven</id>
+            <url>http://maven.enginehub.org/repo/</url>
+        </repository>
+        <repository>
             <id>jcenter</id>
             <name>jcenter-bintray</name>
             <url>http://jcenter.bintray.com</url>
@@ -116,6 +120,11 @@
             <artifactId>discordsrv</artifactId>
             <version>1.18.4</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>7.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
