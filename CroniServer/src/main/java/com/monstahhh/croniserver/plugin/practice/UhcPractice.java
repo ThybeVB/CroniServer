@@ -36,6 +36,8 @@ public class UhcPractice {
         p.sendMessage(ChatColor.GREEN + "-------------------------");
 
         p.getInventory().clear();
+        p.damage(p.getHealth());
+
         Bukkit.getScheduler().runTask(plugin, () -> {
             p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
         });
