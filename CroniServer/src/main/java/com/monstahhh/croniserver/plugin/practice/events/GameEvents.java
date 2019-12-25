@@ -31,7 +31,7 @@ public class GameEvents implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player p = event.getPlayer();
         if (UhcPractice.inDeathProcess.getOrDefault(p, false)) {

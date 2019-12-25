@@ -1,10 +1,5 @@
 package com.monstahhh.croniserver.plugin.practice;
 
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -43,7 +38,7 @@ public class PlayerCooldownManager {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                   killPlayer(p, true);
+                    killPlayer(p, true);
                 }
             }, 3600000, 3600000); //3,600,000 == 2HOURS
         }

@@ -1,6 +1,5 @@
 package com.monstahhh.croniserver.plugin.practice;
 
-import com.iwebpp.crypto.TweetNaclFast;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcClearPlayers;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcPracticeCommand;
@@ -11,10 +10,8 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
