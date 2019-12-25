@@ -1,10 +1,17 @@
 package com.monstahhh.croniserver.plugin.practice;
 
+import com.iwebpp.crypto.TweetNaclFast;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcClearPlayers;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcPracticeCommand;
 import com.monstahhh.croniserver.plugin.practice.commands.UhcStopCommand;
 import com.monstahhh.croniserver.plugin.practice.events.GameEvents;
+import com.sk89q.worldedit.WorldEdit;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.Region;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -19,6 +26,8 @@ public class UhcPractice {
 
     public static PlayerCooldownManager playerCooldownManager = new PlayerCooldownManager();
     public static HashMap<Player, Integer> playerMobsKilled = new HashMap<>();
+    public static HashMap<Player, Boolean> inDeathProcess = new HashMap<>();
+
     private static JavaPlugin plugin;
 
     public UhcPractice(JavaPlugin plugin) {
@@ -35,13 +44,22 @@ public class UhcPractice {
         p.sendMessage(ChatColor.DARK_RED + "> Mobs Killed: " + playerMobsKilled.getOrDefault(p, 0));
         p.sendMessage(ChatColor.GREEN + "-------------------------");
 
-        p.getInventory().clear();
-        p.damage(p.getHealth());
-
         Bukkit.getScheduler().runTask(plugin, () -> {
-            p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+            p.getInventory().clear();
+            p.damage(p.getHealth());
+            regenerateChunks(p);
         });
         playerMobsKilled.remove(p);
+    }
+
+    private static void regenerateChunks(Player p) {
+        BukkitWorld world = new BukkitWorld(p.getWorld());
+        double x = p.getLocation().getX();
+        double z = p.getLocation().getZ();
+
+        Region selection = new CuboidRegion(BlockVector3.at(x - 250, 0, z - 250), BlockVector3.at(x + 250, 256, z + 250));
+
+        world.regenerate(selection, WorldEdit.getInstance().getEditSessionFactory().getEditSession(world, -1));
     }
 
     public void enable() {

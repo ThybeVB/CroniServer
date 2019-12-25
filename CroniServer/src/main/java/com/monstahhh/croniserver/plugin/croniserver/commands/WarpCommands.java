@@ -1,10 +1,7 @@
 package com.monstahhh.croniserver.plugin.croniserver.commands;
 
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,6 +40,9 @@ public class WarpCommands implements CommandExecutor {
             player.teleport(new Location(player.getWorld(), 3, 69, -2));
         }
         if (command.getName().equalsIgnoreCase("survival")) {
+            if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
+                player.teleport(new Location(Bukkit.getWorld("world_nether"), 0, 120, -4));
+            }
             player.teleport(new Location(Bukkit.getWorld("world"), 0, 69, 0));
         }
         if (command.getName().equalsIgnoreCase("creative")) {
