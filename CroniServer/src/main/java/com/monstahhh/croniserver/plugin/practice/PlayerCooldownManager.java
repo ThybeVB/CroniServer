@@ -19,7 +19,6 @@ public class PlayerCooldownManager {
             timer.purge();
             playerCooldownMap.remove(p, timer);
             playersPlayedMap.put(p, true);
-            UhcPractice.inDeathProcess.put(p, true);
             UhcPractice.showEndcard(p, survived);
         }
     }
@@ -35,6 +34,9 @@ public class PlayerCooldownManager {
             p.sendMessage(ChatColor.BLUE + "Starting UHC Practice! (2 Hours)");
             p.sendMessage(ChatColor.BLUE + "You can use /stopuhc at any time to stop the session.");
             p.sendMessage(ChatColor.BLUE + "Note: You can only play once per day.");
+            p.getInventory().clear();
+            p.setExp(0);
+            p.setExhaustion(0);
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {

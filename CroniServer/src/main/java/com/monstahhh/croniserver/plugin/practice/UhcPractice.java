@@ -7,6 +7,7 @@ import com.monstahhh.croniserver.plugin.practice.commands.UhcStopCommand;
 import com.monstahhh.croniserver.plugin.practice.events.GameEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +19,6 @@ public class UhcPractice {
 
     public static PlayerCooldownManager playerCooldownManager = new PlayerCooldownManager();
     public static HashMap<Player, Integer> playerMobsKilled = new HashMap<>();
-    public static HashMap<Player, Boolean> inDeathProcess = new HashMap<>();
 
     private static JavaPlugin plugin;
 
@@ -37,10 +37,11 @@ public class UhcPractice {
         p.sendMessage(ChatColor.GREEN + "-------------------------");
 
         Bukkit.getScheduler().runTask(plugin, () -> {
-            p.getInventory().clear();
             p.damage(p.getHealth());
         });
         playerMobsKilled.remove(p);
+
+        p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
     }
 
     public void enable() {
