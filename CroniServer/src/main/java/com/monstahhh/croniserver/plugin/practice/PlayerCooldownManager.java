@@ -41,7 +41,7 @@ public class PlayerCooldownManager {
             preparePlayer(p);
 
             TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
-            serverChat.sendMessage(":triangular_flag_on_post: **"+ p.getDisplayName() + " has just begun a UHC Practice!**").queue();
+            serverChat.sendMessage(":triangular_flag_on_post: **" + p.getDisplayName() + " has just begun a UHC Practice!**").queue();
 
             timer.schedule(new TimerTask() {
                 @Override
@@ -53,12 +53,12 @@ public class PlayerCooldownManager {
     }
 
     private void preparePlayer(Player p) {
-        p.getInventory().clear();
         p.setExp(0);
         p.setExhaustion(0);
         p.setSaturation(2.5F);
         p.setHealthScale(20.0F);
         p.setHealth(Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue());
+        p.getInventory().clear();
     }
 
     public boolean isPlaying(Player p) {

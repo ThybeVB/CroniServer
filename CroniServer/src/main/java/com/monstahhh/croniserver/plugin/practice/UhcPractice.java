@@ -34,10 +34,10 @@ public class UhcPractice {
         p.sendMessage(ChatColor.GREEN + "--- Game has finished ---");
         if (survived) {
             p.sendMessage(ChatColor.BLUE + "> You Survived!");
-            serverChat.sendMessage(":clap: **"+ p.getDisplayName() + " just finished a UHC Practice game!**").queue();
+            serverChat.sendMessage(":clap: **" + p.getDisplayName() + " just finished a UHC Practice game!**").queue();
         } else {
             p.sendMessage(ChatColor.RED + "> You Died!");
-            serverChat.sendMessage(":clap: **"+ p.getDisplayName() + " just finished a UHC Practice game, but didn't survive.**").queue();
+            serverChat.sendMessage(":clap: **" + p.getDisplayName() + " just finished a UHC Practice game, but didn't survive.**").queue();
         }
         p.sendMessage(ChatColor.DARK_RED + "> Mobs Killed: " + playerMobsKilled.getOrDefault(p, 0));
         p.sendMessage(ChatColor.GREEN + "-------------------------");
