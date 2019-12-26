@@ -31,7 +31,7 @@ public class GameEvents implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (event.getEntity().getWorld().getName().equalsIgnoreCase("uhcpractice")) {
-            PlayerCooldownManager.killPlayer(event.getEntity(), false);
+            PlayerCooldownManager.endPlayer(event.getEntity(), false);
         }
     }
 }

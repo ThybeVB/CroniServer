@@ -20,7 +20,7 @@ public class UhcStopCommand implements CommandExecutor {
                         p.sendMessage(ChatColor.BLUE + "Are you sure you want to stop this UHC Session?");
                         p.sendMessage(ChatColor.BLUE + "Type " + ChatColor.GREEN + "/stopuhc confirm" + ChatColor.BLUE + " to continue.");
                     } else if (args[0].equalsIgnoreCase("confirm")) {
-                        PlayerCooldownManager.killPlayer(p, false);
+                        PlayerCooldownManager.endPlayer(p, false);
                     }
                 } else {
                     p.sendMessage(ChatColor.DARK_RED + "You are not currently in a UHC Session.");
