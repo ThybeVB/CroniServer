@@ -44,9 +44,7 @@ public class UhcPractice {
 
         playerMobsKilled.remove(p);
 
-        if (survived) {
-            p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
-        }
+        p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
     }
 
     public void enable() {
