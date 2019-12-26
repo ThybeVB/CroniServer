@@ -36,7 +36,6 @@ public class GameEvents implements Listener {
         Player p = event.getPlayer();
         if (UhcPractice.inDeathProcess.getOrDefault(p, false)) {
             p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
-
             UhcPractice.inDeathProcess.remove(p);
         }
     }
