@@ -44,16 +44,18 @@ public class PlayerListener implements Listener {
     public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
         Player p = event.getPlayer();
         if (!p.getWorld().getName().equalsIgnoreCase("world")) {
-            boolean hasBeenCleared = playerWorldInvs.getConfig().getBoolean("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName());
-            if (!hasBeenCleared) {
-                Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
-                    playerWorldInvs.getConfig().set("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName(), true);
-                    playerWorldInvs.saveConfig();
-                    p.getInventory().clear();
+            if (!p.getWorld().getName().equalsIgnoreCase("uhcpractice")) {
+                boolean hasBeenCleared = playerWorldInvs.getConfig().getBoolean("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName());
+                if (!hasBeenCleared) {
+                    Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
+                        playerWorldInvs.getConfig().set("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName(), true);
+                        playerWorldInvs.saveConfig();
+                        p.getInventory().clear();
 
-                    p.sendMessage(ChatColor.GREEN + "Because of a bug with our Inventory plugin, we have had to clear your inventory in this world.");
-                    p.sendMessage(ChatColor.GREEN + "For more info on this, view " + ChatColor.BLUE + "#minecraft-news" + ChatColor.GREEN + ".");
-                }, 20);
+                        p.sendMessage(ChatColor.GREEN + "Because of a bug with our Inventory plugin, we have had to clear your inventory in this world.");
+                        p.sendMessage(ChatColor.GREEN + "For more info on this, view " + ChatColor.BLUE + "#minecraft-news" + ChatColor.GREEN + ".");
+                    }, 20);
+                }
             }
         }
     }
