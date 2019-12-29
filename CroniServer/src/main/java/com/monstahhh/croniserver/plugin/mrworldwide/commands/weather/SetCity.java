@@ -4,7 +4,6 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
-import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONObject;
@@ -57,7 +56,7 @@ public class SetCity {
     }
 
     private void setCityForUser(String location, long userId) {
-        Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
+        Config data = new Config("plugins/MrWorldWide", "users.yml");
         data.getConfig().set("locations.users." + userId, location.toLowerCase().trim());
         data.saveConfig();
     }

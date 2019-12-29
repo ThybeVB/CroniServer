@@ -1,12 +1,11 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
 import com.monstahhh.croniserver.configapi.Config;
-import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class ChangeClock {
 
-    private Config data = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
+    private Config data = new Config("plugins/MrWorldWide", "users.yml");
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         long userId = event.getAuthor().getIdLong();

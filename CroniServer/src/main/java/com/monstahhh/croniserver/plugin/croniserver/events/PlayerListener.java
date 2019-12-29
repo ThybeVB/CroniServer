@@ -1,16 +1,21 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
+import com.monstahhh.croniserver.configapi.Config;
+import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import fr.xephi.authme.api.v3.AuthMeApi;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
 
+    Config playerWorldInvs = new Config("plugins/CroniServer", "player_inventories.yml");
     private AuthMeApi authApi = AuthMeApi.getInstance();
 
     @EventHandler
@@ -31,6 +36,24 @@ public class PlayerListener implements Listener {
             if (event.getMessage().equalsIgnoreCase("/ban monstahhhy") || event.getMessage().equalsIgnoreCase("/kick monstahhhy") || event.getMessage().equalsIgnoreCase("/demote monstahhhy")) {
                 event.getPlayer().sendMessage(ChatColor.DARK_RED + "<3");
                 event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
+        Player p = event.getPlayer();
+        if (!p.getWorld().getName().equalsIgnoreCase("world")) {
+            boolean hasBeenCleared = playerWorldInvs.getConfig().getBoolean("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName());
+            if (!hasBeenCleared) {
+                Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
+                    playerWorldInvs.getConfig().set("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName(), true);
+                    playerWorldInvs.saveConfig();
+                    p.getInventory().clear();
+
+                    p.sendMessage(ChatColor.GREEN + "Because of a bug with our Inventory plugin, we have had to clear your inventory in this world.");
+                    p.sendMessage(ChatColor.GREEN + "For more info on this, view " + ChatColor.BLUE + "#minecraft-news" + ChatColor.GREEN + ".");
+                }, 20);
             }
         }
     }

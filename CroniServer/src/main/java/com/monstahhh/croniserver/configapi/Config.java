@@ -2,7 +2,6 @@ package com.monstahhh.croniserver.configapi;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class Config {
     /**
      * Creates a new config at the path, with the fileName, and uses the Plugin
      */
-    public Config(String path, String fileName, Plugin plugin) {
+    public Config(String path, String fileName) {
         if (!fileName.contains(".yml")) {
             fileName = fileName + ".yml";
         }

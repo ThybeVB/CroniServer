@@ -96,7 +96,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
     private void getUsageData() {
         if (data == null) {
-            data = new Config("plugins/MrWorldWide", "data.yml", MrWorldWide._plugin);
+            data = new Config("plugins/MrWorldWide", "data.yml");
         }
 
         this.translateCount = data.getConfig().getInt("usage.translateCommand");

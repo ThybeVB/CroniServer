@@ -37,49 +37,36 @@ public class DistanceCommand implements CommandExecutor {
 
             if (command.getName().equalsIgnoreCase("pdistance")) {
                 if (sender instanceof Player) {
-
+                    Player player = (Player) sender;
                     if (args[0] != null) {
 
                         Player player1 = Bukkit.getServer().getPlayer(args[0]);
 
                         assert player1 != null;
-                        if (((Player) sender).getWorld().getEnvironment() == player1.getWorld().getEnvironment() && ((Player) sender).getWorld() == player1.getWorld()) {
+                        if (player.getWorld().getEnvironment() == player1.getWorld().getEnvironment() && player.getWorld() == player1.getWorld()) {
 
-                            double originX = ((Player) sender).getLocation().getX();
-                            double originY = ((Player) sender).getLocation().getY();
-                            double originZ = ((Player) sender).getLocation().getZ();
+                            double originX = player.getLocation().getX();
+                            double originY = player.getLocation().getY();
+                            double originZ = player.getLocation().getZ();
 
                             double desiredX = player1.getLocation().getX();
                             double desiredY = player1.getLocation().getY();
                             double desiredZ = player1.getLocation().getZ();
 
-                            double distance = getDistance(new Location(((Player) sender).getWorld(), originX, originY, originZ), new Location(player1.getWorld(), desiredX, desiredY, desiredZ));
+                            double distance = getDistance(new Location(player.getWorld(), originX, originY, originZ), new Location(player1.getWorld(), desiredX, desiredY, desiredZ));
 
-                            sender.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getDisplayName() + ChatColor.GREEN + ".");
+                            player.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getDisplayName() + ChatColor.GREEN + ".");
                         } else {
-                            sender.sendMessage(ChatColor.RED + "You need to be in the same world!");
+                            player.sendMessage(ChatColor.RED + "You need to be in the same world!");
                         }
 
                     } else {
-                        sender.sendMessage(ChatColor.RED + "You need to give a playername.");
+                        player.sendMessage(ChatColor.RED + "You need to give a playername.");
                     }
                 } else {
                     sender.sendMessage(ChatColor.RED + "Only valid players can use this command.");
                 }
             }
-        }
-
-        if (sender instanceof Player) {
-            Player executor = (Player) sender;
-            if (command.getName().equalsIgnoreCase("lol")) {
-                if (executor.hasPermission("croniserver.command.lol")) {
-                    Bukkit.broadcastMessage(ChatColor.BLUE + "guaka have big gay jaja xd");
-                } else {
-                    executor.sendMessage(ChatColor.DARK_RED + "Sorry, but it seems like you don't have the sheer power to say guaka has big gay.");
-                }
-            }
-        } else {
-            Bukkit.broadcastMessage(ChatColor.BLUE + "guaka have big gay jaja xd");
         }
 
         return true;

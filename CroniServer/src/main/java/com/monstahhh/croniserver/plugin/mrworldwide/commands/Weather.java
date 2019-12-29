@@ -4,7 +4,6 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
-import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -180,7 +179,7 @@ public class Weather {
     }
 
     private String checkForCity(User user) {
-        Config userData = new Config("plugins/MrWorldWide", "users.yml", MrWorldWide._plugin);
+        Config userData = new Config("plugins/MrWorldWide", "users.yml");
         return userData.getConfig().getString("locations.users." + user.getIdLong());
     }
 

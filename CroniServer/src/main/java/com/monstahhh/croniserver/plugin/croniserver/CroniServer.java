@@ -30,7 +30,7 @@ public final class CroniServer extends JavaPlugin {
     @Override
     public void onEnable() {
         logger = this.getLogger();
-        playerData = new Config("plugins/CroniServer", "player_data.yml", this);
+        playerData = new Config("plugins/CroniServer", "player_data.yml");
 
         this.enableExtensions();
 
@@ -49,7 +49,6 @@ public final class CroniServer extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
         Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
-        Objects.requireNonNull(this.getCommand("lol")).setExecutor(new DistanceCommand());
     }
 
     private void enableExtensions() {

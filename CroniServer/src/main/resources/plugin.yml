@@ -46,10 +46,6 @@ commands:
     description: Shows you the distance to a certain player
     usage: /pdistance playername
 
-  lol:
-    description: xd
-    usage: /lol
-
   spawn:
     description: Takes you to spawn
     usage: /spawn

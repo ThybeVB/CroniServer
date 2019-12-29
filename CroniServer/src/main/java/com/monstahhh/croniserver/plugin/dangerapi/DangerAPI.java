@@ -72,7 +72,7 @@ public class DangerAPI {
     }
 
     private void setupPluginFiles() {
-        Config config = new Config("plugins/DangerAPI", "config.yml", plugin);
+        Config config = new Config("plugins/DangerAPI", "config.yml");
         Object debugObj = config.getConfig().get("debug");
         if (debugObj == null) {
             config.getConfig().set("debug", false);
@@ -83,7 +83,7 @@ public class DangerAPI {
             }
         }
 
-        playerData = new Config("plugins/DangerAPI", "player_data.yml", plugin);
+        playerData = new Config("plugins/DangerAPI", "player_data.yml");
     }
 
     public void disable() {

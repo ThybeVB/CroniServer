@@ -34,7 +34,7 @@ public class MrWorldWide {
     }
 
     public void enable() {
-        Config botConfig = new Config("plugins/MrWorldWide", "config.yml", _plugin);
+        Config botConfig = new Config("plugins/MrWorldWide", "config.yml");
 
         this.checkServices(botConfig);
 

@@ -38,7 +38,6 @@ public class PlayerCooldownManager {
             playerCooldownMap.put(p, timer);
             p.sendMessage(ChatColor.BLUE + "Starting UHC Practice! (2 Hours)");
             p.sendMessage(ChatColor.BLUE + "You can use /stopuhc at any time to stop the session.");
-            p.sendMessage(ChatColor.BLUE + "Note: You can only play once per day.");
             p.teleport(getSpawnLocation(Bukkit.getWorld("uhcpractice")));
             preparePlayer(p);
 
