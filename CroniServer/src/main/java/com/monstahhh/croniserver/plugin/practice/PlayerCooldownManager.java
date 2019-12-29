@@ -2,19 +2,20 @@ package com.monstahhh.croniserver.plugin.practice;
 
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class PlayerCooldownManager {
 
     public static HashMap<Player, Boolean> playersPlayedMap = new HashMap<>();
     private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
+    private Random random = new Random();
 
     public static void endPlayer(Player p, boolean survived) {
         Timer timer = playerCooldownMap.getOrDefault(p, null);
@@ -38,6 +39,7 @@ public class PlayerCooldownManager {
             p.sendMessage(ChatColor.BLUE + "Starting UHC Practice! (2 Hours)");
             p.sendMessage(ChatColor.BLUE + "You can use /stopuhc at any time to stop the session.");
             p.sendMessage(ChatColor.BLUE + "Note: You can only play once per day.");
+            p.teleport(getSpawnLocation(Bukkit.getWorld("uhcpractice")));
             preparePlayer(p);
 
             TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
@@ -48,7 +50,7 @@ public class PlayerCooldownManager {
                 public void run() {
                     endPlayer(p, true);
                 }
-            }, 3600000, 3600000); //3,600,000 == 2HOURS
+            }, 7200000, 7200000); //7,200,000 == 2 HOURS
         }
     }
 
@@ -57,8 +59,23 @@ public class PlayerCooldownManager {
         p.setExhaustion(0);
         p.setSaturation(2.5F);
         p.setHealthScale(20.0F);
+        p.setFoodLevel(20);
         p.setHealth(Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue());
         p.getInventory().clear();
+    }
+
+    private Location getSpawnLocation(World world) {
+        int x = getRandomCoord();
+        int z = getRandomCoord();
+        Location loc = new Location(world, x, world.getHighestBlockAt(x, z).getY(), z);
+        if (loc.getBlock().getBiome().name().endsWith("OCEAN")) {
+            return getSpawnLocation(world);
+        }
+        return loc;
+    }
+
+    private int getRandomCoord() {
+        return random.nextInt(5000 + 1 - -5000) + -5000;
     }
 
     public boolean isPlaying(Player p) {

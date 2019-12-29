@@ -12,11 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 public class UhcPracticeCommand implements CommandExecutor {
-
-    private Random random = new Random();
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
@@ -36,7 +32,6 @@ public class UhcPracticeCommand implements CommandExecutor {
                                 World world = Bukkit.getWorld("uhcpractice");
                                 if (world != null) {
                                     UhcPractice.playerCooldownManager.startGame(p);
-                                    p.teleport(getSpawnLocation(world));
                                 }
                             }
                         } else {
@@ -53,19 +48,5 @@ public class UhcPracticeCommand implements CommandExecutor {
             return true;
         }
         return false;
-    }
-
-    private Location getSpawnLocation(World world) {
-        int x = getRandomCoord();
-        int z = getRandomCoord();
-        Location loc = new Location(world, x, world.getHighestBlockAt(x, z).getY(), z);
-        if (loc.getBlock().getBiome().name().endsWith("OCEAN")) {
-            return getSpawnLocation(world);
-        }
-        return loc;
-    }
-
-    private int getRandomCoord() {
-        return random.nextInt(5000 + 1 - -5000) + -5000;
     }
 }

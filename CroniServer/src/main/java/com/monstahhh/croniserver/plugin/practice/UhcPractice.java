@@ -49,12 +49,15 @@ public class UhcPractice {
 
     public void enable() {
         plugin.getServer().getPluginManager().registerEvents(new GameEvents(), plugin);
+        registerCommands();
 
+        CroniServer.logger.log(Level.INFO, "Enabled Practice");
+    }
+
+    private void registerCommands() {
         Objects.requireNonNull(plugin.getCommand("clearuhcplayers")).setExecutor(new UhcClearPlayers());
         Objects.requireNonNull(plugin.getCommand("uhcpractice")).setExecutor(new UhcPracticeCommand());
         Objects.requireNonNull(plugin.getCommand("stopuhc")).setExecutor(new UhcStopCommand());
-
-        CroniServer.logger.log(Level.INFO, "Enabled Practice");
     }
 
     public void disable() {
