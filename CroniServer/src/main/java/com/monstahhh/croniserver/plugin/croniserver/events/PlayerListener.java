@@ -3,6 +3,8 @@ package com.monstahhh.croniserver.plugin.croniserver.events;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import fr.xephi.authme.api.v3.AuthMeApi;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,7 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
 
-    Config playerWorldInvs = new Config("plugins/CroniServer", "player_inventories.yml");
+    private Config playerWorldInvs = new Config("plugins/CroniServer", "player_inventories.yml");
     private AuthMeApi authApi = AuthMeApi.getInstance();
 
     @EventHandler
@@ -43,8 +45,8 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
         Player p = event.getPlayer();
-        if (!p.getWorld().getName().equalsIgnoreCase("world")) {
-            if (!p.getWorld().getName().equalsIgnoreCase("uhcpractice")) {
+        if (!p.getWorld().getName().startsWith("world")) {
+            if (!p.getWorld().getName().startsWith("uhcpractice")) {
                 boolean hasBeenCleared = playerWorldInvs.getConfig().getBoolean("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName());
                 if (!hasBeenCleared) {
                     Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
@@ -52,8 +54,13 @@ public class PlayerListener implements Listener {
                         playerWorldInvs.saveConfig();
                         p.getInventory().clear();
 
+                        TextComponent component = new TextComponent("#minecraft-news");
+                        component.setColor(net.md_5.bungee.api.ChatColor.BLUE);
+                        component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discordapp.com/channels/305792249877364738/524211976109424641/661015846965084161"));
+
                         p.sendMessage(ChatColor.GREEN + "Because of a bug with our Inventory plugin, we have had to clear your inventory in this world.");
-                        p.sendMessage(ChatColor.GREEN + "For more info on this, view " + ChatColor.BLUE + "#minecraft-news" + ChatColor.GREEN + ".");
+                        p.sendMessage(ChatColor.GREEN + "For more info on this, view");
+                        p.spigot().sendMessage(component);
                     }, 20);
                 }
             }
