@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Config {
 
-    private File file;
+    public File file;
     private FileConfiguration fileConfig;
 
     /**

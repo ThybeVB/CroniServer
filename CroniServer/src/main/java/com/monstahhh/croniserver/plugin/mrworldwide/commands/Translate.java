@@ -32,13 +32,13 @@ public class Translate {
         String[] results = doTranslate(event, false);
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Google Translate");
+        eb.setTitle("Google Translate (Better than MewBot)");
         if (results != null) {
             eb.addField(results[1] + " -> " + results[2], results[0], false);
         } else {
             return;
         }
-        eb.setColor(Color.PINK);
+        eb.setColor(Color.RED);
 
         event.getChannel().sendMessage(eb.build()).queue();
     }

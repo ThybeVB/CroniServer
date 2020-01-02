@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.practice;
 
+import com.monstahhh.croniserver.plugin.practice.commands.UhcClearPlayers;
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
@@ -13,7 +14,6 @@ import java.util.*;
 
 public class PlayerCooldownManager {
 
-    public static HashMap<Player, Boolean> playersPlayedMap = new HashMap<>();
     private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
     private Random random = new Random();
 
@@ -23,13 +23,9 @@ public class PlayerCooldownManager {
             timer.cancel();
             timer.purge();
             playerCooldownMap.remove(p, timer);
-            playersPlayedMap.put(p, true);
+            UhcClearPlayers.putPlayed(p);
             UhcPractice.showEndcard(p, survived);
         }
-    }
-
-    public static boolean hasPlayed(Player p) {
-        return playersPlayedMap.get(p) != null;
     }
 
     public void startGame(Player p) {

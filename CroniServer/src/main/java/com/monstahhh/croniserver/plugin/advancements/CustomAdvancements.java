@@ -25,12 +25,14 @@ public class CustomAdvancements {
     public static void grantAdvancement(Player p, Advancement adv) {
         if (!adv.isGranted(p)) {
             if (p.getGameMode() == GameMode.SURVIVAL) {
-                _manager.grantAdvancement(p, adv);
-                _manager.saveProgress(p, namespace);
+                if (p.hasPermission("croniserver.advancements")) {
+                    _manager.grantAdvancement(p, adv);
+                    _manager.saveProgress(p, namespace);
 
-                TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
-                String advName = adv.getDisplay().getTitle().toString().split("\"")[3];
-                serverChat.sendMessage(":medal: **" + p.getDisplayName() + " has made the advancement " + advName + "**").queue();
+                    TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
+                    String advName = adv.getDisplay().getTitle().toString().split("\"")[3];
+                    serverChat.sendMessage(":medal: **" + p.getDisplayName() + " has made the advancement " + advName + "**").queue();
+                }
             }
         }
     }

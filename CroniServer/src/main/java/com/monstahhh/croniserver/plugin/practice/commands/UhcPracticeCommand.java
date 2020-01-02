@@ -23,7 +23,7 @@ public class UhcPracticeCommand implements CommandExecutor {
                     if (UhcPractice.playerCooldownManager.isPlaying(p)) {
                         p.sendMessage(ChatColor.DARK_RED + "You are already in-game");
                     } else {
-                        if (!PlayerCooldownManager.hasPlayed(p)) {
+                        if (!UhcClearPlayers.hasPlayed(p)) {
                             if (args.length == 0) {
                                 p.sendMessage(ChatColor.BLUE + "Are you sure you want to start a UHC Session?");
                                 p.sendMessage(ChatColor.BLUE + "Use " + ChatColor.GREEN + "/uhcpractice confirm" + ChatColor.BLUE + " to confirm.");

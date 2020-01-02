@@ -107,6 +107,15 @@ public class OnDamage implements Listener {
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
         }
+
+
+        int numbah = getNumber(5);
+        //numbah = 25
+    }
+
+    int getNumber(int number) {
+        //'number' is 5, because you can see above that is the param, so here it will do 5 * 5 under this
+        return number / number;
     }
 
     @EventHandler
