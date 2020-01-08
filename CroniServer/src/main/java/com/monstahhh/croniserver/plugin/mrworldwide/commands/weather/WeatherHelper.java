@@ -65,7 +65,7 @@ public class WeatherHelper {
                 eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
 
-            eb.addField("Temperature", city.temperature + "°C", false);
+            eb.addField("Temperature (+ Feels like)", city.temperature + "°C (" + city.feelTemperature + "°C)", false);
             eb.addField("Horizon Events", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
 
             if (city.currentTime.charAt(0) == '0' && (city.currentTime.contains("AM") || city.currentTime.contains("PM"))) {

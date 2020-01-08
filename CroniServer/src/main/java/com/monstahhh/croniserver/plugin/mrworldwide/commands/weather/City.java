@@ -12,6 +12,7 @@ import java.util.TimeZone;
 public class City {
 
     int temperature;
+    int feelTemperature;
     int humidity;
 
     String cityName;
@@ -32,6 +33,7 @@ public class City {
         JSONObject object = new JSONObject(json);
 
         String tempStr = object.getJSONObject("main").get("temp").toString();
+        String feelTempStr = object.getJSONObject("main").get("feels_like").toString();
         String humidityStr = object.getJSONObject("main").get("humidity").toString();
 
         Object sunRise = object.getJSONObject("sys").get("sunrise");
@@ -68,8 +70,10 @@ public class City {
 
         double windKilometersPerHour = object.getJSONObject("wind").getDouble("speed") * 3.6;
         int temperature = Math.round(Float.parseFloat(tempStr));
+        int feelTemperature = Math.round(Float.parseFloat(feelTempStr));
 
         this.temperature = temperature;
+        this.feelTemperature = feelTemperature;
         this.humidity = Math.round(Float.parseFloat(humidityStr));
         this.cityName = object.getString("name");
         this.countryCode = object.getJSONObject("sys").getString("country");
