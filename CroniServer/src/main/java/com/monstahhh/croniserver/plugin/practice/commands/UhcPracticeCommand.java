@@ -1,6 +1,5 @@
 package com.monstahhh.croniserver.plugin.practice.commands;
 
-import com.monstahhh.croniserver.plugin.practice.PlayerCooldownManager;
 import com.monstahhh.croniserver.plugin.practice.UhcPractice;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

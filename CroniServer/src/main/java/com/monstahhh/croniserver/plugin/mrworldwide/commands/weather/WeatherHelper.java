@@ -64,11 +64,7 @@ public class WeatherHelper {
             } else {
                 eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
-            if (city.temperature == city.feelTemperature) {
-                eb.addField("Temperature", city.temperature + "°C", false);
-            } else {
-                eb.addField("Temperature (+ Feels like)", city.temperature + "°C (" + city.feelTemperature + "°C)", false);
-            }
+            eb.addField("Temperature", (city.temperature + city.feelTemperature) / 2 + "°C", false);
 
             eb.addField("Horizon Events", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
 

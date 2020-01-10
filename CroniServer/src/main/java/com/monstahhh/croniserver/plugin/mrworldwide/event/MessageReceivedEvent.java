@@ -88,10 +88,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
                 Weather weather = new Weather(MrWorldWide.weatherToken);
                 weather.carryRawCommand(event);
             }
-
-            if (message.toLowerCase().startsWith("ship")) {
-
-            }
         }
 
 
