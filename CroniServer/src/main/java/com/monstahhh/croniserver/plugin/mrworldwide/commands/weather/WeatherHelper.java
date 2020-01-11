@@ -64,7 +64,7 @@ public class WeatherHelper {
             } else {
                 eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
             }
-            eb.addField("Temperature", (city.temperature + city.feelTemperature) / 2 + "°C", false);
+            eb.addField("Temperature", city.temperature + "°C", false);
 
             eb.addField("Horizon Events", "Sunrise: " + city.sunRiseTime + " | Sunset: " + city.sunSetTime, false);
 
@@ -77,18 +77,20 @@ public class WeatherHelper {
             eb.addField(city.currentWeatherTitle, city.currentWeatherDescription + "at " + city.windSpeed + "km/h with " + city.humidity + "% humidity", false);
 
             String responsePrefix = "Made by Pitbull, ";
+            String footer;
             if (city.timeOfCalculation[0].equals("0") && city.timeOfCalculation[1].equals("0")) {
-                eb.setFooter(responsePrefix + "Recorded just now", null);
+                footer = responsePrefix + "Recorded just now";
             } else if (city.timeOfCalculation[0].equals("0")) {
-                eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[1] + " seconds ago", null);
+                footer = responsePrefix + "Recorded " + city.timeOfCalculation[1] + " seconds ago";
             } else {
                 if (city.timeOfCalculation[1].equalsIgnoreCase("0")) {
-                    eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minute ago", null);
+                    footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minute ago";
                 } else if (city.timeOfCalculation[1].equalsIgnoreCase("1")) {
-                    eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " second ago", null);
+                    footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " second ago";
                 }
-                eb.setFooter(responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago", null);
+                footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago";
             }
+            eb.setFooter(footer + ". FT: " + city.feelTemperature + "°C", null);
 
             return eb.build();
         } catch (Exception e) {
