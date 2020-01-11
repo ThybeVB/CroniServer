@@ -39,7 +39,7 @@ public class UhcPracticeCommand implements CommandExecutor {
                     }
                 } else {
                     p.sendMessage(ChatColor.DARK_RED + "You do not have permissions to go to this world.");
-                    p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+                    p.teleportAsync(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
                 }
             } else {
                 commandSender.sendMessage("Command can only be executed by Player");

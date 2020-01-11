@@ -44,7 +44,7 @@ public class UhcPractice {
 
         playerMobsKilled.remove(p);
 
-        p.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+        p.teleportAsync(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
     }
 
     public void enable() {

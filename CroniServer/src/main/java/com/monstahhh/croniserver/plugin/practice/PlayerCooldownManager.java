@@ -34,7 +34,7 @@ public class PlayerCooldownManager {
             playerCooldownMap.put(p, timer);
             p.sendMessage(ChatColor.BLUE + "Starting UHC Practice! (2 Hours)");
             p.sendMessage(ChatColor.BLUE + "You can use /stopuhc at any time to stop the session.");
-            p.teleport(getSpawnLocation(Bukkit.getWorld("uhcpractice")));
+            p.teleportAsync(getSpawnLocation(Bukkit.getWorld("uhcpractice")));
             preparePlayer(p);
 
             TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();

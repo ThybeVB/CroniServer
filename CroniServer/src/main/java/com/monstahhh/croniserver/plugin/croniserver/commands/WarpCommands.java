@@ -34,19 +34,19 @@ public class WarpCommands implements CommandExecutor {
 
     private void doTp(Player player, Command command) {
         if (command.getName().equalsIgnoreCase("hub")) {
-            player.teleport(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
+            player.teleportAsync(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
         }
         if (command.getName().equalsIgnoreCase("spawn")) {
-            player.teleport(new Location(player.getWorld(), 3, 69, -2));
+            player.teleportAsync(new Location(player.getWorld(), 3, 69, -2));
         }
         if (command.getName().equalsIgnoreCase("survival")) {
             if (player.getWorld().getEnvironment() == World.Environment.NETHER) {
-                player.teleport(new Location(Bukkit.getWorld("world_nether"), 0, 120, -4));
+                player.teleportAsync(new Location(Bukkit.getWorld("world_nether"), 0, 120, -4));
             }
-            player.teleport(new Location(Bukkit.getWorld("world"), 0, 69, 0));
+            player.teleportAsync(new Location(Bukkit.getWorld("world"), 0, 69, 0));
         }
         if (command.getName().equalsIgnoreCase("creative")) {
-            player.teleport(new Location(Bukkit.getWorld("creative"), 0, 100, 0));
+            player.teleportAsync(new Location(Bukkit.getWorld("creative"), 0, 100, 0));
             player.setFlying(true);
         }
     }
