@@ -119,6 +119,6 @@ public class WeatherHelper {
     private String getCountryName(String countryCode) {
         JSONObject obj = getCountryInformation(countryCode);
         assert obj != null;
-        return obj.getString("name");
+        return obj.getString("nativeName");
     }
 }

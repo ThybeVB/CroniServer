@@ -17,12 +17,23 @@ public class MessageReceivedEvent extends ListenerAdapter {
     private int weatherCount = 0;
     private int currencyCount = 0;
 
+    private boolean enabled = true;
+
     private Config data = null;
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         this.getUsageData();
         String message = event.getMessage().getContentRaw();
+
+        if (message.toLowerCase().equalsIgnoreCase("enable")) {
+            enabled = true;
+            event.getChannel().sendMessage("OK").queue();
+        }
+
+        if (!enabled) {
+            return;
+        }
 
         if (message.toLowerCase().startsWith("weather")) {
             Weather weather = new Weather(MrWorldWide.weatherToken);
@@ -79,7 +90,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
-            if (message.toLowerCase().equals("usage")) {
+            if (message.toLowerCase().equalsIgnoreCase("usage")) {
                 String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
                 event.getChannel().sendMessage(dataString).queue();
             }
@@ -87,6 +98,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
             if (message.toLowerCase().startsWith("rawweather ")) {
                 Weather weather = new Weather(MrWorldWide.weatherToken);
                 weather.carryRawCommand(event);
+            }
+
+            if (message.toLowerCase().equalsIgnoreCase("disable")) {
+                enabled = false;
+                event.getChannel().sendMessage("OK").queue();
             }
         }
 
