@@ -29,18 +29,20 @@ public class MessageReceivedEvent extends ListenerAdapter {
         this.getUsageData();
         String message = event.getMessage().getContentRaw();
 
-        if (message.toLowerCase().equalsIgnoreCase("enable")) {
-            enabled = true;
-            event.getChannel().sendMessage("OK").queue();
+        if (event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
+            if (message.toLowerCase().equalsIgnoreCase("togglestate")) {
+                enabled = !enabled;
+                event.getChannel().sendMessage("TOGGLED STATE").queue();
+            }
+
+            if (message.toLowerCase().startsWith("testmode")) {
+                inMaintenance = !inMaintenance;
+                event.getChannel().sendMessage("SWAPPED MODES").queue();
+            }
         }
 
         if (!enabled) {
             return;
-        }
-
-        if (message.toLowerCase().startsWith("testmode")) {
-            inMaintenance = !inMaintenance;
-            event.getChannel().sendMessage("OK").queue();
         }
 
         if (message.toLowerCase().startsWith("weather")) {
@@ -106,11 +108,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
             if (message.toLowerCase().startsWith("rawweather ")) {
                 Weather weather = new Weather(MrWorldWide.weatherToken);
                 weather.carryRawCommand(event);
-            }
-
-            if (message.toLowerCase().equalsIgnoreCase("disable")) {
-                enabled = false;
-                event.getChannel().sendMessage("OK").queue();
             }
         }
 

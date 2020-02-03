@@ -87,8 +87,9 @@ public class WeatherHelper {
                     footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minute ago";
                 } else if (city.timeOfCalculation[1].equalsIgnoreCase("1")) {
                     footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " second ago";
+                } else {
+                    footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago";
                 }
-                footer = responsePrefix + "Recorded " + city.timeOfCalculation[0] + " minutes and " + city.timeOfCalculation[1] + " seconds ago";
             }
             eb.setFooter(footer + ". FT: " + city.feelTemperature + "°C", null);
 
@@ -119,6 +120,6 @@ public class WeatherHelper {
     private String getCountryName(String countryCode) {
         JSONObject obj = getCountryInformation(countryCode);
         assert obj != null;
-        return obj.getString("subregion");
+        return obj.getString("name");
     }
 }

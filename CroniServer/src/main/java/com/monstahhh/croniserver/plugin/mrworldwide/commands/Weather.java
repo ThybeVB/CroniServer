@@ -40,7 +40,7 @@ public class Weather {
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
-        if (event.getChannel().getIdLong() != 316310737419108354L || event.getChannel().getIdLong() != 444161393109762048L) {
+        if (event.getChannel().getIdLong() != 316310737419108354L && event.getChannel().getIdLong() != 444161393109762048L) {
             event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
             event.getMessage().delete().queue();
         } else {
@@ -60,12 +60,12 @@ public class Weather {
                 }
             } else {
                 City city = new City();
-                city.cityName = "CITY"; city.countryCode = "CO";
+                city.cityName = "CITY"; city.countryCode = "AQ";
                 city.temperature = 0; city.feelTemperature = 0;
                 city.currentTime = "00:00"; city.timeOfCalculation = new String[]{"00:00", "00:00"};
                 city.sunRiseTime = "00:00"; city.sunSetTime = "00:00";
                 city.currentWeatherTitle = "{WEATHER HEADER}"; city.currentWeatherDescription = "{WEATHER DESCRIPTION}";
-                city.iconUrl = ""; city.windSpeed = "0"; city.humidity = 0; city.embedColor = Color.BLACK;
+                city.iconUrl = "http://openweathermap.org/img/w/01n.png"; city.windSpeed = "0"; city.humidity = 0; city.embedColor = Color.BLACK;
 
                 event.getChannel().sendMessage(new WeatherHelper(MrWorldWide.weatherToken, event.getChannel()).getEmbedFor(city)).queue();
             }
