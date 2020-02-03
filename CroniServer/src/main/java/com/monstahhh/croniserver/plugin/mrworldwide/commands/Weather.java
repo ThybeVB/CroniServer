@@ -4,14 +4,13 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
+import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
+import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,22 +40,34 @@ public class Weather {
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
-        if (event.getChannel().getIdLong() != 316310737419108354L) {
+        if (event.getChannel().getIdLong() != 316310737419108354L || event.getChannel().getIdLong() != 444161393109762048L) {
             event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
             event.getMessage().delete().queue();
         } else {
-            if (msg.getMentions().size() > 0) {
-                this.carryMentionCommand(event);
-            } else {
-                if ((msg.getContentRaw().substring(7)).contains(",")) {
-                    this.carryCommandWithParams(event);
+            if (!MessageReceivedEvent.inMaintenance) {
+                if (msg.getMentions().size() > 0) {
+                    this.carryMentionCommand(event);
                 } else {
-                    if (!msg.getContentRaw().substring(7).isEmpty()) {
-                        this.carryCommandWithCountry(event);
+                    if ((msg.getContentRaw().substring(7)).contains(",")) {
+                        this.carryCommandWithParams(event);
                     } else {
-                        this.carryCommandWithNoParams(event);
+                        if (!msg.getContentRaw().substring(7).isEmpty()) {
+                            this.carryCommandWithCountry(event);
+                        } else {
+                            this.carryCommandWithNoParams(event);
+                        }
                     }
                 }
+            } else {
+                City city = new City();
+                city.cityName = "CITY"; city.countryCode = "CO";
+                city.temperature = 0; city.feelTemperature = 0;
+                city.currentTime = "00:00"; city.timeOfCalculation = new String[]{"00:00", "00:00"};
+                city.sunRiseTime = "00:00"; city.sunSetTime = "00:00";
+                city.currentWeatherTitle = "{WEATHER HEADER}"; city.currentWeatherDescription = "{WEATHER DESCRIPTION}";
+                city.iconUrl = ""; city.windSpeed = "0"; city.humidity = 0; city.embedColor = Color.BLACK;
+
+                event.getChannel().sendMessage(new WeatherHelper(MrWorldWide.weatherToken, event.getChannel()).getEmbedFor(city)).queue();
             }
         }
     }

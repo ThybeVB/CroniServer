@@ -11,22 +11,22 @@ import java.util.TimeZone;
 
 public class City {
 
-    int temperature;
-    int feelTemperature;
-    int humidity;
+    public int temperature;
+    public int feelTemperature;
+    public int humidity;
 
-    String cityName;
-    String countryCode;
-    String sunRiseTime;
-    String sunSetTime;
-    String currentTime;
-    String windSpeed;
-    String currentWeatherTitle;
-    String currentWeatherDescription;
-    String[] timeOfCalculation;
-    String iconUrl;
+    public String cityName;
+    public String countryCode;
+    public String sunRiseTime;
+    public String sunSetTime;
+    public String currentTime;
+    public String windSpeed;
+    public String currentWeatherTitle;
+    public String currentWeatherDescription;
+    public String[] timeOfCalculation;
+    public String iconUrl;
 
-    Color embedColor;
+    public Color embedColor;
 
     City getCityObjectForJson(String json, ChangeClock.Time time) throws JSONException {
 

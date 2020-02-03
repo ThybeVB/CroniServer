@@ -7,6 +7,8 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -18,6 +20,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
     private int currencyCount = 0;
 
     private boolean enabled = true;
+    public static boolean inMaintenance = false;
 
     private Config data = null;
 
@@ -33,6 +36,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         if (!enabled) {
             return;
+        }
+
+        if (message.toLowerCase().startsWith("testmode")) {
+            inMaintenance = !inMaintenance;
+            event.getChannel().sendMessage("OK").queue();
         }
 
         if (message.toLowerCase().startsWith("weather")) {
