@@ -6,6 +6,7 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.CountryCode;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -51,6 +52,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
             weather.carryCommand(event);
         }
 
+        if (message.toLowerCase().startsWith("countrycode")) {
+            CountryCode countryCode = new CountryCode();
+            countryCode.carryCommand(event);
+        }
+
         if (message.toLowerCase().startsWith("setcity ")) {
             SetCity setCity = new SetCity();
             setCity.carryCommand(event, MrWorldWide.weatherToken);
@@ -75,6 +81,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> translate <originLanguage> <newLanguage> <message>" +
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
+                            "\n> countrycode <countryName>" +
                             "\n----------------------------------```";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
