@@ -10,7 +10,10 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelp
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,12 +63,20 @@ public class Weather {
                 }
             } else {
                 City city = new City();
-                city.cityName = "CITY"; city.countryCode = "AQ";
-                city.temperature = 0; city.feelTemperature = 0;
-                city.currentTime = "00:00"; city.timeOfCalculation = new String[]{"00:00", "00:00"};
-                city.sunRiseTime = "00:00"; city.sunSetTime = "00:00";
-                city.currentWeatherTitle = "{WEATHER HEADER}"; city.currentWeatherDescription = "{WEATHER DESCRIPTION}";
-                city.iconUrl = "http://openweathermap.org/img/w/01n.png"; city.windSpeed = "0"; city.humidity = 0; city.embedColor = Color.BLACK;
+                city.cityName = "CITY";
+                city.countryCode = "AQ";
+                city.temperature = 0;
+                city.feelTemperature = 0;
+                city.currentTime = "00:00";
+                city.timeOfCalculation = new String[]{"00:00", "00:00"};
+                city.sunRiseTime = "00:00";
+                city.sunSetTime = "00:00";
+                city.currentWeatherTitle = "{WEATHER HEADER}";
+                city.currentWeatherDescription = "{WEATHER DESCRIPTION}";
+                city.iconUrl = "http://openweathermap.org/img/w/01n.png";
+                city.windSpeed = "0";
+                city.humidity = 0;
+                city.embedColor = Color.BLACK;
 
                 event.getChannel().sendMessage(new WeatherHelper(MrWorldWide.weatherToken, event.getChannel()).getEmbedFor(city)).queue();
             }

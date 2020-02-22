@@ -7,7 +7,7 @@ public class UHC {
 
     private JavaPlugin _plugin;
 
-    public UHC (JavaPlugin plugin) {
+    public UHC(JavaPlugin plugin) {
         this._plugin = plugin;
     }
 

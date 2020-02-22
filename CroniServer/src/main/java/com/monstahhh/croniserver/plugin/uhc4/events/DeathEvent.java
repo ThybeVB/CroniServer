@@ -35,7 +35,6 @@ public class DeathEvent implements Listener {
                 }
             }
             if (event.getEntityType() == EntityType.GHAST) {
-                //ItemStack gunpowder = new ItemStack(Material.GUNPOWDER, 1);
                 event.getDrops().clear();
                 if (random.nextInt(10) <= 5) {
                     ItemStack gold = new ItemStack(Material.GOLD_INGOT, 1);
