@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CountryCode {
 
     public void carryCommand(GuildMessageReceivedEvent event) {
-        String country = event.getMessage().getContentRaw().substring(10);
+        String country = event.getMessage().getContentRaw().substring(12);
         String countryCode = getCountryCode(country).toLowerCase();
 
         event.getChannel().sendMessage(country + " = " + countryCode).queue();
