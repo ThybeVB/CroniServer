@@ -80,6 +80,7 @@ public final class CroniServer extends JavaPlugin {
         sleep.disable();
         practice.disable();
         mrWorldWide.disable();
+        uhc.disable();
 
         System.out.println("[CroniServer] Disabled CroniServer");
     }

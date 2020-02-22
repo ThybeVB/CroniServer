@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.uhc4;
 
+import com.monstahhh.croniserver.plugin.uhc4.events.DeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class UHC {
@@ -11,6 +12,11 @@ public class UHC {
     }
 
     public void enable() {
-        //foo
+        _plugin.getServer().getPluginManager().registerEvents(new DeathEvent(), _plugin);
+        System.out.println("[CroniServer] Enabled UHC");
+    }
+
+    public void disable() {
+        System.out.println("[CroniServer] Disabled UHC");
     }
 }
