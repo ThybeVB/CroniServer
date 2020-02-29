@@ -42,24 +42,24 @@ public class DistanceCommand implements CommandExecutor {
 
                         Player player1 = Bukkit.getServer().getPlayer(args[0]);
 
-                        assert player1 != null;
-                        if (player.getWorld().getEnvironment() == player1.getWorld().getEnvironment() && player.getWorld() == player1.getWorld()) {
+                        if (player1 != null) {
+                            if (player.getWorld().getEnvironment() == player1.getWorld().getEnvironment() && player.getWorld() == player1.getWorld()) {
 
-                            double originX = player.getLocation().getX();
-                            double originY = player.getLocation().getY();
-                            double originZ = player.getLocation().getZ();
+                                double originX = player.getLocation().getX();
+                                double originY = player.getLocation().getY();
+                                double originZ = player.getLocation().getZ();
 
-                            double desiredX = player1.getLocation().getX();
-                            double desiredY = player1.getLocation().getY();
-                            double desiredZ = player1.getLocation().getZ();
+                                double desiredX = player1.getLocation().getX();
+                                double desiredY = player1.getLocation().getY();
+                                double desiredZ = player1.getLocation().getZ();
 
-                            double distance = getDistance(new Location(player.getWorld(), originX, originY, originZ), new Location(player1.getWorld(), desiredX, desiredY, desiredZ));
+                                double distance = getDistance(new Location(player.getWorld(), originX, originY, originZ), new Location(player1.getWorld(), desiredX, desiredY, desiredZ));
 
-                            player.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getDisplayName() + ChatColor.GREEN + ".");
-                        } else {
-                            player.sendMessage(ChatColor.RED + "You need to be in the same world!");
+                                player.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getDisplayName() + ChatColor.GREEN + ".");
+                            } else {
+                                player.sendMessage(ChatColor.RED + "You need to be in the same world!");
+                            }
                         }
-
                     } else {
                         player.sendMessage(ChatColor.RED + "You need to give a playername.");
                     }
