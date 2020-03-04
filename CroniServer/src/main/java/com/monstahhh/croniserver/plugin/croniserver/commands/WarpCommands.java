@@ -12,12 +12,13 @@ public class WarpCommands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             if (sender.hasPermission("croniserver.command.warp")) {
-                if (((Player) sender).getWorld().getName().equalsIgnoreCase("world")) {
-                    if (((Player) sender).getGameMode() == GameMode.SURVIVAL) {
-                        if (DangerAPI.isDangerous((Player) sender)) {
+                Player p = (Player) sender;
+                if (p.getWorld().getName().equalsIgnoreCase("world")) {
+                    if (p.getGameMode() == GameMode.SURVIVAL) {
+                        if (DangerAPI.isDangerous(p)) {
                             sender.sendMessage(ChatColor.DARK_RED + "You are in an unsafe state!");
                         } else {
-                            this.doTp((Player) sender, command);
+                            this.doTp(p, command);
                         }
                     }
                 } else {
