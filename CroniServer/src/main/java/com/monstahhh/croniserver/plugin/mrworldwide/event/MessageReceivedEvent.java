@@ -96,6 +96,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
             translate.carryConversationCommand(event);
         }
 
+        if (message.toLowerCase().startsWith("say ")) {
+            Translate translate = new Translate();
+            translate.carrySayCommand(event);
+        }
+
         if (message.toLowerCase().startsWith("convert ")) {
             Currency currency = new Currency();
             data.getConfig().set("usage.currencyCommand", currencyCount + 1);
