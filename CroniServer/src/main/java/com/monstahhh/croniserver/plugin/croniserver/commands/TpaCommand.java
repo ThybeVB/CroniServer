@@ -24,84 +24,76 @@ public class TpaCommand implements CommandExecutor {
             return true;
         }
 
-        final Player me = (Player) sender;
+        Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("tpa")) {
-            if (this.tpaSent.contains(me)) {
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You have to wait for a new TPA request"));
+            if (this.tpaSent.contains(p)) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You have to wait for a new TPA request"));
             } else {
                 if (args.length == 0) {
-                    me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7Please specify a player!"));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7Please specify a player!"));
                     return true;
                 }
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 if (target == null) {
-                    me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7That player doesn't exist!"));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7That player doesn't exist!"));
                     return true;
                 }
-                if (me.getWorld() == target.getWorld()) {
+                if (p.getWorld() == target.getWorld()) {
 
-                    this.tpa.put(target, me);
-                    if (!me.isOp()) {
-                        this.tpaSent.add(me);
+                    this.tpa.put(target, p);
+                    if (!p.isOp()) {
+                        this.tpaSent.add(p);
                     }
-                    me.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request sent to &6/target/").replaceAll("/target/", target.getDisplayName())));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request sent to &6/target/").replaceAll("/target/", target.getDisplayName())));
                     target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
                     target.sendMessage(" ");
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request from &6/sender/").replaceAll("/sender/", me.getDisplayName())));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request from &6/sender/").replaceAll("/sender/", p.getDisplayName())));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aWrite &b&l/tpaccept &ato accept or &c&l/tpdeny &ato deny"));
                     target.sendMessage(" ");
                     target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
-                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, new Runnable() {
-                        public void run() {
-                            tpaSent.remove(me);
-                        }
-                    }, (20 * 20));
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, () -> tpaSent.remove(p), (20 * 20));
                     return true;
                 }
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You can't teleport to a player into another world!"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You can't teleport to a player into another world!"));
                 return true;
             }
 
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("tpaccept")) {
-            if (this.tpa.get(me) == null) {
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to accept!"));
+            if (this.tpa.get(p) == null) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to accept!"));
                 return true;
             }
-            if (this.tpa.get(me) != null) {
-                (this.tpa.get(me)).teleport(me);
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/sender/ &ahas been teleported to you!").replaceAll("/sender/", this.tpa.get(me).getDisplayName())));
-                (this.tpa.get(me)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/target/ &aaccepted the teleport!").replaceAll("/target/", me.getDisplayName())));
-                if (!(this.tpa.get(me)).isOp()) {
+            if (this.tpa.get(p) != null) {
+                (this.tpa.get(p)).teleport(p);
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/sender/ &ahas been teleported to you!").replaceAll("/sender/", this.tpa.get(p).getDisplayName())));
+                (this.tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/target/ &aaccepted the teleport!").replaceAll("/target/", p.getDisplayName())));
+                if (!(this.tpa.get(p)).isOp()) {
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, new Runnable() {
                         public void run() {
-                            tpaSent.remove(tpa.get(me));
+                            tpaSent.remove(tpa.get(p));
                         }
                     }, (20 * 20));
                 }
-                this.tpa.put(me, null);
+                this.tpa.put(p, null);
                 return true;
             }
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("tpdeny")) {
-            if (this.tpa.get(me) == null) {
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to deny!"));
+            if (this.tpa.get(p) == null) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to deny!"));
                 return true;
             }
-            if (this.tpa.get(me) != null) {
-                me.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You denied the teleport"));
-                (this.tpa.get(me)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&c&lTpa > &6/target/ &7denied the teleport ").replaceAll("/target/", me.getDisplayName())));
-                if (!(this.tpa.get(me)).isOp()) {
-                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, new Runnable() {
-                        public void run() {
-                            tpaSent.remove(tpa.get(me));
-                        }
-                    }, (20 * 20));
+            if (this.tpa.get(p) != null) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You denied the teleport"));
+                (this.tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&c&lTpa > &6/target/ &7denied the teleport ").replaceAll("/target/", p.getDisplayName())));
+                if (!(this.tpa.get(p)).isOp()) {
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, () -> tpaSent.remove(tpa.get(p)), (20 * 20));
                 }
-                this.tpa.put(me, null);
+                this.tpa.put(p, null);
                 return true;
             }
             return true;

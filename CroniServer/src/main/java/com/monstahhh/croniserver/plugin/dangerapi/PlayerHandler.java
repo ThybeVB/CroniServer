@@ -51,7 +51,7 @@ public class PlayerHandler {
                 timedPlayers.remove(player, timer);
                 setPlayerInNeutral(player);
             }
-        }, 30000, 30000);
+        }, 15000, 15000);
     }
 
     public void setPlayerDamaged(Player player) {
