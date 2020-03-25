@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
+import com.monstahhh.croniserver.plugin.croniserver.commands.TpaCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 public final class CroniServer extends JavaPlugin {
 
     public static Config playerData;
-
+    public static JavaPlugin _plugin;
     public static Logger logger;
 
     private CustomAdvancements customAdvancements;
@@ -33,7 +34,7 @@ public final class CroniServer extends JavaPlugin {
     public void onEnable() {
         logger = this.getLogger();
         playerData = new Config("plugins/CroniServer", "player_data.yml");
-
+        _plugin = this;
         this.enableExtensions();
 
         this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
@@ -49,6 +50,7 @@ public final class CroniServer extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("creative")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
+        Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TpaCommand());
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
         Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
     }
