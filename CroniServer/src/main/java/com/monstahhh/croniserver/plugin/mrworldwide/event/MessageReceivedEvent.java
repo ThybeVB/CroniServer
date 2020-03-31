@@ -2,6 +2,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide.event;
 
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.CountryFlag;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
@@ -40,6 +41,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         if (!enabled) {
             return;
+        }
+
+        if (message.toLowerCase().startsWith("flag")) {
+            CountryFlag flag = new CountryFlag();
+            flag.carryCommand(event);
         }
 
         if (message.toLowerCase().startsWith("weather")) {
