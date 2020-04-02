@@ -43,11 +43,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
             return;
         }
 
-        if (message.toLowerCase().startsWith("flag")) {
-            CountryFlag flag = new CountryFlag();
-            flag.carryCommand(event);
-        }
-
         if (message.toLowerCase().startsWith("weather")) {
             Weather weather = new Weather(MrWorldWide.weatherToken);
             data.getConfig().set("usage.weatherCommand", weatherCount + 1);
@@ -84,6 +79,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
                             "\n> countrycode <countryName>" +
+                            "\n> flag" +
                             "\n----------------------------------```";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
@@ -124,7 +120,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
                 weather.carryRawCommand(event);
             }
         }
-
 
         data.saveConfig();
     }

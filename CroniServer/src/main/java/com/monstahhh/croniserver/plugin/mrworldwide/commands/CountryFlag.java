@@ -8,59 +8,72 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.bukkit.Bukkit;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
-public class CountryFlag  {
+public class CountryFlag {
 
     Random random = new Random();
+    private EmbedBuilder eb;
 
-    public static String name;
-    public static EmbedBuilder builder;
-    public static Long msgId;
-
-    public void carryCommand (GuildMessageReceivedEvent event) {
+    public void carryCommand(GuildMessageReceivedEvent event) {
         JSONArray countries = getAllCountries();
         assert countries != null;
         int totalCountryAmount = countries.length();
 
-        JSONObject country = (JSONObject)countries.get(random.nextInt(totalCountryAmount));
+        JSONObject country = (JSONObject) countries.get(random.nextInt(totalCountryAmount));
         String countryName = country.getString("name");
 
-        if (countryName.contains("(") && countryName.contains(")")) {
+        if (countryName.contains("(")) {
             carryCommand(event);
         }
+
         try {
             JSONArray blocs = country.getJSONArray("regionalBlocs");
-            JSONObject bloc = (JSONObject)blocs.get(0);
+            JSONObject bloc = (JSONObject) blocs.get(0);
             if (bloc.getString("acronym").equalsIgnoreCase("PA")) {
                 carryCommand(event);
             }
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+            //Country does not have regional bloc
+        }
 
         String flagMsg = String.format(":flag_%s:", country.getString("alpha2Code").toLowerCase());
 
-        name = countryName.toLowerCase();
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.YELLOW);
-        eb.addField("Flag", flagMsg, false);
-        builder = eb;
+        eb.addField("Guess the flag", flagMsg, false);
+        event.getChannel().sendMessage(eb.build()).queue();
+        this.eb = eb;
 
-        msgId = event.getChannel().sendMessage(eb.build()).complete().getIdLong();
-        FlagListener flagListener = new FlagListener(event.getChannel());
-        event.getJDA().addEventListener(flagListener);
+        guess(event, countryName);
+    }
 
-        Bukkit.getScheduler().runTaskLater(MrWorldWide._plugin, () -> {
-            event.getChannel().sendMessage("Timeout!").queue();
-            event.getJDA().removeEventListener(flagListener);
-        }, 400); //20 seconds
+    private void guess(GuildMessageReceivedEvent event, String countryName) {
+        MrWorldWide.eventWaiter.waitForEvent(MessageReceivedEvent.class,
+                e -> e.getAuthor().equals(event.getAuthor())
+                        && e.getChannel().equals(event.getChannel())
+                        && !e.getAuthor().isBot()
+                        && !e.getMessage().getContentRaw().equalsIgnoreCase("flag")
+                        && !e.getMessage().equals(event.getMessage()),
+                e -> evaluate(event, countryName),
+                15, TimeUnit.SECONDS, () -> event.getChannel().sendMessage("Sorry, you took too long").queue());
+    }
 
+    private void evaluate(GuildMessageReceivedEvent event, String countryName) {
+        MessageChannel channel = event.getChannel();
+        String content = event.getMessage().getContentRaw();
+        if (content.toLowerCase().startsWith(countryName.toLowerCase())) {
+            channel.sendMessage("Correct!").queue();
+        } else {
+            event.getChannel().sendMessage("Wrong").queue();
+        }
+        event.getChannel().sendMessage(content).queue();
     }
 
     private JSONArray getAllCountries() {
@@ -71,34 +84,6 @@ public class CountryFlag  {
             return new JSONArray(res);
         } catch (IOException exception) {
             return null;
-        }
-    }
-}
-
-class FlagListener extends ListenerAdapter {
-    private final long channelId;
-
-    public FlagListener(MessageChannel channel) {
-        this.channelId = channel.getIdLong();
-    }
-
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getAuthor().isBot()) return;
-        if (event.getChannel().getIdLong() != channelId) return;
-
-        MessageChannel channel = event.getChannel();
-        String content = event.getMessage().getContentDisplay();
-
-        if (content.equalsIgnoreCase("flag")) return;
-        if (content.toLowerCase().startsWith(CountryFlag.name)) {
-            channel.sendMessage("Correct!").queue();
-            event.getJDA().removeEventListener(this);
-        }
-        else {
-            EmbedBuilder eb = CountryFlag.builder;
-            eb.setFooter("Wrong!");
-            event.getChannel().editMessageById(CountryFlag.msgId, eb.build()).queue();
         }
     }
 }
