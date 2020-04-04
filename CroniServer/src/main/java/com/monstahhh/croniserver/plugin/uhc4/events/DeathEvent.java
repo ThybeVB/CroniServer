@@ -1,11 +1,16 @@
 package com.monstahhh.croniserver.plugin.uhc4.events;
 
+import net.luckperms.api.LuckPerms;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.Random;
 
@@ -47,6 +52,18 @@ public class DeathEvent implements Listener {
                     ItemStack twoPowder = new ItemStack(Material.GUNPOWDER, 2);
                     event.getDrops().add(twoPowder);
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player p = event.getEntity();
+        if (p.getWorld().getName().startsWith("uhc4")) {
+            RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+            if (provider != null) {
+                LuckPerms api = provider.getProvider();
+                //foo
             }
         }
     }

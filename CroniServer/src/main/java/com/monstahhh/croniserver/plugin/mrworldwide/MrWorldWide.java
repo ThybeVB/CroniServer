@@ -1,6 +1,5 @@
 package com.monstahhh.croniserver.plugin.mrworldwide;
 
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
@@ -26,8 +25,6 @@ public class MrWorldWide {
     public static JDA _jda = null;
     private boolean debug = false;
 
-    public static EventWaiter eventWaiter = new EventWaiter();
-
     public MrWorldWide(JavaPlugin plugin) {
         _plugin = plugin;
     }
@@ -52,7 +49,7 @@ public class MrWorldWide {
                 _jda = new JDABuilder(AccountType.BOT)
                         .setToken(tokenObj.toString())
                         .setAutoReconnect(true)
-                        .addEventListeners(new MessageReceivedEvent(), eventWaiter)
+                        .addEventListeners(new MessageReceivedEvent())
                         .setCompression(Compression.NONE)
                         .setActivity(Activity.watching("the world"))
                         .setContextEnabled(false)
