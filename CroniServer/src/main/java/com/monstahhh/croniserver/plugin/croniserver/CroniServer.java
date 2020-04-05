@@ -69,8 +69,8 @@ public final class CroniServer extends JavaPlugin {
         sleep = new Sleep(this);
         sleep.enable();
 
-        practice = new UhcPractice(this);
-        practice.enable();
+        //practice = new UhcPractice(this);
+        //practice.enable();
 
         mrWorldWide = new MrWorldWide(this);
         mrWorldWide.enable();
