@@ -1,7 +1,13 @@
 package com.monstahhh.croniserver.plugin.uhc4.events;
 
+import fr.xephi.authme.api.v3.AuthMeApi;
 import net.luckperms.api.LuckPerms;
+import net.luckperms.api.context.ImmutableContextSet;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.track.DemotionResult;
+import net.luckperms.api.track.Track;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -9,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -57,13 +64,35 @@ public class DeathEvent implements Listener {
     }
 
     @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player p = event.getPlayer();
+
+        if (p.getWorld().getName().startsWith("uhc4")) {
+            AuthMeApi api = AuthMeApi.getInstance();
+            api.forceLogin(p);
+            p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the uhc4 world.");
+        }
+    }
+
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
+
         if (p.getWorld().getName().startsWith("uhc4")) {
             RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
                 LuckPerms api = provider.getProvider();
-                //foo
+                User u = api.getUserManager().getUser(p.getDisplayName());
+                Track track = api.getTrackManager().getTrack("default");
+                if (track != null && u != null) {
+                    ImmutableContextSet contextSet = api.getContextManager().getContext(p);
+                    DemotionResult result = track.demote(u, contextSet);
+                    if (result.wasSuccessful()) {
+                        api.getUserManager().saveUser(u);
+                    } else {
+                        p.sendMessage(result.toString());
+                    }
+                }
             }
         }
     }
