@@ -61,3 +61,7 @@ commands:
   spawn:
     description: Takes you to spawn
     usage: /spawn
+
+  giveplayersuhcplayer:
+    description: Gives players the UHC Player role
+    usage: /giveplayersuhcplayer

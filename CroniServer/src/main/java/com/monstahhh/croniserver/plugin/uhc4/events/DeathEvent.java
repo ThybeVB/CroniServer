@@ -78,20 +78,22 @@ public class DeathEvent implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        if (p.getWorld().getName().startsWith("uhc4")) {
-            RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
-            if (provider != null) {
-                LuckPerms api = provider.getProvider();
-                User u = api.getUserManager().getUser(p.getDisplayName());
-                Track track = api.getTrackManager().getTrack("default");
-                if (track != null && u != null) {
-                    ImmutableContextSet contextSet = api.getContextManager().getContext(p);
-                    DemotionResult result = track.demote(u, contextSet);
-                    if (result.wasSuccessful()) {
-                        api.getUserManager().saveUser(u);
-                    } else {
-                        p.sendMessage(result.toString());
-                    }
+        if (!p.getWorld().getName().startsWith("uhc4")) return;
+
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            LuckPerms api = provider.getProvider();
+            User u = api.getUserManager().getUser(p.getDisplayName());
+            Track track = api.getTrackManager().getTrack("default");
+
+            if (track != null && u != null) {
+                ImmutableContextSet contextSet = ImmutableContextSet.empty();
+                DemotionResult result = track.demote(u, contextSet);
+
+                if (result.wasSuccessful()) {
+                    api.getUserManager().saveUser(u);
+                } else {
+                    p.sendMessage(ChatColor.DARK_RED + result.toString());
                 }
             }
         }
