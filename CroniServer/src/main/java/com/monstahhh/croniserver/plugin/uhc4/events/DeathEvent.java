@@ -93,8 +93,9 @@ public class DeathEvent implements Listener {
                 if (result.wasSuccessful()) {
                     api.getUserManager().saveUser(u);
                     p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
-                    p.sendMessage(ChatColor.GREEN +     "Thanks for playing!");
-                    p.sendMessage(ChatColor.GREEN +     "   - monstahhhy and the admin team");
+                    p.sendMessage(ChatColor.WHITE + p.getDisplayName() + " is no more :v");
+                    p.sendMessage(ChatColor.DARK_RED + "See you in the nursery");
+                    p.sendMessage(ChatColor.DARK_RED + "    - MyZone03");
                     p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
                 } else {
                     p.sendMessage(ChatColor.DARK_RED + result.toString());
