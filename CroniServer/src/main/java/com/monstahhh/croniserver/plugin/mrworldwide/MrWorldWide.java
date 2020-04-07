@@ -20,9 +20,9 @@ public class MrWorldWide {
     public static String weatherToken;
     public static String currencyToken;
     public static long OwnerId = 257247527630274561L;
+    public static JDA _jda = null;
     private static long guildId = 305792249877364738L;
     private static long statusChannelId = 560486517043232768L;
-    public static JDA _jda = null;
     private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
