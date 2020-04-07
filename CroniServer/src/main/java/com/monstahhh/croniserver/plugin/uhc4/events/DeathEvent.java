@@ -70,7 +70,7 @@ public class DeathEvent implements Listener {
         if (p.getWorld().getName().startsWith("uhc4")) {
             AuthMeApi api = AuthMeApi.getInstance();
             api.forceLogin(p);
-            p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the uhc4 world.");
+            p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the UHC world.");
         }
     }
 
@@ -92,6 +92,10 @@ public class DeathEvent implements Listener {
 
                 if (result.wasSuccessful()) {
                     api.getUserManager().saveUser(u);
+                    p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
+                    p.sendMessage(ChatColor.GREEN +     "Thanks for playing!");
+                    p.sendMessage(ChatColor.GREEN +     "   - monstahhhy and the admin team");
+                    p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
                 } else {
                     p.sendMessage(ChatColor.DARK_RED + result.toString());
                 }

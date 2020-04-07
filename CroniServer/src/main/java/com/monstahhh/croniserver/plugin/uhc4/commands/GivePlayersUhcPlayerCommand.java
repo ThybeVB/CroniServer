@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.uhc4.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,13 @@ public class GivePlayersUhcPlayerCommand implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (command.getName().equalsIgnoreCase("giveplayersuhcplayer")) {
-                //luckperms part
+                if (p.hasPermission("group.owner")) {
+
+                    p.sendMessage("foo");
+
+                } else {
+                    p.sendMessage(ChatColor.DARK_RED + "You do not have permissions to use this command");
+                }
             }
         }
 
