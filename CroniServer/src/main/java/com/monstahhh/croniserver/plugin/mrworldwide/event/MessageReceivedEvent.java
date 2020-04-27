@@ -23,8 +23,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        this.getUsageData();
         String message = event.getMessage().getContentRaw();
+
+        if (!checkForPrefix(message)) return;
+
+        this.getUsageData();
 
         if (event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
             if (message.toLowerCase().equalsIgnoreCase("togglestate")) {
@@ -71,14 +74,13 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> weather <cityname,countrycode>" +
                             "\n> weather <countryname>" +
                             "\n> weather *(If 'setcity' has been used)*" +
-                            "\n> weather <@Debiller#7777>" +
+                            "\n> weather <@Guaka25#4852>" +
                             "\n> setcity <cityname,countrycode>" +
                             "\n> changeclock" +
                             "\n> translate <originLanguage> <newLanguage> <message>" +
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
                             "\n> countrycode <countryName>" +
-                            "\n> flag" +
                             "\n----------------------------------```";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
@@ -121,6 +123,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         data.saveConfig();
+    }
+
+    private boolean checkForPrefix(String message) {
+        //todo
+        return true;
     }
 
     private void getUsageData() {

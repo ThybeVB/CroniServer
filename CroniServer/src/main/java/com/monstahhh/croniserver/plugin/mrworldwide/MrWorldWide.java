@@ -8,9 +8,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.Compression;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.EnumSet;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -21,8 +24,6 @@ public class MrWorldWide {
     public static String currencyToken;
     public static long OwnerId = 257247527630274561L;
     public static JDA _jda = null;
-    private static long guildId = 305792249877364738L;
-    private static long statusChannelId = 560486517043232768L;
     private boolean debug = false;
 
     public MrWorldWide(JavaPlugin plugin) {
@@ -50,23 +51,21 @@ public class MrWorldWide {
                         .setToken(tokenObj.toString())
                         .setAutoReconnect(true)
                         .addEventListeners(new MessageReceivedEvent())
-                        .setCompression(Compression.NONE)
+                        .setCompression(Compression.ZLIB)
+                        .setDisabledCacheFlags(
+                                EnumSet.of(CacheFlag.ACTIVITY)
+                        )
+                        .setGuildSubscriptionsEnabled(false)
+                        .setChunkingFilter(ChunkingFilter.NONE)
                         .setActivity(Activity.watching("the world"))
                         .setContextEnabled(false)
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
-                if (debug) {
-                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
-                            .getTextChannelById(statusChannelId))
-                            .sendMessage("Worldwide detected on Local Machine, giving priority...")
-                            .queue();
-                } else {
-                    Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(guildId))
-                            .getTextChannelById(statusChannelId))
-                            .sendMessage("*dale!*")
-                            .queue();
-                }
+                Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
+                        .getTextChannelById(560486517043232768L))
+                        .sendMessage("*dale!*")
+                        .queue();
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
@@ -109,13 +108,11 @@ public class MrWorldWide {
 
     public void disable() {
         if (_jda != null) {
-            TextChannel channel = Objects.requireNonNull(_jda.getGuildById(guildId))
-                    .getTextChannelById(statusChannelId);
+            TextChannel channel = Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
+                    .getTextChannelById(560486517043232768L);
             if (channel != null) {
                 if (!debug) {
                     channel.sendMessage("Woaaaah i'm passing out!").complete();
-                } else {
-                    channel.sendMessage("Worldwide giving control back to server").complete();
                 }
             }
 
