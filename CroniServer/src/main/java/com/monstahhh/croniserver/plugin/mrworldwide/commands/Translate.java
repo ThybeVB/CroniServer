@@ -73,18 +73,18 @@ public class Translate {
                     if (destination.length() > 2) {
                         destination = "en";
                         if (conversationVersion) {
-                            msg = event.getMessage().getContentRaw().substring(6);
+                            msg = strippedCmd.substring(6);
                         } else {
-                            msg = event.getMessage().getContentRaw().substring(13);
+                            msg = strippedCmd.substring(13);
                         }
                     } else {
                         if (destination.length() != 2) {
                             destination = "en";
                         }
                         if (conversationVersion) {
-                            msg = event.getMessage().getContentRaw().substring(9);
+                            msg = strippedCmd.substring(9);
                         } else {
-                            msg = event.getMessage().getContentRaw().substring(16);
+                            msg = strippedCmd.substring(16);
                         }
                     }
                 }
