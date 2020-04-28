@@ -17,9 +17,9 @@ public class Currency {
             .setTitle("Mr. Error")
             .setColor(Color.RED);
 
-    public void carryCommand(GuildMessageReceivedEvent event, String token) {
+    public void carryCommand(GuildMessageReceivedEvent event, String token, String strippedMsg) {
         try {
-            String providedLoc = event.getMessage().getContentRaw().substring(8);
+            String providedLoc = strippedMsg.substring(8);
             String[] words = providedLoc.split(" ");
 
             float amount = Float.parseFloat(words[0]);

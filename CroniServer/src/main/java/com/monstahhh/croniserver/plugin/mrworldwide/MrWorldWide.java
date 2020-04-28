@@ -52,10 +52,6 @@ public class MrWorldWide {
                         .setAutoReconnect(true)
                         .addEventListeners(new MessageReceivedEvent())
                         .setCompression(Compression.ZLIB)
-                        .setDisabledCacheFlags(
-                                EnumSet.of(CacheFlag.ACTIVITY)
-                        )
-                        .setGuildSubscriptionsEnabled(false)
                         .setChunkingFilter(ChunkingFilter.NONE)
                         .setActivity(Activity.watching("the world"))
                         .setContextEnabled(false)

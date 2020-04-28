@@ -41,23 +41,22 @@ public class Weather {
         this.weatherToken = weatherToken;
     }
 
-    public void carryCommand(GuildMessageReceivedEvent event) {
-        Message msg = event.getMessage();
-        if (event.getChannel().getIdLong() != 316310737419108354L && event.getChannel().getIdLong() != 444161393109762048L) {
+    public void carryCommand(GuildMessageReceivedEvent event, String strippedCmd) {
+        if (event.getGuild().getIdLong() == 305792249877364738L && event.getChannel().getIdLong() != 316310737419108354L && event.getChannel().getIdLong() != 444161393109762048L) {
             event.getChannel().sendMessage("Use <#316310737419108354> for weather reports!").queue((m) -> m.delete().queueAfter(10, TimeUnit.SECONDS));
             event.getMessage().delete().queue();
         } else {
             if (!MessageReceivedEvent.inMaintenance) {
-                if (msg.getMentions().size() > 0) {
-                    this.carryMentionCommand(event);
+                if (event.getMessage().getMentions().size() > 0) {
+                    this.carryMentionCommand(event, strippedCmd);
                 } else {
-                    if ((msg.getContentRaw().substring(7)).contains(",")) {
-                        this.carryCommandWithParams(event);
+                    if ((strippedCmd.substring(7)).contains(",")) {
+                        this.carryCommandWithParams(event, strippedCmd);
                     } else {
-                        if (!msg.getContentRaw().substring(7).isEmpty()) {
-                            this.carryCommandWithCountry(event);
+                        if (!strippedCmd.substring(7).isEmpty()) {
+                            this.carryCommandWithCountry(event, strippedCmd);
                         } else {
-                            this.carryCommandWithNoParams(event);
+                            this.carryCommandWithNoParams(event, strippedCmd);
                         }
                     }
                 }
@@ -83,8 +82,8 @@ public class Weather {
         }
     }
 
-    private void carryCommandWithCountry(GuildMessageReceivedEvent event) {
-        String stripped = event.getMessage().getContentRaw().substring(8);
+    private void carryCommandWithCountry(GuildMessageReceivedEvent event, String strippedCmd) {
+        String stripped = strippedCmd.substring(8);
         if (stripped.toCharArray().length > 2) {
             JSONObject country = getCountryInformation(stripped);
             if (country == null) {
@@ -118,9 +117,9 @@ public class Weather {
         }
     }
 
-    public void carryRawCommand(GuildMessageReceivedEvent event) {
+    public void carryRawCommand(GuildMessageReceivedEvent event, String strippedCmd) {
         try {
-            String formattedSend = String.format("?q=%s&appid=%s&units=metric", event.getMessage().getContentRaw().substring(10), weatherToken);
+            String formattedSend = String.format("?q=%s&appid=%s&units=metric", strippedCmd.substring(10), weatherToken);
             HttpResponse result = new HttpClient().request(HttpMethod.GET, ("http://api.openweathermap.org/data/2.5/weather" + formattedSend));
 
             String resultStr = result.asString();
@@ -132,14 +131,14 @@ public class Weather {
         }
     }
 
-    private void carryMentionCommand(GuildMessageReceivedEvent event) {
+    private void carryMentionCommand(GuildMessageReceivedEvent event, String strippedCmd) {
         User mentionedUser = event.getMessage().getMentionedUsers().get(0);
         Member guildMember = event.getGuild().getMember(mentionedUser);
         assert guildMember != null;
         if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
             EmbedBuilder eb = errorEmbed;
             eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
-            eb.setFooter("Your Input: " + event.getMessage().getContentRaw(), null);
+            eb.setFooter("Your Input: " + strippedCmd, null);
             event.getChannel().sendMessage(eb.build()).queue();
             event.getMessage().delete().queue();
         } else {
@@ -162,8 +161,8 @@ public class Weather {
         }
     }
 
-    private void carryCommandWithParams(GuildMessageReceivedEvent event) {
-        String providedLoc = (event.getMessage().getContentRaw()).substring(7);
+    private void carryCommandWithParams(GuildMessageReceivedEvent event, String strippedCmd) {
+        String providedLoc = strippedCmd.substring(7);
         if ((providedLoc.split(","))[1].length() > 2) {
             argError(event, providedLoc);
         } else {
@@ -178,8 +177,8 @@ public class Weather {
 
     }
 
-    private void carryCommandWithNoParams(GuildMessageReceivedEvent event) {
-        String providedLoc = (event.getMessage().getContentRaw()).substring(7);
+    private void carryCommandWithNoParams(GuildMessageReceivedEvent event, String strippedCmd) {
+        String providedLoc = strippedCmd.substring(7);
         String possibleCity = this.checkForCity(event.getAuthor());
         try {
             if (!possibleCity.isEmpty()) {

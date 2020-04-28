@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
 
 public class Translate {
 
-    public void carryConversationCommand(GuildMessageReceivedEvent event) {
+    public void carryConversationCommand(GuildMessageReceivedEvent event, String strippedCmd) {
         try {
-            String[] results = doTranslate(event, true);
+            String[] results = doTranslate(event, true, strippedCmd);
             if (results != null) {
                 event.getChannel().sendMessage(event.getAuthor().getName() + " (" + results[2].toUpperCase() + "): " + results[0]).queue();
                 event.getMessage().delete().queue();
@@ -28,8 +28,8 @@ public class Translate {
         }
     }
 
-    public void carryCommand(GuildMessageReceivedEvent event) {
-        String[] results = doTranslate(event, false);
+    public void carryCommand(GuildMessageReceivedEvent event, String strippedCmd) {
+        String[] results = doTranslate(event, false, strippedCmd);
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Google Translate (Better than MewBot)");
@@ -47,10 +47,10 @@ public class Translate {
         //foo
     }
 
-    private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion) {
+    private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion, String strippedCmd) {
         String origin, destination, msg;
 
-        String[] args = event.getMessage().getContentRaw().split(" ");
+        String[] args = strippedCmd.split(" ");
         try {
             origin = args[1];
             destination = args[2];

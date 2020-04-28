@@ -13,8 +13,8 @@ import java.io.IOException;
 
 public class SetCity {
 
-    public void carryCommand(GuildMessageReceivedEvent event, String weatherToken) {
-        String providedLoc = (event.getMessage().getContentRaw()).substring(8);
+    public void carryCommand(GuildMessageReceivedEvent event, String weatherToken, String cmdStripped) {
+        String providedLoc = cmdStripped.substring(8);
         if (providedLoc.contains(",")) {
             if ((providedLoc.split(","))[1].length() > 2) {
                 argError(event, providedLoc);

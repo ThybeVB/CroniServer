@@ -20,22 +20,26 @@ public class MessageReceivedEvent extends ListenerAdapter {
     private int currencyCount = 0;
     private boolean enabled = true;
     private Config data = null;
+    private Config prefix = null;
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        String message = event.getMessage().getContentRaw();
+        String message = event.getMessage().getContentDisplay();
 
-        if (!checkForPrefix(message)) return;
+        String prefix = getPrefix(event.getGuild().getIdLong());
+        if (!event.getMessage().getContentDisplay().startsWith(prefix)) return;
 
         this.getUsageData();
 
+        String cmdStripped = message.substring(prefix.length());
+
         if (event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
-            if (message.toLowerCase().equalsIgnoreCase("togglestate")) {
+            if (cmdStripped.equalsIgnoreCase("togglestate")) {
                 enabled = !enabled;
                 event.getChannel().sendMessage("TOGGLED STATE").queue();
             }
 
-            if (message.toLowerCase().startsWith("testmode")) {
+            if (cmdStripped.equalsIgnoreCase("testmode")) {
                 inMaintenance = !inMaintenance;
                 event.getChannel().sendMessage("SWAPPED MODES").queue();
             }
@@ -45,30 +49,30 @@ public class MessageReceivedEvent extends ListenerAdapter {
             return;
         }
 
-        if (message.toLowerCase().startsWith("weather")) {
+        if (cmdStripped.toLowerCase().startsWith("weather")) {
             Weather weather = new Weather(MrWorldWide.weatherToken);
             data.getConfig().set("usage.weatherCommand", weatherCount + 1);
-            weather.carryCommand(event);
+            weather.carryCommand(event, cmdStripped);
         }
 
-        if (message.toLowerCase().startsWith("countrycode")) {
+        if (cmdStripped.toLowerCase().startsWith("countrycode")) {
             CountryCode countryCode = new CountryCode();
-            countryCode.carryCommand(event);
+            countryCode.carryCommand(event, cmdStripped);
         }
 
-        if (message.toLowerCase().startsWith("setcity ")) {
+        if (cmdStripped.toLowerCase().startsWith("setcity ")) {
             SetCity setCity = new SetCity();
-            setCity.carryCommand(event, MrWorldWide.weatherToken);
+            setCity.carryCommand(event, MrWorldWide.weatherToken, cmdStripped);
         }
 
-        if (message.toLowerCase().equalsIgnoreCase("changeclock")) {
+        if (cmdStripped.toLowerCase().equalsIgnoreCase("changeclock")) {
             ChangeClock changeClock = new ChangeClock();
             changeClock.carryCommand(event);
         }
 
         if (event.getMessage().getMentions().size() > 0) {
             if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
-                if (event.getMessage().getContentRaw().contains("help")) {
+                if (cmdStripped.toLowerCase().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
                             "\n* <> = Required Field*" +
                             "\n> weather <cityname,countrycode>" +
@@ -80,54 +84,63 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> translate <originLanguage> <newLanguage> <message>" +
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
-                            "\n> countrycode <countryName>" +
                             "\n----------------------------------```";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
             }
         }
 
-        if (message.toLowerCase().startsWith("translate ")) {
+        if (cmdStripped.toLowerCase().startsWith("translate ")) {
             Translate translate = new Translate();
             data.getConfig().set("usage.translateCommand", translateCount + 1);
-            translate.carryCommand(event);
+            translate.carryCommand(event, cmdStripped);
         }
 
-        if (message.toLowerCase().startsWith("trs ")) {
+        if (cmdStripped.toLowerCase().startsWith("trs ")) {
             Translate translate = new Translate();
             data.getConfig().set("usage.conversationCommand", conversationCount + 1);
-            translate.carryConversationCommand(event);
+            translate.carryConversationCommand(event, cmdStripped);
         }
 
-        if (message.toLowerCase().startsWith("say ")) {
+        if (cmdStripped.toLowerCase().startsWith("say ")) {
             Translate translate = new Translate();
             translate.carrySayCommand(event);
         }
 
-        if (message.toLowerCase().startsWith("convert ")) {
+        if (cmdStripped.toLowerCase().startsWith("convert ")) {
             Currency currency = new Currency();
             data.getConfig().set("usage.currencyCommand", currencyCount + 1);
-            currency.carryCommand(event, MrWorldWide.currencyToken);
+            currency.carryCommand(event, MrWorldWide.currencyToken, cmdStripped);
         }
 
         if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
-            if (message.toLowerCase().equalsIgnoreCase("usage")) {
+            if (cmdStripped.toLowerCase().equalsIgnoreCase("usage")) {
                 String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
                 event.getChannel().sendMessage(dataString).queue();
             }
 
-            if (message.toLowerCase().startsWith("rawweather ")) {
+            if (cmdStripped.toLowerCase().startsWith("rawweather ")) {
                 Weather weather = new Weather(MrWorldWide.weatherToken);
-                weather.carryRawCommand(event);
+                weather.carryRawCommand(event, cmdStripped);
             }
         }
 
         data.saveConfig();
     }
 
-    private boolean checkForPrefix(String message) {
-        //todo
-        return true;
+    private String getPrefix(long serverId) {
+        if (prefix == null) {
+            prefix = new Config("plugins/MrWorldWide", "prefix.yml");
+        }
+        Object prefixObj = prefix.getConfig().get(String.valueOf(serverId));
+        if (prefixObj == null) {
+            String defaultPrefix = "ww!";
+            prefix.getConfig().set(String.valueOf(serverId), defaultPrefix);
+            prefix.saveConfig();
+            return defaultPrefix;
+        } else {
+            return prefixObj.toString();
+        }
     }
 
     private void getUsageData() {
