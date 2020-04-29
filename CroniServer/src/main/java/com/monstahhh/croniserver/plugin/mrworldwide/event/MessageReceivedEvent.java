@@ -135,7 +135,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
         Object prefixObj = prefix.getConfig().get(String.valueOf(serverId));
         if (prefixObj == null) {
-            String defaultPrefix = "ww!";
+            String defaultPrefix = "mr!";
             prefix.getConfig().set(String.valueOf(serverId), defaultPrefix);
             prefix.saveConfig();
             return defaultPrefix;
