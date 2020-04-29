@@ -27,6 +27,27 @@ public class MessageReceivedEvent extends ListenerAdapter {
         String message = event.getMessage().getContentDisplay();
 
         String prefix = getPrefix(event.getGuild().getIdLong());
+
+        if (event.getMessage().getMentions().size() > 0) {
+            if ((event.getMessage().getMentions().get(0)).getIdLong() == 373163613390897163L) {
+                if (event.getMessage().getContentRaw().toLowerCase().contains("help")) {
+                    String helpMsg = "```----- Mr. Worldwide Commands -----" +
+                            "\n* <> = Required Field*" +
+                            "\n> weather <cityname,countrycode>" +
+                            "\n> weather <countryname>" +
+                            "\n> weather *(If 'setcity' has been used)*" +
+                            "\n> weather <@Guaka25#4852>" +
+                            "\n> setcity <cityname,countrycode>" +
+                            "\n> changeclock" +
+                            "\n> translate <originLanguage> <newLanguage> <message>" +
+                            "\n> trs <originLanguage> <newLanguage> <message>" +
+                            "\n> convert <amount> <originCurrency> <newCurrency>" +
+                            "\n----------------------------------```";
+                    event.getChannel().sendMessage(helpMsg).queue();
+                }
+            }
+        }
+
         if (!event.getMessage().getContentDisplay().startsWith(prefix)) return;
 
         this.getUsageData();
@@ -68,26 +89,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
         if (cmdStripped.toLowerCase().equalsIgnoreCase("changeclock")) {
             ChangeClock changeClock = new ChangeClock();
             changeClock.carryCommand(event);
-        }
-
-        if (event.getMessage().getMentions().size() > 0) {
-            if ((event.getMessage().getMentions().get(0)).getIdLong() == 373163613390897163L) {
-                if (event.getMessage().getContentDisplay().toLowerCase().contains("help")) {
-                    String helpMsg = "```----- Mr. Worldwide Commands -----" +
-                            "\n* <> = Required Field*" +
-                            "\n> weather <cityname,countrycode>" +
-                            "\n> weather <countryname>" +
-                            "\n> weather *(If 'setcity' has been used)*" +
-                            "\n> weather <@Guaka25#4852>" +
-                            "\n> setcity <cityname,countrycode>" +
-                            "\n> changeclock" +
-                            "\n> translate <originLanguage> <newLanguage> <message>" +
-                            "\n> trs <originLanguage> <newLanguage> <message>" +
-                            "\n> convert <amount> <originCurrency> <newCurrency>" +
-                            "\n----------------------------------```";
-                    event.getChannel().sendMessage(helpMsg).queue();
-                }
-            }
         }
 
         if (cmdStripped.toLowerCase().startsWith("translate ")) {
