@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -140,7 +141,7 @@ public class Translate {
     }
 
     private HttpResponse doTranslateFor(String textToTranslate, String from, String to) throws IOException {
-        String encodedText = java.net.URLEncoder.encode(textToTranslate, "UTF-8");
+        String encodedText = java.net.URLEncoder.encode(textToTranslate, StandardCharsets.UTF_8);
         String paramsLink = "single?client=gtx&sl=%s&tl=%s-CN&ie=UTF-8&oe=UTF-8&dt=t&dt=rm&q=%s";
         String params = String.format(paramsLink, from, to, encodedText);
 

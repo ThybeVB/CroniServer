@@ -10,10 +10,8 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.Compression;
-import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.EnumSet;
 import java.util.Objects;
 import java.util.logging.Level;
 
