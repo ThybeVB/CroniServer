@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.event;
 
 import com.monstahhh.croniserver.configapi.Config;
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
@@ -8,6 +9,7 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.CountryCode;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
+import com.monstahhh.croniserver.sqlite.Database;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -20,7 +22,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
     private int currencyCount = 0;
     private boolean enabled = true;
     private Config data = null;
-    private Config prefix = null;
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -130,17 +131,14 @@ public class MessageReceivedEvent extends ListenerAdapter {
     }
 
     private String getPrefix(long serverId) {
+        Database database = CroniServer._db;
+        String prefix = database.getPrefix(serverId);
         if (prefix == null) {
-            prefix = new Config("plugins/MrWorldWide", "prefix.yml");
-        }
-        Object prefixObj = prefix.getConfig().get(String.valueOf(serverId));
-        if (prefixObj == null) {
             String defaultPrefix = "mr!";
-            prefix.getConfig().set(String.valueOf(serverId), defaultPrefix);
-            prefix.saveConfig();
+            database.setPrefix(serverId, defaultPrefix);
             return defaultPrefix;
         } else {
-            return prefixObj.toString();
+            return prefix;
         }
     }
 

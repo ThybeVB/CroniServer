@@ -39,8 +39,6 @@ public final class CroniServer extends JavaPlugin {
         _db = new SQLite(this);
         _db.load();
 
-        _db.setPrefix(704640651270160514L, "testprefix");
-
         _plugin = this;
         this.enableExtensions();
 

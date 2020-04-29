@@ -40,10 +40,10 @@ public abstract class Database {
     public String getPrefix(Long guildId) {
         Connection conn = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT prefix FROM " + table + " WHERE guild_id = '"+ guildId + "';");
+            ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE guild_id = '"+ guildId + "';");
 
             rs = ps.executeQuery();
             while(rs.next()){
