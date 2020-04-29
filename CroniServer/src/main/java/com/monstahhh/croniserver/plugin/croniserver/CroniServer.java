@@ -22,14 +22,12 @@ public final class CroniServer extends JavaPlugin {
     public static Config playerData;
     public static JavaPlugin _plugin;
     public static Logger logger;
-
+    public static Database _db;
     private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
     //private UhcPractice practice;
     private MrWorldWide mrWorldWide;
-
-    public static Database _db;
 
     @Override
     public void onEnable() {

@@ -1,23 +1,20 @@
 package com.monstahhh.croniserver.sqlite;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
 
 public abstract class Database {
+    public String table = "guild_prefix";
     JavaPlugin plugin;
     Connection connection;
 
-    public String table = "guild_prefix";
-
-    public int tokens = 0;
-
-    public Database(JavaPlugin instance){
+    public Database(JavaPlugin instance) {
         plugin = instance;
     }
 
@@ -25,12 +22,12 @@ public abstract class Database {
 
     public abstract void load();
 
-    public void initialize(){
+    public void initialize() {
         connection = getSQLConnection();
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + table);
             ResultSet rs = ps.executeQuery();
-            close(ps,rs);
+            close(ps, rs);
 
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, "Unable to retreive connection", ex);
@@ -43,11 +40,11 @@ public abstract class Database {
         ResultSet rs;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE guild_id = '"+ guildId + "';");
+            ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE guild_id = '" + guildId + "';");
 
             rs = ps.executeQuery();
-            while(rs.next()){
-                if(rs.getString("guild_id").equalsIgnoreCase(guildId.toString())){
+            while (rs.next()) {
+                if (rs.getString("guild_id").equalsIgnoreCase(guildId.toString())) {
                     return rs.getString("prefix");
                 }
             }
@@ -89,7 +86,7 @@ public abstract class Database {
         }
     }
 
-    public void close(PreparedStatement ps,ResultSet rs){
+    public void close(PreparedStatement ps, ResultSet rs) {
         try {
             if (ps != null)
                 ps.close();

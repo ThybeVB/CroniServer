@@ -56,10 +56,10 @@ public class MrWorldWide {
                         .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
-               //Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
-               //        .getTextChannelById(560486517043232768L))
-               //        .sendMessage("*dale!*")
-               //        .queue();
+                Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
+                        .getTextChannelById(560486517043232768L))
+                        .sendMessage("*dale!*")
+                        .queue();
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
