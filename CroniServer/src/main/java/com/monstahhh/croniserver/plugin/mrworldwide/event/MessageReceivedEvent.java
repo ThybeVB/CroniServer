@@ -33,7 +33,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         String cmdStripped = message.substring(prefix.length());
 
-        if (event.getMessage().getAuthor().getIdLong() == 257247527630274561L) {
+        if (event.getMessage().getAuthor().getIdLong() == 373163613390897163L) {
             if (cmdStripped.equalsIgnoreCase("togglestate")) {
                 enabled = !enabled;
                 event.getChannel().sendMessage("TOGGLED STATE").queue();
@@ -72,7 +72,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         if (event.getMessage().getMentions().size() > 0) {
             if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
-                if (cmdStripped.toLowerCase().contains("help")) {
+                if (event.getMessage().getContentDisplay().toLowerCase().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
                             "\n* <> = Required Field*" +
                             "\n> weather <cityname,countrycode>" +
