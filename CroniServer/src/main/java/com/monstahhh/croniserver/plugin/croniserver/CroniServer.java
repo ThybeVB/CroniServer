@@ -10,6 +10,8 @@ import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
+import com.monstahhh.croniserver.sqlite.Database;
+import com.monstahhh.croniserver.sqlite.SQLite;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -27,10 +29,18 @@ public final class CroniServer extends JavaPlugin {
     //private UhcPractice practice;
     private MrWorldWide mrWorldWide;
 
+    public static Database _db;
+
     @Override
     public void onEnable() {
         logger = this.getLogger();
         playerData = new Config("plugins/CroniServer", "player_data.yml");
+
+        _db = new SQLite(this);
+        _db.load();
+
+        _db.setPrefix(704640651270160514L, "testprefix");
+
         _plugin = this;
         this.enableExtensions();
 
