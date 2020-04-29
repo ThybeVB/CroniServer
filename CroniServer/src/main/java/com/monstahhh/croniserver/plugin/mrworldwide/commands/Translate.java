@@ -33,7 +33,7 @@ public class Translate {
         String[] results = doTranslate(event, false, strippedCmd);
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Google Translate (Better than MewBot)");
+        eb.setTitle("Google Translate");
         if (results != null) {
             eb.addField(results[1] + " -> " + results[2], results[0], false);
         } else {
