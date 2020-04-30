@@ -26,7 +26,6 @@ public final class CroniServer extends JavaPlugin {
     private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
-    //private UhcPractice practice;
     private MrWorldWide mrWorldWide;
 
     @Override

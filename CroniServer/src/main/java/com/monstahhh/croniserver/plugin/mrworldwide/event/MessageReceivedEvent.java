@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.SetPrefix;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
@@ -113,6 +114,11 @@ public class MessageReceivedEvent extends ListenerAdapter {
             Currency currency = new Currency();
             data.getConfig().set("usage.currencyCommand", currencyCount + 1);
             currency.carryCommand(event, MrWorldWide.currencyToken, cmdStripped);
+        }
+
+        if (cmdStripped.toLowerCase().startsWith("setprefix ")) {
+            SetPrefix setPrefix = new SetPrefix();
+            setPrefix.carryCommand(event, cmdStripped);
         }
 
         if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {

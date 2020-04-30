@@ -45,7 +45,7 @@ public class Translate {
     }
 
     public void carrySayCommand(GuildMessageReceivedEvent event) {
-        //foo
+        //finish this later cuckhead
     }
 
     private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion, String strippedCmd) {
