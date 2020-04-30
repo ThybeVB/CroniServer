@@ -36,7 +36,7 @@ public class SetPrefix {
             Database db = CroniServer._db;
             db.setPrefix(event.getGuild().getIdLong(), prefix);
 
-            event.getChannel().sendMessage("Server prefix has been updated to ``" + prefix + "``.").queue();
+            event.getChannel().sendMessage("Guild prefix has set to ``" + prefix + "``").queue();
         }
     }
 }
