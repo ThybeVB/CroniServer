@@ -16,20 +16,25 @@ public class SQLite extends Database {
             "`prefix` varchar(32) NOT NULL," +
             "PRIMARY KEY (`guild_id`)" +
             ");";
-    String dbname;
+
+    private String dbName;
 
     public SQLite(JavaPlugin instance) {
         super(instance);
-        dbname = plugin.getConfig().getString("SQLite.Filename", "guild_prefix");
+        dbName = plugin.getConfig().getString("SQLite.Filename", "guild_prefix");
     }
 
     public Connection getSQLConnection() {
-        File dataFolder = new File("plugins/MrWorldWide/", dbname + ".db");
+        File dataFolder = new File("plugins/MrWorldWide/", dbName + ".db");
         if (!dataFolder.exists()) {
             try {
-                dataFolder.createNewFile();
+                boolean success = dataFolder.createNewFile();
+                if (!success) {
+                    plugin.getLogger().log(Level.SEVERE, "Could not create data folder!");
+                }
+
             } catch (IOException e) {
-                plugin.getLogger().log(Level.SEVERE, "File write error: " + dbname + ".db");
+                plugin.getLogger().log(Level.SEVERE, "File write error: " + dbName + ".db");
             }
         }
         try {
