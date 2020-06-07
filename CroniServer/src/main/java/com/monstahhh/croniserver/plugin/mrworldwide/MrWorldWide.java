@@ -20,6 +20,7 @@ public class MrWorldWide {
     public static JavaPlugin _plugin = null;
     public static String weatherToken;
     public static String currencyToken;
+    public static String apiToken;
     public static long OwnerId = 257247527630274561L;
     public static JDA _jda = null;
     private boolean debug = false;
@@ -77,6 +78,16 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "Weather Data token is not provided.");
         } else {
             weatherToken = _weatherToken.toString();
+        }
+
+        Object _apiToken = botConfig.getConfig().get("apiToken");
+        if (_apiToken == null) {
+            botConfig.getConfig().set("apiToken", "/");
+            botConfig.saveConfig();
+
+            CroniServer.logger.log(Level.SEVERE, "API token is not provided.");
+        } else {
+            apiToken = _apiToken.toString();
         }
 
         Object _currencyToken = botConfig.getConfig().get("currencyToken");

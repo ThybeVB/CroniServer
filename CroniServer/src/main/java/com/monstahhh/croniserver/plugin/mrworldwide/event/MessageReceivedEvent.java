@@ -3,10 +3,7 @@ package com.monstahhh.croniserver.plugin.mrworldwide.event;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
-import com.monstahhh.croniserver.plugin.mrworldwide.commands.Currency;
-import com.monstahhh.croniserver.plugin.mrworldwide.commands.SetPrefix;
-import com.monstahhh.croniserver.plugin.mrworldwide.commands.Translate;
-import com.monstahhh.croniserver.plugin.mrworldwide.commands.Weather;
+import com.monstahhh.croniserver.plugin.mrworldwide.commands.*;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.CountryCode;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
@@ -70,6 +67,31 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         if (!enabled) {
             return;
+        }
+
+        long userId = event.getMessage().getAuthor().getIdLong();
+        if (userId == 257247527630274561L || userId == 283305771624693771L || userId == 217896474602635264L) {
+            Server server = new Server(MrWorldWide.apiToken);
+            if (cmdStripped.toLowerCase().startsWith("startmoddedserver")) {
+                event.getChannel().sendMessage("Server start command sent!").queue();
+                server.carryStartServer();
+            }
+
+            if (cmdStripped.toLowerCase().startsWith("stopmoddedserver")) {
+                event.getChannel().sendMessage("Server stop command sent!").queue();
+                server.carryStopServer();
+            }
+
+            if (cmdStripped.toLowerCase().startsWith("restartmoddedserver")) {
+                event.getChannel().sendMessage("Server restart command sent!").queue();
+                server.carryRestartServer();
+            }
+
+            if (cmdStripped.toLowerCase().startsWith("sendcommandmodded ")) {
+                String cmd = cmdStripped.substring(18);
+                event.getChannel().sendMessage("Sent command ``" + cmd + "``!").queue();
+                server.carrySendCommand(cmd);
+            }
         }
 
         if (cmdStripped.toLowerCase().startsWith("weather")) {
