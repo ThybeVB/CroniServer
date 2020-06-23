@@ -18,7 +18,7 @@
         <authme.version>5.6.0-SNAPSHOT</authme.version>
         <paper.version>1.15.2-R0.1-SNAPSHOT</paper.version>
         <jda.version>4.1.1_154</jda.version>
-        <srv.version>1.18.4</srv.version>
+        <srv.version>1.19.0</srv.version>
         <apiVersion>1.15</apiVersion>
     </properties>
 

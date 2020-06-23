@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Server {
 
-    private String token;
+    private final String token;
     private final String baseUrl = "http://croniserver.epizy.com/";
 
     public Server(String _token) {
@@ -17,8 +17,7 @@ public class Server {
             String params = "?token=%s";
             String formattedSend = String.format(params, token);
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "startModdedServer.php" + formattedSend));
-            String res = result.asString();
-            System.out.println(res);
+            System.out.println(result.asString());
         } catch (IOException exception) {
             System.out.println(exception.toString());
         }
@@ -29,6 +28,7 @@ public class Server {
             String params = "?token=%s";
             String formattedSend = String.format(params, token);
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "stopServerModded.php" + formattedSend));
+            System.out.println(result.asString());
         } catch (IOException exception) {
             System.out.println(exception.toString());
         }
@@ -39,6 +39,7 @@ public class Server {
             String params = "?token=%s";
             String formattedSend = String.format(params, token);
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "restartServerModded.php" + formattedSend));
+            System.out.println(result.asString());
         } catch (IOException exception) {
             System.out.println(exception.toString());
         }
@@ -50,6 +51,7 @@ public class Server {
             String params = "?token=%s&command=%s";
             String formattedSend = String.format(params, token, newUrl);
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "sendCommandModded.php" + formattedSend));
+            System.out.println(result.asString());
         } catch (IOException exception) {
             System.out.println(exception.toString());
         }
