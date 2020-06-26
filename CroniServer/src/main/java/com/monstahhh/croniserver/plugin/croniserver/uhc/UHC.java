@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class UHC {
 
-    private JavaPlugin _plugin;
+    private final JavaPlugin _plugin;
 
     public UHC(JavaPlugin plugin) {
         this._plugin = plugin;
