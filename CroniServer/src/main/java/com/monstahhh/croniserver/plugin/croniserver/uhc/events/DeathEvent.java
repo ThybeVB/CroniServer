@@ -25,7 +25,7 @@ public class DeathEvent implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
-        if (event.getEntity().getWorld().getName().equalsIgnoreCase("uhctest") || event.getEntity().getWorld().getName().equalsIgnoreCase("uhctest_nether")) {
+        if (event.getEntity().getWorld().getName().startsWith("uhctest")) {
             Random random = new Random();
 
             if (event.getEntityType() == EntityType.WITHER_SKELETON) {
@@ -67,7 +67,7 @@ public class DeathEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
 
-        if (p.getWorld().getName().startsWith("uhc4")) {
+        if (p.getWorld().getName().startsWith("uhctest")) {
             AuthMeApi api = AuthMeApi.getInstance();
             api.forceLogin(p);
             p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the UHC world.");
@@ -78,7 +78,7 @@ public class DeathEvent implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        if (!p.getWorld().getName().startsWith("uhc4")) return;
+        if (!p.getWorld().getName().startsWith("uhctest")) return;
 
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
