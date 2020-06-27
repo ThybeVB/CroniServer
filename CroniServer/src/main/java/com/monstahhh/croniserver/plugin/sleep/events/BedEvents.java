@@ -13,7 +13,7 @@ import java.util.List;
 
 public class BedEvents implements Listener {
 
-    private List<Player> sleepingPlayers = new ArrayList<>();
+    private final List<Player> sleepingPlayers = new ArrayList<>();
 
     @EventHandler
     public void onPlayerBedEnter(PlayerBedEnterEvent event) {
