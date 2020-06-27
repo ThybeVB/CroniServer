@@ -1,24 +1,17 @@
 package com.monstahhh.croniserver.plugin.croniserver.events;
 
-import com.monstahhh.croniserver.configapi.Config;
-import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import fr.xephi.authme.api.v3.AuthMeApi;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerListener implements Listener {
 
-    private Config playerWorldInvs = new Config("plugins/CroniServer", "player_inventories.yml");
-    private AuthMeApi authApi = AuthMeApi.getInstance();
+    private final AuthMeApi authApi = AuthMeApi.getInstance();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

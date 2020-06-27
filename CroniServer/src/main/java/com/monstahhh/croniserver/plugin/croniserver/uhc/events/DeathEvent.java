@@ -1,5 +1,6 @@
 package com.monstahhh.croniserver.plugin.croniserver.uhc.events;
 
+import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import fr.xephi.authme.api.v3.AuthMeApi;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.context.ImmutableContextSet;
@@ -67,11 +68,13 @@ public class DeathEvent implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
 
-        if (p.getWorld().getName().startsWith("uhctest")) {
-            AuthMeApi api = AuthMeApi.getInstance();
-            api.forceLogin(p);
-            p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the UHC world.");
-        }
+        Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> {
+            if (p.getWorld().getName().startsWith("uhc5")) {
+                AuthMeApi api = AuthMeApi.getInstance();
+                api.forceLogin(p);
+                p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the UHC world.");
+            }
+        }, 40);
     }
 
     @EventHandler
