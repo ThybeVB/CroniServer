@@ -41,31 +41,4 @@ public class PlayerListener implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
-        Player p = event.getPlayer();
-        if (!p.getWorld().getName().startsWith("world")) {
-            if (!p.getWorld().getName().startsWith("uhcpractice")) {
-                if (!p.getWorld().getName().startsWith("uhc4")) {
-                    boolean hasBeenCleared = playerWorldInvs.getConfig().getBoolean("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName());
-                    if (!hasBeenCleared) {
-                        Bukkit.getScheduler().runTaskLater(CustomAdvancements._plugin, () -> {
-                            playerWorldInvs.getConfig().set("worlds." + p.getWorld().getName() + ".players." + p.getDisplayName(), true);
-                            playerWorldInvs.saveConfig();
-                            p.getInventory().clear();
-
-                            TextComponent component = new TextComponent("#minecraft-news");
-                            component.setColor(net.md_5.bungee.api.ChatColor.BLUE);
-                            component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discordapp.com/channels/305792249877364738/524211976109424641/661015846965084161"));
-
-                            p.sendMessage(ChatColor.GREEN + "Because of a bug with our Inventory plugin, we have had to clear your inventory in this world.");
-                            p.sendMessage(ChatColor.GREEN + "For more info on this, view");
-                            p.spigot().sendMessage(component);
-                        }, 20);
-                    }
-                }
-            }
-        }
-    }
 }
