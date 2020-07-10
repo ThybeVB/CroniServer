@@ -64,20 +64,20 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void enableExtensions() {
-        customAdvancements = new CustomAdvancements(this);
-        customAdvancements.enable();
+        //customAdvancements = new CustomAdvancements(this);
+        //customAdvancements.enable();
 
         dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
-        sleep = new Sleep(this);
-        sleep.enable();
+        //sleep = new Sleep(this);
+        //sleep.enable();
 
         uhc = new UHC(this);
         uhc.enable();
 
-        mrWorldWide = new MrWorldWide(this);
-        mrWorldWide.enable();
+        //mrWorldWide = new MrWorldWide(this);
+        //mrWorldWide.enable();
     }
 
     @Override
