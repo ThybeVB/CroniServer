@@ -1,6 +1,7 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands;
 
 import com.monstahhh.croniserver.http.HttpMethod;
+
 import java.io.IOException;
 
 public class Server {
@@ -47,7 +48,7 @@ public class Server {
 
     public void carrySendCommand(String command) {
         try {
-            String newUrl = command.replaceAll(" ","%20");
+            String newUrl = command.replaceAll(" ", "%20");
             String params = "?token=%s&command=%s";
             String formattedSend = String.format(params, token, newUrl);
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "sendCommandModded.php" + formattedSend));
