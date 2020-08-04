@@ -91,8 +91,8 @@ public class Translate {
                 }
 
                 msg = msg.replaceAll("\n", " ");
-                msg = msg.replaceAll("\\?", ".");
-                msg = msg.replaceAll("!", ".");
+                msg = msg.replaceAll("\\?", "?");
+                msg = msg.replaceAll("!", "!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             if (conversationVersion) {
