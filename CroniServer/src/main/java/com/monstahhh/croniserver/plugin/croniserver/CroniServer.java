@@ -30,6 +30,7 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        //a
         logger = this.getLogger();
         playerData = new Config("plugins/CroniServer", "player_data.yml");
 
