@@ -7,7 +7,6 @@ import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.TpaCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
-import com.monstahhh.croniserver.plugin.croniserver.uhc.UHC;
 import com.monstahhh.croniserver.plugin.dangerapi.DangerAPI;
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.sleep.Sleep;
@@ -27,7 +26,6 @@ public final class CroniServer extends JavaPlugin {
     private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
-    private UHC uhc;
     private MrWorldWide mrWorldWide;
 
     @Override
@@ -64,20 +62,17 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void enableExtensions() {
-        //customAdvancements = new CustomAdvancements(this);
-        //customAdvancements.enable();
+        customAdvancements = new CustomAdvancements(this);
+        customAdvancements.enable();
 
         dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
-        //sleep = new Sleep(this);
-        //sleep.enable();
+        sleep = new Sleep(this);
+        sleep.enable();
 
-        uhc = new UHC(this);
-        uhc.enable();
-
-        //mrWorldWide = new MrWorldWide(this);
-        //mrWorldWide.enable();
+        mrWorldWide = new MrWorldWide(this);
+        mrWorldWide.enable();
     }
 
     @Override
@@ -85,7 +80,6 @@ public final class CroniServer extends JavaPlugin {
         customAdvancements.disable();
         dangerApi.disable();
         sleep.disable();
-        uhc.disable();
         mrWorldWide.disable();
 
         System.out.println("[CroniServer] Disabled CroniServer");
