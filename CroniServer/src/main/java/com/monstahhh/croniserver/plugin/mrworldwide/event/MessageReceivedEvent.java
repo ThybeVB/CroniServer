@@ -127,11 +127,6 @@ public class MessageReceivedEvent extends ListenerAdapter {
             translate.carryConversationCommand(event, cmdStripped);
         }
 
-        if (cmdStripped.toLowerCase().startsWith("say ")) {
-            Translate translate = new Translate();
-            translate.carrySayCommand(event);
-        }
-
         if (cmdStripped.toLowerCase().startsWith("convert ")) {
             Currency currency = new Currency();
             data.getConfig().set("usage.currencyCommand", currencyCount + 1);

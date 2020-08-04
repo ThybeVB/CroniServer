@@ -44,10 +44,6 @@ public class Translate {
         event.getChannel().sendMessage(eb.build()).queue();
     }
 
-    public void carrySayCommand(GuildMessageReceivedEvent event) {
-        //finish this later cuckhead
-    }
-
     private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion, String strippedCmd) {
         String origin, destination, msg;
 
