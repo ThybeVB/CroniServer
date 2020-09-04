@@ -24,9 +24,11 @@ import java.util.Random;
 
 public class DeathEvent implements Listener {
 
+    private final String worldPrefix = "uhc6";
+
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
-        if (event.getEntity().getWorld().getName().startsWith("uhc5")) {
+        if (event.getEntity().getWorld().getName().startsWith(worldPrefix)) {
             Random random = new Random();
 
             if (event.getEntityType() == EntityType.WITHER_SKELETON) {
@@ -76,7 +78,7 @@ public class DeathEvent implements Listener {
         Player p = event.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> {
-            if (p.getWorld().getName().startsWith("uhc5")) {
+            if (p.getWorld().getName().startsWith(worldPrefix)) {
                 AuthMeApi api = AuthMeApi.getInstance();
                 api.forceLogin(p);
                 p.sendMessage(ChatColor.DARK_GREEN + "You have been automatically logged in due to being the UHC world.");
@@ -88,7 +90,7 @@ public class DeathEvent implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
 
-        if (!p.getWorld().getName().startsWith("uhc5")) return;
+        if (!p.getWorld().getName().startsWith(worldPrefix)) return;
 
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
