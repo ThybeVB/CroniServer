@@ -24,25 +24,8 @@ public class UHC {
         _plugin.getServer().getPluginManager().registerEvents(new DeathEvent(), _plugin);
 
         Objects.requireNonNull(_plugin.getCommand("giveplayersuhcplayer")).setExecutor(new GivePlayersUhcPlayerCommand());
-        addRecipe();
 
         System.out.println("[CroniServer] Enabled UHC");
-    }
-
-    private void addRecipe() {
-        ItemStack dragonBreath = new ItemStack(Material.DRAGON_BREATH, 1);
-        ShapedRecipe recipe = new ShapedRecipe(dragonBreath);
-
-        ItemStack potion = new ItemStack(Material.POTION);
-        PotionMeta meta = (PotionMeta) potion.getItemMeta();
-        meta.setBasePotionData(new PotionData(PotionType.STRENGTH));
-        potion.setItemMeta(meta);
-
-        recipe.shape("GGG", "GSG", "GGG");
-        recipe.setIngredient('G', Material.GOLD_NUGGET);
-        recipe.setIngredient('S', potion);
-
-        _plugin.getServer().addRecipe(recipe);
     }
 
     public void disable() {

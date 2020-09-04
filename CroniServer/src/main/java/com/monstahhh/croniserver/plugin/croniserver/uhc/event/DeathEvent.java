@@ -66,6 +66,10 @@ public class DeathEvent implements Listener {
             if (event.getEntityType() == EntityType.ENDERMAN) {
                 event.getDrops().clear();
                 if (random.nextInt(10) <= 2.5F) {
+                    ItemStack eye = new ItemStack(Material.ENDER_EYE, 1);
+                    event.getDrops().add(eye);
+                }
+                if (random.nextInt(10) <= 5) {
                     ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 1);
                     event.getDrops().add(pearl);
                 }
