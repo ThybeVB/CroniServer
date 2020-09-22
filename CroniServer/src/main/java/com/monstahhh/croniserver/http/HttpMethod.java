@@ -4,7 +4,7 @@ public enum HttpMethod {
 
     GET("GET"), POST("POST"), PUT("PUT"), DELETE("DELETE");
 
-    private String value;
+    private final String value;
 
     HttpMethod(String value) {
         this.value = value;

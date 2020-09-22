@@ -14,8 +14,8 @@ import java.util.HashMap;
 
 public class TpaCommand implements CommandExecutor {
 
-    private HashMap<Player, Player> tpa = new HashMap();
-    private ArrayList<Player> tpaSent = new ArrayList();
+    private final HashMap<Player, Player> tpa = new HashMap();
+    private final ArrayList<Player> tpaSent = new ArrayList();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {

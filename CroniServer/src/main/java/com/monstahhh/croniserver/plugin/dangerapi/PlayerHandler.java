@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 public class PlayerHandler {
 
-    private HashMap<Player, Timer> timedPlayers = new HashMap<>();
+    private final HashMap<Player, Timer> timedPlayers = new HashMap<>();
 
     public void setPlayerInCombat(Player player) {
         Config playerData = DangerAPI.playerData;

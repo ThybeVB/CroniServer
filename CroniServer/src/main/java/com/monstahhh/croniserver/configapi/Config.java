@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Config {
 
     public File file;
-    private FileConfiguration fileConfig;
+    private final FileConfiguration fileConfig;
 
     /**
      * Creates a new config at the path, with the fileName, and uses the Plugin

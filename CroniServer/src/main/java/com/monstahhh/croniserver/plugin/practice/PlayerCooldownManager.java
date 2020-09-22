@@ -14,8 +14,8 @@ import java.util.*;
 
 public class PlayerCooldownManager {
 
-    private static HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
-    private Random random = new Random();
+    private static final HashMap<Player, Timer> playerCooldownMap = new HashMap<>();
+    private final Random random = new Random();
 
     public static void endPlayer(Player p, boolean survived) {
         Timer timer = playerCooldownMap.getOrDefault(p, null);

@@ -2,8 +2,8 @@ package com.monstahhh.croniserver.http;
 
 public class HttpParameter {
 
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 
     public HttpParameter(String name, String value) {
         this.name = name;

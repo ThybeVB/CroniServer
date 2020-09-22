@@ -8,7 +8,7 @@ import java.util.logging.Level;
 
 public class Sleep {
 
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
     public Sleep(JavaPlugin plugin) {
         this.plugin = plugin;

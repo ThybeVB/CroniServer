@@ -17,7 +17,7 @@ public class SQLite extends Database {
             "PRIMARY KEY (`guild_id`)" +
             ");";
 
-    private String dbName;
+    private final String dbName;
 
     public SQLite(JavaPlugin instance) {
         super(instance);

@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class Currency {
 
-    private EmbedBuilder defaultError = new EmbedBuilder()
+    private final EmbedBuilder defaultError = new EmbedBuilder()
             .setTitle("Mr. Error")
             .setColor(Color.RED);
 

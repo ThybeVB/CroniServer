@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 
 public class HttpRequest {
 
-    private HttpURLConnection httpConnection;
+    private final HttpURLConnection httpConnection;
 
     public HttpRequest(HttpURLConnection httpConnection) {
         this.httpConnection = httpConnection;

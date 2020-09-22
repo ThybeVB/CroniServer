@@ -9,7 +9,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerDeathEvent implements Listener {
 
-    private PlayerHandler handler = new PlayerHandler();
+    private final PlayerHandler handler = new PlayerHandler();
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onPlayerDeath(org.bukkit.event.entity.PlayerDeathEvent event) {

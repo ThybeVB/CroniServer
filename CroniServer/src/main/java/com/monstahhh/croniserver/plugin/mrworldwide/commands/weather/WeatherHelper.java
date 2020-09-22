@@ -13,11 +13,11 @@ import java.io.IOException;
 
 public class WeatherHelper {
 
-    private EmbedBuilder defaultError = new EmbedBuilder()
+    private final EmbedBuilder defaultError = new EmbedBuilder()
             .setTitle("Mr. Error")
             .setColor(Color.RED);
-    private String weatherToken;
-    private TextChannel textChannel;
+    private final String weatherToken;
+    private final TextChannel textChannel;
 
     public WeatherHelper(String token, TextChannel channel) {
         this.weatherToken = token;

@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerMoveEvent implements Listener {
 
-    private PlayerHandler handler = new PlayerHandler();
+    private final PlayerHandler handler = new PlayerHandler();
 
     @EventHandler
     public void onPlayerMove(org.bukkit.event.player.PlayerMoveEvent event) {

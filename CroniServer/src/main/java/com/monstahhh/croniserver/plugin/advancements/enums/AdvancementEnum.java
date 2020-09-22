@@ -59,8 +59,9 @@ public enum AdvancementEnum {
     private final boolean showToast, announceChat;
     private final AdvancementVisibility visibility;
     private Advancement advancement;
-    private AdvancementEnum parent;
-    private String title, description;
+    private final AdvancementEnum parent;
+    private final String title;
+    private final String description;
     private String backgroundTexture;
     private float x, y;
 

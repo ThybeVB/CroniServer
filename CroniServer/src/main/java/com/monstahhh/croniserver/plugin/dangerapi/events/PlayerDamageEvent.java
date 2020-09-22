@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class PlayerDamageEvent implements Listener {
 
-    private PlayerHandler handler = new PlayerHandler();
+    private final PlayerHandler handler = new PlayerHandler();
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {

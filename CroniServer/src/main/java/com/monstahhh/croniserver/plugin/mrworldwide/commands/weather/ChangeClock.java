@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class ChangeClock {
 
-    private Config data = new Config("plugins/MrWorldWide", "users.yml");
+    private final Config data = new Config("plugins/MrWorldWide", "users.yml");
 
     public void carryCommand(GuildMessageReceivedEvent event) {
         long userId = event.getAuthor().getIdLong();
