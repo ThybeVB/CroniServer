@@ -39,7 +39,7 @@ public class Translate {
         } else {
             return;
         }
-        eb.setColor(Color.RED);
+        eb.setColor(Color.BLUE);
 
         event.getChannel().sendMessage(eb.build()).queue();
     }
