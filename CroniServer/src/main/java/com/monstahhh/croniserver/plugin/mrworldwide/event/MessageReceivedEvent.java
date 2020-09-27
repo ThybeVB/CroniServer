@@ -28,7 +28,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         String prefix = getPrefix(event.getGuild().getIdLong());
 
         if (event.getMessage().getMentions().size() > 0) {
-            if ((event.getMessage().getMentions().get(0)).getIdLong() == 373163613390897163L) {
+            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
                 if (event.getMessage().getContentRaw().toLowerCase().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
                             "\n* <> = Required Field*" +
