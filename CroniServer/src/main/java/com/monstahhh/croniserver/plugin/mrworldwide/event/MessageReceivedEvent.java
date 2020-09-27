@@ -41,7 +41,8 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> translate <originLanguage> <newLanguage> <message>" +
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
-                            "\n----------------------------------```";
+                            "\n----------------------------------```" +
+                            "\nSupport Server: https://discord.gg/CrZ7FZ7/ ";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
             }
