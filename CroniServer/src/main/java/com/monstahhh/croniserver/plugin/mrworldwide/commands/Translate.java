@@ -53,17 +53,17 @@ public class Translate {
             destination = args[2];
             if (origin.equalsIgnoreCase(destination)) {
                 if (conversationVersion) {
-                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs es en no habla ingles'*").queue();
                 } else {
-                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                    event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate es en no habla ingles'*").queue();
                 }
                 return null;
             } else {
                 if (origin.length() != 2) {
                     if (conversationVersion) {
-                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs es en no habla ingles'*").queue();
                     } else {
-                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                        event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate es en no habla ingles'*").queue();
                     }
                     return null;
                 } else {
@@ -92,9 +92,9 @@ public class Translate {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             if (conversationVersion) {
-                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs id en kontol'*").queue();
+                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'trs es en no habla ingles'*").queue();
             } else {
-                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate id en kontol'*").queue();
+                event.getChannel().sendMessage("You failed to provide one of the arguments\nExample: *'translate es en no habla ingles'*").queue();
             }
             return null;
         }

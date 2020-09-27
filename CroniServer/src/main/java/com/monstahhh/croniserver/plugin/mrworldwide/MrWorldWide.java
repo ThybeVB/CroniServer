@@ -46,15 +46,14 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
-                _jda = new JDABuilder(AccountType.BOT)
-                        .setToken(tokenObj.toString())
-                        .setAutoReconnect(true)
-                        .addEventListeners(new MessageReceivedEvent())
-                        .setCompression(Compression.ZLIB)
-                        .setChunkingFilter(ChunkingFilter.NONE)
-                        .setActivity(Activity.watching("the world"))
-                        .setContextEnabled(false)
-                        .build().awaitReady();
+                _jda = new JDABuilder(tokenObj.toString())
+                    .setAutoReconnect(true)
+                    .addEventListeners(new MessageReceivedEvent())
+                    .setCompression(Compression.ZLIB)
+                    .setChunkingFilter(ChunkingFilter.NONE)
+                    .setActivity(Activity.watching("the world"))
+                    .setContextEnabled(false)
+                    .build().awaitReady();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
                 Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))

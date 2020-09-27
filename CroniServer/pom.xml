@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <authme.version>5.6.0-SNAPSHOT</authme.version>
         <paper.version>1.16.3-R0.1-SNAPSHOT</paper.version>
-        <jda.version>4.2.0_184</jda.version>
+        <jda.version>4.2.0_204</jda.version>
         <srv.version>1.19.1</srv.version>
         <apiVersion>1.16</apiVersion>
     </properties>
