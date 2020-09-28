@@ -27,12 +27,12 @@ public class MessageReceivedEvent extends ListenerAdapter {
 
         String prefix = getPrefix(event.getGuild().getIdLong());
 
-        if (event.getMessage().getMentions().size() > 0) {
-            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
+        if (event.getMessage().getMentions().size() > 0 || event.getMessage().getContentDisplay().startsWith(prefix)) {
+            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L || event.getMessage().getContentDisplay().contains(prefix)) {
                 if (event.getMessage().getContentRaw().toLowerCase().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
-                            "\n  <> = Required Field - Prefix: " + prefix +
-                            "\n  Use the prefix before the command. eg."+ prefix + "weather" +
+                            "\n<> = Required Field - Prefix: " + prefix +
+                            "\nUse the prefix before the command. eg." + prefix + "weather" +
                             "\n> weather <cityname,countrycode>" +
                             "\n> weather <countryname>" +
                             "\n> weather *(If 'setcity' has been used)*" +
