@@ -31,7 +31,8 @@ public class MessageReceivedEvent extends ListenerAdapter {
             if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
                 if (event.getMessage().getContentRaw().toLowerCase().contains("help")) {
                     String helpMsg = "```----- Mr. Worldwide Commands -----" +
-                            "\n* <> = Required Field*" +
+                            "\n  <> = Required Field - Prefix: " + prefix +
+                            "\n  Use the prefix before the command. eg."+ prefix + "weather" +
                             "\n> weather <cityname,countrycode>" +
                             "\n> weather <countryname>" +
                             "\n> weather *(If 'setcity' has been used)*" +
@@ -42,7 +43,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
                             "\n----------------------------------```" +
-                            "\nSupport Server: https://discord.gg/CrZ7FZ7/ ";
+                            "\nSupport Server: https://discord.gg/CrZ7FZ7";
                     event.getChannel().sendMessage(helpMsg).queue();
                 }
             }
