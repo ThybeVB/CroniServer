@@ -21,32 +21,38 @@ public class MessageReceivedEvent extends ListenerAdapter {
     private boolean enabled = true;
     private Config data = null;
 
+    private final String helpMsg = "```----- Mr. Worldwide Commands -----" +
+            "\n<> = Required Field - Prefix: %s" +
+            "\nUse the prefix before the command. eg. %sweather" +
+            "\n> weather <cityname,countrycode>" +
+            "\n> weather <countryname>" +
+            "\n> weather *(If 'setcity' has been used)*" +
+            "\n> weather <@Guaka25#4852>" +
+            "\n> setcity <cityname,countrycode>" +
+            "\n> changeclock" +
+            "\n> translate <originLanguage> <newLanguage> <message>" +
+            "\n> trs <originLanguage> <newLanguage> <message>" +
+            "\n> convert <amount> <originCurrency> <newCurrency>" +
+            "\n----------------------------------```" +
+            "\nSupport Server: https://discord.gg/CrZ7FZ7";
+
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         String message = event.getMessage().getContentDisplay();
 
         String prefix = getPrefix(event.getGuild().getIdLong());
 
-        if (event.getMessage().getMentions().size() > 0 || event.getMessage().getContentDisplay().startsWith(prefix)) {
-            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L || event.getMessage().getContentDisplay().contains(prefix)) {
+        if (event.getMessage().getMentions().size() > 0) {
+            if ((event.getMessage().getMentions().get(0)).getIdLong() == 443510227380207646L) {
                 if (event.getMessage().getContentRaw().toLowerCase().contains("help")) {
-                    String helpMsg = "```----- Mr. Worldwide Commands -----" +
-                            "\n<> = Required Field - Prefix: " + prefix +
-                            "\nUse the prefix before the command. eg." + prefix + "weather" +
-                            "\n> weather <cityname,countrycode>" +
-                            "\n> weather <countryname>" +
-                            "\n> weather *(If 'setcity' has been used)*" +
-                            "\n> weather <@Guaka25#4852>" +
-                            "\n> setcity <cityname,countrycode>" +
-                            "\n> changeclock" +
-                            "\n> translate <originLanguage> <newLanguage> <message>" +
-                            "\n> trs <originLanguage> <newLanguage> <message>" +
-                            "\n> convert <amount> <originCurrency> <newCurrency>" +
-                            "\n----------------------------------```" +
-                            "\nSupport Server: https://discord.gg/CrZ7FZ7";
-                    event.getChannel().sendMessage(helpMsg).queue();
+
+                    event.getChannel().sendMessage(String.format(helpMsg, prefix, prefix)).queue();
                 }
             }
+        }
+
+        if (event.getMessage().getContentRaw().startsWith(prefix) && event.getMessage().getContentRaw().contains("help")) {
+            event.getChannel().sendMessage(String.format(helpMsg, prefix, prefix)).queue();
         }
 
         if (!event.getMessage().getContentDisplay().startsWith(prefix)) return;
