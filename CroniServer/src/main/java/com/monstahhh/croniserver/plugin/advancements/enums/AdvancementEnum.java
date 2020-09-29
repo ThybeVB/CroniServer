@@ -58,10 +58,10 @@ public enum AdvancementEnum {
     private final AdvancementDisplay.AdvancementFrame frame;
     private final boolean showToast, announceChat;
     private final AdvancementVisibility visibility;
-    private Advancement advancement;
     private final AdvancementEnum parent;
     private final String title;
     private final String description;
+    private Advancement advancement;
     private String backgroundTexture;
     private float x, y;
 

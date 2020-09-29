@@ -11,13 +11,12 @@ import java.sql.Statement;
 import java.util.logging.Level;
 
 public class SQLite extends Database {
+    private final String dbName;
     public String SQLiteCreateTokensTable = "CREATE TABLE IF NOT EXISTS guild_prefix (" +
             "`guild_id` int(8) NOT NULL," +
             "`prefix` varchar(32) NOT NULL," +
             "PRIMARY KEY (`guild_id`)" +
             ");";
-
-    private final String dbName;
 
     public SQLite(JavaPlugin instance) {
         super(instance);

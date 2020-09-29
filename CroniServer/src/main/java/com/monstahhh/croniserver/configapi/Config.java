@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class Config {
 
-    public File file;
     private final FileConfiguration fileConfig;
+    public File file;
 
     /**
      * Creates a new config at the path, with the fileName, and uses the Plugin
