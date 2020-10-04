@@ -48,7 +48,6 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void registerCommands() {
-        TpaCommand tpaCommand = new TpaCommand();
 
         Objects.requireNonNull(this.getCommand("hub")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new WarpCommands());
@@ -56,9 +55,9 @@ public final class CroniServer extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("creative")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
-        Objects.requireNonNull(this.getCommand("tpaccept")).setExecutor(tpaCommand);
-        Objects.requireNonNull(this.getCommand("tpdeny")).setExecutor(tpaCommand);
-        Objects.requireNonNull(this.getCommand("tpa")).setExecutor(tpaCommand);
+        Objects.requireNonNull(this.getCommand("tpaccept")).setExecutor(new TpaCommand());
+        Objects.requireNonNull(this.getCommand("tpdeny")).setExecutor(new TpaCommand());
+        Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TpaCommand());
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
         Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
     }
