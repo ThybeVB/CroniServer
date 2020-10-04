@@ -45,7 +45,7 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
-                _jda = new JDABuilder(tokenObj.toString())
+                _jda = JDABuilder.createDefault(tokenObj.toString())
                         .setAutoReconnect(true)
                         .addEventListeners(new MessageReceivedEvent())
                         .setCompression(Compression.ZLIB)
