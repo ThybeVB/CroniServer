@@ -50,7 +50,7 @@ public class SetPrefix {
             event.getChannel().sendMessage(prefixTooLongErrorEmbed).queue();
         } else {
             Database db = CroniServer._db;
-            db.setPrefix(event.getGuild().getIdLong(), prefix);
+            db.setPrefix(event.getGuild().getIdLong(), prefix.toLowerCase());
 
             event.getChannel().sendMessage("Guild prefix has set to ``" + prefix + "``").queue();
         }

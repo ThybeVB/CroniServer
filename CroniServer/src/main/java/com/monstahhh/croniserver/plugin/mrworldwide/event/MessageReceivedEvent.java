@@ -49,7 +49,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
             }
         }
 
-        if (!event.getMessage().getContentDisplay().startsWith(prefix)) return;
+        if (!event.getMessage().getContentDisplay().toLowerCase().startsWith(prefix)) return;
 
         this.getUsageData();
 
