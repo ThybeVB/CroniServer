@@ -150,6 +150,10 @@ public class MessageReceivedEvent extends ListenerAdapter {
                 Weather weather = new Weather(MrWorldWide.weatherToken);
                 weather.carryRawCommand(event, cmdStripped);
             }
+
+            if (cmdStripped.toLowerCase().startsWith("json")) {
+                event.getChannel().sendMessage(MrWorldWide.JsonStats.toString()).queue();
+            }
         }
 
         data.saveConfig();

@@ -6,12 +6,16 @@ import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.Compression;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.JSONObject;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 
 public class MrWorldWide {
@@ -21,6 +25,7 @@ public class MrWorldWide {
     public static String currencyToken;
     public static String apiToken;
     public static long OwnerId = 257247527630274561L;
+    public static JSONObject JsonStats;
     public static JDA _jda = null;
     private boolean debug = false;
 
@@ -59,6 +64,23 @@ public class MrWorldWide {
                         .getTextChannelById(560486517043232768L))
                         .sendMessage("*dale!*")
                         .queue();
+
+                Timer timer = new Timer();
+
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    public void run() {
+                        int userCount = 0;
+                        for (Guild g : _jda.getGuilds()) {
+                            userCount += g.getMemberCount();
+                        }
+
+                        JSONObject stats = new JSONObject();
+                        stats.put("guild_count", _jda.getGuilds().size());
+                        stats.put("user_count", userCount);
+
+                        MrWorldWide.JsonStats = stats;
+                    }
+                }, 100, 5000);
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
