@@ -1,6 +1,8 @@
 package com.monstahhh.croniserver.plugin.mrworldwide;
 
 import com.monstahhh.croniserver.configapi.Config;
+import com.monstahhh.croniserver.http.HttpClient;
+import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.JDA;
@@ -13,6 +15,7 @@ import net.dv8tion.jda.api.utils.Compression;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +27,7 @@ public class MrWorldWide {
     public static String weatherToken;
     public static String currencyToken;
     public static String apiToken;
+    public static String serverToken;
     public static long OwnerId = 257247527630274561L;
     public static JSONObject JsonStats;
     public static JDA _jda = null;
@@ -77,8 +81,14 @@ public class MrWorldWide {
                         JSONObject stats = new JSONObject();
                         stats.put("guild_count", _jda.getGuilds().size());
                         stats.put("user_count", userCount);
-
                         MrWorldWide.JsonStats = stats;
+
+                        try {
+                            new HttpClient().requestToGateway(HttpMethod.POST, "http://localhost:3000/api/post_status", stats);
+                        } catch (IOException exception) {
+                            System.out.println(exception.toString());
+                        }
+
                     }
                 }, 100, 5000);
 
@@ -89,6 +99,16 @@ public class MrWorldWide {
     }
 
     private void checkServices(Config botConfig) {
+
+        Object _serverToken = botConfig.getConfig().get("serverToken");
+        if (_serverToken == null) {
+            botConfig.getConfig().set("serverToken", "/");
+            botConfig.saveConfig();
+
+            CroniServer.logger.log(Level.SEVERE, "Server token is not provided.");
+        } else {
+            serverToken = _serverToken.toString();
+        }
 
         Object _weatherToken = botConfig.getConfig().get("weatherToken");
         if (_weatherToken == null) {

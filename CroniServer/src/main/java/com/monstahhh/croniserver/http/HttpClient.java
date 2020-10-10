@@ -1,5 +1,7 @@
 package com.monstahhh.croniserver.http;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -14,6 +16,17 @@ public class HttpClient {
 
     public HttpResponse request(HttpMethod method, String url) throws IOException {
         return request(method, url, null);
+    }
+
+    public HttpResponse requestToGateway(HttpMethod method, String url, JSONObject object) throws IOException {
+        return requestGateway(method, url, null, object);
+    }
+
+    private HttpResponse requestGateway(HttpMethod method, String url,
+                                        HttpParameterSet httpParameters, JSONObject json) throws IOException {
+        HttpRequest request = new HttpRequestFactory().getRequestGateway(method, url, httpParameters, json);
+
+        return request.doRequest();
     }
 
     public HttpResponse request(HttpMethod method, String url,
