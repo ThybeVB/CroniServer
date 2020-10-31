@@ -47,7 +47,7 @@ public class WarpCommands implements CommandExecutor {
             player.teleportAsync(new Location(Bukkit.getWorld("world"), 0, 69, 0));
         }
         if (command.getName().equalsIgnoreCase("creative")) {
-            player.teleportAsync(new Location(Bukkit.getWorld("creative"), 0, 100, 0));
+            player.teleportAsync(new Location(Bukkit.getWorld("creative"), 0, 4, 4));
             player.setFlying(true);
         }
     }

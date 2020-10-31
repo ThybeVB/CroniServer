@@ -42,6 +42,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
                             "\n> translate <originLanguage> <newLanguage> <message>" +
                             "\n> trs <originLanguage> <newLanguage> <message>" +
                             "\n> convert <amount> <originCurrency> <newCurrency>" +
+                            "\n> invite" +
                             "\n----------------------------------```" +
                             "\nSupport Server: https://discord.gg/CrZ7FZ7";
                     event.getChannel().sendMessage(helpMsg).queue();
@@ -138,6 +139,10 @@ public class MessageReceivedEvent extends ListenerAdapter {
         if (cmdStripped.toLowerCase().startsWith("setprefix ")) {
             SetPrefix setPrefix = new SetPrefix();
             setPrefix.carryCommand(event, cmdStripped);
+        }
+
+        if (cmdStripped.toLowerCase().startsWith("invite")) {
+            event.getChannel().sendMessage("https://discord.com/oauth2/authorize?client_id=443510227380207646&scope=bot&permissions=0").queue();
         }
 
         if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {

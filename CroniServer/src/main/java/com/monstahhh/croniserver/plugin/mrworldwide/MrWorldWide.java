@@ -4,6 +4,7 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
+import com.monstahhh.croniserver.plugin.mrworldwide.event.GuildUpdate;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -56,7 +57,7 @@ public class MrWorldWide {
             try {
                 _jda = JDABuilder.createDefault(tokenObj.toString())
                         .setAutoReconnect(true)
-                        .addEventListeners(new MessageReceivedEvent())
+                        .addEventListeners(new MessageReceivedEvent(), new GuildUpdate())
                         .setCompression(Compression.ZLIB)
                         .setChunkingFilter(ChunkingFilter.NONE)
                         .setActivity(Activity.watching("the world"))
@@ -68,29 +69,6 @@ public class MrWorldWide {
                         .getTextChannelById(560486517043232768L))
                         .sendMessage("*dale!*")
                         .queue();
-
-                Timer timer = new Timer();
-
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    public void run() {
-                        int userCount = 0;
-                        for (Guild g : _jda.getGuilds()) {
-                            userCount += g.getMemberCount();
-                        }
-
-                        JSONObject stats = new JSONObject();
-                        stats.put("guild_count", _jda.getGuilds().size());
-                        stats.put("user_count", userCount);
-                        MrWorldWide.JsonStats = stats;
-
-                        try {
-                            new HttpClient().requestToGateway(HttpMethod.POST, "http://localhost:3000/api/post_status", stats);
-                        } catch (IOException exception) {
-                            System.out.println(exception.toString());
-                        }
-
-                    }
-                }, 100, 5000);
 
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
