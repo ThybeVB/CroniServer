@@ -1,25 +1,19 @@
 package com.monstahhh.croniserver.plugin.mrworldwide;
 
 import com.monstahhh.croniserver.configapi.Config;
-import com.monstahhh.croniserver.http.HttpClient;
-import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.GuildUpdate;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.Compression;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 
 public class MrWorldWide {
@@ -28,6 +22,7 @@ public class MrWorldWide {
     public static String weatherToken;
     public static String currencyToken;
     public static String apiToken;
+    public static String dblToken;
     public static String serverToken;
     public static long OwnerId = 257247527630274561L;
     public static JSONObject JsonStats;
@@ -70,6 +65,8 @@ public class MrWorldWide {
                         .sendMessage("*dale!*")
                         .queue();
 
+                new GuildUpdate().update(_jda);
+
             } catch (Exception e) {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
@@ -106,6 +103,16 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "API token is not provided.");
         } else {
             apiToken = _apiToken.toString();
+        }
+
+        Object _dblToken = botConfig.getConfig().get("dblToken");
+        if (_dblToken == null) {
+            botConfig.getConfig().set("dblToken", "/");
+            botConfig.saveConfig();
+
+            CroniServer.logger.log(Level.SEVERE, "DBL token is not provided.");
+        } else {
+            dblToken = _dblToken.toString();
         }
 
         Object _currencyToken = botConfig.getConfig().get("currencyToken");
