@@ -126,7 +126,7 @@
         <dependency>
             <groupId>eu.endercentral.crazy_advancements</groupId>
             <artifactId>CrazyAdvancementsAPI</artifactId>
-            <version>1.13.9</version>
+            <version>1.13.11</version>
             <systemPath>${project.basedir}/jar/CrazyAdvancementsAPI.jar</systemPath>
             <scope>system</scope>
         </dependency>
