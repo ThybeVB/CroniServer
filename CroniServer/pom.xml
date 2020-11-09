@@ -6,7 +6,7 @@
 
     <groupId>com.monstahhh.croniserver.plugin</groupId>
     <artifactId>croniserver</artifactId>
-    <version>1.9.6</version>
+    <version>1.9.7</version>
     <packaging>jar</packaging>
 
     <name>CroniServer</name>
@@ -15,7 +15,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <paper.version>1.16.3-R0.1-SNAPSHOT</paper.version>
+        <paper.version>1.16.4-R0.1-SNAPSHOT</paper.version>
         <apiVersion>1.16</apiVersion>
     </properties>
 
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
-            <version>1.19.1</version>
+            <version>1.20.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
