@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public class Translate {
         String[] results = doTranslate(event, false, strippedCmd);
 
         EmbedBuilder eb = new EmbedBuilder();
-        String translateLink = String.format("https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate", results[1], results[2], results[3]);
-        eb.setTitle("Google Translate", translateLink);
+        String translateLink = String.format("https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate/", results[1], results[2], results[3]);
+        eb.setTitle("Google Translate", URLEncoder.encode(translateLink, StandardCharsets.UTF_8));
         eb.addField(results[1] + " -> " + results[2], results[0], false);
         eb.setColor(Color.BLUE);
 
