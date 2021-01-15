@@ -33,12 +33,9 @@ public class Translate {
         String[] results = doTranslate(event, false, strippedCmd);
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Google Translate");
-        if (results != null) {
-            eb.addField(results[1] + " -> " + results[2], results[0], false);
-        } else {
-            return;
-        }
+        String translateLink = String.format("[Google Translate](https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate)", results[1], results[2], results[3]);
+        eb.setTitle(translateLink);
+        eb.addField(results[1] + " -> " + results[2], results[0], false);
         eb.setColor(Color.BLUE);
 
         event.getChannel().sendMessage(eb.build()).queue();
@@ -98,10 +95,11 @@ public class Translate {
             }
             return null;
         }
-        String[] strArray = new String[3];
+        String[] strArray = new String[4];
         strArray[0] = getTranslation(origin, destination, msg);
         strArray[1] = origin;
         strArray[2] = destination;
+        strArray[3] = msg;
 
         return strArray;
     }
