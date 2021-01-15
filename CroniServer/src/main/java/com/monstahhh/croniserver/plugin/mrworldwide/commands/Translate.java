@@ -32,10 +32,10 @@ public class Translate {
 
     public void carryCommand(GuildMessageReceivedEvent event, String strippedCmd) {
         String[] results = doTranslate(event, false, strippedCmd);
-
         EmbedBuilder eb = new EmbedBuilder();
-        String translateLink = String.format("https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate/", results[1], results[2], results[3]);
-        eb.setTitle("Google Translate", URLEncoder.encode(translateLink, StandardCharsets.UTF_8));
+        String link = String.format("https://translate.google.com?sl=%s&tl=%s&op=translate&text=", results[1], results[2]);
+        String inputText = URLEncoder.encode(results[3], StandardCharsets.UTF_8);
+        eb.setTitle("Google Translate", link + inputText);
         eb.addField(results[1] + " -> " + results[2], results[0], false);
         eb.setColor(Color.BLUE);
 
