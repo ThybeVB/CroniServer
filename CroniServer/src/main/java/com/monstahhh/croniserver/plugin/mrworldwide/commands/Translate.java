@@ -33,7 +33,7 @@ public class Translate {
         String[] results = doTranslate(event, false, strippedCmd);
 
         EmbedBuilder eb = new EmbedBuilder();
-        String translateLink = String.format("[Google Translate](https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate)", results[1], results[2], results[3]);
+        String translateLink = String.format("https://translate.google.com/?sl=%s&tl=%s&text=%s&op=translate", results[1], results[2], results[3]);
         eb.setTitle("Google Translate", translateLink);
         eb.addField(results[1] + " -> " + results[2], results[0], false);
         eb.setColor(Color.BLUE);
