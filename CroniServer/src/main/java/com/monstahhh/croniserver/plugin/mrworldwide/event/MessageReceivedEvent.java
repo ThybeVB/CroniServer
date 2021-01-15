@@ -14,13 +14,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class MessageReceivedEvent extends ListenerAdapter {
 
     public static boolean inMaintenance = false;
-    private int translateCount = 0;
-    private int conversationCount = 0;
-    private int weatherCount = 0;
-    private int currencyCount = 0;
-    private boolean enabled = true;
-    private Config data = null;
-
     private final String helpMsg = "```----- Mr. Worldwide Commands -----" +
             "\n<> = Required Field - Prefix: %s" +
             "\nUse the prefix before the command. eg. %sweather" +
@@ -36,6 +29,12 @@ public class MessageReceivedEvent extends ListenerAdapter {
             "\n> invite" +
             "\n----------------------------------```" +
             "\nSupport Server: https://discord.gg/CrZ7FZ7";
+    private int translateCount = 0;
+    private int conversationCount = 0;
+    private int weatherCount = 0;
+    private int currencyCount = 0;
+    private boolean enabled = true;
+    private Config data = null;
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
