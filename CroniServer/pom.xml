@@ -15,7 +15,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <paper.version>1.16.4-R0.1-SNAPSHOT</paper.version>
+        <paper.version>1.16.5-R0.1-SNAPSHOT</paper.version>
         <apiVersion>1.16</apiVersion>
     </properties>
 
@@ -74,6 +74,11 @@
             <url>https://nexus.scarsz.me/content/groups/public/</url>
         </repository>
         <repository>
+            <id>dv8tion</id>
+            <name>m2-dv8tion</name>
+            <url>https://m2.dv8tion.net/releases</url>
+        </repository>
+        <repository>
             <id>jcenter</id>
             <name>jcenter-bintray</name>
             <url>https://jcenter.bintray.com</url>
@@ -109,7 +114,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.0_204</version>
+            <version>4.2.1_256</version>
             <exclusions>
                 <exclusion>
                     <groupId>club.minnced</groupId>
