@@ -4,12 +4,15 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.GuildUpdate;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.utils.ChunkingFilter;
-import net.dv8tion.jda.api.utils.Compression;
+import github.scarsz.discordsrv.dependencies.jda.api.JDA;
+import github.scarsz.discordsrv.dependencies.jda.api.JDABuilder;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.Activity;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
+import github.scarsz.discordsrv.dependencies.jda.api.requests.GatewayIntent;
+import github.scarsz.discordsrv.dependencies.jda.api.utils.ChunkingFilter;
+import github.scarsz.discordsrv.dependencies.jda.api.utils.Compression;
+import github.scarsz.discordsrv.dependencies.jda.api.utils.MemberCachePolicy;
+import github.scarsz.discordsrv.dependencies.jda.api.utils.cache.CacheFlag;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.JSONObject;
 
@@ -50,14 +53,15 @@ public class MrWorldWide {
             CroniServer.logger.log(Level.SEVERE, "Mr. Worldwide token is not provided.");
         } else {
             try {
-                _jda = JDABuilder.createDefault(tokenObj.toString())
-                        .setAutoReconnect(true)
-                        .addEventListeners(new MessageReceivedEvent(), new GuildUpdate())
-                        .setCompression(Compression.ZLIB)
-                        .setChunkingFilter(ChunkingFilter.NONE)
-                        .setActivity(Activity.watching("the world"))
-                        .setContextEnabled(false)
-                        .build().awaitReady();
+                JDABuilder builder = JDABuilder.createDefault(tokenObj.toString());
+                builder.setCompression(Compression.ZLIB);
+                builder.setChunkingFilter(ChunkingFilter.NONE);
+                builder.setActivity(Activity.watching("the world"));
+                builder.setContextEnabled(false);
+                builder.setAutoReconnect(true);
+                builder.addEventListeners(new MessageReceivedEvent(), new GuildUpdate());
+                configureMemoryUsage(builder);
+                _jda = builder.build();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
                 Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
@@ -71,6 +75,15 @@ public class MrWorldWide {
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] " + e.getMessage());
             }
         }
+    }
+
+    public void configureMemoryUsage(JDABuilder builder) {
+        builder.disableCache(CacheFlag.ACTIVITY);
+        builder.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
+        builder.setChunkingFilter(ChunkingFilter.NONE);
+        builder.disableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_TYPING);
+
+        builder.setLargeThreshold(50);
     }
 
     private void checkServices(Config botConfig) {

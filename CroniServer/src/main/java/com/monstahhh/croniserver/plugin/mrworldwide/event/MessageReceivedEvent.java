@@ -8,8 +8,8 @@ import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.ChangeClock
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.CountryCode;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.SetCity;
 import com.monstahhh.croniserver.sqlite.Database;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import github.scarsz.discordsrv.dependencies.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.hooks.ListenerAdapter;
 
 public class MessageReceivedEvent extends ListenerAdapter {
 

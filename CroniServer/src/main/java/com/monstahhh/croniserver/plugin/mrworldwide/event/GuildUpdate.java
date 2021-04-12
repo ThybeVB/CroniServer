@@ -1,11 +1,11 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.event;
 
 import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import github.scarsz.discordsrv.dependencies.jda.api.JDA;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.Guild;
+import github.scarsz.discordsrv.dependencies.jda.api.events.guild.GuildJoinEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.events.guild.GuildLeaveEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.hooks.ListenerAdapter;
 import org.discordbots.api.client.DiscordBotListAPI;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;

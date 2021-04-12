@@ -4,8 +4,8 @@ import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.http.HttpClient;
 import com.monstahhh.croniserver.http.HttpMethod;
 import com.monstahhh.croniserver.http.HttpResponse;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.EmbedBuilder;
+import github.scarsz.discordsrv.dependencies.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONObject;
 
 import java.awt.*;

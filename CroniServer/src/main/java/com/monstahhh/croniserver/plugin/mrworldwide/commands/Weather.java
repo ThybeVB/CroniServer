@@ -8,12 +8,12 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.EmbedBuilder;
+import github.scarsz.discordsrv.dependencies.jda.api.OnlineStatus;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.MessageEmbed;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.User;
+import github.scarsz.discordsrv.dependencies.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
