@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class DeathEvent implements Listener {
 
-    private final String worldPrefix = "uhc6";
+    private final String worldPrefix = "uhc";
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
@@ -99,7 +99,7 @@ public class DeathEvent implements Listener {
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
         if (provider != null) {
             LuckPerms api = provider.getProvider();
-            User u = api.getUserManager().getUser(p.getDisplayName());
+            User u = api.getUserManager().getUser(p.getName());
             Track track = api.getTrackManager().getTrack("default");
 
             if (track != null && u != null) {
@@ -109,7 +109,7 @@ public class DeathEvent implements Listener {
                 if (result.wasSuccessful()) {
                     api.getUserManager().saveUser(u);
                     p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
-                    p.sendMessage(ChatColor.WHITE + p.getDisplayName() + " is no more :v");
+                    p.sendMessage(ChatColor.WHITE + p.getName() + " is no more :v");
                     p.sendMessage(ChatColor.DARK_RED + "See you in the nursery");
                     p.sendMessage(ChatColor.DARK_RED + "    - MyZone03");
                     p.sendMessage(ChatColor.DARK_GRAY + "-------------------------------------------");

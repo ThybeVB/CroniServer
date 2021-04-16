@@ -77,7 +77,7 @@ public class MrWorldWide {
         }
     }
 
-    public void configureMemoryUsage(JDABuilder builder) {
+    private void configureMemoryUsage(JDABuilder builder) {
         builder.disableCache(CacheFlag.ACTIVITY);
         builder.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
         builder.setChunkingFilter(ChunkingFilter.NONE);
