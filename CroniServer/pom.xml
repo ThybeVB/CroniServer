@@ -42,7 +42,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+                            <!-- <minimizeJar>true</minimizeJar> -->
                         </configuration>
                     </execution>
                 </executions>
