@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +37,11 @@ public class Translate {
         String link = String.format("https://translate.google.com?sl=%s&tl=%s&op=translate&text=", results[1], results[2]);
         String inputText = URLEncoder.encode(results[3], StandardCharsets.UTF_8);
         eb.setTitle("Google Translate", link + inputText);
-        eb.addField(results[1] + " -> " + results[2], results[0], false);
+
+        String originLocale = new Locale(results[1]).getDisplayLanguage(Locale.ENGLISH);
+        String wantedLocale = new Locale(results[2]).getDisplayLanguage(Locale.ENGLISH);
+
+        eb.addField(originLocale + " -> " + wantedLocale, results[0], false);
         eb.setColor(Color.BLUE);
 
         event.getChannel().sendMessage(eb.build()).queue();
