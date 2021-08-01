@@ -42,10 +42,10 @@ public class TpaCommand implements CommandExecutor {
                 if (p.getWorld() == target.getWorld()) {
                     tpa.put(target, p);
                     tpaSent.add(p);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request sent to &6/target/").replaceAll("/target/", target.getDisplayName())));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request sent to &6/target/").replaceAll("/target/", target.getName())));
                     target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
                     target.sendMessage(" ");
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request from &6/sender/").replaceAll("/sender/", p.getDisplayName())));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request from &6/sender/").replaceAll("/sender/", p.getName())));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aWrite &b&l/tpaccept &ato accept or &c&l/tpdeny &ato deny"));
                     target.sendMessage(" ");
                     target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
@@ -65,8 +65,8 @@ public class TpaCommand implements CommandExecutor {
             }
             if (tpa.get(p) != null) {
                 (tpa.get(p)).teleport(p);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/sender/ &ahas been teleported to you!").replaceAll("/sender/", tpa.get(p).getDisplayName())));
-                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/target/ &aaccepted the teleport!").replaceAll("/target/", p.getDisplayName())));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/sender/ &ahas been teleported to you!").replaceAll("/sender/", tpa.get(p).getName())));
+                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/target/ &aaccepted the teleport!").replaceAll("/target/", p.getName())));
                 Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> tpaSent.remove(tpa.get(p)), (20 * 20));
                 tpa.put(p, null);
                 return true;
@@ -80,7 +80,7 @@ public class TpaCommand implements CommandExecutor {
             }
             if (tpa.get(p) != null) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You denied the teleport"));
-                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&c&lTpa > &6/target/ &7denied the teleport ").replaceAll("/target/", p.getDisplayName())));
+                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&c&lTpa > &6/target/ &7denied the teleport ").replaceAll("/target/", p.getName())));
                 Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> tpaSent.remove(tpa.get(p)), (20 * 20));
                 tpa.put(p, null);
                 return true;

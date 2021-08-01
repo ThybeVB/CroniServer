@@ -16,6 +16,6 @@ public class PlayerDeathEvent implements Listener {
         Player player = event.getEntity();
         handler.setPlayerHealthy(player);
         handler.setPlayerInNeutral(player);
-        DangerAPI.debugLog(player.getDisplayName() + " has died, damage data has been reset");
+        DangerAPI.debugLog(player.getName() + " has died, damage data has been reset");
     }
 }

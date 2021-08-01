@@ -33,9 +33,9 @@ public class GivePlayersUhcPlayerCommand implements CommandExecutor {
                             for (Player player : commandSender.getServer().getOnlinePlayers()) {
                                 boolean result = doPromotion(player, track);
                                 if (!result) {
-                                    p.sendMessage(ChatColor.DARK_RED + "Could not promote " + ChatColor.AQUA + player.getDisplayName());
+                                    p.sendMessage(ChatColor.DARK_RED + "Could not promote " + ChatColor.AQUA + player.getName());
                                 } else {
-                                    p.sendMessage(ChatColor.AQUA + "Successfully promoted " + player.getDisplayName() + " to UHC Player");
+                                    p.sendMessage(ChatColor.AQUA + "Successfully promoted " + player.getName() + " to UHC Player");
                                     player.sendMessage(ChatColor.AQUA + "You have gotten the UHC Player rank!");
                                 }
                             }
@@ -51,7 +51,7 @@ public class GivePlayersUhcPlayerCommand implements CommandExecutor {
     }
 
     private boolean doPromotion(Player player, Track track) {
-        User u = api.getUserManager().getUser(player.getDisplayName());
+        User u = api.getUserManager().getUser(player.getName());
         if (u != null) {
             ImmutableContextSet contextSet = ImmutableContextSet.empty();
             PromotionResult result = track.promote(u, contextSet);

@@ -14,7 +14,7 @@ public class PlayerHandler {
     public void setPlayerInCombat(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", true);
+        playerData.getConfig().set("players." + player.getName() + ".inCombat", true);
         playerData.saveConfig();
 
         startTimerForPlayer(player);
@@ -23,19 +23,19 @@ public class PlayerHandler {
     public void setPlayerInNeutral(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".inCombat", false);
+        playerData.getConfig().set("players." + player.getName() + ".inCombat", false);
         playerData.saveConfig();
     }
 
     private void startTimerForPlayer(Player player) {
-        DangerAPI.debugLog("Starting Timer for " + player.getDisplayName());
+        DangerAPI.debugLog("Starting Timer for " + player.getName());
 
         if (timedPlayers.get(player) != null) {
             Timer oldTimer = timedPlayers.get(player);
             oldTimer.cancel();
             oldTimer.purge();
             timedPlayers.remove(player, oldTimer);
-            DangerAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getDisplayName());
+            DangerAPI.debugLog("COMBAT WILL BE RESTARTED FOR " + player.getName());
         }
         Timer timer = new Timer();
         timedPlayers.put(player, timer);
@@ -44,7 +44,7 @@ public class PlayerHandler {
             @Override
             public void run() {
 
-                DangerAPI.debugLog("COMBAT FINISHED FOR " + player.getDisplayName());
+                DangerAPI.debugLog("COMBAT FINISHED FOR " + player.getName());
                 timer.cancel();
                 timer.purge();
 
@@ -57,28 +57,28 @@ public class PlayerHandler {
     public void setPlayerDamaged(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", true);
+        playerData.getConfig().set("players." + player.getName() + ".damaged", true);
         playerData.saveConfig();
     }
 
     public void setPlayerHealthy(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".damaged", false);
+        playerData.getConfig().set("players." + player.getName() + ".damaged", false);
         playerData.saveConfig();
     }
 
     public void setFalling(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".falling", true);
+        playerData.getConfig().set("players." + player.getName() + ".falling", true);
         playerData.saveConfig();
     }
 
     public void setStill(Player player) {
         Config playerData = DangerAPI.playerData;
 
-        playerData.getConfig().set("players." + player.getDisplayName() + ".falling", false);
+        playerData.getConfig().set("players." + player.getName() + ".falling", false);
         playerData.saveConfig();
     }
 }

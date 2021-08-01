@@ -55,7 +55,7 @@ public class DistanceCommand implements CommandExecutor {
 
                                 double distance = getDistance(new Location(player.getWorld(), originX, originY, originZ), new Location(player1.getWorld(), desiredX, desiredY, desiredZ));
 
-                                player.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getDisplayName() + ChatColor.GREEN + ".");
+                                player.sendMessage(ChatColor.GREEN + "You are " + Math.round(distance) + " blocks away from " + ChatColor.LIGHT_PURPLE + player1.getName() + ChatColor.GREEN + ".");
                             } else {
                                 player.sendMessage(ChatColor.RED + "You need to be in the same world!");
                             }

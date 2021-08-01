@@ -40,7 +40,7 @@ public class HomeCommand implements CommandExecutor {
 
     private void callHome(Player player) {
         Config data = CroniServer.playerData;
-        Object playerLocation = data.getConfig().get("players." + player.getDisplayName());
+        Object playerLocation = data.getConfig().get("players." + player.getName());
         if (playerLocation == null) {
             player.sendMessage(ChatColor.DARK_RED + "You have not set a home yet! Set one with " + ChatColor.AQUA + "/sethome");
         } else {
@@ -54,7 +54,7 @@ public class HomeCommand implements CommandExecutor {
 
     private void callSetHome(Player player) {
         Config data = CroniServer.playerData;
-        String username = player.getDisplayName();
+        String username = player.getName();
         double x = player.getLocation().getX();
         double y = player.getLocation().getY();
         double z = player.getLocation().getZ();

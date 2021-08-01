@@ -10,8 +10,8 @@ public class PlayerLeaveEvent implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent event) {
         Config playerData = DangerAPI.playerData;
-        playerData.getConfig().set("players." + event.getPlayer().getDisplayName(), null);
+        playerData.getConfig().set("players." + event.getPlayer().getName(), null);
         playerData.saveConfig();
-        DangerAPI.debugLog(event.getPlayer().getDisplayName() + " has quit, Danger data removed");
+        DangerAPI.debugLog(event.getPlayer().getName() + " has quit, Danger data removed");
     }
 }

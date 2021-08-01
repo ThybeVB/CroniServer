@@ -31,7 +31,7 @@ public class CustomAdvancements {
 
                     TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
                     String advName = adv.getDisplay().getTitle().toString().split("\"")[3];
-                    serverChat.sendMessage(":medal: **" + p.getDisplayName() + " has made the advancement " + advName + "**").queue();
+                    serverChat.sendMessage(":medal: **" + p.getName() + " has made the advancement " + advName + "**").queue();
                 }
             }
         }

@@ -53,12 +53,12 @@ public class OnDamage implements Listener {
             Advancement notPacifistAdvancement = AdvancementEnum.NOTPACIFIST.getAdvancement();
             CustomAdvancements.grantAdvancement(p.getKiller(), notPacifistAdvancement);
 
-            if (p.getKiller().getDisplayName().equalsIgnoreCase("Guaka25")) {
+            if (p.getKiller().getName().equalsIgnoreCase("Guaka25")) {
                 Advancement advancement = AdvancementEnum.GUAKAAPPROVED.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
 
-            if (p.getKiller().getDisplayName().equalsIgnoreCase("Cronibet")) {
+            if (p.getKiller().getName().equalsIgnoreCase("Cronibet")) {
                 Advancement advancement = AdvancementEnum.FURNITURYDEATH.getAdvancement();
                 int progress = CustomAdvancements._manager.getCriteriaProgress(p, advancement);
                 if (progress < advancement.getCriteria()) {
@@ -69,7 +69,7 @@ public class OnDamage implements Listener {
                 }
             }
 
-            if (p.getKiller().getDisplayName().equalsIgnoreCase("ongoaviv")) {
+            if (p.getKiller().getName().equalsIgnoreCase("ongoaviv")) {
                 Advancement advancement = AdvancementEnum.SHALOM.getAdvancement();
                 CustomAdvancements.grantAdvancement(p, advancement);
             }
@@ -85,7 +85,7 @@ public class OnDamage implements Listener {
         double zPos = p.getLocation().getZ();
         if (xPos >= 203 && xPos <= 210) {
             if (zPos <= -275 && zPos >= -281) {
-                if (p.getKiller().getDisplayName().equalsIgnoreCase("MyZone03")) {
+                if (p.getKiller().getName().equalsIgnoreCase("MyZone03")) {
                     Advancement advancement = AdvancementEnum.KILLEDBYNURSERY.getAdvancement();
                     CustomAdvancements.grantAdvancement(p, advancement);
                 }

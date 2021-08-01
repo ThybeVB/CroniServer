@@ -15,12 +15,12 @@ public class UhcClearPlayers implements CommandExecutor {
 
     public static void putPlayed(Player p) {
         Config conf = getPlayed();
-        conf.getConfig().set("players." + p.getDisplayName(), true);
+        conf.getConfig().set("players." + p.getName(), true);
         conf.saveConfig();
     }
 
     public static boolean hasPlayed(Player p) {
-        return getPlayed().getConfig().getBoolean("players." + p.getDisplayName());
+        return getPlayed().getConfig().getBoolean("players." + p.getName());
     }
 
     @Override

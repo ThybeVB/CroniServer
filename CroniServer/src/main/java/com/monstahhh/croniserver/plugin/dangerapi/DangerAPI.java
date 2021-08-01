@@ -24,7 +24,7 @@ public class DangerAPI {
 
     public static boolean isDangerous(Player player) {
 
-        String displayName = player.getDisplayName();
+        String displayName = player.getName();
         Object damaged = playerData.getConfig().get("players." + displayName + ".damaged");
         Object inCombat = playerData.getConfig().get("players." + displayName + ".inCombat");
         Object falling = playerData.getConfig().get("players." + displayName + ".falling");

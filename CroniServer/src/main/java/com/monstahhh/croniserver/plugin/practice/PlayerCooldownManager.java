@@ -38,7 +38,7 @@ public class PlayerCooldownManager {
             preparePlayer(p);
 
             TextChannel serverChat = DiscordSRV.getPlugin().getMainTextChannel();
-            serverChat.sendMessage(":triangular_flag_on_post: **" + p.getDisplayName() + " has just begun a UHC Practice!**").queue();
+            serverChat.sendMessage(":triangular_flag_on_post: **" + p.getName() + " has just begun a UHC Practice!**").queue();
 
             timer.schedule(new TimerTask() {
                 @Override
