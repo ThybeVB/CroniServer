@@ -34,17 +34,22 @@ public class Translate {
     public void carryCommand(GuildMessageReceivedEvent event, String strippedCmd) {
         String[] results = doTranslate(event, false, strippedCmd);
         EmbedBuilder eb = new EmbedBuilder();
-        String link = String.format("https://translate.google.com?sl=%s&tl=%s&op=translate&text=", results[1], results[2]);
-        String inputText = URLEncoder.encode(results[3], StandardCharsets.UTF_8);
-        eb.setTitle("Google Translate", link + inputText);
 
-        String originLocale = new Locale(results[1]).getDisplayLanguage(Locale.ENGLISH);
-        String wantedLocale = new Locale(results[2]).getDisplayLanguage(Locale.ENGLISH);
+        if (results == null) {
+            event.getChannel().sendMessage("There was an error translating the sentence. Please try again later.").queue();
+        } else {
+            String link = String.format("https://translate.google.com?sl=%s&tl=%s&op=translate&text=", results[1], results[2]);
+            String inputText = URLEncoder.encode(results[3], StandardCharsets.UTF_8);
+            eb.setTitle("Google Translate", link + inputText);
 
-        eb.addField(originLocale + " -> " + wantedLocale, results[0], false);
-        eb.setColor(Color.BLUE);
+            String originLocale = new Locale(results[1]).getDisplayLanguage(Locale.ENGLISH);
+            String wantedLocale = new Locale(results[2]).getDisplayLanguage(Locale.ENGLISH);
 
-        event.getChannel().sendMessage(eb.build()).queue();
+            eb.addField(originLocale + " -> " + wantedLocale, results[0], false);
+            eb.setColor(Color.BLUE);
+
+            event.getChannel().sendMessage(eb.build()).queue();
+        }
     }
 
     private String[] doTranslate(GuildMessageReceivedEvent event, boolean conversationVersion, String strippedCmd) {
