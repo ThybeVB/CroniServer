@@ -8,12 +8,12 @@ import com.monstahhh.croniserver.plugin.mrworldwide.MrWorldWide;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.City;
 import com.monstahhh.croniserver.plugin.mrworldwide.commands.weather.WeatherHelper;
 import com.monstahhh.croniserver.plugin.mrworldwide.event.MessageReceivedEvent;
-import github.scarsz.discordsrv.dependencies.jda.api.EmbedBuilder;
-import github.scarsz.discordsrv.dependencies.jda.api.OnlineStatus;
-import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
-import github.scarsz.discordsrv.dependencies.jda.api.entities.MessageEmbed;
-import github.scarsz.discordsrv.dependencies.jda.api.entities.User;
-import github.scarsz.discordsrv.dependencies.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -131,17 +131,15 @@ public class Weather {
     }
 
     private void carryMentionCommand(GuildMessageReceivedEvent event, String strippedCmd) {
-        User mentionedUser = event.getMessage().getMentionedUsers().get(0);
-        Member guildMember = event.getGuild().getMember(mentionedUser);
-        assert guildMember != null;
+        Member guildMember = event.getMessage().getMentionedMembers().get(0);
         if (guildMember.getOnlineStatus() == OnlineStatus.OFFLINE) {
             EmbedBuilder eb = errorEmbed;
             eb.addField("Weather Error", "Mentioning an offline user is not allowed. Fight Me.", false);
             eb.setFooter("Your Input: " + strippedCmd, null);
-            event.getChannel().sendMessage(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue();
             event.getMessage().delete().queue();
         } else {
-            String possibleCity = this.checkForCity(mentionedUser);
+            String possibleCity = this.checkForCity(guildMember.getUser());
             try {
                 if (!possibleCity.isEmpty()) {
                     WeatherHelper helper = new WeatherHelper(this.weatherToken, event.getChannel());
@@ -152,7 +150,7 @@ public class Weather {
                         event.getChannel().sendMessage(embed).queue();
                     }
                 } else {
-                    event.getChannel().sendMessage(mentionedUser.getName() + " has not set a city.").queue();
+                    event.getChannel().sendMessage(guildMember.getUser().getName() + " has not set a city.").queue();
                 }
             } catch (NullPointerException e) {
                 event.getChannel().sendMessage(invalidLocError.build()).queue();

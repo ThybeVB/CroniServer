@@ -1,7 +1,7 @@
 package com.monstahhh.croniserver.plugin.mrworldwide.commands.weather;
 
 import com.monstahhh.croniserver.configapi.Config;
-import github.scarsz.discordsrv.dependencies.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class ChangeClock {
 
