@@ -119,7 +119,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
             setCity.carryCommand(event, MrWorldWide.weatherToken, cmdStripped);
         }
 
-        if (cmdStripped.toLowerCase().equalsIgnoreCase("changeclock")) {
+        if (cmdStripped.equalsIgnoreCase("changeclock")) {
             ChangeClock changeClock = new ChangeClock();
             changeClock.carryCommand(event);
         }
@@ -152,7 +152,7 @@ public class MessageReceivedEvent extends ListenerAdapter {
         }
 
         if (event.getMessage().getAuthor().getIdLong() == MrWorldWide.OwnerId) {
-            if (cmdStripped.toLowerCase().equalsIgnoreCase("usage")) {
+            if (cmdStripped.equalsIgnoreCase("usage")) {
                 String dataString = "translateCount=" + translateCount + ";weatherCount=" + weatherCount + ";currencyCount=" + currencyCount + ";conversationTranslateCount=" + conversationCount;
                 event.getChannel().sendMessage(dataString).queue();
             }

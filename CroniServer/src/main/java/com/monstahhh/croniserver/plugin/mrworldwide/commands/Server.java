@@ -20,7 +20,7 @@ public class Server {
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "startModdedServer.php" + formattedSend));
             System.out.println(result.asString());
         } catch (IOException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
@@ -31,7 +31,7 @@ public class Server {
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "stopServerModded.php" + formattedSend));
             System.out.println(result.asString());
         } catch (IOException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
@@ -42,7 +42,7 @@ public class Server {
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "restartServerModded.php" + formattedSend));
             System.out.println(result.asString());
         } catch (IOException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 
@@ -54,7 +54,7 @@ public class Server {
             com.monstahhh.croniserver.http.HttpResponse result = new com.monstahhh.croniserver.http.HttpClient().request(HttpMethod.GET, (baseUrl + "sendCommandModded.php" + formattedSend));
             System.out.println(result.asString());
         } catch (IOException exception) {
-            System.out.println(exception.toString());
+            System.out.println(exception);
         }
     }
 }

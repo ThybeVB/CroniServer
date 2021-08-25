@@ -96,7 +96,7 @@ public class HttpRequestFactory {
             System.out.println(result);
             JSONObject myResponse = new JSONObject(result);
 
-            System.out.println(myResponse.toString());
+            System.out.println(myResponse);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
