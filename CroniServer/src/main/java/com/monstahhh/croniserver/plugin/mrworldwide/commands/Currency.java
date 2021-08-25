@@ -30,7 +30,7 @@ public class Currency {
                 EmbedBuilder eb = defaultError;
                 eb.addField("Converter Error", "You can't enter the same currency twice!", false);
                 eb.addField("Example", "convert 1.25 eur usd", false);
-                event.getChannel().sendMessage(eb.build()).queue();
+                event.getChannel().sendMessageEmbeds(eb.build()).queue();
                 return;
             }
 
@@ -40,22 +40,22 @@ public class Currency {
                     EmbedBuilder eb = defaultError;
                     eb.addField("Server Error", "503: Currency Server was unable to be reached.", false);
 
-                    event.getChannel().sendMessage(eb.build()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).queue();
                 } else {
                     MessageEmbed embed = getCurrencyEmbed(prices[0], prices[1], base, destination);
-                    event.getChannel().sendMessage(embed).queue();
+                    event.getChannel().sendMessageEmbeds(embed).queue();
                 }
             } else {
                 EmbedBuilder eb = defaultError;
                 eb.addField("Currency Error", "It seems that one or both of the currencies are wrong or don't exist.", false);
                 eb.addField("Example", "convert 1.25 eur usd", false);
-                event.getChannel().sendMessage(eb.build()).queue();
+                event.getChannel().sendMessageEmbeds(eb.build()).queue();
             }
         } catch (Exception e) {
             EmbedBuilder eb = defaultError;
             eb.addField("Argument Error", "It seems that you have not entered the currencies correctly.", false);
             eb.addField("Example", "convert 1.25 eur usd", false);
-            event.getChannel().sendMessage(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue();
         }
     }
 

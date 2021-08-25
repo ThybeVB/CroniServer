@@ -47,7 +47,7 @@ public class WeatherHelper {
                 eb.addField("Exception", e.getMessage(), false);
             }
 
-            textChannel.sendMessage(eb.build()).queue();
+            textChannel.sendMessageEmbeds(eb.build()).queue();
 
             return null;
         }

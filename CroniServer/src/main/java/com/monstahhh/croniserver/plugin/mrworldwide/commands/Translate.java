@@ -48,7 +48,7 @@ public class Translate {
             eb.addField(originLocale + " -> " + wantedLocale, results[0], false);
             eb.setColor(Color.BLUE);
 
-            event.getChannel().sendMessage(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue();
         }
     }
 

@@ -34,7 +34,7 @@ public class SetPrefix {
         Member m = event.getMessage().getMember();
         if (m != null) {
             if (!m.hasPermission(Permission.ADMINISTRATOR)) {
-                event.getChannel().sendMessage(noPermissionsErrorEmbed).queue();
+                event.getChannel().sendMessageEmbeds(noPermissionsErrorEmbed).queue();
                 return;
             }
         }
@@ -42,12 +42,12 @@ public class SetPrefix {
         String prefix = cmdStripped.split(" ")[1];
 
         if (prefix.isEmpty() || prefix.isBlank()) {
-            event.getChannel().sendMessage(noPrefixErrorEmbed).queue();
+            event.getChannel().sendMessageEmbeds(noPrefixErrorEmbed).queue();
             return;
         }
 
         if (prefix.length() > 6) {
-            event.getChannel().sendMessage(prefixTooLongErrorEmbed).queue();
+            event.getChannel().sendMessageEmbeds(prefixTooLongErrorEmbed).queue();
         } else {
             Database db = CroniServer._db;
             db.setPrefix(event.getGuild().getIdLong(), prefix.toLowerCase());

@@ -32,20 +32,11 @@ public class ChangeClock {
     }
 
     private Time getNewTime(Time currentTime) {
-        Time newTime;
 
-        switch (currentTime) {
-            case TWELVEHOUR:
-                newTime = Time.TWENTYFOURHOUR;
-                break;
-            case TWENTYFOURHOUR:
-                newTime = Time.TWELVEHOUR;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + currentTime);
-        }
-
-        return newTime;
+        return switch (currentTime) {
+            case TWELVEHOUR -> Time.TWENTYFOURHOUR;
+            case TWENTYFOURHOUR -> Time.TWELVEHOUR;
+        };
     }
 
     public enum Time {

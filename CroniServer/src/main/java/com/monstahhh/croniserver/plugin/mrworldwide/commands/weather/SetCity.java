@@ -26,7 +26,7 @@ public class SetCity {
                     eb.setColor(Color.ORANGE);
                     eb.addField("User City", "City for " + event.getAuthor().getName() + " has been set to " + providedLoc, false);
 
-                    event.getChannel().sendMessage(eb.build()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).queue();
                 } else {
                     event.getChannel().sendMessage("City could not be found.").queue();
                 }
@@ -69,6 +69,6 @@ public class SetCity {
         eb.addField("Example", "weather kortrijk,be", false);
         eb.setFooter("Your Input: weather " + input, null);
 
-        event.getChannel().sendMessage(eb.build()).queue();
+        event.getChannel().sendMessageEmbeds(eb.build()).queue();
     }
 }

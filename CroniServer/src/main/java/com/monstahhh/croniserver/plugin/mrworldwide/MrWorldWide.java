@@ -62,10 +62,6 @@ public class MrWorldWide {
                 _jda = builder.build();
 
                 _plugin.getServer().getConsoleSender().sendMessage("[Mr. Worldwide] Listening!");
-                Objects.requireNonNull(Objects.requireNonNull(_jda.getGuildById(305792249877364738L))
-                                .getTextChannelById(560486517043232768L))
-                        .sendMessage("*dale!*")
-                        .queue();
 
                 new GuildUpdate().update(_jda);
 
@@ -79,7 +75,6 @@ public class MrWorldWide {
         builder.setMemberCachePolicy(MemberCachePolicy.ALL);
         builder.enableCache(CacheFlag.ONLINE_STATUS);
         builder.enableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS);
-        builder.disableIntents(GatewayIntent.GUILD_MESSAGE_TYPING);
 
         builder.setLargeThreshold(50);
     }

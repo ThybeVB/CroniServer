@@ -76,7 +76,7 @@ public class Weather {
                 city.humidity = 0;
                 city.embedColor = Color.BLACK;
 
-                event.getChannel().sendMessage(new WeatherHelper(MrWorldWide.weatherToken, event.getChannel()).getEmbedFor(city)).queue();
+                event.getChannel().sendMessageEmbeds(new WeatherHelper(MrWorldWide.weatherToken, event.getChannel()).getEmbedFor(city)).queue();
             }
         }
     }
@@ -94,7 +94,7 @@ public class Weather {
                 MessageEmbed embed = helper.getEmbedFor(city);
 
                 if (embed != null) {
-                    event.getChannel().sendMessage(embed).queue();
+                    event.getChannel().sendMessageEmbeds(embed).queue();
                 } else {
                     event.getChannel().sendMessage("Capital of this country does not have a weather station").queue();
                 }
@@ -147,13 +147,13 @@ public class Weather {
                     MessageEmbed embed = helper.getEmbedFor(city);
 
                     if (embed != null) {
-                        event.getChannel().sendMessage(embed).queue();
+                        event.getChannel().sendMessageEmbeds(embed).queue();
                     }
                 } else {
                     event.getChannel().sendMessage(guildMember.getUser().getName() + " has not set a city.").queue();
                 }
             } catch (NullPointerException e) {
-                event.getChannel().sendMessage(invalidLocError.build()).queue();
+                event.getChannel().sendMessageEmbeds(invalidLocError.build()).queue();
             }
         }
     }
@@ -168,7 +168,7 @@ public class Weather {
             MessageEmbed embed = helper.getEmbedFor(city);
 
             if (embed != null) {
-                event.getChannel().sendMessage(embed).queue();
+                event.getChannel().sendMessageEmbeds(embed).queue();
             }
         }
 
@@ -184,7 +184,7 @@ public class Weather {
                 MessageEmbed embed = helper.getEmbedFor(city);
 
                 if (embed != null) {
-                    event.getChannel().sendMessage(embed).queue();
+                    event.getChannel().sendMessageEmbeds(embed).queue();
                 } else {
                     argError(event, providedLoc);
                 }
@@ -192,7 +192,7 @@ public class Weather {
                 argError(event, providedLoc);
             }
         } catch (NullPointerException e) {
-            event.getChannel().sendMessage(invalidLocError.build()).queue();
+            event.getChannel().sendMessageEmbeds(invalidLocError.build()).queue();
         }
     }
 
@@ -207,6 +207,6 @@ public class Weather {
         eb.addField("Example", "weather kortrijk,be", false);
         eb.setFooter("Your Input: weather " + input, null);
 
-        event.getChannel().sendMessage(eb.build()).queue();
+        event.getChannel().sendMessageEmbeds(eb.build()).queue();
     }
 }
