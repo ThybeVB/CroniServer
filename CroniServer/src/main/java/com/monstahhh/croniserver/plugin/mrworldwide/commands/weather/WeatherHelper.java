@@ -60,9 +60,9 @@ public class WeatherHelper {
             eb.setThumbnail(city.iconUrl);
 
             if (city.temperature >= 40) {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode) + " <:40DEGREESFUCK:617781121236860963>");
+                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode/*getCountryName(city.countryCode)*/ + " <:40DEGREESFUCK:617781121236860963>");
             } else {
-                eb.setTitle("Weather for " + city.cityName + ", " + getCountryName(city.countryCode));
+                eb.setTitle("Weather for " + city.cityName + ", " + city.countryCode/*getCountryName(city.countryCode)*/);
             }
             eb.addField("Temperature", city.temperature + "°C", false);
 
@@ -106,20 +106,20 @@ public class WeatherHelper {
         }
     }
 
-    private JSONObject getCountryInformation(String countryCode) {
-        try {
-            HttpResponse result = new HttpClient().request(HttpMethod.GET, ("https://restcountries.eu/rest/v2/alpha/" + countryCode));
-            String res = result.asString();
+    //private JSONObject getCountryInformation(String countryCode) {
+    //    try {
+    //        HttpResponse result = new HttpClient().request(HttpMethod.GET, ("https://restcountries.eu/rest/v2/alpha/" + countryCode));
+    //        String res = result.asString();
+//
+    //        return new JSONObject(res);
+    //    } catch (IOException exception) {
+    //        return null;
+    //    }
+    //}
 
-            return new JSONObject(res);
-        } catch (IOException exception) {
-            return null;
-        }
-    }
-
-    private String getCountryName(String countryCode) {
-        JSONObject obj = getCountryInformation(countryCode);
-        assert obj != null;
-        return obj.getString("name");
-    }
+    //private String getCountryName(String countryCode) {
+    //    JSONObject obj = getCountryInformation(countryCode);
+    //    assert obj != null;
+    //    return obj.getString("name");
+    //}
 }
