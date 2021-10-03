@@ -110,8 +110,6 @@ public class WeatherHelper {
     private String getCountryName(String countryCode) {
         try {
             Locale l = new Locale("", countryCode.toUpperCase());
-            System.out.println(l.getDisplayCountry());
-
             return l.getDisplayCountry();
         } catch (Exception exception) {
             return null;
