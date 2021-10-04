@@ -15,8 +15,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <paper.version>1.16.5-R0.1-SNAPSHOT</paper.version>
-        <apiVersion>1.16</apiVersion>
+        <paper.version>1.17.1-R0.1-SNAPSHOT</paper.version>
+        <apiVersion>1.17</apiVersion>
     </properties>
 
     <build>
@@ -95,7 +95,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
+            <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>${paper.version}</version>
             <scope>provided</scope>
