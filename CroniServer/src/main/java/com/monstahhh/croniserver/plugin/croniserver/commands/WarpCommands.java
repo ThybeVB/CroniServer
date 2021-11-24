@@ -34,9 +34,6 @@ public class WarpCommands implements CommandExecutor {
     }
 
     private void doTp(Player player, Command command) {
-        if (command.getName().equalsIgnoreCase("hub")) {
-            player.teleportAsync(new Location(Bukkit.getWorld("hub"), 0, 100, 0));
-        }
         if (command.getName().equalsIgnoreCase("spawn")) {
             player.teleportAsync(new Location(player.getWorld(), 3, 69, -2));
         }
