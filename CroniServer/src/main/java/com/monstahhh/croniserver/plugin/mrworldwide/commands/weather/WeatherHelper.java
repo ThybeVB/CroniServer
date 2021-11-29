@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.Locale;
 
 public class WeatherHelper {

@@ -89,7 +89,7 @@ public class Weather {
                 event.getChannel().sendMessage("Could not find this country.").queue();
             } else {
                 WeatherHelper helper = new WeatherHelper(this.weatherToken, event.getChannel());
-                String cityStr = String.format("%s,%s", country.getString("capital"), country.getString("alpha2Code"));
+                String cityStr = String.format("%s,%s", country.getJSONArray("capital").getString(0), country.getString("cca2"));
                 City city = helper.getWeatherFor(cityStr, event.getAuthor().getIdLong());
                 MessageEmbed embed = helper.getEmbedFor(city);
 
@@ -104,13 +104,13 @@ public class Weather {
 
     private JSONObject getCountryInformation(String countryName) {
         try {
-            String formattedSend = String.format("https://restcountries.eu/rest/v2/name/%s", countryName);
+            String formattedSend = String.format("https://restcountries.com/v3.1/name/%s", countryName);
             HttpResponse result = new HttpClient().request(HttpMethod.GET, formattedSend);
 
             String resultStr = result.asString();
-            JSONArray arr = new JSONArray(resultStr);
+            JSONArray jsonArr = new JSONArray(resultStr);
 
-            return arr.getJSONObject(0);
+            return jsonArr.getJSONObject(0);
         } catch (IOException e) {
             return null;
         }
