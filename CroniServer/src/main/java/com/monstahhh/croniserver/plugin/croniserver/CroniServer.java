@@ -1,7 +1,6 @@
 package com.monstahhh.croniserver.plugin.croniserver;
 
 import com.monstahhh.croniserver.configapi.Config;
-import com.monstahhh.croniserver.plugin.advancements.CustomAdvancements;
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.TpaCommand;
@@ -24,7 +23,6 @@ public final class CroniServer extends JavaPlugin {
     public static JavaPlugin _plugin;
     public static Logger logger;
     public static Database _db;
-    private CustomAdvancements customAdvancements;
     private DangerAPI dangerApi;
     private Sleep sleep;
     private UHC uhc;
@@ -48,7 +46,6 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void registerCommands() {
-
         Objects.requireNonNull(this.getCommand("hub")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("spawn")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("survival")).setExecutor(new WarpCommands());
@@ -63,9 +60,6 @@ public final class CroniServer extends JavaPlugin {
     }
 
     private void enableExtensions() {
-        customAdvancements = new CustomAdvancements(this);
-        customAdvancements.enable();
-
         dangerApi = new DangerAPI(this);
         dangerApi.enable();
 
@@ -81,7 +75,6 @@ public final class CroniServer extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        customAdvancements.disable();
         dangerApi.disable();
         sleep.disable();
         //uhc.disable();

@@ -129,13 +129,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>eu.endercentral.crazy_advancements</groupId>
-            <artifactId>CrazyAdvancementsAPI</artifactId>
-            <version>1.14.3</version>
-            <systemPath>${project.basedir}/jar/CrazyAdvancementsAPI.jar</systemPath>
-            <scope>system</scope>
-        </dependency>
-        <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
             <version>1.20.0</version>
