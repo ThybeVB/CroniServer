@@ -3,7 +3,7 @@ version: ${project.version}
 api-version: ${apiVersion}
 main: com.monstahhh.croniserver.plugin.croniserver.CroniServer
 authors: [ monstahhhy ]
-softdepend: [ AuthMe, DiscordSRV, CrazyAdvancementsAPI ]
+softdepend: [ AuthMe, DiscordSRV ]
 
 commands:
   hub:
