@@ -11,12 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.bukkit.Bukkit.getServer;
-
 public class TpaCommand implements CommandExecutor {
 
-    Map<String, Long> tpaCooldown = new HashMap<>();
-    Map<String, String> currentRequest = new HashMap<>();
+    Map<Player, Long> tpaCooldown = new HashMap<>();
+    Map<Player, Player> currentRequest = new HashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
@@ -29,8 +27,8 @@ public class TpaCommand implements CommandExecutor {
             if (!(p == null)) {
                 if (!p.hasPermission("croniserver.tpa.overridecooldown")) {
                     int cooldown = 20;
-                    if (tpaCooldown.containsKey(p.getName())) {
-                        long diff = (System.currentTimeMillis() - tpaCooldown.get(sender.getName())) / 1000;
+                    if (tpaCooldown.containsKey(p)) {
+                        long diff = (System.currentTimeMillis() - tpaCooldown.get(sender)) / 1000;
                         if (diff < cooldown) {
                             p.sendMessage(ChatColor.RED + "Error: You must wait a " + cooldown + " second cooldown in between teleport requests!");
                             return false;
@@ -39,7 +37,7 @@ public class TpaCommand implements CommandExecutor {
                 }
 
                 if (args.length > 0) {
-                    final Player target = getServer().getPlayer(args[0]);
+                    final Player target = sender.getServer().getPlayer(args[0]);
 
                     if (target == null) {
                         sender.sendMessage(ChatColor.RED + "Error: You can only send a teleport request to online players!");
@@ -57,21 +55,14 @@ public class TpaCommand implements CommandExecutor {
                     }
 
                     sendRequest(p, target);
-
-                    sender.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            killRequest(target.getName());
-                        }
-                    });
-
-                    tpaCooldown.put(p.getName(), System.currentTimeMillis());
+                    tpaCooldown.put(p, System.currentTimeMillis());
+                    sender.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, () -> killRequest(target), 30*20);
                 } else {
                     p.sendMessage("Send a teleport request to a player.");
                     p.sendMessage("/tpa <player>");
                 }
             } else {
-                sender.sendMessage(ChatColor.RED + "Error: The console can't teleport to people, silly!");
+                sender.sendMessage(ChatColor.RED + "Error: The console can't teleport to people");
                 return false;
             }
             return true;
@@ -79,10 +70,10 @@ public class TpaCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("tpaccept")) {
             if (!(p == null)) {
-                if (currentRequest.containsKey(p.getName())) {
+                if (currentRequest.containsKey(p)) {
 
-                    Player heIsGoingOutOnADate = getServer().getPlayer(currentRequest.get(p.getName()));
-                    currentRequest.remove(p.getName());
+                    Player heIsGoingOutOnADate = currentRequest.get(p);
+                    currentRequest.remove(p);
 
                     if (!(heIsGoingOutOnADate == null)) {
                         heIsGoingOutOnADate.teleport(p);
@@ -105,9 +96,9 @@ public class TpaCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("tpdeny")) {
             if (!(p == null)) {
-                if (currentRequest.containsKey(p.getName())) {
-                    Player poorRejectedGuy = getServer().getPlayer(currentRequest.get(p.getName()));
-                    currentRequest.remove(p.getName());
+                if (currentRequest.containsKey(p)) {
+                    Player poorRejectedGuy = currentRequest.get(p);
+                    currentRequest.remove(p);
 
                     if (!(poorRejectedGuy == null)) {
                         poorRejectedGuy.sendMessage(ChatColor.RED + p.getName() + " rejected your teleport request! :(");
@@ -127,9 +118,9 @@ public class TpaCommand implements CommandExecutor {
         return false;
     }
 
-    public boolean killRequest(String key) {
+    public boolean killRequest(Player key) {
         if (currentRequest.containsKey(key)) {
-            Player loser = getServer().getPlayer(currentRequest.get(key));
+            Player loser = currentRequest.get(key);
             if (!(loser == null)) {
                 loser.sendMessage(ChatColor.RED + "Your teleport request timed out.");
             }
@@ -161,6 +152,6 @@ public class TpaCommand implements CommandExecutor {
         }
 
         recipient.sendMessage(ChatColor.RED + sender.getName() + ChatColor.RESET + " has sent a request to teleport to you." + sendtpaccept + sendtpdeny);
-        currentRequest.put(recipient.getName(), sender.getName());
+        currentRequest.put(recipient, sender);
     }
 }

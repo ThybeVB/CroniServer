@@ -49,7 +49,7 @@ public class PlayerDamageEvent implements Listener {
     public void onEntityRegainHealth(EntityRegainHealthEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
             Player p = (Player) event.getEntity();
-            if (isPlayerFullHealth(p)) {
+            if (isPlayerSufficientHealth(p)) {
                 DangerAPI.debugLog(p.getName() + " REGAIN: SETHEALTHY");
                 handler.setPlayerHealthy(p);
             } else {
@@ -59,16 +59,16 @@ public class PlayerDamageEvent implements Listener {
         }
     }
 
-    private boolean isPlayerFullHealth(Player player) {
+    private boolean isPlayerSufficientHealth(Player player) {
         double fixedHealth = player.getHealth() + 1.0;
         DangerAPI.debugLog(player.getName() + "'s Current Health: " + Math.round(fixedHealth));
         DangerAPI.debugLog(player.getName() + "'s Max Health: " + Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue());
 
-        if (Math.round(fixedHealth) >= Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue()) {
-            DangerAPI.debugLog(player.getName() + " is at Max Health!");
+        if (Math.round(fixedHealth) > (Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue())*0.5) {
+            DangerAPI.debugLog(player.getName() + " is at sufficient health!");
             return true;
         }
-        DangerAPI.debugLog(player.getName() + " is not at Full Health!");
+        DangerAPI.debugLog(player.getName() + " is not at full health!");
         return false;
     }
 }
