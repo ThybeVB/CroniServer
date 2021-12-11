@@ -22,8 +22,7 @@ public class PlayerDamageEvent implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntityType() == EntityType.PLAYER) {
-            if (event.getDamager() instanceof Player) {
-                Player attacker = (Player) event.getDamager();
+            if (event.getDamager() instanceof Player attacker) {
                 Player defender = (Player) event.getEntity();
 
                 handler.setPlayerInCombat(attacker);
@@ -64,7 +63,7 @@ public class PlayerDamageEvent implements Listener {
         DangerAPI.debugLog(player.getName() + "'s Current Health: " + Math.round(fixedHealth));
         DangerAPI.debugLog(player.getName() + "'s Max Health: " + Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue());
 
-        if (Math.round(fixedHealth) > (Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue())*0.5) {
+        if (Math.round(fixedHealth) > (Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getDefaultValue())*0.75) {
             DangerAPI.debugLog(player.getName() + " is at sufficient health!");
             return true;
         }

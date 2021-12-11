@@ -38,18 +38,6 @@ commands:
     description: Sets your home to your current location
     usage: /sethome
 
-  tpa:
-    description: Teleports to another player
-    usage: /teleport player
-
-  tpaccept:
-    description: Accepts a teleportation request
-    usage: /tpaccept player
-
-  tpdeny:
-    description: Denies a teleportation request
-    usage: /tpdeny player
-
   distance:
     description: Shows you the distance to a certain point
     usage: /distance x y z

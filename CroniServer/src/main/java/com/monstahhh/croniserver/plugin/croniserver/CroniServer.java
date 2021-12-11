@@ -3,7 +3,6 @@ package com.monstahhh.croniserver.plugin.croniserver;
 import com.monstahhh.croniserver.configapi.Config;
 import com.monstahhh.croniserver.plugin.croniserver.commands.DistanceCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.HomeCommand;
-import com.monstahhh.croniserver.plugin.croniserver.commands.TpaCommand;
 import com.monstahhh.croniserver.plugin.croniserver.commands.WarpCommands;
 import com.monstahhh.croniserver.plugin.croniserver.events.PlayerListener;
 import com.monstahhh.croniserver.plugin.croniserver.uhc.UHC;
@@ -52,9 +51,6 @@ public final class CroniServer extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("creative")).setExecutor(new WarpCommands());
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new HomeCommand());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new HomeCommand());
-        Objects.requireNonNull(this.getCommand("tpaccept")).setExecutor(new TpaCommand());
-        Objects.requireNonNull(this.getCommand("tpdeny")).setExecutor(new TpaCommand());
-        Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TpaCommand());
         Objects.requireNonNull(this.getCommand("distance")).setExecutor(new DistanceCommand());
         Objects.requireNonNull(this.getCommand("pdistance")).setExecutor((new DistanceCommand()));
     }
