@@ -1,92 +1,166 @@
 package com.monstahhh.croniserver.plugin.croniserver.commands;
 
 import com.monstahhh.croniserver.plugin.croniserver.CroniServer;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class TpaCommand implements CommandExecutor {
 
-    private final HashMap<Player, Player> tpa = new HashMap();
-    private final ArrayList<Player> tpaSent = new ArrayList();
+    Map<String, Long> tpaCooldown = new HashMap<>();
+    Map<String, String> currentRequest = new HashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.DARK_RED + "This command can only be executed by players");
-            return true;
+        Player p = null;
+        if (sender instanceof Player) {
+            p = (Player) sender;
         }
-
-        Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("tpa")) {
-            if (tpaSent.contains(p)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You have to wait for a new TPA request"));
+            if (!(p == null)) {
+                if (!p.hasPermission("croniserver.tpa.overridecooldown")) {
+                    int cooldown = 20;
+                    if (tpaCooldown.containsKey(p.getName())) {
+                        long diff = (System.currentTimeMillis() - tpaCooldown.get(sender.getName())) / 1000;
+                        if (diff < cooldown) {
+                            p.sendMessage(ChatColor.RED + "Error: You must wait a " + cooldown + " second cooldown in between teleport requests!");
+                            return false;
+                        }
+                    }
+                }
+
+                if (args.length > 0) {
+                    final Player target = getServer().getPlayer(args[0]);
+
+                    if (target == null) {
+                        sender.sendMessage(ChatColor.RED + "Error: You can only send a teleport request to online players!");
+                        return false;
+                    }
+
+                    if (target == p) {
+                        sender.sendMessage(ChatColor.RED + "Error: You can't teleport to yourself!");
+                        return false;
+                    }
+
+                    if (!p.hasPermission("croniserver.tpa")) {
+                        sender.sendMessage("You do not have permission to use tpa");
+                        return false;
+                    }
+
+                    sendRequest(p, target);
+
+                    sender.getServer().getScheduler().scheduleSyncDelayedTask(CroniServer._plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            killRequest(target.getName());
+                        }
+                    });
+
+                    tpaCooldown.put(p.getName(), System.currentTimeMillis());
+                } else {
+                    p.sendMessage("Send a teleport request to a player.");
+                    p.sendMessage("/tpa <player>");
+                }
             } else {
-                if (args.length == 0) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7Please specify a player!"));
-                    return true;
+                sender.sendMessage(ChatColor.RED + "Error: The console can't teleport to people, silly!");
+                return false;
+            }
+            return true;
+        }
+
+        if (cmd.getName().equalsIgnoreCase("tpaccept")) {
+            if (!(p == null)) {
+                if (currentRequest.containsKey(p.getName())) {
+
+                    Player heIsGoingOutOnADate = getServer().getPlayer(currentRequest.get(p.getName()));
+                    currentRequest.remove(p.getName());
+
+                    if (!(heIsGoingOutOnADate == null)) {
+                        heIsGoingOutOnADate.teleport(p);
+                        p.sendMessage(ChatColor.GRAY + "Teleporting...");
+                        heIsGoingOutOnADate.sendMessage(ChatColor.GRAY + "Teleporting...");
+                    } else {
+                        sender.sendMessage(ChatColor.RED + "Error: It appears that the person trying to teleport to you doesn't exist anymore. WHOA!");
+                        return false;
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.RED + "Error: It doesn't appear that there are any current tp requests. Maybe it timed out?");
+                    return false;
                 }
-                Player target = Bukkit.getServer().getPlayer(args[0]);
-                if (target == null) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7That player doesn't exist!"));
-                    return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + "Error: The console can't accept teleport requests, silly!");
+                return false;
+            }
+            return true;
+        }
+
+        if (cmd.getName().equalsIgnoreCase("tpdeny")) {
+            if (!(p == null)) {
+                if (currentRequest.containsKey(p.getName())) {
+                    Player poorRejectedGuy = getServer().getPlayer(currentRequest.get(p.getName()));
+                    currentRequest.remove(p.getName());
+
+                    if (!(poorRejectedGuy == null)) {
+                        poorRejectedGuy.sendMessage(ChatColor.RED + p.getName() + " rejected your teleport request! :(");
+                        p.sendMessage(ChatColor.GRAY + poorRejectedGuy.getName() + " was rejected!");
+                        return true;
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.RED + "Error: It doesn't appear that there are any current tp requests. Maybe it timed out?");
+                    return false;
                 }
-                if (p.getWorld() == target.getWorld()) {
-                    tpa.put(target, p);
-                    tpaSent.add(p);
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request sent to &6/target/").replaceAll("/target/", target.getName())));
-                    target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
-                    target.sendMessage(" ");
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6&lTpa > &aTPA request from &6/sender/").replaceAll("/sender/", p.getName())));
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aWrite &b&l/tpaccept &ato accept or &c&l/tpdeny &ato deny"));
-                    target.sendMessage(" ");
-                    target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "_____________________________________________");
-                    Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> tpaSent.remove(p), (20 * 20));
-                    return true;
-                }
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You can't teleport to a player into another world!"));
-                return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + "Error: The console can't deny teleport requests, silly!");
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean killRequest(String key) {
+        if (currentRequest.containsKey(key)) {
+            Player loser = getServer().getPlayer(currentRequest.get(key));
+            if (!(loser == null)) {
+                loser.sendMessage(ChatColor.RED + "Your teleport request timed out.");
             }
 
+            currentRequest.remove(key);
+
             return true;
+        } else {
+            return false;
         }
-        if (cmd.getName().equalsIgnoreCase("tpaccept")) {
-            if (tpa.get(p) == null) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to accept!"));
-                return true;
-            }
-            if (tpa.get(p) != null) {
-                (tpa.get(p)).teleport(p);
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/sender/ &ahas been teleported to you!").replaceAll("/sender/", tpa.get(p).getName())));
-                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&6/target/ &aaccepted the teleport!").replaceAll("/target/", p.getName())));
-                Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> tpaSent.remove(tpa.get(p)), (20 * 20));
-                tpa.put(p, null);
-                return true;
-            }
-            return true;
+    }
+
+    public void sendRequest(Player sender, Player recipient) {
+        sender.sendMessage("Sending a teleport request to " + recipient.getName() + ".");
+
+        String sendtpaccept = "";
+        String sendtpdeny = "";
+
+        if (recipient.hasPermission("croniserver.tpa.tpaccept")) {
+            sendtpaccept = " To accept the teleport request, type " + ChatColor.RED + "/tpaccept" + ChatColor.RESET + ".";
+        } else {
+            sendtpaccept = "";
         }
-        if (cmd.getName().equalsIgnoreCase("tpdeny")) {
-            if (tpa.get(p) == null) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7No request to deny!"));
-                return true;
-            }
-            if (tpa.get(p) != null) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lTpa > &7You denied the teleport"));
-                (tpa.get(p)).sendMessage(ChatColor.translateAlternateColorCodes('&', ("&c&lTpa > &6/target/ &7denied the teleport ").replaceAll("/target/", p.getName())));
-                Bukkit.getScheduler().runTaskLater(CroniServer._plugin, () -> tpaSent.remove(tpa.get(p)), (20 * 20));
-                tpa.put(p, null);
-                return true;
-            }
-            return true;
+
+        if (recipient.hasPermission("croniserver.tpa.tpdeny")) {
+            sendtpdeny = " To deny the teleport request, type " + ChatColor.RED + "/tpdeny" + ChatColor.RESET + ".";
+        } else {
+            sendtpdeny = "";
         }
-        return true;
+
+        recipient.sendMessage(ChatColor.RED + sender.getName() + ChatColor.RESET + " has sent a request to teleport to you." + sendtpaccept + sendtpdeny);
+        currentRequest.put(recipient.getName(), sender.getName());
     }
 }
